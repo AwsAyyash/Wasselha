@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Wasselha</string>
+    <string name="main_title">Wasselha</string>
+    <string name="welcome">Welcome to Wasselha</string>
+    <string name="need">all on one you need</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="login_title">Login to Wasselha</string>
+    <string name="username_or_phone_number_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="main_login_btn">Login</string>
+    <string name="question_signup">Don\'t have an account?‎ ‎ ‎</string>
+    <string name="question_login">Do have an account?‎ ‎ ‎</string>
+    <string name="signup_in_question"><u>Signup</u></string>
+    <string name="login_in_question"><u>Login</u></string>
+    <string name="select_type_of_signup">Signup as:</string>
+    <string name="signup_as_customer">Customer</string>
+    <string name="signup_as_transporter">Transporter</string>
+    <string name="signup_as_collection_point_provider">Collection point provider</string>
 </resources>
