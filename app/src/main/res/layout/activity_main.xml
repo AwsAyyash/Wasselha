@@ -20,8 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/intro" />
 
-
-
     <ImageView
         android:id="@+id/logoImgInRegisterPage"
         android:layout_width="382dp"
@@ -100,4 +98,6 @@
         app:layout_constraintTop_toBottomOf="@+id/loginBtnInRegisterPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 

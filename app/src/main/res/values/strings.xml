@@ -17,4 +17,17 @@
     <string name="signup_as_customer">Customer</string>
     <string name="signup_as_transporter">Transporter</string>
     <string name="signup_as_collection_point_provider">Collection point provider</string>
+    <string name="first_name_customer">First Name</string>
+    <string name="first_name_customer_hint">Enter your first name</string>
+    <string name="last_name_customer">Last Name</string>
+    <string name="last_name_customer_hint">Enter your last name</string>
+    <string name="email_customer_signup_textview">Email</string>
+    <string name="email_signup_customer_hint">Enter your email</string>
+    <string name="passwordc_customer_signup_textview">Password</string>
+    <string name="phone_number_customer_signup_textview">Phone Number</string>
+    <string name="phone_number_customer_signup_hint">Enter your phone number</string>
+    <string name="password_customer_signup_hint">Enter your password</string>
+    <string name="customer_signup_top_title">Customer signup</string>
+    <string name="re_repeat_password_customer_signup">Re-Repeat Password</string>
+    <string name="re_repeat_password_hint">Enter re-repeat password</string>
 </resources>

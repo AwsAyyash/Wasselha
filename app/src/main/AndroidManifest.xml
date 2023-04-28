@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Wasselha"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerSignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".TypeSignupActivity"
             android:exported="false" />
         <activity
