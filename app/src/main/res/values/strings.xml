@@ -17,4 +17,11 @@
     <string name="signup_as_customer">Customer</string>
     <string name="signup_as_transporter">Transporter</string>
     <string name="signup_as_collection_point_provider">Collection point provider</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or_go_back_to">Or go back to</string>
+    <string name="phone_number">Phone Number</string>
 </resources>
