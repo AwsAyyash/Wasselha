@@ -28,12 +28,12 @@
                     app:srcCompat="@drawable/splash_logo" />
 
                 <TextView
-                    android:id="@+id/customerSignupTopTitle"
+                    android:id="@+id/collectionPointProviderSignupTopTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/customer_signup_top_title"
+                    android:text="@string/collection_point_provider_signup_top_title"
                     android:textColor="@color/light_selver"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/logoInCustomerSignupPage"
                     app:layout_constraintStart_toStartOf="@+id/logoInCustomerSignupPage"
@@ -58,7 +58,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/firstNameCustomer"
+                    android:id="@+id/firstNameCollectionPointProvider"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -72,7 +72,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/lastNametextView"
+                    android:id="@+id/lastNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -82,7 +82,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/lastNameCustomer"
+                    android:id="@+id/lastNameCollectionPointProvider"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -96,7 +96,31 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/phoneNumberCustomerSignupTextview"
+                    android:id="@+id/collectionPointProviderSignupTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/national_id_signup_textview"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nationalIDCollectionPointProviderSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_border"
+                    android:ems="10"
+                    android:hint="@string/national_id_transporter_signup_hint"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:textColor="@color/dark_green"
+                    android:textColorHint="@color/dark_green"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/phoneNumberCollectionPointProviderSignupTextview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -106,7 +130,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/phoneNumberCustomerSignup"
+                    android:id="@+id/phoneNumberCollectionPointProviderSignup"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -120,32 +144,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/addressCustomerSignupTextview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/address_customer_signup_textview"
-                    android:textColor="@color/dark_green"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/addressCustomerSignup"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/edittext_border"
-                    android:ems="10"
-                    android:hint="@string/address_customer_signup_hint"
-                    android:inputType="phone"
-                    android:padding="8dp"
-                    android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
-                    android:textSize="16sp" />
-
-
-                <TextView
-                    android:id="@+id/emailCustomerSignupTextView"
+                    android:id="@+id/emailCollectionPointProviderSignupTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -155,7 +154,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/emailCustomerSignup"
+                    android:id="@+id/emailCollectionPointProviderSignup"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -169,7 +168,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/passwordCustomerSignupTextView"
+                    android:id="@+id/passwordCollectionPointProviderSignupTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -179,7 +178,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/passwordCustomerSignup"
+                    android:id="@+id/passwordCollectionPointProviderSignup"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -193,7 +192,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/repeatPasswordCustomerSignupTextView"
+                    android:id="@+id/repeatPasswordCustomerCollectionPointProviderTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -203,7 +202,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/repeatPasswordCustomerSignup"
+                    android:id="@+id/repeatPasswordCollectionPointProviderSignup"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
@@ -219,7 +218,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/signupCustomerBtn"
+                android:id="@+id/signupCollectionPointProviderBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"

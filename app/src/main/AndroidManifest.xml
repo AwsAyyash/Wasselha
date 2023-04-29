@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Wasselha"
         tools:targetApi="31">
         <activity
+            android:name=".CollectionPointProviderSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TransporterSignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".CustomerSignupActivity"
             android:exported="false" />
         <activity

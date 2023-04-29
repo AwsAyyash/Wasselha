@@ -55,9 +55,8 @@ public class TypeSignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(TypeSignupActivity.this, "Not available now!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(TypeSignupActivity.this, TransporterSignupActivity.class);
-               // startActivity(intent);
+                Intent intent = new Intent(TypeSignupActivity.this, TransporterSignupActivity.class);
+               startActivity(intent);
             }
         });
     }
@@ -67,10 +66,8 @@ public class TypeSignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(TypeSignupActivity.this, "Not available now!", Toast.LENGTH_SHORT).show();
-
-                //Intent intent = new Intent(TypeSignupActivity.this, collectionPointProviderSignupActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(TypeSignupActivity.this, CollectionPointProviderSignupActivity.class);
+                startActivity(intent);
             }
         });
     }

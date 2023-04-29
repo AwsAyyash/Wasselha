@@ -1,4 +1,9 @@
 <resources>
+    <string-array name="vehicle_type">
+        <item>Car</item>
+        <item>Van</item>
+        <item>Truck</item>
+    </string-array>
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
     <string name="welcome">Welcome to Wasselha</string>
@@ -30,4 +35,14 @@
     <string name="customer_signup_top_title">Customer signup</string>
     <string name="re_repeat_password_customer_signup">Re-Repeat Password</string>
     <string name="re_repeat_password_hint">Enter re-repeat password</string>
+    <string name="address_customer_signup_textview">Address</string>
+    <string name="address_customer_signup_hint">Enter your address</string>
+    <string name="transporter_signup_top_title">Transporter signup</string>
+    <string name="national_id_transporter_signup_hint">Enter your national id</string>
+    <string name="national_id_signup_textview">National id</string>
+    <string name="upload_image">Upload image</string>
+    <string name="vehicle_license_photo">Vehicle license photo</string>
+    <string name="personal_license_photo">Personal license photo</string>
+    <string name="vehicle_type_transporter_signup_text_view">Vehicle type</string>
+    <string name="collection_point_provider_signup_top_title">Collection point provider signup</string>
 </resources>
