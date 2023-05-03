@@ -4,6 +4,68 @@
         <item>Van</item>
         <item>Truck</item>
     </string-array>
+
+    <string-array name="services">
+        <item>Mohammad</item>
+        <item>Ahmad</item>
+        <item>Salah</item>
+        <item>Ghassan</item>
+        <item>Mohammad</item>
+        <item>Aws</item>
+        <item>Emad</item>
+        <item>Sami</item>
+        <item>Omar</item>
+        <item>Adeeb</item>
+        <item>Bahaa</item>
+        <item>Iyad</item>
+    </string-array>
+
+    <string-array name="times">
+        <item>9:00 AM</item>
+        <item>9:30 AM</item>
+        <item>9:50 AM</item>
+        <item>10:00 AM</item>
+        <item>10:15 AM</item>
+        <item>10:30 AM</item>
+        <item>10:50 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>12:00 PM</item>
+        <item>12:30 PM</item>
+        <item>1:00 PM</item>
+    </string-array>
+
+    <string-array name="sourceCities">
+        <item>Ramallah</item>
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Hebron</item>
+        <item>Jerusalem</item>
+        <item>Salfit</item>
+        <item>Tulkarim</item>
+        <item>Ramallah</item>
+        <item>Hebron</item>
+        <item>Nablus</item>
+        <item>Salfit</item>
+        <item>Jenin</item>
+    </string-array>
+
+    <string-array name="destinationCities">
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Hebron</item>
+        <item>Jerusalem</item>
+        <item>Ramallah</item>
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Nablus</item>
+        <item>Jerusalem</item>
+        <item>Jenin</item>
+        <item>Ramallah</item>
+        <item>Salfit</item>
+    </string-array>
+
+
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
     <string name="welcome">Welcome to Wasselha</string>
@@ -45,4 +107,15 @@
     <string name="personal_license_photo">Personal license photo</string>
     <string name="vehicle_type_transporter_signup_text_view">Vehicle type</string>
     <string name="collection_point_provider_signup_top_title">Collection point provider signup</string>
+    <string name="home_in_bottom_bar">Home</string>
+    <string name="reservation_in_bottom_bar">Reservation</string>
+    <string name="track_in_bottom_bar">Track</string>
+    <string name="profile_in_bottom_bar">Profile</string>
+    <string name="ads_text">Free delivery</string>
+    <string name="date_offer">May 2 - June 10</string>
+    <string name="serviceAvailableCustomer_main_title">Services Available</string>
+    <string name="service_available_main_title">Service Available</string>
+    <string name="transporter_name_in_customer_recyclerView">Transporter:</string>
+    <string name="time_in_customer_recyclerView">Time:</string>
+    <string name="details_in_customer_card_recycler_view">Details</string>
 </resources>
