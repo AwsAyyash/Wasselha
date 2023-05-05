@@ -113,9 +113,22 @@
     <string name="profile_in_bottom_bar">Profile</string>
     <string name="ads_text">Free delivery</string>
     <string name="date_offer">May 2 - June 10</string>
-    <string name="serviceAvailableCustomer_main_title">Services Available</string>
-    <string name="service_available_main_title">Service Available</string>
+    <string name="service_available_main_title">Services Available</string>
     <string name="transporter_name_in_customer_recyclerView">Transporter:</string>
     <string name="time_in_customer_recyclerView">Time:</string>
     <string name="details_in_customer_card_recycler_view">Details</string>
+    <string name="notifications_in_bottom_bar">Notifications</string>
+    <string name="main_search_area_hint">Search about you need...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_filter_main_title">Search filter</string>
+    <string name="source_in_filter">Source</string>
+    <string name="destination_in_filter">Destination</string>
+    <string name="enter_the_source_city_hint">Enter the source</string>
+    <string name="enter_the_destination_city_hint">Enter the destination</string>
+    <string name="destination_in_filter_main_title">Destination</string>
+    <string name="price_in_filter">Price</string>
+    <string name="search_btn_in_filter_search">Search</string>
+    <string name="price_in_filter_title">Price</string>
+    <string name="enter_the_price_in_filter_hint">Enter the price</string>
 </resources>

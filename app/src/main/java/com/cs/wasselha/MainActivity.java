@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView servicesAvailableRecyclerView;
     ArrayList<ServicesModel> servicesModelList = new ArrayList<>();
     int imageCard = R.drawable.car1;
+    EditText mainSearchArea;
+    ImageView filterImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //References
-        //setupReference();
+        setupReference();
         servicesModelSetup();
+        clickOnSearchEditTextSetup();
+        clickOnFilterImageSetup();
         //bottomBarSetup();
         servicesAvailableRecyclerView = findViewById(R.id.servicesAvailableRecyclerView);
         ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(this, servicesModelList);
@@ -44,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     //References
     private void setupReference()
     {
+        mainSearchArea = findViewById(R.id.mainSearchArea);
+        filterImage = findViewById(R.id.filterImage);
 
         //customerBottomNavigationView = findViewById(R.id.customer_bottom_bar);
         //getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MainActivity()).commit();
@@ -64,6 +74,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void clickOnSearchEditTextSetup()
+    {
+            mainSearchArea.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+    }
+
+    private void clickOnFilterImageSetup()
+    {
+        filterImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 
 
 //    private void bottomBarSetup()
