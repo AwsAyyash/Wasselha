@@ -10,5 +10,13 @@ public class CustomerSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_signup);
+        getSupportActionBar().hide();
     }
+
+
+//    //References
+//    private void setupReference() {
+//        loginBtn = findViewById(R.id.loginBtnInRegisterPage);
+//        signupBtn = findViewById(R.id.signupBtnInRegisterPage);
+//    }
 }

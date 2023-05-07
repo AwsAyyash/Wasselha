@@ -1,4 +1,71 @@
 <resources>
+    <string-array name="vehicle_type">
+        <item>Car</item>
+        <item>Van</item>
+        <item>Truck</item>
+    </string-array>
+
+    <string-array name="services">
+        <item>Mohammad</item>
+        <item>Ahmad</item>
+        <item>Salah</item>
+        <item>Ghassan</item>
+        <item>Mohammad</item>
+        <item>Aws</item>
+        <item>Emad</item>
+        <item>Sami</item>
+        <item>Omar</item>
+        <item>Adeeb</item>
+        <item>Bahaa</item>
+        <item>Iyad</item>
+    </string-array>
+
+    <string-array name="times">
+        <item>9:00 AM</item>
+        <item>9:30 AM</item>
+        <item>9:50 AM</item>
+        <item>10:00 AM</item>
+        <item>10:15 AM</item>
+        <item>10:30 AM</item>
+        <item>10:50 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>12:00 PM</item>
+        <item>12:30 PM</item>
+        <item>1:00 PM</item>
+    </string-array>
+
+    <string-array name="sourceCities">
+        <item>Ramallah</item>
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Hebron</item>
+        <item>Jerusalem</item>
+        <item>Salfit</item>
+        <item>Tulkarim</item>
+        <item>Ramallah</item>
+        <item>Hebron</item>
+        <item>Nablus</item>
+        <item>Salfit</item>
+        <item>Jenin</item>
+    </string-array>
+
+    <string-array name="destinationCities">
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Hebron</item>
+        <item>Jerusalem</item>
+        <item>Ramallah</item>
+        <item>Nablus</item>
+        <item>Jenin</item>
+        <item>Nablus</item>
+        <item>Jerusalem</item>
+        <item>Jenin</item>
+        <item>Ramallah</item>
+        <item>Salfit</item>
+    </string-array>
+
+
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
     <string name="welcome">Welcome to Wasselha</string>
@@ -17,11 +84,51 @@
     <string name="signup_as_customer">Customer</string>
     <string name="signup_as_transporter">Transporter</string>
     <string name="signup_as_collection_point_provider">Collection point provider</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last name</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="sign_up">Sign up</string>
-    <string name="or_go_back_to">Or go back to</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="first_name_customer">First Name</string>
+    <string name="first_name_customer_hint">Enter your first name</string>
+    <string name="last_name_customer">Last Name</string>
+    <string name="last_name_customer_hint">Enter your last name</string>
+    <string name="email_customer_signup_textview">Email</string>
+    <string name="email_signup_customer_hint">Enter your email</string>
+    <string name="passwordc_customer_signup_textview">Password</string>
+    <string name="phone_number_customer_signup_textview">Phone Number</string>
+    <string name="phone_number_customer_signup_hint">Enter your phone number</string>
+    <string name="password_customer_signup_hint">Enter your password</string>
+    <string name="customer_signup_top_title">Customer signup</string>
+    <string name="re_repeat_password_customer_signup">Re-Repeat Password</string>
+    <string name="re_repeat_password_hint">Enter re-repeat password</string>
+    <string name="address_customer_signup_textview">Address</string>
+    <string name="address_customer_signup_hint">Enter your address</string>
+    <string name="transporter_signup_top_title">Transporter signup</string>
+    <string name="national_id_transporter_signup_hint">Enter your national id</string>
+    <string name="national_id_signup_textview">National id</string>
+    <string name="upload_image">Upload image</string>
+    <string name="vehicle_license_photo">Vehicle license photo</string>
+    <string name="personal_license_photo">Personal license photo</string>
+    <string name="vehicle_type_transporter_signup_text_view">Vehicle type</string>
+    <string name="collection_point_provider_signup_top_title">Collection point provider signup</string>
+    <string name="home_in_bottom_bar">Home</string>
+    <string name="reservation_in_bottom_bar">Reservation</string>
+    <string name="track_in_bottom_bar">Track</string>
+    <string name="profile_in_bottom_bar">Profile</string>
+    <string name="ads_text">Free delivery</string>
+    <string name="date_offer">May 2 - June 10</string>
+    <string name="service_available_main_title">Services Available</string>
+    <string name="transporter_name_in_customer_recyclerView">Transporter:</string>
+    <string name="time_in_customer_recyclerView">Time:</string>
+    <string name="details_in_customer_card_recycler_view">Details</string>
+    <string name="notifications_in_bottom_bar">Notifications</string>
+    <string name="main_search_area_hint">Search about you need...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_filter_main_title">Search filter</string>
+    <string name="source_in_filter">Source</string>
+    <string name="destination_in_filter">Destination</string>
+    <string name="enter_the_source_city_hint">Enter the source</string>
+    <string name="enter_the_destination_city_hint">Enter the destination</string>
+    <string name="destination_in_filter_main_title">Destination</string>
+    <string name="price_in_filter">Price</string>
+    <string name="search_btn_in_filter_search">Search</string>
+    <string name="price_in_filter_title">Price</string>
+    <string name="enter_the_price_in_filter_hint">Enter the price</string>
 </resources>
