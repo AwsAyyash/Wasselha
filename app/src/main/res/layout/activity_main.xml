@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topNavCustomer"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@drawable/main_title_customer_page_style"
         android:backgroundTint="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/light_selver"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/changasemibold"
@@ -42,8 +42,8 @@
             <ImageView
                 android:id="@+id/searchImg"
                 android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="22dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 app:srcCompat="@drawable/ic_search" />
 

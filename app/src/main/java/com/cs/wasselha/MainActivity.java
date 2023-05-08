@@ -1,6 +1,7 @@
 package com.cs.wasselha;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
     //BottomNavigationView customerBottomNavigationView;
     RecyclerView servicesAvailableRecyclerView;
     ArrayList<ServicesModel> servicesModelList = new ArrayList<>();
-    int imageCard = R.drawable.car2;
+    int imageCard = R.drawable.car1;
     ImageView searchImg;
+
+    //AppCompatButton detailsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setupReference();
         servicesModelSetup();
         clickOnSearchImgSetup();
+        //detailsBtnSetup();
         //bottomBarSetup();
         servicesAvailableRecyclerView = findViewById(R.id.servicesAvailableRecyclerView);
         ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(this, servicesModelList);
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupReference()
     {
         searchImg = findViewById(R.id.searchImg);
+        //detailsBtn = findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
 
         //customerBottomNavigationView = findViewById(R.id.customer_bottom_bar);
         //getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MainActivity()).commit();
@@ -75,6 +80,18 @@ public class MainActivity extends AppCompatActivity {
             });
 
     }
+
+
+//    private void detailsBtnSetup()
+//    {
+//        detailsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ServiceDetailsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 
 //    private void bottomBarSetup()
