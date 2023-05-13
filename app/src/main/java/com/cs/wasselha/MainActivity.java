@@ -2,6 +2,9 @@ package com.cs.wasselha;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,35 +13,68 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cs.wasselha.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //BottomNavigationView customerBottomNavigationView;
-    RecyclerView servicesAvailableRecyclerView;
-    ArrayList<ServicesModel> servicesModelList = new ArrayList<>();
-    int imageCard = R.drawable.car1;
     ImageView searchImg;
+    ActivityMainBinding binding;
 
     //AppCompatButton detailsBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
         getSupportActionBar().hide();
+
+        binding.bottomBarInCustomerMainPage.setOnItemSelectedListener(item -> {
+
+            switch(item.getItemId())
+            {
+                case R.id.nav_home:
+                    replaceFragment(new HomeFragment());
+                    break;
+
+                case R.id.nav_history:
+                    replaceFragment(new ReservationsFragment());
+                    break;
+
+                case R.id.nav_track:
+                    replaceFragment(new TrackingFragment());
+                    break;
+
+                case R.id.nav_notifications:
+                    replaceFragment(new NotificationsFragment());
+                    break;
+
+                case R.id.nav_profile:
+                    replaceFragment(new ProfileFragment());
+                    break;
+            }
+
+            return true;
+        });
 
         //References
         setupReference();
-        servicesModelSetup();
         clickOnSearchImgSetup();
         //detailsBtnSetup();
-        //bottomBarSetup();
-        servicesAvailableRecyclerView = findViewById(R.id.servicesAvailableRecyclerView);
-        ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(this, servicesModelList);
-        servicesAvailableRecyclerView.setAdapter(serviceAdapter);
-        servicesAvailableRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+    }
+
+    private void replaceFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainCustomerLayout,fragment);
+        fragmentTransaction.commit();
 
     }
 
@@ -48,23 +84,6 @@ public class MainActivity extends AppCompatActivity {
     {
         searchImg = findViewById(R.id.searchImg);
         //detailsBtn = findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
-
-        //customerBottomNavigationView = findViewById(R.id.customer_bottom_bar);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MainActivity()).commit();
-        // customerBottomNavigationView.setSelectedItemId(R.id.nav_home);
-    }
-
-    private void servicesModelSetup()
-    {
-        String[] transportersNames = getResources().getStringArray(R.array.services);
-        String[] times = getResources().getStringArray(R.array.times);
-        String[] sourceCities = getResources().getStringArray(R.array.sourceCities);
-        String[] destinationCities = getResources().getStringArray(R.array.destinationCities);
-
-        for(int i = 0 ; i < transportersNames.length ; i++)
-        {
-            servicesModelList.add(new ServicesModel(transportersNames[i], times[i], sourceCities[i], destinationCities[i], imageCard));
-        }
 
     }
 
@@ -81,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
 //    private void detailsBtnSetup()
 //    {
 //        detailsBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,38 +111,4 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
-
-//    private void bottomBarSetup()
-//    {
-//        customerBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment fragment = null;
-//
-//                switch(item.getItemId())
-//                {
-//                    case R.id.nav_home:
-//                        //fragment = new MainActivity();
-//                        break;
-//
-//                    case R.id.nav_history:
-//                        //fragment = new ReservastionHistoryActivity();
-//                        Toast.makeText(MainActivity.this, "Not available now!", Toast.LENGTH_SHORT).show();
-//                        break;
-//
-//                    case R.id.nav_track:
-//                        //fragment = new TrackingActivity();
-//                        Toast.makeText(MainActivity.this, "Not available now!!", Toast.LENGTH_SHORT).show();
-//                        break;
-//
-//                    case R.id.nav_profile:
-//                        //fragment = new ProfileActivity();
-//                        Toast.makeText(MainActivity.this, "Not available now!!!", Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//
-//                return true;
-//            }
-//        });
-//    }
 }
