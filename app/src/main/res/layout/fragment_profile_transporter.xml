@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_green"
-    tools:context=".HomeFragment">
+    tools:context=".ProfileTransporterFragment">
 
     <ImageView
-        android:id="@+id/mainPhotoInProfilePage"
+        android:id="@+id/mainPhotoInProfileTransporterPage"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="40dp"
@@ -18,17 +18,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainNameInProfilePage"
+        android:id="@+id/mainNameTransporterInProfilePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ghassan Amreyah"
+        android:text="Ahmad Ali"
         android:textColor="@color/light_selver"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/mainPhotoInProfilePage"
-        app:layout_constraintStart_toStartOf="@+id/mainPhotoInProfilePage"
-        app:layout_constraintTop_toBottomOf="@+id/mainPhotoInProfilePage" />
+        app:layout_constraintEnd_toEndOf="@+id/mainPhotoInProfileTransporterPage"
+        app:layout_constraintStart_toStartOf="@+id/mainPhotoInProfileTransporterPage"
+        app:layout_constraintTop_toBottomOf="@+id/mainPhotoInProfileTransporterPage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainNameInProfilePage">
+        app:layout_constraintTop_toBottomOf="@+id/mainNameTransporterInProfilePage">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -164,7 +164,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_reservations"
+                            android:src="@drawable/ic_car"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView22"
                             app:layout_constraintEnd_toEndOf="@+id/imageView22"
                             app:layout_constraintHorizontal_bias="0.43"
@@ -178,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="@string/history_in_profile_page"
+                        android:text="@string/cars_in_profile_page"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />

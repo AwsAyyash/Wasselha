@@ -1,26 +1,21 @@
 package com.cs.wasselha;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.cs.wasselha.databinding.ActivityMainBinding;
+import com.cs.wasselha.databinding.ActivityMainCustomerBinding;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class MainCustomerActivity extends AppCompatActivity {
 
     ImageView searchImg;
-    ActivityMainBinding binding;
+    ActivityMainCustomerBinding binding;
 
     //AppCompatButton detailsBtn;
 
@@ -28,33 +23,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+        replaceFragment(new HomeCustomerFragment());
         getSupportActionBar().hide();
 
         binding.bottomBarInCustomerMainPage.setOnItemSelectedListener(item -> {
 
             switch(item.getItemId())
             {
-                case R.id.nav_home:
-                    replaceFragment(new HomeFragment());
+                case R.id.nav_home_transporter:
+                    replaceFragment(new HomeCustomerFragment());
                     break;
 
-                case R.id.nav_history:
-                    replaceFragment(new ReservationsFragment());
+                case R.id.nav_history_transporter:
+                    replaceFragment(new ReservationsCustomerFragment());
                     break;
 
                 case R.id.nav_track:
-                    replaceFragment(new TrackingFragment());
+                    replaceFragment(new TrackingCustomerFragment());
                     break;
 
-                case R.id.nav_notifications:
-                    replaceFragment(new NotificationsFragment());
+                case R.id.nav_notifications_transporter:
+                    replaceFragment(new NotificationsCustomerFragment());
                     break;
 
-                case R.id.nav_profile:
-                    replaceFragment(new ProfileFragment());
+                case R.id.nav_profile_transporter:
+                    replaceFragment(new ProfileCustomerFragment());
                     break;
             }
 
@@ -93,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v)
                 {
-                    Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                    Intent intent = new Intent(MainCustomerActivity.this, FilterActivity.class);
                     startActivity(intent);
                 }
             });

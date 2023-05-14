@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TrackingFragment#newInstance} factory method to
+ * Use the {@link NotificationsTransporterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrackingFragment extends Fragment {
+public class NotificationsTransporterFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class TrackingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TrackingFragment() {
+    public NotificationsTransporterFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class TrackingFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TrackingFragment.
+     * @return A new instance of fragment NotificationsTransporterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TrackingFragment newInstance(String param1, String param2) {
-        TrackingFragment fragment = new TrackingFragment();
+    public static NotificationsTransporterFragment newInstance(String param1, String param2) {
+        NotificationsTransporterFragment fragment = new NotificationsTransporterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class TrackingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tracking, container, false);
+        return inflater.inflate(R.layout.fragment_notifications_transporter, container, false);
     }
 }

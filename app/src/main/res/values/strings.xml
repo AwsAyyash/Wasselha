@@ -146,4 +146,11 @@
     <string name="logout_in_profile_page">Logout</string>
     <string name="inbox_in_profile_page">InBox</string>
     <string name="history_in_profile_page">History</string>
+    <string name="home_in_bottom_bar_transporter">Home</string>
+    <string name="new_service_in_bottom_bar_transporter">New service</string>
+    <string name="reservations_in_bottom_bar_transporter">Reservations</string>
+    <string name="profile_in_bottom_bar_transporter">Profile</string>
+    <string name="notifications_in_bottom_bar_transporter">Notifications</string>
+    <string name="cars_in_profile_page">Cars</string>
+    <string name="skip_btn_in_registration_page">Skip</string>
 </resources>

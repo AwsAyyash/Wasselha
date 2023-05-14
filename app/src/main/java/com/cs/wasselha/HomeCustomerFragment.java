@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeCustomerFragment extends Fragment {
 
     RecyclerView servicesAvailableRecyclerView;
     ArrayList<ServicesModel> servicesModelList = new ArrayList<>();
@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         servicesModelSetup();
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_customer, container, false);
         servicesAvailableRecyclerView = view.findViewById(R.id.servicesAvailableRecyclerView);
         ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList);
         servicesAvailableRecyclerView.setAdapter(serviceAdapter);

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FilterActivity"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".MainTransporterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topNavCustomer"
+        android:id="@+id/topNavTransporter"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/main_title_customer_page_style"
@@ -39,31 +36,23 @@
                 android:fontFamily="@font/changasemibold"
                 android:text="@string/app_name" />
 
-            <ImageView
-                android:id="@+id/searchImg"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:srcCompat="@drawable/ic_search" />
-
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/mainCustomerLayout"
+        android:id="@+id/mainTransporterLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/customer_bottom_bar"
+        app:layout_constraintBottom_toTopOf="@id/transporter_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/topNavTransporter"
         app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/customer_bottom_bar"
+        android:id="@+id/transporter_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_bar_in_customer_main_page"
+            android:id="@+id/bottom_bar_in_transporter_main_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -89,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/items_bottom_bar"
+            app:menu="@menu/items_bottom_bar_transporter_main_activity"
             tools:ignore="MissingConstraints">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -97,4 +86,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
