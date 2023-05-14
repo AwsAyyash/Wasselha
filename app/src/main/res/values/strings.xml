@@ -140,4 +140,10 @@
     <string name="vehicle_number_transporter_signup_hint">Enter the vehicle number</string>
     <string name="vehicle_number_customer_signup_textview">Vehicle Number</string>
     <string name="vehicle_photo_transporter_signup">Vehicle photo</string>
+    <string name="settings_in_profile_page">Settings</string>
+    <string name="claims_in_profile_page">Claims</string>
+    <string name="favorites__in_profile_page">Favorites</string>
+    <string name="logout_in_profile_page">Logout</string>
+    <string name="inbox_in_profile_page">InBox</string>
+    <string name="history_in_profile_page">History</string>
 </resources>
