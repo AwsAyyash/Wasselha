@@ -153,4 +153,7 @@
     <string name="notifications_in_bottom_bar_transporter">Notifications</string>
     <string name="cars_in_profile_page">Cars</string>
     <string name="skip_btn_in_registration_page">Skip</string>
+    <string name="add_new_service_main_title">Add new service</string>
+    <string name="create_btn_in_add_new_service">Create</string>
+    <string name="your_services_in_main_transporter_page">Your services</string>
 </resources>
