@@ -144,6 +144,30 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/vehicleNumberTransporterSignupTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/vehicle_number_customer_signup_textview"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/vehicleNumberTransporterSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_border"
+                    android:ems="10"
+                    android:hint="@string/vehicle_number_transporter_signup_hint"
+                    android:inputType="phone"
+                    android:padding="8dp"
+                    android:textColor="@color/dark_green"
+                    android:textColorHint="@color/dark_green"
+                    android:textSize="16sp" />
+
+                <TextView
                     android:id="@+id/vehicleTypeTransporterSignupTextview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -239,6 +263,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:text="@string/vehicle_photo_transporter_signup"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vehiclePhotoUploadBtn"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/background_login_btn"
+                    android:text="@string/upload_image"
+                    android:textColor="@color/light_selver"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/doneMessageVehiclePhotoUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/red"
+                    android:textDirection="firstStrong" />
+
+                <TextView
+                    android:id="@+id/vehicleLicensePhotoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/vehicle_license_photo"
                     android:textColor="@color/dark_green"
                     android:textSize="16sp"
@@ -258,7 +315,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/doneMessageVehicleLicenseUploadPhoto"
+                    android:id="@+id/doneMessageVehicleLicenseUpload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -271,7 +328,7 @@
                     android:id="@+id/personalPhotoTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/personal_license_photo"
                     android:textColor="@color/dark_green"
                     android:textSize="16sp"

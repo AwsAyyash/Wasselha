@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private Button loginBtn, signupBtn;
+    ImageView skipBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setupReference();
         loginSetup();
         signupSetup();
+        skipSetup();
     }
 
 
@@ -28,6 +31,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void setupReference() {
         loginBtn = findViewById(R.id.loginBtnInRegisterPage);
         signupBtn = findViewById(R.id.signupBtnInRegisterPage);
+        skipBtn = findViewById(R.id.skipBtnInRegisterPage);
     }
 
     private void loginSetup() {
@@ -47,6 +51,17 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 Intent intent = new Intent(RegistrationActivity.this, TypeSignupActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void skipSetup() {
+        skipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(RegistrationActivity.this, MainCustomerActivity.class);
                 startActivity(intent);
             }
         });

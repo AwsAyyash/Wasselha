@@ -2,9 +2,11 @@ package com.cs.wasselha;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +42,20 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
         holder.cardImageView.setImageResource(servicesModelList.get(position).getImage());
+
+        Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
+        detailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ServiceDetailsActivity.class);
+
+                // Pass any extra data if needed
+//                intent.putExtra("key", value);
+
+                // Start the activity
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
