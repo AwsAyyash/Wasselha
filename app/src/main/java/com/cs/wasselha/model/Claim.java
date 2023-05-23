@@ -7,9 +7,48 @@ public class Claim {
     private DeliveryServiceDetails deliveryServiceDetails;
 
     private int writerId;
+    private int writtenToId;
     private String writerType;
+    private String writtenToType;
     private String message;
+
+    public int getWrittenToId() {
+        return writtenToId;
+    }
+
+    public Claim(DeliveryServiceDetails deliveryServiceDetails, int writerId, int writtenToId, String writerType, String writtenToType, String message, LocalDateTime date, int review) {
+        this.deliveryServiceDetails = deliveryServiceDetails;
+        this.writerId = writerId;
+        this.writtenToId = writtenToId;
+        this.writerType = writerType;
+        this.writtenToType = writtenToType;
+        this.message = message;
+        this.date = date;
+        this.review = review;
+    }
+
+    public void setWrittenToId(int writtenToId) {
+        this.writtenToId = writtenToId;
+    }
+
+    public String getWrittenToType() {
+        return writtenToType;
+    }
+
+    public void setWrittenToType(String writtenToType) {
+        this.writtenToType = writtenToType;
+    }
+
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
+    }
+
     private LocalDateTime date;
+    private int review;
 
     public Claim() {
     }

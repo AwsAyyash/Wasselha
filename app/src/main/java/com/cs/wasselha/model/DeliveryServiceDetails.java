@@ -13,14 +13,14 @@ public class DeliveryServiceDetails {
     private LocalDateTime collectionTime;
 
     private LocalDateTime handoverTime;
-    private String status;
+   // private String status;
 
     public DeliveryServiceDetails() {
     }
 
     public DeliveryServiceDetails(Service service, Customer customer, CollectionPoint sourceCollectionPoint,
                                   CollectionPoint destinationCollectionPoint, boolean isPaid,
-                                  LocalDateTime collectionTime, LocalDateTime handoverTime, String status) {
+                                  LocalDateTime collectionTime, LocalDateTime handoverTime) {
         this.service = service;
         this.customer = customer;
         this.sourceCollectionPoint = sourceCollectionPoint;
@@ -28,7 +28,7 @@ public class DeliveryServiceDetails {
         this.isPaid = isPaid;
         this.collectionTime = collectionTime;
         this.handoverTime = handoverTime;
-        this.status = status;
+        //this.status = status;
     }
 
     public Service getService() {
@@ -87,11 +87,11 @@ public class DeliveryServiceDetails {
         this.handoverTime = handoverTime;
     }
 
-    public String getStatus() {
-        return status;
-    }
+   // public String getStatus() {
+       // return status;
+    //}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+   // public void setStatus(String status) {
+     //   this.status = status;
+   // }
 }

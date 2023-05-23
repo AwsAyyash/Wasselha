@@ -9,9 +9,16 @@ public class Vehicle {
     private Transporter transporter;
     private Image vehicleImage;
     private String vehicleType;
-
+    private String vehicleNumber;
     private File vehicleLicense;
 
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
 
     public Vehicle() {
     }

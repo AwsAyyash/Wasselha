@@ -16,7 +16,15 @@ public class Transporter {
     private String status;
     private String nationalId;
     private File drivingLicense;
+    private int review;
 
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
+    }
 
     public Transporter() {
     }
