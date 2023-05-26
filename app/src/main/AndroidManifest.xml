@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wasselha" >
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".MainTransporterActivity"
             android:exported="false" />
         <activity
             android:name=".ServiceDetailsActivity"
@@ -47,7 +47,7 @@
             android:name=".FilterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainTransporterActivity"
+            android:name=".RegistrationActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

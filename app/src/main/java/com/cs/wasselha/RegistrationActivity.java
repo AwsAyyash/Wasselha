@@ -61,10 +61,17 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(RegistrationActivity.this, MainCustomerActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(RegistrationActivity.this, MainCustomerActivity.class);
+//                startActivity(intent);
+                openDialog();
             }
         });
+    }
+
+    private void openDialog()
+    {
+        ForgetRegistrationDialog forgetRegistration = new ForgetRegistrationDialog();
+        forgetRegistration.show(getSupportFragmentManager(), "Test");
     }
 
 
