@@ -1,13 +1,19 @@
 package com.cs.wasselha.model;
 
+import android.util.Log;
+
+import com.github.javafaker.Faker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Package {
 
     private DeliveryServiceDetails deliveryServiceDetails;
     private String type;
     private double weight;
 
-    public Package() {
-    }
+
 
     public Package(DeliveryServiceDetails deliveryServiceDetails, String type, double weight) {
         this.deliveryServiceDetails = deliveryServiceDetails;

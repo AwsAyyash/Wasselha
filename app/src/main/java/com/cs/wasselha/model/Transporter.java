@@ -1,12 +1,28 @@
 package com.cs.wasselha.model;
 
 
+import android.util.Log;
+
+import com.github.javafaker.Faker;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Transporter {
 
+    private int id; // for the database
     private String firstName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String lastName;
     private String email;
     private String phoneNumber;
@@ -17,7 +33,30 @@ public class Transporter {
     private String nationalId;
     private File drivingLicense;
     private int review;
+    List<Transporter> transporters = new ArrayList<>();
 
+    public Transporter(){
+        Faker faker = new Faker();
+       // List<Transporter> transporters = new ArrayList<>();
+        int i=0;
+        while (i<30) {
+            int id = faker.number().numberBetween(1,1000000);
+            String email = faker.internet().emailAddress();
+            String firstName = faker.name().firstName();
+            String lastName = faker.name().lastName();
+            String phoneNumber = faker.phoneNumber().phoneNumber();
+            String password = faker.internet().password();
+            String nationalId = faker.idNumber().ssnValid();
+            Transporter transporter  = new Transporter(
+                    id,firstName,lastName,email,phoneNumber,password,nationalId);
+            transporters.add(transporter);
+
+            i++;
+
+        }
+
+        Log.d("transporters",transporters.toString());
+    }
     public int getReview() {
         return review;
     }
@@ -26,18 +65,18 @@ public class Transporter {
         this.review = review;
     }
 
-    public Transporter() {
-    }
 
-    public Transporter(String firstName, String lastName, String email, String phoneNumber,
-                       String password, String nationalId, File drivingLicense) {
+
+    public Transporter(int id,String firstName, String lastName, String email, String phoneNumber,
+                       String password, String nationalId) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.nationalId = nationalId;
-        this.drivingLicense = drivingLicense;
+
     }
 
     public Transporter(String firstName, String lastName, String email, String phoneNumber,
@@ -135,5 +174,21 @@ public class Transporter {
 
     public void setDrivingLicense(File drivingLicense) {
         this.drivingLicense = drivingLicense;
+    }
+
+    @Override
+    public String toString() {
+        return "Transporter{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", isVerified=" + isVerified +
+                ", status='" + status + '\'' +
+                ", nationalId='" + nationalId + '\'' +
+                ", drivingLicense=" + drivingLicense +
+                ", review=" + review +
+                '}';
     }
 }

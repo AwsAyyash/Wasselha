@@ -1,9 +1,25 @@
 package com.cs.wasselha.model;
 
+import android.util.Log;
+
+import com.github.javafaker.Faker;
+
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class CollectionPoint {
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private CollectionPointProvider collectionPointProvider;
     private String status;
     private LocalTime open_time ; // open_time = LocalTime.of(15,30);
@@ -11,10 +27,42 @@ public class CollectionPoint {
 
     private Location location;
 
-    public CollectionPoint() {
+    public CollectionPoint(){
+
+        Faker faker = new Faker();
+        List<CollectionPoint> collectionPoints = new ArrayList<>();
+
+        List<String> statusTypes = new ArrayList<>();
+        statusTypes.add("open");
+        statusTypes.add("closed");
+
+        // todo: i have to get them from the real database
+        List<CollectionPointProvider> collectionPointProviders = new CollectionPointProvider().collectionPointProviders;
+
+        int i=0;
+
+        while (i<30) {
+
+            int id = faker.number().numberBetween(1,1000000);
+            String statusTypesCurr = statusTypes.get(new Random().nextInt(3));
+            CollectionPointProvider cPPOwner=
+                    collectionPointProviders.get(new Random().nextInt(collectionPointProviders.size()));
+
+            CollectionPoint collectionPoint  = new CollectionPoint(id,cPPOwner,statusTypesCurr,LocalTime.of(10,30),
+                    LocalTime.of(17,30),null);
+
+            collectionPoints.add(collectionPoint);
+
+            i++;
+
+        }
+
+        Log.d("collectionPoints",collectionPoints.toString());
     }
 
-    public CollectionPoint(CollectionPointProvider collectionPointProvider, String status, LocalTime open_time, LocalTime close_time, Location location) {
+    public CollectionPoint(int id,CollectionPointProvider collectionPointProvider, String status,
+                           LocalTime open_time, LocalTime close_time, Location location) {
+        this.id = id;
         this.collectionPointProvider = collectionPointProvider;
         this.status = status;
         this.open_time = open_time;

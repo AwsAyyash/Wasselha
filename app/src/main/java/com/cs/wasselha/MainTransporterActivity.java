@@ -6,8 +6,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cs.wasselha.databinding.ActivityMainTransporterBinding;
+import com.cs.wasselha.interfaces.ICustomerDA;
+import com.cs.wasselha.interfaces.implementation.CustomerDA;
+import com.cs.wasselha.model.Customer;
+import com.cs.wasselha.model.Location;
+import com.cs.wasselha.model.Transporter;
+
+import java.io.FileNotFoundException;
 
 public class MainTransporterActivity extends AppCompatActivity {
 
@@ -51,6 +59,20 @@ public class MainTransporterActivity extends AppCompatActivity {
 
         //References
         setupReference();
+
+       /* try {
+            Location location = new Location();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }*/
+
+       // new Location();
+        //new Customer();
+       // new Transporter();
+
+        ICustomerDA customerDA = new CustomerDA();
+
+        Log.d("insideMainTransporter",customerDA.getCustomers(this).toString());
     }
 
         //References

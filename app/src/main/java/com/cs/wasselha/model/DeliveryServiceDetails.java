@@ -5,6 +5,16 @@ import java.util.Date;
 
 public class DeliveryServiceDetails {
 
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private Service service;
     private Customer customer;
     private CollectionPoint sourceCollectionPoint;
@@ -16,6 +26,8 @@ public class DeliveryServiceDetails {
    // private String status;
 
     public DeliveryServiceDetails() {
+
+
     }
 
     public DeliveryServiceDetails(Service service, Customer customer, CollectionPoint sourceCollectionPoint,
