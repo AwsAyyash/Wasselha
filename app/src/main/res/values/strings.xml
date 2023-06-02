@@ -156,4 +156,17 @@
     <string name="add_new_service_main_title">Add new service</string>
     <string name="create_btn_in_add_new_service">Create</string>
     <string name="your_services_in_main_transporter_page">Your services</string>
+    <string name="notifications_in_bottom_bar_in_collection_point_provider">Notifications</string>
+    <string name="profile_in_bottom_bar_in_collection_point_provider">Profile</string>
+    <string name="new_collection_point_in_bottom_bar_in_collection_point_provider">New collection point</string>
+    <string name="name_collection_point">Name</string>
+    <string name="enter_name_of_collection_point_hint">Enter the name of collection point</string>
+    <string name="open_time_collection_point">Open time</string>
+    <string name="add_btn_in_add_collection_point">Add</string>
+    <string name="add_new_collection_point">Add new collection point</string>
+    <string name="close_time_collection_point">Close time</string>
+    <string name="location_collection_point">Location</string>
+    <string name="add_location_collection_point">Add location</string>
+    <string name="manage_btn_in_home_list_view_collection_point">Manage</string>
+    <string name="collection_point_cpmplete_in_list_view_collection_point">collection point</string>
 </resources>

@@ -7,12 +7,12 @@
     tools:context=".MainTransporterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topNavTransporter"
+        android:id="@+id/topNavCollectionPointProvider"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/main_title_customer_page_style"
         android:backgroundTint="@color/dark_green"
-        app:layout_constraintBottom_toTopOf="@id/mainTransporterLayout"
+        app:layout_constraintBottom_toTopOf="@id/mainCollectionPointProviderLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +24,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/maniTitleInTransporterPage"
+                android:id="@+id/maniTitleInCollectionPointProviderPage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -40,13 +40,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/mainTransporterLayout"
+        android:id="@+id/mainCollectionPointProviderLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/transporter_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavTransporter"
+        app:layout_constraintTop_toBottomOf="@+id/topNavCollectionPointProvider"
         app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_bar_in_transporter_main_page"
+            android:id="@+id/bottom_bar_in_collection_point_provider_main_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/items_bottom_bar_transporter_main_activity"
+            app:menu="@menu/items_bottom_bar_collection_point_provider_activity"
             tools:ignore="MissingConstraints">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,12 +14,12 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ServicesAdapter extends ArrayAdapter<Services>
-{
+public class CollectionPointsAdapter extends ArrayAdapter<CollectionPoints> {
+
     private Context mContext;
     private int mResource;
 
-    public ServicesAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Services> objects)
+    public CollectionPointsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<CollectionPoints> objects)
     {
         super(context, resource, objects);
         this.mContext = context;
@@ -33,14 +34,13 @@ public class ServicesAdapter extends ArrayAdapter<Services>
         convertView = layoutInFlater.inflate(mResource, parent, false);
 
         ImageView imageView = convertView.findViewById(R.id.imageInListViewMainPageCollectionPointProvider);
-        TextView sourceCity = convertView.findViewById(R.id.sourceCityInListViewMainPageTransporter);
-        TextView destinationCity = convertView.findViewById(R.id.destinationCityInListViewMainPageTransporter);
-        TextView time = convertView.findViewById(R.id.timeOfServiceInListViewMainPageTransporter);
+        TextView nameCollectionPoint = convertView.findViewById(R.id.nameCollectionPointInListViewMainPageCollectionPointProvider);
+        Button manageBtn = convertView.findViewById(R.id.manageBtnInListViewMainPageCollectionPointProvider);
+
 
         imageView.setImageResource(getItem(position).getImage());
-        sourceCity.setText(getItem(position).getSourceCity());
-        destinationCity.setText(getItem(position).getDestinationCity());
-        time.setText(getItem(position).getTime());
+        nameCollectionPoint.setText(getItem(position).getCollectionPointName());
+//        manageBtn.setBackgroundResource(R.drawable.button_background);
         return convertView;
     }
 }

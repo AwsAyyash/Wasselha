@@ -41,6 +41,9 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".MainCollectionPointProviderActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="false" />
         <activity

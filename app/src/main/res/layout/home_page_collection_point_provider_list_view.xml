@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageInListViewMainPageCollectionPointProvider"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        android:src="@drawable/car1"/>
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:src="@drawable/collection_point_img"/>
 
     <LinearLayout
         android:id="@+id/pathLinearLayout"
@@ -22,7 +22,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/sourceCityInListViewMainPageTransporter"
+            android:id="@+id/nameCollectionPointInListViewMainPageCollectionPointProvider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ramallah"
@@ -39,38 +39,26 @@
             android:textSize="18sp"
             android:layout_weight="1"
             style="@style/TextAppearance.AppCompat.Title"
-            android:text="to"
-            android:textColor="@color/dark_green"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/destinationCityInListViewMainPageTransporter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nablus"
-            android:textSize="18sp"
-            style="@style/TextAppearance.AppCompat.Title"
+            android:text="@string/collection_point_cpmplete_in_list_view_collection_point"
             android:textColor="@color/black"
             android:textStyle="bold" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeOfServiceInListViewMainPageTransporter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/manageBtnInListViewMainPageCollectionPointProvider"
+        style="@android:style/Widget.Button"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/details_btn_in_card_customer_recycler_view"
+        android:text="@string/manage_btn_in_home_list_view_collection_point"
+        android:textColor="@color/light_selver"
+        android:textStyle="bold"
+        android:textSize="14sp"
         android:layout_below="@+id/pathLinearLayout"
         android:layout_toEndOf="@+id/imageInListViewMainPageCollectionPointProvider"
-        android:layout_marginTop="8dp"
-        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        android:text="10:00 AM" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_below="@+id/pathLinearLayout"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/ic_close" />
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
