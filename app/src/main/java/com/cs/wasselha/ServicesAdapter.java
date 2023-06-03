@@ -32,7 +32,7 @@ public class ServicesAdapter extends ArrayAdapter<Services>
         LayoutInflater layoutInFlater = LayoutInflater.from(mContext);
         convertView = layoutInFlater.inflate(mResource, parent, false);
 
-        ImageView imageView = convertView.findViewById(R.id.imageInListViewMainPageCollectionPointProvider);
+        ImageView imageView = convertView.findViewById(R.id.imageInListViewMainPageTransporter);
         TextView sourceCity = convertView.findViewById(R.id.sourceCityInListViewMainPageTransporter);
         TextView destinationCity = convertView.findViewById(R.id.destinationCityInListViewMainPageTransporter);
         TextView time = convertView.findViewById(R.id.timeOfServiceInListViewMainPageTransporter);
