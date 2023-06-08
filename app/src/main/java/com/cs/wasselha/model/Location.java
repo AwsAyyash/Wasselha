@@ -3,6 +3,7 @@ package com.cs.wasselha.model;
 import android.util.Log;
 
 import com.github.javafaker.Faker;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +14,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Location {
+
+    //@Expose(serialize = false)
+    private transient int id;
     private String title;
     private String description;
     private double latitude;
     private double longitude;
 
-    List<Location> locations = new ArrayList<>();
+    public  List<Location> getLocations() {
+        return locations;
+    }
+
+    //@Expose(serialize = false)
+    transient List<Location> locations = new ArrayList<>();
 
     public Location() {
         Faker faker = new Faker();

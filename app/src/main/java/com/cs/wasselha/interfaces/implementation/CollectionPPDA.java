@@ -1,18 +1,16 @@
 package com.cs.wasselha.interfaces.implementation;
 
 import android.os.StrictMode;
+import android.util.Log;
 
-
-import com.cs.wasselha.interfaces.ICustomerDA;
-import com.cs.wasselha.model.Customer;
-
+import com.cs.wasselha.model.CollectionPointProvider;
+import com.cs.wasselha.model.Transporter;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -20,9 +18,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CustomerDA implements ICustomerDA {
+public class CollectionPPDA {
+
     OkHttpClient client = new OkHttpClient();
-    ArrayList<Customer> customerListGlobal = new ArrayList<>();
+    ArrayList<CollectionPointProvider> collectionPPDAListGlobal = new ArrayList<>();
 
     Gson gson = new Gson();
 
@@ -33,73 +32,72 @@ public class CustomerDA implements ICustomerDA {
     }
 
 
-    public ArrayList<Customer> getCustomerArrList() {
-        return customerListGlobal;
+    public ArrayList<CollectionPointProvider> getCollectionPPDAListGlobal() {
+        return collectionPPDAListGlobal;
     }
 
 
-    @Override
-    public ArrayList<Customer> getCustomers() throws IOException {
+    //    @Override
+    public ArrayList<CollectionPointProvider> getCollectionPPs() throws IOException {
 
 
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
+        String url = "http://176.119.254.198:8000/wasselha/collection-point-providers/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             Gson gson = new Gson();
-            Type customerListType = new TypeToken<ArrayList<Customer>>() {
+            Type collectionPPsListType = new TypeToken<ArrayList<CollectionPointProvider>>() {
             }.getType();
-            customerListGlobal = new ArrayList<>();
-            customerListGlobal = gson.fromJson(response.peekBody(2048).string(), customerListType);
+            collectionPPDAListGlobal = new ArrayList<>();
+            collectionPPDAListGlobal = gson.fromJson(response.peekBody(2048).string(), collectionPPsListType);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
 
-        return customerListGlobal;
+        return collectionPPDAListGlobal;
 
 
     }
 
 
-    @Override
-    public Customer getCustomer(int id) throws IOException {
+    // @Override
+    public CollectionPointProvider getCollectionPP(int id) throws IOException {
 
-        String url = "http://176.119.254.198:8000/wasselha/customers/" + id + "/";
+        String url = "http://176.119.254.198:8000/wasselha/collection-point-providers/" + id + "/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Customer customer;
+        CollectionPointProvider collectionPP;
         try (Response response = client.newCall(request).execute()) {
 
             //Type customerListType = new TypeToken<ArrayList<Customer>>() {}.getType();
             //customerListGlobal = new ArrayList<>();
-            customer = gson.fromJson(response.peekBody(2048).string(), Customer.class);
+            collectionPP = gson.fromJson(response.peekBody(2048).string(), CollectionPointProvider.class);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
-        return customer;
+        return collectionPP;
     }
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    @Override
-    public String saveCustomer(Customer customer) throws IOException {
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
-        RequestBody body = RequestBody.create(gson.toJson(customer), JSON);
+    // @Override
+    public String saveCollectionPP(CollectionPointProvider collectionPP) throws IOException {
+        String url = "http://176.119.254.198:8000/wasselha/collection-point-providers/";
+        RequestBody body = RequestBody.create(gson.toJson(collectionPP), JSON);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
+            Log.d("cppDA2", response.peekBody(2048).string());
             return response.peekBody(2048).string();
         }
     }
-
-
 }

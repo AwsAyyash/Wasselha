@@ -1,9 +1,8 @@
 package com.cs.wasselha.model;
 
 
-import android.util.Log;
-
 import com.github.javafaker.Faker;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,8 +11,9 @@ import java.util.List;
 
 public class Transporter {
 
-    private int id; // for the database
-    private String firstName;
+    //@Expose(serialize = false)
+    private transient int id; // for the database
+    private String first_name;
 
     public int getId() {
         return id;
@@ -23,39 +23,54 @@ public class Transporter {
         this.id = id;
     }
 
-    private String lastName;
+    private String last_name;
     private String email;
-    private String phoneNumber;
+    private String phone_number;
     private String password;
-    private boolean isVerified;
+    private boolean is_verified;
 
     private String status;
-    private String nationalId;
-    private File drivingLicense;
+    private String national_id;
+    private File driving_license;
     private int review;
-    List<Transporter> transporters = new ArrayList<>();
+
+    public List<Transporter> getTransporters() {
+        return transporters;
+    }
+
+    public void setTransporters(List<Transporter> transporters) {
+        this.transporters = transporters;
+    }
+
+    //@Expose(serialize = false)
+    transient List<Transporter> transporters = new ArrayList<>();
+
 
     public Transporter(){
         Faker faker = new Faker();
        // List<Transporter> transporters = new ArrayList<>();
         int i=0;
         while (i<30) {
-            int id = faker.number().numberBetween(1,1000000);
+            //int id = faker.number().numberBetween(1,1000000);
             String email = faker.internet().emailAddress();
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String phoneNumber = faker.phoneNumber().phoneNumber();
+            String phoneNumber = "4"+i;//faker.phoneNumber().phoneNumber();
             String password = faker.internet().password();
             String nationalId = faker.idNumber().ssnValid();
+            File drivingLicense =  new File("C:\\Users\\hp\\AndroidStudioProjects\\Wasselha2\\download.jpeg");
+            String status = "Available";
+            int review = 2;
             Transporter transporter  = new Transporter(
-                    id,firstName,lastName,email,phoneNumber,password,nationalId);
+                    firstName,lastName,email,phoneNumber,password,nationalId,drivingLicense
+            ,status,review);
             transporters.add(transporter);
 
             i++;
 
         }
 
-        Log.d("transporters",transporters.toString());
+       // Log.d("transporters",transporters.toString());
     }
     public int getReview() {
         return review;
@@ -67,57 +82,61 @@ public class Transporter {
 
 
 
-    public Transporter(int id,String firstName, String lastName, String email, String phoneNumber,
-                       String password, String nationalId) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Transporter(String first_name, String last_name, String email, String phone_number,
+                       String password, String national_id,
+                       File driving_license,String status, int review) {
+      /*  this.id = id;*/
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
         this.password = password;
-        this.nationalId = nationalId;
-
-    }
-
-    public Transporter(String firstName, String lastName, String email, String phoneNumber,
-                       String password, boolean isVerified, String status, String nationalId, File drivingLicense) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.isVerified = isVerified;
+        this.national_id = national_id;
+        this.driving_license = driving_license;
         this.status = status;
-        this.nationalId = nationalId;
-        this.drivingLicense = drivingLicense;
+        this.review = review;
+
     }
 
-    public Transporter(String firstName, String lastName, String email, String phoneNumber,
-                       String password, String status, String nationalId, File drivingLicense) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Transporter(String first_name, String last_name, String email, String phone_number,
+                       String password, boolean is_verified, String status, String national_id, File driving_license) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
+        this.password = password;
+        this.is_verified = is_verified;
+        this.status = status;
+        this.national_id = national_id;
+        this.driving_license = driving_license;
+    }
+
+    public Transporter(String first_name, String last_name, String email, String phone_number,
+                       String password, String status, String national_id, File driving_license) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone_number = phone_number;
         this.password = password;
         this.status = status;
-        this.nationalId = nationalId;
-        this.drivingLicense = drivingLicense;
+        this.national_id = national_id;
+        this.driving_license = driving_license;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -128,12 +147,12 @@ public class Transporter {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getPassword() {
@@ -144,12 +163,12 @@ public class Transporter {
         this.password = password;
     }
 
-    public boolean isVerified() {
-        return isVerified;
+    public boolean isIs_verified() {
+        return is_verified;
     }
 
-    public void setVerified(boolean verified) {
-        isVerified = verified;
+    public void setIs_verified(boolean is_verified) {
+        this.is_verified = is_verified;
     }
 
     public String getStatus() {
@@ -160,34 +179,34 @@ public class Transporter {
         this.status = status;
     }
 
-    public String getNationalId() {
-        return nationalId;
+    public String getNational_id() {
+        return national_id;
     }
 
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
+    public void setNational_id(String national_id) {
+        this.national_id = national_id;
     }
 
-    public File getDrivingLicense() {
-        return drivingLicense;
+    public File getDriving_license() {
+        return driving_license;
     }
 
-    public void setDrivingLicense(File drivingLicense) {
-        this.drivingLicense = drivingLicense;
+    public void setDriving_license(File driving_license) {
+        this.driving_license = driving_license;
     }
 
     @Override
     public String toString() {
         return "Transporter{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phone_number='" + phone_number + '\'' +
                 ", password='" + password + '\'' +
-                ", isVerified=" + isVerified +
+                ", isIs_verified=" + is_verified +
                 ", status='" + status + '\'' +
-                ", nationalId='" + nationalId + '\'' +
-                ", drivingLicense=" + drivingLicense +
+                ", national_id='" + national_id + '\'' +
+                ", driving_license=" + driving_license +
                 ", review=" + review +
                 '}';
     }

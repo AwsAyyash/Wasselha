@@ -1,15 +1,14 @@
 package com.cs.wasselha.interfaces;
 
-import android.content.Context;
-
 import com.cs.wasselha.model.Customer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface ICustomerDA {
 
-    ArrayList<Customer> getCustomers(Context context);
-    Customer getCustomer(int id);
-    void saveCustomer(Customer customer);
+    ArrayList<Customer> getCustomers() throws IOException;
+    Customer getCustomer( int id) throws IOException;
+    String saveCustomer(Customer customer) throws IOException;
 
 }

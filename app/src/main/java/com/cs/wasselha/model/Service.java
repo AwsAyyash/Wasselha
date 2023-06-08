@@ -2,9 +2,11 @@ package com.cs.wasselha.model;
 
 import android.util.Log;
 
+import com.cs.wasselha.interfaces.implementation.LocationDA;
+import com.cs.wasselha.interfaces.implementation.TransporterDA;
 import com.github.javafaker.Faker;
 
-import java.time.LocalTime;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,9 @@ import java.util.Random;
 
 public class Service {
 
-    private int id;
+
+   // @Expose(serialize = false)
+    private  transient int id;
 
     public int getId() {
         return id;
@@ -23,26 +27,32 @@ public class Service {
     }
 
     private Transporter transporter;
-    private Location sourcePlace;
-    private Location destinationPlace;
-    private Date serviceDate;
+    private Location source_place;
+    private Location destination_place;
+    private Date service_date;
     private double price;
-    List<Service> services = new ArrayList<>();
 
-    public Service(){
+    public List<Service> getServices() {
+        return services;
+    }
+
+    //@Expose(serialize = false)
+    transient List<Service> services = new ArrayList<>();
+
+    public Service() throws IOException {
 
         Faker faker = new Faker();
 
 
 
-        List<Transporter> transportersList = new Transporter().transporters; // todo: i have to get them from the real database
-        List<Location> locationList = new Location().locations;
+        ArrayList<Transporter> transportersList = new TransporterDA().getTransporters(); // todo: i have to get them from the real database
+        List<Location> locationList = new LocationDA().getLocations();
 
         int i=0;
 
         while (i<30) {
 
-            int id = faker.number().numberBetween(1,1000000);
+            //int id = faker.number().numberBetween(1,1000000);
 
             double price = faker.number().numberBetween(10,500);
 
@@ -62,12 +72,12 @@ public class Service {
         Log.d("services",services.toString());
     }
 
-    public Service(int id, Transporter transporter, Location sourcePlace, Location destinationPlace, Date serviceDate, double price) {
+    public Service(int id, Transporter transporter, Location source_place, Location destination_place, Date service_date, double price) {
         this.id = id;
         this.transporter = transporter;
-        this.sourcePlace = sourcePlace;
-        this.destinationPlace = destinationPlace;
-        this.serviceDate = serviceDate;
+        this.source_place = source_place;
+        this.destination_place = destination_place;
+        this.service_date = service_date;
         this.price = price;
     }
 
@@ -79,28 +89,28 @@ public class Service {
         this.transporter = transporter;
     }
 
-    public Location getSourcePlace() {
-        return sourcePlace;
+    public Location getSource_place() {
+        return source_place;
     }
 
-    public void setSourcePlace(Location sourcePlace) {
-        this.sourcePlace = sourcePlace;
+    public void setSource_place(Location source_place) {
+        this.source_place = source_place;
     }
 
-    public Location getDestinationPlace() {
-        return destinationPlace;
+    public Location getDestination_place() {
+        return destination_place;
     }
 
-    public void setDestinationPlace(Location destinationPlace) {
-        this.destinationPlace = destinationPlace;
+    public void setDestination_place(Location destination_place) {
+        this.destination_place = destination_place;
     }
 
-    public Date getServiceDate() {
-        return serviceDate;
+    public Date getService_date() {
+        return service_date;
     }
 
-    public void setServiceDate(Date serviceDate) {
-        this.serviceDate = serviceDate;
+    public void setService_date(Date service_date) {
+        this.service_date = service_date;
     }
 
     public double getPrice() {

@@ -1,18 +1,16 @@
 package com.cs.wasselha.interfaces.implementation;
 
 import android.os.StrictMode;
+import android.util.Log;
 
-
-import com.cs.wasselha.interfaces.ICustomerDA;
-import com.cs.wasselha.model.Customer;
-
+import com.cs.wasselha.model.Location;
+import com.cs.wasselha.model.Service;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -20,86 +18,94 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CustomerDA implements ICustomerDA {
+public class ServiceDA {
+
     OkHttpClient client = new OkHttpClient();
-    ArrayList<Customer> customerListGlobal = new ArrayList<>();
+    ArrayList<Service> ServiceListGlobal = new ArrayList<>();
 
     Gson gson = new Gson();
 
-    {
+
+    public ServiceDA() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
+
+    }
+
+    public ArrayList<Service> getServiceListGlobal() {
+        return ServiceListGlobal;
     }
 
 
-    public ArrayList<Customer> getCustomerArrList() {
-        return customerListGlobal;
-    }
+    //    @Override
+    public ArrayList<Service> getServices() throws IOException {
 
 
-    @Override
-    public ArrayList<Customer> getCustomers() throws IOException {
-
-
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
+        String url = "http://176.119.254.198:8000/wasselha/services/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             Gson gson = new Gson();
-            Type customerListType = new TypeToken<ArrayList<Customer>>() {
+            Type transportersListType = new TypeToken<ArrayList<Location>>() {
             }.getType();
-            customerListGlobal = new ArrayList<>();
-            customerListGlobal = gson.fromJson(response.peekBody(2048).string(), customerListType);
+            ServiceListGlobal = new ArrayList<>();
+            ServiceListGlobal = gson.fromJson(response.peekBody(2048).string(), transportersListType);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
 
-        return customerListGlobal;
+        return ServiceListGlobal;
 
 
     }
 
 
-    @Override
-    public Customer getCustomer(int id) throws IOException {
+    // @Override
+    public Service getService(int id) throws IOException {
 
-        String url = "http://176.119.254.198:8000/wasselha/customers/" + id + "/";
+        String url = "http://176.119.254.198:8000/wasselha/services/" + id + "/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Customer customer;
+        Service service;
         try (Response response = client.newCall(request).execute()) {
 
             //Type customerListType = new TypeToken<ArrayList<Customer>>() {}.getType();
             //customerListGlobal = new ArrayList<>();
-            customer = gson.fromJson(response.peekBody(2048).string(), Customer.class);
+            service = gson.fromJson(response.peekBody(2048).string(), Service.class);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
-        return customer;
+        return service;
     }
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    @Override
-    public String saveCustomer(Customer customer) throws IOException {
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
-        RequestBody body = RequestBody.create(gson.toJson(customer), JSON);
+    // @Override
+    public String saveService(Service service) throws IOException {
+
+        // Gson gson = new GsonBuilder()
+        //       .excludeFieldsWithoutExposeAnnotation()
+        //     .create();
+        String url = "http://176.119.254.198:8000/wasselha/services/";
+        RequestBody body = RequestBody.create(gson.toJson(service), JSON);
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
+            Log.d("toJsonTransLocations2",gson.toJson(service));
+            Log.d("res2",response.peekBody(2048).string());
             return response.peekBody(2048).string();
         }
+
     }
-
-
 }

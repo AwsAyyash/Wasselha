@@ -1,18 +1,18 @@
 package com.cs.wasselha.interfaces.implementation;
 
 import android.os.StrictMode;
-
+import android.util.Log;
 
 import com.cs.wasselha.interfaces.ICustomerDA;
 import com.cs.wasselha.model.Customer;
-
+import com.cs.wasselha.model.Transporter;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -20,83 +20,92 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CustomerDA implements ICustomerDA {
+public class TransporterDA {
+
+
     OkHttpClient client = new OkHttpClient();
-    ArrayList<Customer> customerListGlobal = new ArrayList<>();
+    ArrayList<Transporter> transporterListGlobal = new ArrayList<>();
 
     Gson gson = new Gson();
 
-    {
+
+    public TransporterDA() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
+
+    }
+
+    public ArrayList<Transporter> getTransporterListGlobal() {
+        return transporterListGlobal;
     }
 
 
-    public ArrayList<Customer> getCustomerArrList() {
-        return customerListGlobal;
-    }
+    //    @Override
+    public ArrayList<Transporter> getTransporters() throws IOException {
 
 
-    @Override
-    public ArrayList<Customer> getCustomers() throws IOException {
-
-
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
+        String url = "http://176.119.254.198:8000/wasselha/transporters/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             Gson gson = new Gson();
-            Type customerListType = new TypeToken<ArrayList<Customer>>() {
+            Type transportersListType = new TypeToken<ArrayList<Transporter>>() {
             }.getType();
-            customerListGlobal = new ArrayList<>();
-            customerListGlobal = gson.fromJson(response.peekBody(2048).string(), customerListType);
+            transporterListGlobal = new ArrayList<>();
+            transporterListGlobal = gson.fromJson(response.peekBody(2048).string(), transportersListType);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
 
-        return customerListGlobal;
+        return transporterListGlobal;
 
 
     }
 
 
-    @Override
-    public Customer getCustomer(int id) throws IOException {
+    // @Override
+    public Transporter getTransporter(int id) throws IOException {
 
-        String url = "http://176.119.254.198:8000/wasselha/customers/" + id + "/";
+        String url = "http://176.119.254.198:8000/wasselha/transporters/" + id + "/";
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Customer customer;
+        Transporter transporter;
         try (Response response = client.newCall(request).execute()) {
 
             //Type customerListType = new TypeToken<ArrayList<Customer>>() {}.getType();
             //customerListGlobal = new ArrayList<>();
-            customer = gson.fromJson(response.peekBody(2048).string(), Customer.class);
+            transporter = gson.fromJson(response.peekBody(2048).string(), Transporter.class);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
         }
 
-        return customer;
+        return transporter;
     }
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    @Override
-    public String saveCustomer(Customer customer) throws IOException {
-        String url = "http://176.119.254.198:8000/wasselha/customers/";
-        RequestBody body = RequestBody.create(gson.toJson(customer), JSON);
+    // @Override
+    public String saveTransporter(Transporter transporter) throws IOException {
+
+      //  Gson gson = new GsonBuilder()
+        //        .excludeFieldsWithoutExposeAnnotation()
+          //      .create();
+        String url = "http://176.119.254.198:8000/wasselha/transporters/";
+        RequestBody body = RequestBody.create(gson.toJson(transporter), JSON);
+        Log.d("toJsonTrans",gson.toJson(transporter));
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
+            Log.d("trans2",response.peekBody(2048).string());
             return response.peekBody(2048).string();
         }
     }
