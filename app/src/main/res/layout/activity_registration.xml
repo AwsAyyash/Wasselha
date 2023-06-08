@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeInRegisterPage" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginBtnInRegisterPage"
+        android:id="@+id/loginBtnInLoginPage"
         style="@android:style/Widget.Button"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -95,7 +95,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtnInRegisterPage" />
+        app:layout_constraintTop_toBottomOf="@+id/loginBtnInLoginPage" />
 
     <ImageView
         android:id="@+id/skipBtnInRegisterPage"

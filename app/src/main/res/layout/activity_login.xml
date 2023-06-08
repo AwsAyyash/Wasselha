@@ -33,7 +33,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailInLoginPage"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -45,11 +45,12 @@
                 android:hint="@string/username_or_phone_number_hint"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
+                android:textColor="@color/light_selver"
                 android:textColorHint="@color/light_selver"
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordInLoginPage"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -58,6 +59,7 @@
                 android:background="@drawable/edittext_background"
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="16dp"
+                android:textColor="@color/light_selver"
                 android:ems="10"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
@@ -75,10 +77,11 @@
                 android:layout_marginBottom="10dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/red"
+                android:textStyle="bold"
                 android:textDirection="firstStrong" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/loginBtnInRegisterPage"
+                android:id="@+id/loginBtnInLoginPage"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"

@@ -29,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     //References
     private void setupReference() {
-        loginBtn = findViewById(R.id.loginBtnInRegisterPage);
+        loginBtn = findViewById(R.id.loginBtnInLoginPage);
         signupBtn = findViewById(R.id.signupBtnInRegisterPage);
         skipBtn = findViewById(R.id.skipBtnInRegisterPage);
     }
@@ -39,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, TypeLoginActivity.class);
                 startActivity(intent);
             }
         });

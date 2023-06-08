@@ -169,4 +169,5 @@
     <string name="add_location_collection_point">Add location</string>
     <string name="manage_btn_in_home_list_view_collection_point">Manage</string>
     <string name="collection_point_cpmplete_in_list_view_collection_point">collection point</string>
+    <string name="select_type_of_login">Login as:</string>
 </resources>
