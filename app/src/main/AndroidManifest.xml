@@ -18,40 +18,40 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".TypeLoginActivity"
+            android:name=".Login.TypeLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainTransporterActivity"
+            android:name=".Transporter.MainTransporterActivity"
             android:exported="false" />
         <activity
-            android:name=".ServiceDetailsActivity"
+            android:name=".Customer.ServiceDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainCustomerActivity"
+            android:name=".Customer.MainCustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".CollectionPointProviderSignupActivity"
+            android:name=".CollectionPointProvider.CollectionPointProviderSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".TransporterSignupActivity"
+            android:name=".Transporter.TransporterSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".CustomerSignupActivity"
+            android:name=".Customer.CustomerSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".TypeSignupActivity"
+            android:name=".Signup.TypeSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainCollectionPointProviderActivity"
+            android:name=".CollectionPointProvider.MainCollectionPointProviderActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".FilterActivity"
+            android:name=".Customer.FilterActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrationActivity"

@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.cs.wasselha.Dialogs.ForgetRegistrationDialog;
+import com.cs.wasselha.Login.TypeLoginActivity;
+import com.cs.wasselha.Signup.TypeSignupActivity;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private Button loginBtn, signupBtn;
@@ -61,8 +65,6 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-//                Intent intent = new Intent(RegistrationActivity.this, MainCustomerActivity.class);
-//                startActivity(intent);
                 openDialog();
             }
         });
