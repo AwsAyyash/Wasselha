@@ -36,6 +36,7 @@ public class TypeLoginActivity extends AppCompatActivity {
     private void setupReference()
     {
         loginAsCustomerBtn = findViewById(R.id.loginAsCustomerBtn);
+
         loginAsTransporterBtn = findViewById(R.id.loginAsTransporterBtn);
         loginAsCollectionPointProviderBtn = findViewById(R.id.loginAsCollectionPointProviderBtn);
         signupQuestion = findViewById(R.id.signupQuestionBtnInTypeLoginPage);
@@ -47,6 +48,7 @@ public class TypeLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                //save in shared preferences --> type=customer
                 Intent intent = new Intent(TypeLoginActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -59,6 +61,7 @@ public class TypeLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                //save in shared preferences --> type=transporter
                 Intent intent = new Intent(TypeLoginActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -71,6 +74,7 @@ public class TypeLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                //save in shared preferences --> type=collectionpointprovider
                 Intent intent = new Intent(TypeLoginActivity.this, LoginActivity.class);
                 startActivity(intent);
             }

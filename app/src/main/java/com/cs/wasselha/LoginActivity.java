@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoginUser()
     {
+        //type,(customer,transprter,collectionpointprovider)
                 requestQueue = Volley.newRequestQueue(this);
                 String url = "http://176.119.254.198:8000/wasselha/login/customer/";
                 final String value = "";
@@ -112,10 +113,9 @@ public class LoginActivity extends AppCompatActivity {
                                 try
                                 {
                                     Log.d("ressss",response.toString());
-                                    String result = response.getString("result");
-                                    Log.d("ressss",result);
+                                    int id = response.getInt("id");
 
-                                    if (result.equals("true"))
+                                    if (id>0)
                                     {
                                         Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
                                         startActivity(intent);
