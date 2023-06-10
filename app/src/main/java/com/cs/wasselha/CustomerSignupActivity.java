@@ -2,7 +2,9 @@ package com.cs.wasselha;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -72,7 +76,8 @@ public class CustomerSignupActivity extends AppCompatActivity {
                         if(password.getText().toString().equals(repeatPassword.getText().toString()))
                         {
                             errorMessage.setText("");
-                            addCustomer(email.getText().toString(), firstName.getText().toString(),lastName.getText().toString(), password.getText().toString(), phoneNumber.getText().toString(), true,"3",  address.getText().toString());
+                            addCustomer();
+                            //addCustomer(email.getText().toString(), firstName.getText().toString(),lastName.getText().toString(), password.getText().toString(), phoneNumber.getText().toString(), true,"3",  address.getText().toString());
                         }
                         else
                         {
@@ -95,73 +100,77 @@ public class CustomerSignupActivity extends AppCompatActivity {
     }
 
 
-    private void addCustomer(String email, String firstName, String lastName, String password, String phoneNumber, boolean isVerified, String review, String location) {
+    private void addCustomer()
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "http://176.119.254.198:8000/wasselha/customers/";
-        RequestQueue queue = Volley.newRequestQueue(CustomerSignupActivity.this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try
-                {
-                    JSONObject jsonObject = new JSONObject(response);
 
-                    if (jsonObject.getString("error").equalsIgnoreCase("true"))
+        JSONObject jsonObject = new JSONObject();
+
+        try
+        {
+            jsonObject.put("email", email.getText().toString());
+            jsonObject.put("first_name", firstName.getText().toString());
+            jsonObject.put("last_name", lastName.getText().toString());
+            jsonObject.put("password", password.getText().toString());
+            jsonObject.put("phone_number", phoneNumber.getText().toString());
+            jsonObject.put("is_verified", true);
+            jsonObject.put("review", 3);
+            jsonObject.put("location", 1);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        // Create the POST request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response)
                     {
-                        errorMessage.setText("Eamil or Phone number is already exist!");
-                        Toast.makeText(CustomerSignupActivity.this, "Eamil or Phone number is already exist!", Toast.LENGTH_SHORT).show();
+                        try
+                        {
+                            Log.d("ressss",response.toString());
+                            String result = response.getString("result");
+                            Log.d("ressss",result);
+
+                            if (result.equals("true"))
+                            {
+                                Intent intent = new Intent(CustomerSignupActivity.this, RegistrationActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(CustomerSignupActivity.this, "Test"+result, Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                errorMessage.setText("The information is not correct, try again!");                                    }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
                     }
-                    else
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
                     {
-//                        editor.putString(LOGIN, "true");
-//                        editor.putString(USERNAME, username);
-//                        editor.putString(FULLNAME, fullName);
-//                        editor.putString(EMAIL, email);
-//                        editor.commit();
-                        Toast.makeText(CustomerSignupActivity.this, "Add customer succeeded!", Toast.LENGTH_SHORT).show();
-//                        if (nextActivity.equalsIgnoreCase("main")) {
-//                            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        } else {
-//                            Intent intent = new Intent(SignupActivity.this, FixedIncomeInfoActivity.class);
-//                            startActivity(intent);
-//                        }
+                        Toast.makeText(CustomerSignupActivity.this, "Email or phone number already exists!", Toast.LENGTH_SHORT).show();
+                        errorMessage.setText("Email or phone number already exists!");
                     }
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
+                }) {
             @Override
-            public void onErrorResponse(VolleyError error)
+            public Map<String, String> getHeaders() throws AuthFailureError
             {
-                Toast.makeText(CustomerSignupActivity.this, "" + error, Toast.LENGTH_SHORT).show();
-                errorMessage.setText(error.toString());
-            }
-        }) {
-            @Override
-            public String getBodyContentType()
-            {
-                return "application/x-www-form-urlencoded; charset=UTF-8";
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("email", email);
-                params.put("first_name", firstName);
-                params.put("last_name", lastName);
-                params.put("password", password);
-                params.put("phone_number", phoneNumber);
-                params.put("isVerified", String.valueOf(isVerified));
-                params.put("review", review);
-                params.put("location", location);
-                return params;
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
         };
-        queue.add(request);
+
+        // Add the request to the RequestQueue
+        requestQueue.add(jsonObjectRequest);
     }
 
 
