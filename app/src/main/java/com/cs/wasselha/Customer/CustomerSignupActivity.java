@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Dialogs.FinishAddCustomerDialog;
+import com.cs.wasselha.Dialogs.LoadingDialog;
 
 import com.cs.wasselha.R;
 
@@ -34,7 +35,6 @@ public class CustomerSignupActivity extends AppCompatActivity {
     EditText firstName, lastName,email, phoneNumber, address, password, repeatPassword;
     TextView errorMessage;
 
-    ProgressBar loadingProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class CustomerSignupActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordCustomerSignup);
         repeatPassword = findViewById(R.id.repeatPasswordCustomerSignup);
         errorMessage = findViewById(R.id.errorMessageInCustomerSignup);
-        loadingProgressBar = findViewById(R.id.loadProgressBar);
+        //loadingProgressBar = findViewById(R.id.loadProgressBar);
     }
 
 
@@ -141,10 +141,11 @@ public class CustomerSignupActivity extends AppCompatActivity {
 
                             if (id > 0 )
                             {
-                                openDialog();
+                                openFinishAddCustomerDialog();
                                 email.setText("");
                                 firstName.setText("");
                                 lastName.setText("");
+                                phoneNumber.setText("");
                                 password.setText("");
                                 repeatPassword.setText("");
                                 address.setText("");
@@ -182,11 +183,36 @@ public class CustomerSignupActivity extends AppCompatActivity {
     }
 
 
-    private void openDialog()
+    private void openLoadingDialog()
     {
-        FinishAddCustomerDialog finishAddCustomer = new FinishAddCustomerDialog();
-        finishAddCustomer.show(getSupportFragmentManager(), "AddCustomer");
+        final LoadingDialog loadingDialog = new LoadingDialog(CustomerSignupActivity.this);
+        loadingDialog.startLoadingDialog();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run()
+            {
+                loadingDialog.dismissDialog();
+            }
+        }, 4000);
+
     }
 
+    private void openFinishAddCustomerDialog()
+    {
+        openLoadingDialog();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run()
+            {
+                FinishAddCustomerDialog finishAddCustomer = new FinishAddCustomerDialog();
+                finishAddCustomer.show(getSupportFragmentManager(), "AddCustomer");
+            }
+        }, 5000);
+
+    }
 
 }

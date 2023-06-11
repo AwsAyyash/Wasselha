@@ -40,4 +40,3 @@ public class FinishAddCustomerDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 }
-

@@ -18,8 +18,6 @@ public class MainCustomerActivity extends AppCompatActivity {
     ImageView searchImg;
     ActivityMainCustomerBinding binding;
 
-    //AppCompatButton detailsBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -96,15 +94,5 @@ public class MainCustomerActivity extends AppCompatActivity {
 
     }
 
-//    private void detailsBtnSetup()
-//    {
-//        detailsBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ServiceDetailsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
 
 }
