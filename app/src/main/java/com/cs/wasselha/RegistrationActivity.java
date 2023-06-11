@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.cs.wasselha.model.Location;
+
+import java.io.FileNotFoundException;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private Button loginBtn, signupBtn;
@@ -24,6 +28,9 @@ public class RegistrationActivity extends AppCompatActivity {
         loginSetup();
         signupSetup();
         skipSetup();
+
+
+
     }
 
 
