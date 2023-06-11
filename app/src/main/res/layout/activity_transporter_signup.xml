@@ -357,6 +357,17 @@
                     android:textColor="@color/red"
                     android:textDirection="firstStrong" />
 
+                <TextView
+                    android:id="@+id/errorMessageInTransporterSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/red"
+                    android:textDirection="firstStrong"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton

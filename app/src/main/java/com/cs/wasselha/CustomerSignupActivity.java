@@ -76,6 +76,7 @@ public class CustomerSignupActivity extends AppCompatActivity {
                         if(password.getText().toString().equals(repeatPassword.getText().toString()))
                         {
                             errorMessage.setText("");
+                            validateeee();
                             addCustomer();
                             //addCustomer(email.getText().toString(), firstName.getText().toString(),lastName.getText().toString(), password.getText().toString(), phoneNumber.getText().toString(), true,"3",  address.getText().toString());
                         }
@@ -97,6 +98,10 @@ public class CustomerSignupActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void validateeee() {
+
     }
 
 
@@ -132,18 +137,18 @@ public class CustomerSignupActivity extends AppCompatActivity {
                     {
                         try
                         {
-                            Log.d("ressss",response.toString());
-                            String result = response.getString("result");
-                            Log.d("ressss",result);
+                            int id = response.getInt("id");
 
-                            if (result.equals("true"))
+                            if (id>0)
                             {
+
                                 Intent intent = new Intent(CustomerSignupActivity.this, RegistrationActivity.class);
                                 startActivity(intent);
-                                Toast.makeText(CustomerSignupActivity.this, "Test"+result, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CustomerSignupActivity.this, "id:"+id, Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
+                                Toast.makeText(CustomerSignupActivity.this, "Failed Signup the email or phoneNumber is ", Toast.LENGTH_SHORT).show();
                                 errorMessage.setText("The information is not correct, try again!");                                    }
                         }
                         catch (JSONException e)

@@ -1,6 +1,7 @@
 package com.cs.wasselha;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,6 +33,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +67,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
     private Button vehicleLicenseUploadPhotoBtn;
     private Button personalLicenseUploadPhotoBtn;
     private Button signupTransporterBtn;
+    private TextView errorMessage;
 
     private static final int PICK_IMAGE = 1;
     private static final int PICK_VEHICLE_IMAGE = 1;
@@ -82,6 +85,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
     String boundary = "*****";
     String lineEnd = "\r\n";
     String twoHyphens = "--";
+    private boolean createSuccefully;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
         vehicleLicenseUploadPhotoBtn = findViewById(R.id.vehicleLicenseUploadPhotoBtn);
         personalLicenseUploadPhotoBtn = findViewById(R.id.personalLicenseUploadPhotoBtn);
         signupTransporterBtn=findViewById(R.id.signupTransporterBtn);
+        errorMessage=findViewById(R.id.errorMessageInTransporterSignup);
         vehiclePhotoUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,12 +141,9 @@ public class TransporterSignupActivity extends AppCompatActivity {
         signupTransporterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    createTransporter();
-                new CreateTransporterTask().execute();
-                Toast.makeText(TransporterSignupActivity.this, "result", Toast.LENGTH_SHORT).show();
-                Log.d("idddd","id:"+transporterID);
-//                    createVehicle(transporterID);
-                Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
+                if(verifyInputsAndSubmit()){
+                    new CreateTransporterTask().execute();
+                }
             }
         });
 
@@ -311,15 +313,18 @@ public class TransporterSignupActivity extends AppCompatActivity {
                 Log.d("iddddd",transporterId);
                 TransporterSignupActivity.transporterID=Integer.parseInt(transporterId.trim());
                 return transporterId;
+            }else{
+                Toast.makeText(TransporterSignupActivity.this, "Invalid Information, there are repetution of email or national id", Toast.LENGTH_SHORT).show();
+                return null;
             }
         } catch (IOException | JSONException e) {
             Log.e("UploadTransporterTask", "Error: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
 
-    private void createVehicle(int transporterId) {
+    private String createVehicle(int transporterId) {
         try {
             try {
                 selectedVehicleImagebitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),selectedVehicleImageUri);
@@ -327,6 +332,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(TransporterSignupActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                return null;
 
             }
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -399,30 +405,153 @@ public class TransporterSignupActivity extends AppCompatActivity {
                 // Note: You have to know the exact key under which the id is stored in the JSON response
                 String vehicleId = jsonResponse.getString("id"); // replace 'transporter_id' with the correct key
                 Log.d("iddddd",vehicleId);
+                return vehicleId+"";
+            }else{
+                Toast.makeText(TransporterSignupActivity.this, "Invalid Information, there are repetution of vehicle number", Toast.LENGTH_SHORT).show();
+                return null;
             }
         } catch (IOException | JSONException e) {
             Log.e("UploadTransporterTask", "Error: " + e.getMessage());
+            Toast.makeText(TransporterSignupActivity.this, "UploadTransporterTask:Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            return null;
         }
 
 
 
     }
+    private boolean sendDeleteRequest(String url) {
+        try {
+            URL deleteUrl = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) deleteUrl.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setDoOutput(true);
+
+            // Add any additional headers if needed
+            // connection.setRequestProperty("HeaderKey", "HeaderValue");
+
+            int responseCode = connection.getResponseCode();
+            // Handle the response code as per your requirement
+            connection.disconnect();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return true;
+
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle any exceptions that occur during the request
+            return false;
+        }
+    }
 
     private class CreateTransporterTask extends AsyncTask<Void, Void, String> {
-
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(TransporterSignupActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
         @Override
         protected String doInBackground(Void... params) {
-            String id=createTransporter();
-            int transporterId=Integer.parseInt(id);
-            createVehicle(transporterId);
-
+            String transporterId=createTransporter();
+            if(transporterId != null){
+                transporterId=transporterId.trim();
+                int transporterID=Integer.parseInt(transporterId);
+                String vehicleId=createVehicle(transporterID);
+                if(vehicleId!=null){
+                    createSuccefully=true;
+                }else{
+                    createSuccefully=false;
+                    sendDeleteRequest(transportersUrl+transporterId+"/");
+                }
+            }
             return "";
         }
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            if(createSuccefully){
+                Intent intent = new Intent(TransporterSignupActivity.this, MainTransporterActivity.class);
+                startActivity(intent);
+                Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+    private boolean isEditTextFilled(EditText editText) {
+        String text = editText.getText().toString().trim();
+        return !text.isEmpty();
+    }
+
+    private boolean isEmailValid(String email) {
+        // Perform email validation logic here
+        // You can use regular expressions or any other method you prefer
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private void showToastMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean verifyInputsAndSubmit() {
+        String firstName = firstNameEditText.getText().toString().trim();
+        String lastName = lastNameEditText.getText().toString().trim();
+        String nationalID = nationalIDEditText.getText().toString().trim();
+        String phoneNumber = phoneNumberEditText.getText().toString().trim();
+        String vehicleNumber = vehicleNumberEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String repeatPassword = repeatPasswordEditText.getText().toString().trim();
+        String vehiclePhotoBtnText = vehiclePhotoUploadBtn.getText().toString().trim();
+        String vehicleLicenseBtnText = vehicleLicenseUploadPhotoBtn.getText().toString().trim();
+        String personalLicenseBtnText = personalLicenseUploadPhotoBtn.getText().toString().trim();
+
+        if (!isEditTextFilled(firstNameEditText)) {
+            showToastMessage("Please fill in the First Name field.");
+            return false;
+        } else if (!isEditTextFilled(lastNameEditText)) {
+            showToastMessage("Please fill in the Last Name field.");
+            return false;
+        } else if (!isEditTextFilled(nationalIDEditText)) {
+            showToastMessage("Please fill in the National ID field.");
+            return false;
+        } else if (!isEditTextFilled(phoneNumberEditText)) {
+            showToastMessage("Please fill in the Phone Number field.");
+            return false;
+        } else if (!isEditTextFilled(vehicleNumberEditText)) {
+            showToastMessage("Please fill in the Vehicle Number field.");
+            return false;
+        } else if (!isEditTextFilled(emailEditText)) {
+            showToastMessage("Please fill in the Email field.");
+            return false;
+        } else if (!isEditTextFilled(passwordEditText)) {
+            showToastMessage("Please fill in the Password field.");
+            return false;
+        } else if (!isEditTextFilled(repeatPasswordEditText)) {
+            showToastMessage("Please fill in the Repeat Password field.");
+            return false;
+        } else if (!isEmailValid(email)) {
+            showToastMessage("Please enter a valid email address.");
+            return false;
+        } else if (!password.equals(repeatPassword)) {
+            showToastMessage("Passwords do not match.");
+            return false;
+        } else if (vehiclePhotoBtnText.equals("Upload image")) {
+            showToastMessage("Please upload a vehicle photo.");
+            return false;
+        } else if (vehicleLicenseBtnText.equals("Upload image")) {
+            showToastMessage("Please upload a vehicle license photo.");
+            return false;
+        } else if (personalLicenseBtnText.equals("Upload image")) {
+            showToastMessage("Please upload a personal license photo.");
+            return false;
+        }
+
+        return true;
     }
 
 
