@@ -170,4 +170,5 @@
     <string name="manage_btn_in_home_list_view_collection_point">Manage</string>
     <string name="collection_point_cpmplete_in_list_view_collection_point">collection point</string>
     <string name="select_type_of_login">Login as:</string>
+    <string name="title_notifications_customer_list_view">Notifications</string>
 </resources>

@@ -3,6 +3,7 @@ package com.cs.wasselha.model;
 import android.util.Log;
 
 import com.github.javafaker.Faker;
+<<<<<<< HEAD
 import com.google.gson.annotations.Expose;
 
 import java.io.File;
@@ -12,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+=======
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 
 public class Location {
 

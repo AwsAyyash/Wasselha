@@ -59,6 +59,21 @@ public class CollectionPointProvider {
         this.national_id = national_id;
         //this.review = review;
     }
+<<<<<<< HEAD
+=======
+    public CollectionPointProvider( String first_name, String last_name, String email, String password,
+                                   String phone_number, String national_id, boolean is_verified) {
+       // this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.phone_number = phone_number;
+        this.is_verified = is_verified;
+        this.national_id = national_id;
+        //this.review = review;
+    }
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 
     public String getFirst_name() {
         return first_name;

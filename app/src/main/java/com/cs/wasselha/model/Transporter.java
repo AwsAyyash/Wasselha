@@ -2,7 +2,10 @@ package com.cs.wasselha.model;
 
 
 import com.github.javafaker.Faker;
+<<<<<<< HEAD
 import com.google.gson.annotations.Expose;
+=======
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 
 import java.io.File;
 import java.util.ArrayList;

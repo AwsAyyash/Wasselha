@@ -1,7 +1,10 @@
 package com.cs.wasselha.model;
 
 import java.time.LocalDateTime;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 
 public class DeliveryServiceDetails {
 

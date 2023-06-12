@@ -1,5 +1,6 @@
 package com.cs.wasselha.model;
 
+<<<<<<< HEAD
 import android.util.Log;
 
 import com.github.javafaker.Faker;
@@ -7,6 +8,8 @@ import com.github.javafaker.Faker;
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 public class Package {
 
     private DeliveryServiceDetails deliveryServiceDetails;

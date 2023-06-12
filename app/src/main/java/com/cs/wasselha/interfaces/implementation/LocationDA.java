@@ -4,9 +4,14 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.cs.wasselha.model.Location;
+<<<<<<< HEAD
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+=======
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 
 import java.io.IOException;
 import java.lang.reflect.Type;

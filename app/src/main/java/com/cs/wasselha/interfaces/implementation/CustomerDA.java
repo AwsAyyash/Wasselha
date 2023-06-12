@@ -2,6 +2,7 @@ package com.cs.wasselha.interfaces.implementation;
 
 import android.os.StrictMode;
 
+<<<<<<< HEAD
 
 import com.cs.wasselha.interfaces.ICustomerDA;
 import com.cs.wasselha.model.Customer;
@@ -14,6 +15,17 @@ import java.util.ArrayList;
 
 import java.io.IOException;
 
+=======
+import com.cs.wasselha.interfaces.ICustomerDA;
+import com.cs.wasselha.model.Customer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+>>>>>>> 5fcdbe0afa329a10092af74c4d4646951c3d202b
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
