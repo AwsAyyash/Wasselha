@@ -5,8 +5,9 @@ import android.util.Log;
 
 import com.cs.wasselha.model.CollectionPointProvider;
 import com.cs.wasselha.model.Transporter;
-import com.google.common.reflect.TypeToken;
+//import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -48,7 +49,7 @@ public class CollectionPPDA {
 
         try (Response response = client.newCall(request).execute()) {
             Gson gson = new Gson();
-            Type collectionPPsListType = new TypeToken<ArrayList<CollectionPointProvider>>() {
+            Type collectionPPsListType = new  TypeToken<ArrayList<CollectionPointProvider>>() {
             }.getType();
             collectionPPDAListGlobal = new ArrayList<>();
             collectionPPDAListGlobal = gson.fromJson(response.peekBody(2048).string(), collectionPPsListType);
