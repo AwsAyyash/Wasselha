@@ -41,7 +41,6 @@ public class HomeCollectionPointProviderFragment extends Fragment {
         collectionPointsData = new ArrayList<>();
 
 
-
         collectionPointsData.add(new CollectionPoints(R.drawable.collection_point_img, "Ramallah", btn));
         collectionPointsData.add(new CollectionPoints(R.drawable.collection_point_img, "Nablus", btn));
         collectionPointsData.add(new CollectionPoints(R.drawable.collection_point_img, "Birzeit", btn));

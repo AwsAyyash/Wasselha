@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.R;
 
 
@@ -486,7 +487,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
             if(createSuccefully){
-                Intent intent = new Intent(TransporterSignupActivity.this, MainTransporterActivity.class);
+                Intent intent = new Intent(TransporterSignupActivity.this, TypeLoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
             }

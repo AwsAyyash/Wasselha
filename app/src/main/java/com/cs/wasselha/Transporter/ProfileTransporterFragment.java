@@ -1,5 +1,6 @@
 package com.cs.wasselha.Transporter;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.cs.wasselha.MapLocaterDemoExample;
 import com.cs.wasselha.R;
 
 
@@ -49,6 +52,9 @@ import com.cs.wasselha.RegistrationActivity;
  */
 public class ProfileTransporterFragment extends Fragment {
 
+    private static final String ID_KEY = "id";
+    private static final String LOGIN_TYPE_KEY = "loginType";
+    private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
     private ImageView image,settings,claims,cars,favoritos,inbox,logout;
     private TextView name;
@@ -100,7 +106,9 @@ public class ProfileTransporterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
         setupReference(view);
-        int transporterID=15;
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        String id = preferences.getString(ID_KEY, null);
+        int transporterID=Integer.parseInt(id.trim());
         setAndGetName(getContext(),transporterID);
         getVehicleImageURLAndSetImage(getContext(),transporterID);
 
@@ -112,29 +120,41 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //delete info from shared preferences
+                SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove(ID_KEY);
+                editor.remove(LOGIN_TYPE_KEY);
+                editor.apply();
                 Intent intent = new Intent(getContext(), RegistrationActivity.class);
                 startActivity(intent);
             }
         });
+        inbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapLocaterDemoExample.class);
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_transporter, container, false);
-
+//        return inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+        return view;
     }
 
 
     private void setupReference(View view) {
-        image = view.findViewById(R.id.signupCustomerBtn);
-        name = view.findViewById(R.id.signupCustomerBtn);
-        settings = view.findViewById(R.id.signupCustomerBtn);
-        claims = view.findViewById(R.id.signupCustomerBtn);
-        cars = view.findViewById(R.id.signupCustomerBtn);
-        favoritos = view.findViewById(R.id.signupCustomerBtn);
-        inbox = view.findViewById(R.id.signupCustomerBtn);
-        logout = view.findViewById(R.id.signupCustomerBtn);
+        image = view.findViewById(R.id.mainPhotoInProfileTransporterPage);
+        name = view.findViewById(R.id.mainNameTransporterInProfilePage);
+        settings = view.findViewById(R.id.imageView15);
+        claims = view.findViewById(R.id.imageView9);
+        cars = view.findViewById(R.id.imageView22);
+        favoritos = view.findViewById(R.id.imageView20);
+        inbox = view.findViewById(R.id.imageView23);
+        logout = view.findViewById(R.id.imageView26);
     }
     public void setAndGetName(Context context, int transporterID) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = apiURL + "transporters/" + transporterID + "/";
+        String url = apiURL + "/transporters/" + transporterID + "/";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -149,12 +169,14 @@ public class ProfileTransporterFragment extends Fragment {
                             name.setText(fullName);
 
                         } catch (Exception e) {
+                            Log.e("profile","Error:"+e.toString());
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("profile","Error:"+error.toString());
                 // Handle error here
                 error.printStackTrace();
             }
@@ -165,19 +187,18 @@ public class ProfileTransporterFragment extends Fragment {
 
     public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = apiURL + "vehicles/";
+        String url = apiURL + "/vehicles/?transporter="+transporterID;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         try {
-                            // Assume the vehicles are inside a JSONArray called "vehicles" in the response
-                            JSONArray vehicles = response.getJSONArray("vehicles");
-                            for (int i = 0; i < vehicles.length(); i++) {
-                                JSONObject vehicle = vehicles.getJSONObject(i);
+                            // Directly loop through the JSON Array response
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject vehicle = response.getJSONObject(i);
                                 if (vehicle.getInt("transporter") == transporterID) {
-                                    setImage(apiURL+vehicle.getString("vehicle_image"));
+                                    setImage(apiURL + vehicle.getString("vehicle_image"));
                                     return;
                                 }
                             }
@@ -188,11 +209,15 @@ public class ProfileTransporterFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("profile", "Error: " + error.toString());
+                if (error.networkResponse != null) {
+                    Log.e("profile", "Status code: " + error.networkResponse.statusCode);
+                }
                 Log.e("profile","failed loading image(Network Issue )");
             }
         });
 
-        queue.add(jsonObjectRequest);
+        queue.add(jsonArrayRequest);
     }
     void setImage(String imageUrl){
         Glide.with(this)
