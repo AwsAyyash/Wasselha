@@ -36,6 +36,7 @@ public class AddServiceTransporterFragment extends Fragment {
     //References
     private void setUpReferences(View view)
     {
+
         hoursPicker = view.findViewById(R.id.numPickerHourInAddNewService);
         hoursPicker.setTextColor(Color.WHITE);
         hoursPicker.setMinValue(1);
