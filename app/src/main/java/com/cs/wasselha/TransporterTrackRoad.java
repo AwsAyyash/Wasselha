@@ -55,6 +55,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_track_road);
+        getSupportActionBar().hide();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
