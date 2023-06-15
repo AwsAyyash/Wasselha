@@ -136,25 +136,30 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        // Check location permission
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Show satellite layer
-            if (isNetworkConnected()) {
-                startLocationUpdates();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        addCustomerAndCollectionPointsMarkers();
-                    }
-                }, 2000);
+        try{
+            mMap = googleMap;
+            // Check location permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Show satellite layer
+                if (isNetworkConnected()) {
+                    startLocationUpdates();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            addCustomerAndCollectionPointsMarkers();
+                        }
+                    }, 2000);
+                } else {
+                    Toast.makeText(TransporterTrackRoad.this, "No internet connection. Please check your network settings.", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(TransporterTrackRoad.this, "No internet connection. Please check your network settings.", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
             }
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        }catch (Exception e){
+            Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
         }
+
     }
 
     @Override
