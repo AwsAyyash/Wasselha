@@ -20,6 +20,7 @@ import com.cs.wasselha.Adapters.ServicesModelRecyclerViewAdapter;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.interfaces.implementation.TransporterDA;
+import com.cs.wasselha.interfaces.implementation.VehiclesDA;
 import com.cs.wasselha.model.Service;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class HomeCustomerFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
-        ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList);
+        ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList,servicesModelDAList);
         servicesAvailableRecyclerView.setAdapter(serviceAdapter);
         servicesAvailableRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -88,7 +89,9 @@ public class HomeCustomerFragment extends Fragment {
                     servicesModelDAList.get(i).getTransporter(),
                     servicesModelDAList.get(i).getService_date().toString(),
                     new LocationDA().getLocation(servicesModelDAList.get(i).getSource_place()).getTitle(),
-                    new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle()));
+                    new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle(),
+                    new VehiclesDA().getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
+                    new VehiclesDA().getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())));
         }
 
     }

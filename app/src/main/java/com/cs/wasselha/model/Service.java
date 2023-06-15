@@ -18,7 +18,7 @@ public class Service {
         this.id = id;
     }
 
-    private int transporter;
+    private int transporter; // transporter Id
     private int source_place;
     private int destination_place;
     private Date service_date;
