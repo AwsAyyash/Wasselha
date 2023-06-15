@@ -13,16 +13,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.cs.wasselha.Customer.HomeCustomerFragment;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Customer.ServiceDetailsActivity;
 import com.cs.wasselha.Models.ServicesModel;
+import com.cs.wasselha.interfaces.implementation.VehiclesDA;
+import com.cs.wasselha.model.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<ServicesModelRecyclerViewAdapter.MyViewHolder>
 {
     Context context;
     ArrayList<ServicesModel> servicesModelList;
+
 
     public ServicesModelRecyclerViewAdapter(Context context, ArrayList<ServicesModel> servicesModelList)
     {
@@ -45,7 +51,18 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.time.setText(servicesModelList.get(position).getTime());
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
-        holder.cardImageView.setImageResource(servicesModelList.get(position).getImage());
+        //setImage();
+       /* try {
+            HomeCustomerFragment.setImage(new VehiclesDA().getVehicleImageOfTransporter( servicesModelList.get(position).getTransporter()),holder.cardImageView);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Glide.with(context)
+                .load(servicesModelList.get(position).getImageUrl())
+                .into( holder.cardImageView);
+                */
+
+       // holder.cardImageView.setImageResource(servicesModelList.get(position).getImage());
 
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
         detailsBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,5 +101,11 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
             destinationCity = itemView.findViewById(R.id.destinationCity);
 
         }
+    }
+
+    void setImage(String imageUrl, Context context, ImageView image){
+        Glide.with(context)
+                .load(imageUrl)
+                .into(image);
     }
 }

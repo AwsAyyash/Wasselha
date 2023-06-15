@@ -10,8 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cs.wasselha.Models.ServicesModel;
 import com.cs.wasselha.R;
 import com.cs.wasselha.databinding.ActivityMainCustomerBinding;
+import com.cs.wasselha.interfaces.implementation.LocationDA;
+import com.cs.wasselha.interfaces.implementation.ServiceDA;
+import com.cs.wasselha.interfaces.implementation.TransporterDA;
+import com.cs.wasselha.model.Service;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainCustomerActivity extends AppCompatActivity {
 
@@ -24,7 +32,7 @@ public class MainCustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeCustomerFragment());
+        //replaceFragment(new HomeCustomerFragment(this));
         getSupportActionBar().hide();
 
         binding.bottomBarInCustomerMainPage.setOnItemSelectedListener(item -> {
@@ -32,7 +40,9 @@ public class MainCustomerActivity extends AppCompatActivity {
             switch(item.getItemId())
             {
                 case R.id.nav_home_transporter:
-                    replaceFragment(new HomeCustomerFragment());
+                    replaceFragment(new HomeCustomerFragment(this));
+
+
                     break;
 
                 case R.id.nav_history_transporter:
@@ -62,6 +72,100 @@ public class MainCustomerActivity extends AppCompatActivity {
 
 
     }
+    ArrayList<Service> servicesModelDAList = new ArrayList<>();
+    ArrayList<ServicesModel> servicesModelList = new ArrayList<>();
+    private ArrayList<Service> getServiceFromDA() throws IOException {
+
+        ServiceDA serviceDA = new ServiceDA();
+        return serviceDA.getServices();
+    }
+
+    private void servicesModelSetup() throws IOException {
+        String[] transportersNames = getResources().getStringArray(R.array.services);
+        String[] times = getResources().getStringArray(R.array.times);
+        String[] sourceCities = getResources().getStringArray(R.array.sourceCities);
+        String[] destinationCities = getResources().getStringArray(R.array.destinationCities);
+
+        servicesModelDAList = getServiceFromDA();
+
+        for(int i = 0 ; i < servicesModelDAList.size() ; i++)
+        {
+            servicesModelList.add(new ServicesModel(new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter()).getFirst_name(),
+                    servicesModelDAList.get(i).getTransporter(),
+                    servicesModelDAList.get(i).getService_date().toString(),
+                    new LocationDA().getLocation(servicesModelDAList.get(i).getSource_place()).getTitle(),
+                    new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle()));
+        }
+
+    }
+   /* private void doReplaceFragmentWithImageVehicle() {
+
+        String apiURL="http://176.119.254.198:8000/wasselha";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = apiURL + "vehicles/";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            // Assume the vehicles are inside a JSONArray called "vehicles" in the response
+                            JSONArray vehicles = response.getJSONArray("vehicles");
+                            for (int i = 0; i < vehicles.length(); i++) {
+                                JSONObject vehicle = vehicles.getJSONObject(i);
+                                if (vehicle.getInt("transporter") == transporterID) {
+
+                                    setImage(apiURL+vehicle.getString("vehicle_image"));
+                                    return;
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("profile","Transporter not found");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("profile","failed loading image(Network Issue )");
+            }
+        });
+
+        queue.add(jsonObjectRequest);
+
+         String apiURL="http://176.119.254.198:8000/wasselha";
+        //public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = apiURL + "vehicles/";
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                // Assume the vehicles are inside a JSONArray called "vehicles" in the response
+                                JSONArray vehicles = response.getJSONArray("vehicles");
+                                for (int i = 0; i < vehicles.length(); i++) {
+                                    JSONObject vehicle = vehicles.getJSONObject(i);
+                                    if (vehicle.getInt("transporter") == transporterID) {
+                                        setImage(apiURL+vehicle.getString("vehicle_image"));
+                                        return;
+                                    }
+                                }
+                            } catch (Exception e) {
+                                Log.e("profile","Transporter not found");
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("profile","failed loading image(Network Issue )");
+                }
+            });
+
+            queue.add(jsonObjectRequest);
+        }
+        replaceFragment(new HomeCustomerFragment(this));
+    }*/
 
     private void replaceFragment(Fragment fragment)
     {

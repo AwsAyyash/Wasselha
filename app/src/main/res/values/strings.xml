@@ -102,7 +102,7 @@
     <string name="transporter_signup_top_title">Transporter signup</string>
     <string name="national_id_transporter_signup_hint">Enter your national id</string>
     <string name="national_id_signup_textview">National id</string>
-    <string name="upload_image">Upload image</string>
+    <string name="upload_image">Upload imageUrl</string>
     <string name="vehicle_license_photo">Vehicle license photo</string>
     <string name="personal_license_photo">Personal license photo</string>
     <string name="vehicle_type_transporter_signup_text_view">Vehicle type</string>

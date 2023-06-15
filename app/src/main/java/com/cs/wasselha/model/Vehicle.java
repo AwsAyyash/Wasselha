@@ -1,23 +1,15 @@
 package com.cs.wasselha.model;
 
-import android.media.Image;
-import android.util.Log;
-
-import com.github.javafaker.Faker;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Vehicle {
 
     private int id; // for the database
-    private Transporter transporter;
-    private Image vehicleImage;
-    private String vehicleType;
-    private String vehicleNumber;
-    private File vehicleLicense;
+    private int transporter;
+    private File vehicle_image;
+    private String vehicle_type;
+    private String vehicle_number;
+    private File vehicle_license;
 
     public int getId() {
         return id;
@@ -27,7 +19,7 @@ public class Vehicle {
         this.id = id;
     }
 
-    public Vehicle(){
+    /*public Vehicle(){
 
         Faker faker = new Faker();
         List<Vehicle> vehicles = new ArrayList<>();
@@ -55,54 +47,66 @@ public class Vehicle {
         }
 
         Log.d("vehicles",vehicles.toString());
-    }
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
+    }*/
+    public String getVehicle_number() {
+        return vehicle_number;
     }
 
+    public void setVehicle_number(String vehicle_number) {
+        this.vehicle_number = vehicle_number;
+    }
 
 
-    public Vehicle(int id,Transporter transporter, Image vehicleImage, String vehicleType, File vehicleLicense) {
+
+    public Vehicle(int id, int transporter, File vehicle_image, String vehicle_type, File vehicle_license) {
         this.id = id;
         this.transporter = transporter;
-        this.vehicleImage = vehicleImage;
-        this.vehicleType = vehicleType;
-        this.vehicleLicense = vehicleLicense;
+        this.vehicle_image = vehicle_image;
+        this.vehicle_type = vehicle_type;
+        this.vehicle_license = vehicle_license;
     }
 
-    public Transporter getTransporter() {
+    public int getTransporter() {
         return transporter;
     }
 
-    public void setTransporter(Transporter transporter) {
+    public void setTransporter(int transporter) {
         this.transporter = transporter;
     }
 
-    public Image getVehicleImage() {
-        return vehicleImage;
+    public File getVehicle_image() {
+        return vehicle_image;
     }
 
-    public void setVehicleImage(Image vehicleImage) {
-        this.vehicleImage = vehicleImage;
+    public void setVehicle_image(File vehicle_image) {
+        this.vehicle_image = vehicle_image;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
+    public String getVehicle_type() {
+        return vehicle_type;
     }
 
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
+    public void setVehicle_type(String vehicle_type) {
+        this.vehicle_type = vehicle_type;
     }
 
-    public File getVehicleLicense() {
-        return vehicleLicense;
+    public File getVehicle_license() {
+        return vehicle_license;
     }
 
-    public void setVehicleLicense(File vehicleLicense) {
-        this.vehicleLicense = vehicleLicense;
+    public void setVehicle_license(File vehicle_license) {
+        this.vehicle_license = vehicle_license;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", transporter=" + transporter +
+                ", vehicle_image=" + vehicle_image +
+                ", vehicle_type='" + vehicle_type + '\'' +
+                ", vehicle_number='" + vehicle_number + '\'' +
+                ", vehicle_license=" + vehicle_license +
+                '}';
     }
 }
