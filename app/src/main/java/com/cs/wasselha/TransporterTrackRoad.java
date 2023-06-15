@@ -55,16 +55,38 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_track_road);
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
-        addCustomersLocations();
-        addCollectionPointLocations();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapFragment);
-        mapFragment.getMapAsync(this);
+        try{
+            RequestOptions requestOptions = new RequestOptions()
+                    .override(100, 100) // Adjust the desired size here
+                    .circleCrop();
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.ic_car_map)
+                    .apply(requestOptions)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            transporterMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(31.896064, 35.205644))
+                                    .icon(BitmapDescriptorFactory.fromBitmap(resource))
+                                    .anchor(0.5f, 0.5f)
+                                    .title("Transporter"));
+                        }
+                    });
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID=Integer.parseInt(id.trim());
+            addCustomersLocations();
+            addCollectionPointLocations();
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mapFragment);
+            mapFragment.getMapAsync(this);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        }catch (Exception e){
+            Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void addCollectionPointLocations() {
@@ -135,25 +157,30 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        // Check location permission
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Show satellite layer
-            if (isNetworkConnected()) {
-                startLocationUpdates();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        addCustomerAndCollectionPointsMarkers();
-                    }
-                }, 2000);
+        try{
+            mMap = googleMap;
+            // Check location permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Show satellite layer
+                if (isNetworkConnected()) {
+                    startLocationUpdates();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            addCustomerAndCollectionPointsMarkers();
+                        }
+                    }, 2000);
+                } else {
+                    Toast.makeText(TransporterTrackRoad.this, "No internet connection. Please check your network settings.", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(TransporterTrackRoad.this, "No internet connection. Please check your network settings.", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
             }
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        }catch (Exception e){
+            Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
         }
+
     }
 
     @Override
@@ -198,7 +225,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
         if (transporterMarker == null) {
             RequestOptions requestOptions = new RequestOptions()
-                    .override(100, 100) // Adjust the desired size here
+                    .override(200, 200) // Adjust the desired size here
                     .circleCrop();
 
             Glide.with(this)
