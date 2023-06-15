@@ -20,6 +20,7 @@ import com.cs.wasselha.Customer.ServiceDetailsActivity;
 import com.cs.wasselha.Models.ServicesModel;
 import com.cs.wasselha.interfaces.implementation.VehiclesDA;
 import com.cs.wasselha.model.Service;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,12 +29,16 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 {
     Context context;
     ArrayList<ServicesModel> servicesModelList;
+    ArrayList<Service> servicesDA;
+    private static String apiURL="http://176.119.254.198:8000/wasselha";
 
 
-    public ServicesModelRecyclerViewAdapter(Context context, ArrayList<ServicesModel> servicesModelList)
+    public ServicesModelRecyclerViewAdapter(Context context, ArrayList<ServicesModel> servicesModelList
+            ,ArrayList<Service> servicesDA)
     {
         this.context = context;
         this.servicesModelList = servicesModelList;
+        this.servicesDA = servicesDA;
     }
 
     @NonNull
@@ -47,11 +52,13 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
     @Override
     public void onBindViewHolder(@NonNull ServicesModelRecyclerViewAdapter.MyViewHolder holder, int position) {
 
+
         holder.transporterName.setText(servicesModelList.get(position).getTransporterName());
         holder.time.setText(servicesModelList.get(position).getTime());
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
-        //setImage();
+
+        setImage(apiURL +servicesModelList.get(position).getImageUrl(), context.getApplicationContext(), holder.cardImageView );
        /* try {
             HomeCustomerFragment.setImage(new VehiclesDA().getVehicleImageOfTransporter( servicesModelList.get(position).getTransporter()),holder.cardImageView);
         } catch (IOException e) {
@@ -65,6 +72,9 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
        // holder.cardImageView.setImageResource(servicesModelList.get(position).getImage());
 
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
+        Service service =  servicesDA.get(position);
+        String transName = servicesModelList.get(position).getTransporterName();
+        String vehicleType = servicesModelList.get(position).getVehicleType();
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +82,11 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 
                 // Pass any extra data if needed
 //                intent.putExtra("key", value);
+
+                intent.putExtra("serviceDet",new Gson().toJson(service));
+                intent.putExtra("transporterName",transName);
+                intent.putExtra("vehicleType",vehicleType);
+
 
                 // Start the activity
                 view.getContext().startActivity(intent);

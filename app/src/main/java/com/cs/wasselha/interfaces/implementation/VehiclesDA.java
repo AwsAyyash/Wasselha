@@ -52,8 +52,8 @@ public class VehiclesDA {
             Type vehiclesListType = new TypeToken<ArrayList<Vehicle>>() {
             }.getType();
             vehiclesListGlobal = new ArrayList<>();
-            Log.d("vehDA",response.peekBody(2028).string());
-            vehiclesListGlobal = gson.fromJson(response.peekBody(2048).string(), vehiclesListType);
+            Log.d("vehDA",response.peekBody(7028).string());
+            vehiclesListGlobal = gson.fromJson(response.peekBody(7048).string().trim(), vehiclesListType);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
@@ -110,7 +110,7 @@ public class VehiclesDA {
 
     }
 
-    public String getVehicleImageOfTransporter(int transporterID) throws IOException {
+    public String getVehicleTypeOfTransporter(int transporterID) throws IOException {
 
         getVehicles();
 
@@ -124,11 +124,33 @@ public class VehiclesDA {
 
             if (vehicle.getTransporter()  == transporterID) {
                 Log.d("getVehicle_image",vehicle.getVehicle_image().toString());
-                return vehicle.getVehicle_image().getName().toString();
+                return vehicle.getVehicle_type();
                 //setImage(apiURL+vehicle.getString("vehicle_image"));
                 //return;
             }
         }
-        return null;
+        return "null";
+    }
+
+    public String getVehicleImageURLOfTransporter(int transporterID) throws IOException {
+
+        getVehicles();
+
+        Log.d("size11",vehiclesListGlobal.size() +"");
+        Log.d("size1111", vehiclesListGlobal.toString());
+        // JSONArray vehicles = response.getJSONArray("vehicles");
+        for (int i = 0; i < vehiclesListGlobal.size(); i++) {
+            Vehicle vehicle = vehiclesListGlobal.get(i);
+
+            Log.d("veh111",vehicle.toString());
+
+            if (vehicle.getTransporter()  == transporterID) {
+                Log.d("getVehicle_image",vehicle.getVehicle_image().toString());
+                return vehicle.getVehicle_image();
+                //setImage(apiURL+vehicle.getString("vehicle_image"));
+                //return;
+            }
+        }
+        return "null";
     }
 }

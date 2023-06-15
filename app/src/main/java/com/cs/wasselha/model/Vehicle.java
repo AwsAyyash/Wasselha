@@ -1,15 +1,15 @@
 package com.cs.wasselha.model;
 
-import java.io.File;
+
 
 public class Vehicle {
 
     private int id; // for the database
     private int transporter;
-    private File vehicle_image;
+    private String vehicle_image;
     private String vehicle_type;
     private String vehicle_number;
-    private File vehicle_license;
+    private String vehicle_license;
 
     public int getId() {
         return id;
@@ -58,7 +58,7 @@ public class Vehicle {
 
 
 
-    public Vehicle(int id, int transporter, File vehicle_image, String vehicle_type, File vehicle_license) {
+    public Vehicle(int id, int transporter, String vehicle_image, String vehicle_type, String vehicle_license) {
         this.id = id;
         this.transporter = transporter;
         this.vehicle_image = vehicle_image;
@@ -74,11 +74,11 @@ public class Vehicle {
         this.transporter = transporter;
     }
 
-    public File getVehicle_image() {
+    public String getVehicle_image() {
         return vehicle_image;
     }
 
-    public void setVehicle_image(File vehicle_image) {
+    public void setVehicle_image(String vehicle_image) {
         this.vehicle_image = vehicle_image;
     }
 
@@ -90,11 +90,11 @@ public class Vehicle {
         this.vehicle_type = vehicle_type;
     }
 
-    public File getVehicle_license() {
+    public String getVehicle_license() {
         return vehicle_license;
     }
 
-    public void setVehicle_license(File vehicle_license) {
+    public void setVehicle_license(String vehicle_license) {
         this.vehicle_license = vehicle_license;
     }
 
