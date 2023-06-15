@@ -3,15 +3,31 @@ package com.cs.wasselha.Models;
 public class ServicesModel {
 
     String transporterName, time, sourceCity, destinationCity;
-    int image;
 
-    public ServicesModel(String transporterName, String time, String sourceCity, String destinationCity, int image)
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    String imageUrl;
+
+    public int getTransporterId() {
+        return transporterId;
+    }
+
+    int transporterId;
+
+    public void setTransporterId(int transporterId) {
+        this.transporterId = transporterId;
+    }
+
+    public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity/*, String imageUrl*/)
     {
+        this.transporterId = transporterId;
         this.transporterName = transporterName;
         this.time = time;
         this.sourceCity = sourceCity;
         this.destinationCity = destinationCity;
-        this.image = image;
+       this.imageUrl = imageUrl;
     }
 
 
@@ -36,9 +52,9 @@ public class ServicesModel {
         return destinationCity;
     }
 
-    public int getImage()
+    public String getImageUrl()
     {
-        return image;
+        return imageUrl;
     }
 
 }
