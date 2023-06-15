@@ -44,6 +44,7 @@ import java.io.InputStream;
 
 import com.cs.wasselha.R;
 import com.cs.wasselha.RegistrationActivity;
+import com.cs.wasselha.TransporterTrackRoad;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,6 +134,21 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MapLocaterDemoExample.class);
+                startActivity(intent);
+            }
+        });
+
+        inbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapLocaterDemoExample.class);
+                startActivity(intent);
+            }
+        });
+        cars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TransporterTrackRoad.class);
                 startActivity(intent);
             }
         });
