@@ -3,6 +3,7 @@ package com.cs.wasselha.Login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +20,11 @@ import com.android.volley.toolbox.Volley;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cs.wasselha.CollectionPointProvider.MainCollectionPointProviderActivity;
 import com.cs.wasselha.Customer.MainCustomerActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Signup.TypeSignupActivity;
+import com.cs.wasselha.Transporter.MainTransporterActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,22 +33,49 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private static final String ID_KEY = "id";
+    private static final String LOGIN_TYPE_KEY = "loginType";
+    private static final String PREFERENCES_NAME = "MyPreferences";
+    // Flag to indicate if the user is logged in
+    private boolean isUserLoggedIn = false;
     private TextView signupQuestionBtn, errorMessage;
     private EditText email, password;
     private Button loginBtn;
     RequestQueue requestQueue;
+
+    String loginBaseURL = "http://176.119.254.198:8000/wasselha/login/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
-
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+        String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
+        if(loginType !=null){
+            loginBaseURL+=loginType+"/";
+        }else{
+            loginBaseURL+="customer/";
+        }
         //References
         setupReference();
         loginSetup();
         signupQuestionBtnSetup();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Only delete LOGIN_TYPE_KEY if the user is not logged in
+        if (!isUserLoggedIn) {
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+            if (preferences.contains(LOGIN_TYPE_KEY)) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove(LOGIN_TYPE_KEY);
+                editor.apply();
+            }
+        }
     }
 
 
@@ -90,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
     private void LoginUser()
     {
                 requestQueue = Volley.newRequestQueue(this);
-                String url = "http://176.119.254.198:8000/wasselha/login/customer/";
                 final String value = "";
 
                 JSONObject jsonObject = new JSONObject();
@@ -108,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // Create the POST request
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, loginBaseURL, jsonObject,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response)
@@ -119,8 +148,27 @@ public class LoginActivity extends AppCompatActivity {
 
                                     if (id > 0)
                                     {
-                                        Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
-                                        startActivity(intent);
+                                        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString(ID_KEY, id+"");
+                                        editor.apply();
+                                        String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
+                                        if(loginType !=null){
+                                            isUserLoggedIn = true;
+                                            if(loginType.equals("customer")){
+                                                Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }else if(loginType.equals("transporter")){
+                                                Intent intent = new Intent(LoginActivity.this, MainTransporterActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }else if(loginType.equals("collectionpointprovider")){
+                                                Intent intent = new Intent(LoginActivity.this, MainCollectionPointProviderActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
                                         Toast.makeText(LoginActivity.this, "Login succeeded!", Toast.LENGTH_SHORT).show();
                                     }
                                     else

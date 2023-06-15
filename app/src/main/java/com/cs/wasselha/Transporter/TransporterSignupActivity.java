@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.R;
 
 
@@ -115,7 +116,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
         vehicleLicenseUploadPhotoBtn = findViewById(R.id.vehicleLicenseUploadPhotoBtn);
         personalLicenseUploadPhotoBtn = findViewById(R.id.personalLicenseUploadPhotoBtn);
         signupTransporterBtn=findViewById(R.id.signupTransporterBtn);
-        //errorMessage=findViewById(R.id.errorMessageInTransporterSignup);
+        errorMessage=findViewById(R.id.errorMessageInTransporterSignup);
         vehiclePhotoUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,8 +151,10 @@ public class TransporterSignupActivity extends AppCompatActivity {
         });
         signupTransporterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(verifyInputsAndSubmit()){
+            public void onClick(View v)
+            {
+                if(verifyInputsAndSubmit())
+                {
                     new CreateTransporterTask().execute();
                 }
             }
@@ -324,7 +327,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
                 TransporterSignupActivity.transporterID=Integer.parseInt(transporterId.trim());
                 return transporterId;
             }else{
-                Toast.makeText(TransporterSignupActivity.this, "Invalid Information, there are repetution of email or national id", Toast.LENGTH_SHORT).show();
+                errorMessage.setText("Invalid Information, there are reputation of email or national id!");
                 return null;
             }
         } catch (IOException | JSONException e) {
@@ -417,7 +420,8 @@ public class TransporterSignupActivity extends AppCompatActivity {
                 Log.d("iddddd",vehicleId);
                 return vehicleId+"";
             }else{
-                Toast.makeText(TransporterSignupActivity.this, "Invalid Information, there are repetution of vehicle number", Toast.LENGTH_SHORT).show();
+                errorMessage.setText("Invalid Information, there are reputation of vehicle number!");
+
                 return null;
             }
         } catch (IOException | JSONException e) {
@@ -486,7 +490,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
             if(createSuccefully){
-                Intent intent = new Intent(TransporterSignupActivity.this, MainTransporterActivity.class);
+                Intent intent = new Intent(TransporterSignupActivity.this, TypeLoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
             }
@@ -521,43 +525,57 @@ public class TransporterSignupActivity extends AppCompatActivity {
         String personalLicenseBtnText = personalLicenseUploadPhotoBtn.getText().toString().trim();
 
         if (!isEditTextFilled(firstNameEditText)) {
-            showToastMessage("Please fill in the First Name field.");
+            showToastMessage("Please fill in the First Name field!");
+            errorMessage.setText("Please fill in the First Name field!");
             return false;
         } else if (!isEditTextFilled(lastNameEditText)) {
-            showToastMessage("Please fill in the Last Name field.");
+            showToastMessage("Please fill in the Last Name field!");
+            errorMessage.setText("Please fill in the Last Name field!");
             return false;
-        } else if (!isEditTextFilled(nationalIDEditText)) {
-            showToastMessage("Please fill in the National ID field.");
+        } else if (!isEditTextFilled(nationalIDEditText))
+        {
+            showToastMessage("Please fill in the National ID field!");
+            errorMessage.setText("Please fill in the National ID field!");
             return false;
         } else if (!isEditTextFilled(phoneNumberEditText)) {
-            showToastMessage("Please fill in the Phone Number field.");
+            showToastMessage("Please fill in the Phone Number field!");
+            errorMessage.setText("Please fill in the Phone Number field!");
             return false;
         } else if (!isEditTextFilled(vehicleNumberEditText)) {
+            errorMessage.setText("Please fill in the Vehicle Number field!");
             showToastMessage("Please fill in the Vehicle Number field.");
             return false;
         } else if (!isEditTextFilled(emailEditText)) {
-            showToastMessage("Please fill in the Email field.");
+            showToastMessage("Please fill in the Email field!");
+            errorMessage.setText("Please fill in the Email field!");
             return false;
         } else if (!isEditTextFilled(passwordEditText)) {
-            showToastMessage("Please fill in the Password field.");
+            showToastMessage("Please fill in the Password field!");
+            errorMessage.setText("Please fill in the Password field!");
             return false;
         } else if (!isEditTextFilled(repeatPasswordEditText)) {
-            showToastMessage("Please fill in the Repeat Password field.");
+            showToastMessage("Please fill in the Repeat Password field!");
+            errorMessage.setText("Please fill in the Repeat Password field!");
             return false;
         } else if (!isEmailValid(email)) {
-            showToastMessage("Please enter a valid email address.");
+            showToastMessage("Please enter a valid email address!");
+            errorMessage.setText("Please enter a valid email address!");
             return false;
         } else if (!password.equals(repeatPassword)) {
-            showToastMessage("Passwords do not match.");
+            showToastMessage("Passwords do not match!");
+            errorMessage.setText("Passwords do not match!");
             return false;
         } else if (vehiclePhotoBtnText.equals("Upload image")) {
-            showToastMessage("Please upload a vehicle photo.");
+            showToastMessage("Please upload a vehicle photo!");
+            errorMessage.setText("Please upload a vehicle photo!");
             return false;
         } else if (vehicleLicenseBtnText.equals("Upload image")) {
-            showToastMessage("Please upload a vehicle license photo.");
+            showToastMessage("Please upload a vehicle license photo!");
+            errorMessage.setText("Please upload a vehicle license photo!");
             return false;
         } else if (personalLicenseBtnText.equals("Upload image")) {
-            showToastMessage("Please upload a personal license photo.");
+            showToastMessage("Please upload a personal license photo!");
+            errorMessage.setText("Please upload a personal license photo!");
             return false;
         }
 
