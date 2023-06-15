@@ -4,6 +4,16 @@ public class ServicesModel {
 
     String transporterName, time, sourceCity, destinationCity;
 
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    String vehicleType;
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
@@ -20,7 +30,8 @@ public class ServicesModel {
         this.transporterId = transporterId;
     }
 
-    public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity/*, String imageUrl*/)
+    public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
+                         String imageUrl,String vehicleType)
     {
         this.transporterId = transporterId;
         this.transporterName = transporterName;
@@ -28,6 +39,7 @@ public class ServicesModel {
         this.sourceCity = sourceCity;
         this.destinationCity = destinationCity;
        this.imageUrl = imageUrl;
+       this.vehicleType = vehicleType;
     }
 
 

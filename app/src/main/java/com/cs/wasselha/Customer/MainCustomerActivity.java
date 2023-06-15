@@ -80,7 +80,7 @@ public class MainCustomerActivity extends AppCompatActivity {
         return serviceDA.getServices();
     }
 
-    private void servicesModelSetup() throws IOException {
+   /* private void servicesModelSetup() throws IOException {
         String[] transportersNames = getResources().getStringArray(R.array.services);
         String[] times = getResources().getStringArray(R.array.times);
         String[] sourceCities = getResources().getStringArray(R.array.sourceCities);
@@ -97,7 +97,7 @@ public class MainCustomerActivity extends AppCompatActivity {
                     new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle()));
         }
 
-    }
+    }*/
    /* private void doReplaceFragmentWithImageVehicle() {
 
         String apiURL="http://176.119.254.198:8000/wasselha";
