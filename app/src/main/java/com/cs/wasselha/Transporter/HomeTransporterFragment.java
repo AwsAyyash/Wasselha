@@ -36,7 +36,7 @@ public class HomeTransporterFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     ListView listView;
-    private ArrayList<Services> servicesData;
+    public static ArrayList<Services> servicesData;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
