@@ -55,17 +55,38 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_track_road);
-        transporterMarker.setPosition(new LatLng(31.896064, 35.205644));
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
-        addCustomersLocations();
-        addCollectionPointLocations();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapFragment);
-        mapFragment.getMapAsync(this);
+        try{
+            RequestOptions requestOptions = new RequestOptions()
+                    .override(100, 100) // Adjust the desired size here
+                    .circleCrop();
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.ic_car_map)
+                    .apply(requestOptions)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            transporterMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(31.896064, 35.205644))
+                                    .icon(BitmapDescriptorFactory.fromBitmap(resource))
+                                    .anchor(0.5f, 0.5f)
+                                    .title("Transporter"));
+                        }
+                    });
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID=Integer.parseInt(id.trim());
+            addCustomersLocations();
+            addCollectionPointLocations();
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mapFragment);
+            mapFragment.getMapAsync(this);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        }catch (Exception e){
+            Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void addCollectionPointLocations() {
@@ -204,7 +225,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
         if (transporterMarker == null) {
             RequestOptions requestOptions = new RequestOptions()
-                    .override(100, 100) // Adjust the desired size here
+                    .override(200, 200) // Adjust the desired size here
                     .circleCrop();
 
             Glide.with(this)
