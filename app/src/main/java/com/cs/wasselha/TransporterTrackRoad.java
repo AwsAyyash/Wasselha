@@ -55,6 +55,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_track_road);
+        getSupportActionBar().hide();
         try{
             RequestOptions requestOptions = new RequestOptions()
                     .override(100, 100) // Adjust the desired size here
@@ -90,13 +91,13 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     }
 
     private void addCollectionPointLocations() {
-        collectionPointsLocations.add(new LatLng(31.916177, 35.127968)); // deir ibze
-        collectionPointsLocations.add(new LatLng(31.930065, 35.074651)); // billin
+        collectionPointsLocations.add(new LatLng(31.992165, 35.151601)); // deir ibze
+        collectionPointsLocations.add(new LatLng(31.9387, 35.2017)); // billin
         collectionPointsLocations.add(new LatLng(31.907012, 35.061517)); // safa
     }
 
     private void addCustomersLocations() {
-        customerLocations.add(new LatLng(31.927892, 35.093573)); // last of kufer nema
+        customerLocations.add(new LatLng(31.990229, 35.158582)); // last of kobar
         customerLocations.add(new LatLng(31.920901, 35.107598)); // between kufer nema and deir ibze
         customerLocations.add(new LatLng(31.914855, 35.127968)); // first of deir ibze
         customerLocations.add(new LatLng(31.917217, 35.116280)); // last of deir ibze
