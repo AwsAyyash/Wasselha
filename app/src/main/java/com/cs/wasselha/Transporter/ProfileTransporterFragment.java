@@ -90,6 +90,7 @@ public class ProfileTransporterFragment extends Fragment {
         carInfoSetup();
         settingSetup();
         claimsImgSetup();
+        statusImgSetup();
 
         return view;
     }
@@ -105,6 +106,7 @@ public class ProfileTransporterFragment extends Fragment {
         settingsImg = view.findViewById(R.id.settingImage);
         claimsImg = view.findViewById(R.id.claimsImage);
         carsImg = view.findViewById(R.id.carsImag);
+        statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImage);
     }
 
@@ -155,6 +157,17 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TransporterClaimsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void statusImgSetup()
+    {
+        statusImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TransporterTrackRoad.class);
                 startActivity(intent);
             }
         });
