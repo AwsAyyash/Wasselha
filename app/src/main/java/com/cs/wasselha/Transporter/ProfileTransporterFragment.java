@@ -77,7 +77,7 @@ public class ProfileTransporterFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
-        setupReferences(view);
+        setupReference(view);
 
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
@@ -90,6 +90,7 @@ public class ProfileTransporterFragment extends Fragment {
         carInfoSetup();
         settingSetup();
         claimsImgSetup();
+        statusImgSetup();
 
         return view;
     }
@@ -98,13 +99,14 @@ public class ProfileTransporterFragment extends Fragment {
     //-----------Methods---------------------------------------------------------------
 
     //References
-    private void setupReferences(View view)
+    private void setupReference(View view)
     {
         mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
-        settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
+        settingsImg = view.findViewById(R.id.settingImage);
         claimsImg = view.findViewById(R.id.claimsImage);
-        carsImg = view.findViewById(R.id.vehicleInfoImgInCustomerProfile);
+        carsImg = view.findViewById(R.id.carsImag);
+        statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImage);
     }
 
@@ -155,6 +157,17 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TransporterClaimsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void statusImgSetup()
+    {
+        statusImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TransporterTrackRoad.class);
                 startActivity(intent);
             }
         });
