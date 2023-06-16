@@ -12,16 +12,25 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 import android.Manifest;
+
 import androidx.annotation.Nullable;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.cs.wasselha.R;
+import com.github.javafaker.Bool;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -35,14 +44,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransporterTrackRoad extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final String BASE_URL = "http://176.119.254.198:8000/wasselha";
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
+    private static int transporterID;
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final long UPDATE_INTERVAL = 5000; // 5 seconds
     private static final long FASTEST_INTERVAL = 2000; // 2 seconds
@@ -51,13 +69,15 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Marker transporterMarker;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_track_road);
+        requestQueue = Volley.newRequestQueue(this);
         getSupportActionBar().hide();
-        try{
+        try {
             RequestOptions requestOptions = new RequestOptions()
                     .override(100, 100) // Adjust the desired size here
                     .circleCrop();
@@ -77,32 +97,179 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                     });
             SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
             String id = preferences.getString(ID_KEY, null);
-            int transporterID=Integer.parseInt(id.trim());
-            addCustomersLocations();
-            addCollectionPointLocations();
+            transporterID = Integer.parseInt(id.trim());
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.mapFragment);
             mapFragment.getMapAsync(this);
 
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
         }
 
     }
 
     private void addCollectionPointLocations() {
-        collectionPointsLocations.add(new LatLng(31.992165, 35.151601)); // deir ibze
-        collectionPointsLocations.add(new LatLng(31.993566, 35.138926)); // kobar
-        collectionPointsLocations.add(new LatLng(31.907012, 35.061517)); // safa
+        String collectionPointsUrl = BASE_URL + "/collection-points/";
+
+        JsonArrayRequest collectionPointsRequest = new JsonArrayRequest(
+                Request.Method.GET, collectionPointsUrl, null,
+                response -> {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject collectionPoint = response.getJSONObject(i);
+                            String status = collectionPoint.getString("status");
+
+                            if ("open".equalsIgnoreCase(status)) {
+                                int locationId = collectionPoint.getInt("location");
+                                getAndAddLocation(locationId);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(collectionPointsRequest);
     }
 
-    private void addCustomersLocations() {
-        customerLocations.add(new LatLng(31.990229, 35.158582)); // last of kobar
-        customerLocations.add(new LatLng(31.920901, 35.107598)); // between kufer nema and deir ibze
-        customerLocations.add(new LatLng(31.914855, 35.127968)); // first of deir ibze
-        customerLocations.add(new LatLng(31.917217, 35.116280)); // last of deir ibze
+    private void addCustomersLocations(int transporterID) {
+        String servicesUrl = BASE_URL + "/services/?transporter=" + transporterID + "&time=upper";
+
+        JsonArrayRequest servicesRequest = new JsonArrayRequest(
+                Request.Method.GET, servicesUrl, null,
+                response -> {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject service = response.getJSONObject(i);
+                            int serviceId = service.getInt("id");
+
+                            getDeliveryServiceDetails(serviceId);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(servicesRequest);
     }
+
+    private void getDeliveryServiceDetails(int serviceId) {
+        String deliveryServiceDetailsUrl = BASE_URL + "/delivery-service-details/?service=" + serviceId;
+
+        JsonArrayRequest detailsRequest = new JsonArrayRequest(
+                Request.Method.GET, deliveryServiceDetailsUrl, null,
+                response -> {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject detail = response.getJSONObject(i);
+                            boolean accepted = detail.getBoolean("accepted");
+                            boolean responsed = detail.getBoolean("responsed");
+
+                            if (accepted && responsed) {
+                                int customerId = detail.getInt("customer");
+                                getCustomerLocation(customerId);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(detailsRequest);
+    }
+
+    private void getCustomerLocation(int customerId) {
+        String customerUrl = BASE_URL + "/customers/" + customerId + "/";
+
+        JsonObjectRequest customerRequest = new JsonObjectRequest(
+                Request.Method.GET, customerUrl, null,
+                response -> {
+                    try {
+                        int locationId = response.getInt("location");
+                        getLocationAndAdd(locationId);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(customerRequest);
+    }
+
+    private void getLocationAndAdd(int locationId) {
+        String locationUrl = BASE_URL + "/locations/" + locationId + "/";
+
+        JsonObjectRequest locationRequest = new JsonObjectRequest(
+                Request.Method.GET, locationUrl, null,
+                response -> {
+                    try {
+                        double latitude = Double.parseDouble(response.getString("latitude"));
+                        double longitude = Double.parseDouble(response.getString("longitude"));
+                        customerLocations.add(new LatLng(latitude, longitude));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(locationRequest);
+    }
+
+
+    private void getAndAddLocation(int locationId) {
+        String locationUrl = BASE_URL + "/locations/" + locationId + "/";
+
+        JsonObjectRequest locationRequest = new JsonObjectRequest(
+                Request.Method.GET, locationUrl, null,
+                response -> {
+                    try {
+                        double latitude = Double.parseDouble(response.getString("latitude"));
+                        double longitude = Double.parseDouble(response.getString("longitude"));
+                        collectionPointsLocations.add(new LatLng(latitude, longitude));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    // Handle errors here, such as showing an error message to the user.
+                }
+        );
+
+        requestQueue.add(locationRequest);
+    }
+
+//    private void addCollectionPointLocations2() {
+//        collectionPointsLocations.add(new LatLng(31.992165, 35.151601)); // deir ibze
+//        collectionPointsLocations.add(new LatLng(31.993566, 35.138926)); // kobar
+//        collectionPointsLocations.add(new LatLng(31.907012, 35.061517)); // safa
+//    }
+//
+//    private void addCustomersLocations() {
+//        customerLocations.add(new LatLng(31.990229, 35.158582)); // last of kobar
+//        customerLocations.add(new LatLng(31.920901, 35.107598)); // between kufer nema and deir ibze
+//        customerLocations.add(new LatLng(31.914855, 35.127968)); // first of deir ibze
+//        customerLocations.add(new LatLng(31.917217, 35.116280)); // last of deir ibze
+//    }
 
     private double calculateDistance(LatLng point1, LatLng point2) {
         Location location1 = new Location("");
@@ -115,7 +282,9 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
         return location1.distanceTo(location2);
     }
+
     private void addCustomerAndCollectionPointsMarkers() {
+
         float scalingFactor = 0.25f; // Adjust the scaling factor as needed
         float visibilityRadius = 5000; // Visibility radius in meters (5km)
 
@@ -159,7 +328,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        try{
+        try {
             mMap = googleMap;
             // Check location permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -170,7 +339,27 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            addCustomerAndCollectionPointsMarkers();
+                            new AsyncTask<String, Void, Boolean>() {
+                                @Override
+                                protected Boolean doInBackground(String... params) {
+                                    try {
+                                        addCustomersLocations(transporterID);
+                                        addCollectionPointLocations();
+                                        return true;
+                                    }catch (Exception e){
+                                        return false;
+                                    }
+                                }
+
+                                @Override
+                                protected void onPostExecute(Boolean success) {
+                                    if(success){
+                                        addCustomerAndCollectionPointsMarkers();
+                                    }
+                                }
+                            }.execute();
+
+
                         }
                     }, 2000);
                 } else {
@@ -179,7 +368,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
         }
 
@@ -250,6 +439,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
     }
+
     private boolean isNetworkConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
