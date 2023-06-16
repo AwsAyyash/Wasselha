@@ -92,7 +92,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
     private void addCollectionPointLocations() {
         collectionPointsLocations.add(new LatLng(31.992165, 35.151601)); // deir ibze
-        collectionPointsLocations.add(new LatLng(31.9387, 35.2017)); // billin
+        collectionPointsLocations.add(new LatLng(31.993566, 35.138926)); // kobar
         collectionPointsLocations.add(new LatLng(31.907012, 35.061517)); // safa
     }
 

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-import com.cs.wasselha.ConfirmAddress;
 import com.cs.wasselha.R;
 
 public class AddCollectionPointFragment extends Fragment {
@@ -31,7 +30,6 @@ public class AddCollectionPointFragment extends Fragment {
 
         //References
         setUpReferences(view);
-        addLocationSetUp();
 
         return view;
     }
@@ -77,22 +75,6 @@ public class AddCollectionPointFragment extends Fragment {
 
     }
 
-    private void addLocationSetUp()
-    {
-        addLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = requireContext();
-
-                Intent intent = new Intent(context, ConfirmAddress.class);
-
-                // Pass any data to the target Activity if needed
-                //intent.putExtra("key", "value");
-
-                context.startActivity(intent);
-            }
-        });
-    }
 
 
 }

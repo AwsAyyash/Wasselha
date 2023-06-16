@@ -10,7 +10,8 @@
         android:id="@+id/imageInCustomerNotificationsListView"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        android:src="@drawable/car1"/>
+        android:background="@drawable/image_profile_style"
+        />
 
     <LinearLayout
         android:id="@+id/pathLinearLayout"
@@ -59,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="@color/quantum_grey700"
         android:layout_below="@+id/pathLinearLayout"
         android:layout_toEndOf="@+id/imageInCustomerNotificationsListView"
         android:layout_marginTop="8dp"
@@ -69,6 +71,7 @@
         android:id="@+id/textView9"
         android:layout_width="20dp"
         android:layout_height="25dp"
+        android:layout_marginEnd="20dp"
         android:layout_below="@+id/pathLinearLayout"
         android:layout_alignParentEnd="true"
         android:background="@drawable/ic_close" />
