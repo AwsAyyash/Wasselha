@@ -28,8 +28,10 @@
 
             <ImageView
                 android:id="@+id/cardImageView"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/image_profile_style"
                 android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailsBtnInCustomerCardRecyclerView"
                 app:layout_constraintStart_toStartOf="parent"

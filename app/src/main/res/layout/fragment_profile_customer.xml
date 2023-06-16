@@ -11,7 +11,7 @@
         android:id="@+id/mainPhotoInProfilePage"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/profile_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ghassan Amreyah"
+        android:text=""
         android:textColor="@color/light_selver"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -33,7 +33,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/profile_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/imageView15"
+                            android:id="@+id/settingImage"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -76,9 +76,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_setting"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView15"
-                            app:layout_constraintStart_toStartOf="@+id/imageView15"
+                            app:layout_constraintBottom_toBottomOf="@+id/settingImage"
+                            app:layout_constraintEnd_toEndOf="@+id/settingImage"
+                            app:layout_constraintStart_toStartOf="@+id/settingImage"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -107,7 +107,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/claimsImage"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -121,9 +121,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_warning"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView9"
-                            app:layout_constraintStart_toStartOf="@+id/imageView9"
+                            app:layout_constraintBottom_toBottomOf="@+id/claimsImage"
+                            app:layout_constraintEnd_toEndOf="@+id/claimsImage"
+                            app:layout_constraintStart_toStartOf="@+id/claimsImage"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 
@@ -151,7 +151,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/imageView22"
+                            android:id="@+id/carsImag"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -165,10 +165,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_reservations"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView22"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView22"
+                            app:layout_constraintBottom_toBottomOf="@+id/carsImag"
+                            app:layout_constraintEnd_toEndOf="@+id/carsImag"
                             app:layout_constraintHorizontal_bias="0.43"
-                            app:layout_constraintStart_toStartOf="@+id/imageView22"
+                            app:layout_constraintStart_toStartOf="@+id/carsImag"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -202,95 +202,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/imageView20"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/circle_photo"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_favorite"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView20"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView20"
-                            app:layout_constraintStart_toStartOf="@+id/imageView20"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.71000004" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:text="@string/favorites__in_profile_page"
-                        android:textColor="@color/dark_green"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/light_selver_background">
-
-                        <ImageView
-                            android:id="@+id/imageView23"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/circle_photo"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_messages"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView23"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView23"
-                            app:layout_constraintStart_toStartOf="@+id/imageView23"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.63" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:text="@string/inbox_in_profile_page"
-                        android:textColor="@color/dark_green"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/light_selver_background">
-
-                        <ImageView
-                            android:id="@+id/imageView26"
+                            android:id="@+id/logoutImage"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -304,10 +216,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView26"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView26"
+                            app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
+                            app:layout_constraintEnd_toEndOf="@+id/logoutImage"
                             app:layout_constraintHorizontal_bias="0.65"
-                            app:layout_constraintStart_toStartOf="@+id/imageView26"
+                            app:layout_constraintStart_toStartOf="@+id/logoutImage"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -323,7 +235,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </TableRow>
-
         </TableLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

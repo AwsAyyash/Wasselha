@@ -58,7 +58,6 @@ public class CustomerSignupActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastNameCustomer);
         email = findViewById(R.id.emailCustomerSignup);
         phoneNumber = findViewById(R.id.phoneNumberCustomerSignup);
-        address = findViewById(R.id.addressCustomerSignup);
         password = findViewById(R.id.passwordCustomerSignup);
         repeatPassword = findViewById(R.id.repeatPasswordCustomerSignup);
         errorMessage = findViewById(R.id.errorMessageInCustomerSignup);

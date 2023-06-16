@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Transporter.CarInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transporter.TransporterSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".TransporterTrackRoad"
             android:exported="false">
             <meta-data

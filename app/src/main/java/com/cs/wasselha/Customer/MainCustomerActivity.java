@@ -32,7 +32,7 @@ public class MainCustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //replaceFragment(new HomeCustomerFragment(this));
+        replaceFragment(new HomeCustomerFragment(this));
         getSupportActionBar().hide();
 
         binding.bottomBarInCustomerMainPage.setOnItemSelectedListener(item -> {
