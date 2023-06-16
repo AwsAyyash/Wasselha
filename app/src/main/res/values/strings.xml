@@ -184,4 +184,7 @@
     <string name="back_to_profile_page_btn">Back to profile page</string>
     <string name="vehicle_information_main_title">Vehicle Information</string>
     <string name="vehicle_ninformation_in_transporter_profile">Vehicle \nInformation</string>
+    <string name="review_in_claim_list_view">Review:</string>
+    <string name="claims_in_transporter_claims_page">Claims</string>
+    <string name="requests_in_bottom_bar_transporter">Requests</string>
 </resources>

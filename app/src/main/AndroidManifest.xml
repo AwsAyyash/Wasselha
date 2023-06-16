@@ -17,14 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
+
         <activity
-            android:name=".Transporter.CarInformationActivity"
+            android:name=".Transporter.VehicleInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transporter.TransporterClaimsActivity"
             android:exported="false" />
         <activity
             android:name=".Transporter.TransporterSettingActivity"
             android:exported="false" />
         <activity
-            android:name=".TransporterTrackRoad"
+            android:name=".Transporter.TransporterTrackRoad"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.cs.wasselha.R;
 
-public class CarInformationActivity extends AppCompatActivity {
+public class VehicleInformationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

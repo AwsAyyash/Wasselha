@@ -39,7 +39,7 @@ public class ProfileTransporterFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
-    private ImageView image,settings,claims,cars,status,logout;
+    private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg;
     private TextView name;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -89,6 +89,7 @@ public class ProfileTransporterFragment extends Fragment {
         logoutSetup();
         carInfoSetup();
         settingSetup();
+        claimsImgSetup();
 
         return view;
     }
@@ -99,18 +100,18 @@ public class ProfileTransporterFragment extends Fragment {
     //References
     private void setupReference(View view)
     {
-        image = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
+        mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
-        settings = view.findViewById(R.id.settingImage);
-        claims = view.findViewById(R.id.claimsImage);
-        cars = view.findViewById(R.id.carsImag);
-        logout = view.findViewById(R.id.logoutImage);
+        settingsImg = view.findViewById(R.id.settingImage);
+        claimsImg = view.findViewById(R.id.claimsImage);
+        carsImg = view.findViewById(R.id.carsImag);
+        logoutImg = view.findViewById(R.id.logoutImage);
     }
 
     //-----------Logout Setup------------------------------------------------------
     private void logoutSetup()
     {
-        logout.setOnClickListener(new View.OnClickListener() {
+        logoutImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -128,7 +129,7 @@ public class ProfileTransporterFragment extends Fragment {
 
     private void settingSetup()
     {
-        settings.setOnClickListener(new View.OnClickListener() {
+        settingsImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TransporterSettingActivity.class);
@@ -139,11 +140,22 @@ public class ProfileTransporterFragment extends Fragment {
 
     private void carInfoSetup()
     {
-        cars.setOnClickListener(new View.OnClickListener() {
+        carsImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CarInformationActivity.class);
+                Intent intent = new Intent(getContext(), VehicleInformationActivity.class);
                startActivity(intent);
+            }
+        });
+    }
+
+    private void claimsImgSetup()
+    {
+        claimsImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TransporterClaimsActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -195,7 +207,7 @@ public class ProfileTransporterFragment extends Fragment {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject vehicle = response.getJSONObject(i);
                                 if (vehicle.getInt("transporter") == transporterID) {
-                                    setImage(apiURL + vehicle.getString("vehicle_image"));
+                                    setMainImage(apiURL + vehicle.getString("vehicle_image"));
                                     return;
                                 }
                             }
@@ -216,10 +228,10 @@ public class ProfileTransporterFragment extends Fragment {
 
         queue.add(jsonArrayRequest);
     }
-    void setImage(String imageUrl){
+    void setMainImage(String imageUrl){
         Glide.with(this)
                 .load(imageUrl)
-                .into(image);
+                .into(mainImage);
     }
 
 }

@@ -14,15 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.cs.wasselha.Customer.HomeCustomerFragment;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Customer.ServiceDetailsActivity;
 import com.cs.wasselha.Models.ServicesModel;
-import com.cs.wasselha.interfaces.implementation.VehiclesDA;
 import com.cs.wasselha.model.Service;
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<ServicesModelRecyclerViewAdapter.MyViewHolder>
@@ -45,7 +42,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
     @Override
     public ServicesModelRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycler_view_row, parent,false);
+        View view = inflater.inflate(R.layout.services_recycler_view_in_customer_main_page, parent,false);
         return new ServicesModelRecyclerViewAdapter.MyViewHolder(view);
     }
 

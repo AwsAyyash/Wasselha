@@ -35,9 +35,9 @@ public class NotificationsTransporterAdapter extends ArrayAdapter<Notifications>
         LayoutInflater layoutInFlater = LayoutInflater.from(context);
         convertView = layoutInFlater.inflate(cResource, parent, false);
 
-        ImageView imageView = convertView.findViewById(R.id.imageInTransporterNotificationsListView);
+        ImageView imageView = convertView.findViewById(R.id.imageInClaimsListView);
         TextView titleNotification = convertView.findViewById(R.id.titleNotificationTransporter);
-        TextView descriptionNotification = convertView.findViewById(R.id.descriptionNotificationTransporter);
+        TextView descriptionNotification = convertView.findViewById(R.id.messageInClaimListView);
         TextView timeNotification = convertView.findViewById(R.id.timeNotificationTransporter);
 
         imageView.setImageResource(R.drawable.notification);

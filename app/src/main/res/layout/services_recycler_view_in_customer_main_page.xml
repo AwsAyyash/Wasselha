@@ -29,10 +29,10 @@
             <ImageView
                 android:id="@+id/cardImageView"
                 android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/image_profile_style"
-                android:elevation="10dp"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailsBtnInCustomerCardRecyclerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/transporterNameLayout"
@@ -42,7 +42,7 @@
                 android:id="@+id/transporterNameLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@+id/cardImageView"
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Mohammad"
+                    android:text="Not available!"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -69,14 +69,41 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout4"
+                android:id="@+id/transporterReviewLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@+id/cardImageView"
                 app:layout_constraintTop_toBottomOf="@+id/transporterNameLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_in_claim_list_view"
+                    android:textColor="@color/dark_green"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/transporterReviewInCustomerRecyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Not available!"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteY="16dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@+id/cardImageView"
+                app:layout_constraintTop_toBottomOf="@+id/transporterReviewLayout">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -93,14 +120,14 @@
                     android:layout_marginStart="10dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:text="9:00 AM" />
+                    android:text="Not available!" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@+id/cardImageView"
@@ -110,7 +137,7 @@
                     android:id="@+id/sourceCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ramallah"
+                    android:text="Not available!"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -129,7 +156,7 @@
                     android:id="@+id/destinationCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nablus"
+                    android:text="Not available!"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -140,16 +167,19 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="200dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/details_btn_in_card_customer_recycler_view"
                 android:text="@string/details_in_customer_card_recycler_view"
                 android:textColor="@color/light_selver"
                 android:textStyle="bold"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardImageView"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
