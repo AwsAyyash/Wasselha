@@ -1,6 +1,7 @@
 package com.cs.wasselha.Adapters;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.cs.wasselha.Login.LoginActivity;
 import com.cs.wasselha.R;
+import com.cs.wasselha.Transporter.HomeTransporterFragment;
 import com.cs.wasselha.Transporter.Services;
 
 import org.json.JSONArray;
@@ -92,7 +94,9 @@ public class ServicesAdapter extends ArrayAdapter<Services>
             @Override
             public void onClick(View view)
             {
-                sendDeleteRequest(apiURL+"/services/"+getItem(position).getId()+"/");                        // Notify the adapter that the data has changed
+                sendDeleteRequest(apiURL+"/services/"+getItem(position).getId()+"/");
+                HomeTransporterFragment.servicesData.remove(position);
+                // Notify the adapter that the data has changed
                 notifyDataSetChanged();
             }
         });
@@ -106,31 +110,40 @@ public class ServicesAdapter extends ArrayAdapter<Services>
 
         return convertView;
     }
-    private boolean sendDeleteRequest(String url) {
-        try {
-            URL deleteUrl = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) deleteUrl.openConnection();
-            connection.setRequestMethod("DELETE");
-            connection.setDoOutput(true);
+    private void sendDeleteRequest(String url) {
+        new AsyncTask<String, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(String... params) {
+                String url = params[0];
+                try {
+                    URL deleteUrl = new URL(url);
+                    HttpURLConnection connection = (HttpURLConnection) deleteUrl.openConnection();
+                    connection.setRequestMethod("DELETE");
+                    connection.setDoOutput(true);
 
-            // Add any additional headers if needed
-            // connection.setRequestProperty("HeaderKey", "HeaderValue");
-
-            int responseCode = connection.getResponseCode();
-            // Handle the response code as per your requirement
-            connection.disconnect();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                return true;
-
-            } else {
-                return false;
+                    int responseCode = connection.getResponseCode();
+                    // Handle the response code as per your requirement
+                    connection.disconnect();
+                    return responseCode == HttpURLConnection.HTTP_OK;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Handle any exceptions that occur during the request
+                    return false;
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle any exceptions that occur during the request
-            return false;
-        }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                // Handle the result after the background operation completes
+                if (success) {
+                    // Delete request was successful
+                } else {
+                    // Delete request failed
+                }
+            }
+        }.execute(url);
     }
+
     public void getVehicleImageURLAndSetImage(Context context, int transporterID,ImageView imageView) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = apiURL + "/vehicles/?transporter="+transporterID;
