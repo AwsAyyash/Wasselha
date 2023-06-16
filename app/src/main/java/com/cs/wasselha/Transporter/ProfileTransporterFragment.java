@@ -77,7 +77,7 @@ public class ProfileTransporterFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
-        setupReference(view);
+        setupReferences(view);
 
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
@@ -98,13 +98,13 @@ public class ProfileTransporterFragment extends Fragment {
     //-----------Methods---------------------------------------------------------------
 
     //References
-    private void setupReference(View view)
+    private void setupReferences(View view)
     {
         mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
-        settingsImg = view.findViewById(R.id.settingImage);
+        settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
         claimsImg = view.findViewById(R.id.claimsImage);
-        carsImg = view.findViewById(R.id.carsImag);
+        carsImg = view.findViewById(R.id.vehicleInfoImgInCustomerProfile);
         logoutImg = view.findViewById(R.id.logoutImage);
     }
 

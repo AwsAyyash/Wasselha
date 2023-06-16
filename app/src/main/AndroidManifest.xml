@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".Customer.CustomerSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".Transporter.VehicleInformationActivity"
             android:exported="false" />
         <activity

@@ -64,7 +64,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/settingImage"
+                            android:id="@+id/settingImageInCustomerProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -78,9 +78,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_setting"
-                            app:layout_constraintBottom_toBottomOf="@+id/settingImage"
-                            app:layout_constraintEnd_toEndOf="@+id/settingImage"
-                            app:layout_constraintStart_toStartOf="@+id/settingImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInCustomerProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/settingImageInCustomerProfile"
+                            app:layout_constraintStart_toStartOf="@+id/settingImageInCustomerProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -154,7 +154,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/carsImag"
+                            android:id="@+id/vehicleInfoImgInCustomerProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -168,10 +168,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_car"
-                            app:layout_constraintBottom_toBottomOf="@+id/carsImag"
-                            app:layout_constraintEnd_toEndOf="@+id/carsImag"
+                            app:layout_constraintBottom_toBottomOf="@+id/vehicleInfoImgInCustomerProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/vehicleInfoImgInCustomerProfile"
                             app:layout_constraintHorizontal_bias="0.43"
-                            app:layout_constraintStart_toStartOf="@+id/carsImag"
+                            app:layout_constraintStart_toStartOf="@+id/vehicleInfoImgInCustomerProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -192,6 +192,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/light_selver_background">
+
+                        <ImageView
+                            android:id="@+id/reservationsImgInCustomerProfile"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/circle_photo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_reservations"
+                            app:layout_constraintBottom_toBottomOf="@+id/reservationsImgInCustomerProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/reservationsImgInCustomerProfile"
+                            app:layout_constraintHorizontal_bias="0.43"
+                            app:layout_constraintStart_toStartOf="@+id/reservationsImgInCustomerProfile"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.63" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/reservations_in_bottom_bar_transporter"
+                        android:textColor="@color/dark_green"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
