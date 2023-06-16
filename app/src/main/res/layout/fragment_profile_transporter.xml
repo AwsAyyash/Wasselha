@@ -144,6 +144,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
                     android:layout_margin="16dp"
                     android:orientation="vertical">
 
@@ -180,7 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="@string/cars_in_profile_page"
+                        android:text="@string/vehicle_ninformation_in_transporter_profile"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />
