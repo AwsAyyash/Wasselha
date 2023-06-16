@@ -12,34 +12,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/changasemibold"
         android:text="@string/service_details_main_title"
         android:textColor="@color/dark_green"
-        android:textStyle="bold"
         android:textSize="30sp"
-        android:fontFamily="@font/changasemibold"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewVehicleInServiceDetails"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/serviceDetailsMainTitle"
-        app:srcCompat="@drawable/car1"
-        tools:layout_editor_absoluteX="5dp" />
+        app:srcCompat="@drawable/car1" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="1000dp"
         android:layout_marginTop="90dp"
-        android:orientation="vertical"
         android:background="@drawable/service_details_background"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVehicleInServiceDetails">
 
         <LinearLayout
             android:id="@+id/transporterNameLayout"
@@ -53,19 +55,19 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="@string/transporter_name_in_customer_recyclerView"
                 android:textColor="@color/light_selver"
-                android:text="@string/transporter_name_in_customer_recyclerView" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/transporterNameInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
                 android:text="Mohammad"
                 android:textColor="@color/dark_yellow2"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteY="16dp" />
         </LinearLayout>
@@ -83,20 +85,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="@string/time_in_customer_recyclerView"
                 android:textColor="@color/light_selver"
-                android:text="@string/time_in_customer_recyclerView" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/timeInCustomerRecyclerView"
+                android:id="@+id/timeInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
+                android:text="9:00 AM"
                 android:textColor="@color/dark_yellow2"
-                android:textStyle="bold"
-                android:text="9:00 AM" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,18 +116,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/path_in_service_details_page"
-                android:textSize="18sp"
                 android:textColor="@color/light_selver"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/sourceCity"
+                android:id="@+id/sourceCityInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ramallah"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
+                android:text="Ramallah"
                 android:textColor="@color/dark_yellow2"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -134,18 +136,18 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:text="to"
                 android:textColor="@color/light_selver"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/destinationCity"
+                android:id="@+id/destinationCityInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nablus"
-                android:textSize="18sp"
                 android:textColor="@color/dark_yellow2"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -163,21 +165,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="Vehicle type:"
                 android:textColor="@color/light_selver"
-                android:text="Vehicle type:" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/vehicleTypeInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
+                android:text="@string/vehicle_type_in_service_details_page"
                 android:textColor="@color/dark_yellow2"
-                android:textStyle="bold"
-                android:text="@string/vehicle_type_in_service_details_page" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/priceLayout"
             android:layout_width="wrap_content"
@@ -191,35 +194,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="@string/price_in_service_details_page"
                 android:textColor="@color/light_selver"
-                android:text="@string/price_in_service_details_page" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/priceInServiceDetailsPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
+                android:text="150"
                 android:textColor="@color/dark_yellow2"
-                android:textStyle="bold"
-                android:text="150" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reserveBtnServiceDetailsPage"
             style="@android:style/Widget.Button"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:layout_marginTop="55dp"
             android:layout_marginBottom="5dp"
-            android:layout_gravity="center"
-            android:textSize="18sp"
             android:background="@drawable/reserve_btn_background"
             android:text="@string/reserve_btn_in_service_details_page"
             android:textColor="@color/dark_green"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
 

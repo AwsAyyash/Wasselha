@@ -73,8 +73,10 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
         Service service =  servicesDA.get(position);
+        int transpoterId =  servicesDA.get(position).getTransporter();
         String transName = servicesModelList.get(position).getTransporterName();
         String vehicleType = servicesModelList.get(position).getVehicleType();
+        String imageUrl = apiURL +servicesModelList.get(position).getImageUrl();
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +88,8 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
                 intent.putExtra("serviceDet",new Gson().toJson(service));
                 intent.putExtra("transporterName",transName);
                 intent.putExtra("vehicleType",vehicleType);
-
+                intent.putExtra("imageUrl",imageUrl);
+                intent.putExtra("transpoterId",transpoterId);
 
                 // Start the activity
                 view.getContext().startActivity(intent);

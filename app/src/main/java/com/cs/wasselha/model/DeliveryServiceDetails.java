@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class DeliveryServiceDetails {
 
-    private int id;
+    private transient int id;
 
     public int getId() {
         return id;
@@ -14,14 +14,14 @@ public class DeliveryServiceDetails {
         this.id = id;
     }
 
-    private Service service;
-    private Customer customer;
-    private CollectionPoint sourceCollectionPoint;
-    private CollectionPoint destinationCollectionPoint;
-    private boolean isPaid;
-    private LocalDateTime collectionTime;
+    private int service;
+    private int customer;
+    private int source_collection_point;
+    private int destination_collection_point;
+    private boolean is_paid;
+    private LocalDateTime collection_time;
 
-    private LocalDateTime handoverTime;
+    private LocalDateTime handover_time;
    // private String status;
 
     public DeliveryServiceDetails() {
@@ -29,73 +29,73 @@ public class DeliveryServiceDetails {
 
     }
 
-    public DeliveryServiceDetails(Service service, Customer customer, CollectionPoint sourceCollectionPoint,
-                                  CollectionPoint destinationCollectionPoint, boolean isPaid,
-                                  LocalDateTime collectionTime, LocalDateTime handoverTime) {
+    public DeliveryServiceDetails(int service, int customer, int source_collection_point,
+                                  int destination_collection_point, boolean is_paid,
+                                  LocalDateTime collection_time, LocalDateTime handover_time) {
         this.service = service;
         this.customer = customer;
-        this.sourceCollectionPoint = sourceCollectionPoint;
-        this.destinationCollectionPoint = destinationCollectionPoint;
-        this.isPaid = isPaid;
-        this.collectionTime = collectionTime;
-        this.handoverTime = handoverTime;
+        this.source_collection_point = source_collection_point;
+        this.destination_collection_point = destination_collection_point;
+        this.is_paid = is_paid;
+        this.collection_time = collection_time;
+        this.handover_time = handover_time;
         //this.status = status;
     }
 
-    public Service getService() {
+    public int getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(int service) {
         this.service = service;
     }
 
-    public Customer getCustomer() {
+    public int getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(int customer) {
         this.customer = customer;
     }
 
-    public CollectionPoint getSourceCollectionPoint() {
-        return sourceCollectionPoint;
+    public int getSource_collection_point() {
+        return source_collection_point;
     }
 
-    public void setSourceCollectionPoint(CollectionPoint sourceCollectionPoint) {
-        this.sourceCollectionPoint = sourceCollectionPoint;
+    public void setSource_collection_point(int source_collection_point) {
+        this.source_collection_point = source_collection_point;
     }
 
-    public CollectionPoint getDestinationCollectionPoint() {
-        return destinationCollectionPoint;
+    public int getDestination_collection_point() {
+        return destination_collection_point;
     }
 
-    public void setDestinationCollectionPoint(CollectionPoint destinationCollectionPoint) {
-        this.destinationCollectionPoint = destinationCollectionPoint;
+    public void setDestination_collection_point(int destination_collection_point) {
+        this.destination_collection_point = destination_collection_point;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public boolean isIs_paid() {
+        return is_paid;
     }
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
+    public void setIs_paid(boolean is_paid) {
+        this.is_paid = is_paid;
     }
 
-    public LocalDateTime getCollectionTime() {
-        return collectionTime;
+    public LocalDateTime getCollection_time() {
+        return collection_time;
     }
 
-    public void setCollectionTime(LocalDateTime collectionTime) {
-        this.collectionTime = collectionTime;
+    public void setCollection_time(LocalDateTime collection_time) {
+        this.collection_time = collection_time;
     }
 
-    public LocalDateTime getHandoverTime() {
-        return handoverTime;
+    public LocalDateTime getHandover_time() {
+        return handover_time;
     }
 
-    public void setHandoverTime(LocalDateTime handoverTime) {
-        this.handoverTime = handoverTime;
+    public void setHandover_time(LocalDateTime handover_time) {
+        this.handover_time = handover_time;
     }
 
    // public String getStatus() {
