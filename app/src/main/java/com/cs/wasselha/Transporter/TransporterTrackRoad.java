@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 import android.Manifest;
 
@@ -223,6 +224,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                         double latitude = Double.parseDouble(response.getString("latitude"));
                         double longitude = Double.parseDouble(response.getString("longitude"));
                         customerLocations.add(new LatLng(latitude, longitude));
+                        Log.e("addCustomer",latitude+","+longitude);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -246,6 +248,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                         double latitude = Double.parseDouble(response.getString("latitude"));
                         double longitude = Double.parseDouble(response.getString("longitude"));
                         collectionPointsLocations.add(new LatLng(latitude, longitude));
+                        Log.e("addCollectionPoint",latitude+","+longitude);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -354,7 +357,14 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                                 @Override
                                 protected void onPostExecute(Boolean success) {
                                     if(success){
-                                        addCustomerAndCollectionPointsMarkers();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Log.e("addtoMap","latitude,longitude");
+                                                addCustomerAndCollectionPointsMarkers();
+                                            }
+
+                                            }, 5000);
                                     }
                                 }
                             }.execute();
