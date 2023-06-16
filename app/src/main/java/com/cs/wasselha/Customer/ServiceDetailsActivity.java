@@ -91,7 +91,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     private void setUpViews() {
 
         transporterNameInServiceDet = findViewById(R.id.transporterNameInServiceDetailsPage);
-        timeInCustomer = findViewById(R.id.timeInServiceDetailsPage);
+        timeInCustomer = findViewById(R.id.timeInInServiceDetailsPage);
         srcCity = findViewById(R.id.sourceCityInServiceDetailsPage);
 
         destCity = findViewById(R.id.destinationCityInServiceDetailsPage);
