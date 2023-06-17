@@ -103,9 +103,9 @@ public class ProfileTransporterFragment extends Fragment {
     {
         mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
-        settingsImg = view.findViewById(R.id.settingImage);
+        settingsImg = view.findViewById(R.id.settingImageInTransporterProfile);
         claimsImg = view.findViewById(R.id.claimsImageCustomer);
-        carsImg = view.findViewById(R.id.carsImag);
+        carsImg = view.findViewById(R.id.vehicleInfoImgInTransporterProfile);
         statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImage);
     }

@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".Customer.ReservationDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".Customer.CustomerClaimsActivity"
             android:exported="false" />

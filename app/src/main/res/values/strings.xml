@@ -102,7 +102,7 @@
     <string name="transporter_signup_top_title">Transporter signup</string>
     <string name="national_id_transporter_signup_hint">Enter your national id</string>
     <string name="national_id_signup_textview">National id</string>
-    <string name="upload_image">Upload imageUrl</string>
+    <string name="upload_image">Upload image</string>
     <string name="vehicle_license_photo">Vehicle license photo</string>
     <string name="personal_license_photo">Personal license photo</string>
     <string name="vehicle_type_transporter_signup_text_view">Vehicle type</string>
@@ -197,4 +197,6 @@
     <string name="handover_to_in_reservations_details">Handover to:</string>
     <string name="enter_the_price_hint_in_reservations_details">Enter the price</string>
     <string name="price_in_reservations_details">Price:</string>
+    <string name="customer_review_in_request_list_view">Customer review:</string>
+    <string name="path_in_request_list_view">Path:</string>
 </resources>

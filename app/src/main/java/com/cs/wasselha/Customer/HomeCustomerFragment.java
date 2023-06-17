@@ -37,8 +37,8 @@ public class HomeCustomerFragment extends Fragment {
 
     static Context context ;
     public HomeCustomerFragment(Context context2 ) {
-         context = context2;
-         //this.servicesModelList = servicesModelList;
+        context = context2;
+        //this.servicesModelList = servicesModelList;
     }
     public HomeCustomerFragment( ) {
 
@@ -114,38 +114,38 @@ public class HomeCustomerFragment extends Fragment {
 
     private static String apiURL="http://176.119.254.198:8000/wasselha";
 
-   /* public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = apiURL + "vehicles/";
+    /* public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
+         RequestQueue queue = Volley.newRequestQueue(context);
+         String url = apiURL + "vehicles/";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // Assume the vehicles are inside a JSONArray called "vehicles" in the response
-                            JSONArray vehicles = response.getJSONArray("vehicles");
-                            for (int i = 0; i < vehicles.length(); i++) {
-                                JSONObject vehicle = vehicles.getJSONObject(i);
-                                if (vehicle.getInt("transporter") == transporterID) {
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                 new Response.Listener<JSONObject>() {
+                     @Override
+                     public void onResponse(JSONObject response) {
+                         try {
+                             // Assume the vehicles are inside a JSONArray called "vehicles" in the response
+                             JSONArray vehicles = response.getJSONArray("vehicles");
+                             for (int i = 0; i < vehicles.length(); i++) {
+                                 JSONObject vehicle = vehicles.getJSONObject(i);
+                                 if (vehicle.getInt("transporter") == transporterID) {
 
-                                    setImage(apiURL+vehicle.getString("vehicle_image"));
-                                    return;
-                                }
-                            }
-                        } catch (Exception e) {
-                            Log.e("profile","Transporter not found");
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("profile","failed loading image(Network Issue )");
-            }
-        });
+                                     setImage(apiURL+vehicle.getString("vehicle_image"));
+                                     return;
+                                 }
+                             }
+                         } catch (Exception e) {
+                             Log.e("profile","Transporter not found");
+                         }
+                     }
+                 }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+                 Log.e("profile","failed loading image(Network Issue )");
+             }
+         });
 
-        queue.add(jsonObjectRequest);
-    }*/
+         queue.add(jsonObjectRequest);
+     }*/
     public static void setImage(String imageUrl, ImageView imageView){
         Glide.with(context)
                 .load(imageUrl)
