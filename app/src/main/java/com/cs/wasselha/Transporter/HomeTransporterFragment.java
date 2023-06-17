@@ -57,7 +57,8 @@ public class HomeTransporterFragment extends Fragment {
     private void populateServicesData(int transporterID)
     {
         servicesData = new ArrayList<>();
-        String url = "http://176.119.254.198:8000/wasselha/services/?transporter="+transporterID;
+
+        String url = "http://176.119.254.198:8000/wasselha/services/?transporter="+transporterID+ "&time=upper";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
