@@ -2,7 +2,10 @@ package com.cs.wasselha.Transporter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,7 @@ public class TransporterClaimsActivity extends AppCompatActivity {
     ListView claimsListView;
     private ArrayList<Claims> claimsTransporterData;
     private static String apiURL="http://176.119.254.198:8000/wasselha";
+    int transporterID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,20 @@ public class TransporterClaimsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
+        transporterID=Integer.parseInt(id.trim());
         //Calls
         setupReference();
         populateClaimsData(transporterID);
-        ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
-        claimsListView.setAdapter(claimsTransporterAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                    Log.e("claimmm","size:"+ claimsTransporterData.size());
+                    ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
+                    claimsListView.setAdapter(claimsTransporterAdapter);
+
+            }
+
+        }, 2000);
 
     }
 
@@ -54,14 +66,14 @@ public class TransporterClaimsActivity extends AppCompatActivity {
         claimsListView = findViewById(R.id.claimsTransporterListView);
     }
 
-//    private void populateClaimsData()
-//    {
-//        claimsTransporterData = new ArrayList<>();
-//
-//        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans1"));
-//        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans2"));
-//        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","transporter3"));
-//    }
+    private void populateClaimsData()
+    {
+        claimsTransporterData = new ArrayList<>();
+
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans1"));
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans2"));
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","transporter3"));
+    }
 private void populateClaimsData(int transporterID) {
     claimsTransporterData = new ArrayList<>();
 
@@ -69,6 +81,7 @@ private void populateClaimsData(int transporterID) {
 
     JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
             response -> {
+                Log.e("claimmm","length"+response.length());
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject claimObject = response.getJSONObject(i);
@@ -96,16 +109,18 @@ private void populateClaimsData(int transporterID) {
                                     try {
                                         String firstName = writerResponse.getString("first_name");
                                         String lastName = writerResponse.getString("last_name");
-
+                                        Log.e("claimmm","add to claims list");
                                         claimsTransporterData.add(new Claims(R.drawable.ic_claim, String.valueOf(review),
                                                 message, displayDate, firstName + " " + lastName));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
+                                        Log.e("claimmm",e.toString());
                                     }
                                 },
                                 error -> {
                                     // Handle error for writer request
                                     error.printStackTrace();
+                                    Log.e("claimmm",error.toString());
                                 }
                         );
 
@@ -114,6 +129,7 @@ private void populateClaimsData(int transporterID) {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Log.e("claimmm",e.toString());
                     }
                 }
             },
@@ -129,3 +145,4 @@ private void populateClaimsData(int transporterID) {
 
 
 }
+
