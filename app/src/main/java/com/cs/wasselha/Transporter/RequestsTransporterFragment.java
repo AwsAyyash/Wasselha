@@ -12,10 +12,10 @@ import com.cs.wasselha.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReservationsTransporterFragment#newInstance} factory method to
+ * Use the {@link RequestsTransporterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReservationsTransporterFragment extends Fragment {
+public class RequestsTransporterFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class ReservationsTransporterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ReservationsTransporterFragment() {
+    public RequestsTransporterFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class ReservationsTransporterFragment extends Fragment {
      * @return A new instance of fragment ReservationsTransporterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ReservationsTransporterFragment newInstance(String param1, String param2) {
-        ReservationsTransporterFragment fragment = new ReservationsTransporterFragment();
+    public static RequestsTransporterFragment newInstance(String param1, String param2) {
+        RequestsTransporterFragment fragment = new RequestsTransporterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

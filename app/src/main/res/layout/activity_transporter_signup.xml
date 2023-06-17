@@ -68,7 +68,7 @@
                     android:inputType="textPersonName"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -92,7 +92,7 @@
                     android:inputType="textPersonName"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -116,7 +116,7 @@
                     android:inputType="number"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -140,7 +140,7 @@
                     android:inputType="phone"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -164,7 +164,7 @@
                     android:inputType="phone"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -207,7 +207,7 @@
                     android:inputType="textEmailAddress"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -231,7 +231,7 @@
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -255,7 +255,7 @@
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColor="@color/dark_green"
-                    android:textColorHint="@color/dark_green"
+                    android:textColorHint="@color/quantum_grey600"
                     android:textSize="16sp" />
 
                 <TextView

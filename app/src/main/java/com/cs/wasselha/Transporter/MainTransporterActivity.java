@@ -31,7 +31,7 @@ public class MainTransporterActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_history_transporter:
-                    replaceFragment(new ReservationsTransporterFragment());
+                    replaceFragment(new RequestsTransporterFragment());
                     break;
 
                 case R.id.nav_add_service_transporter:

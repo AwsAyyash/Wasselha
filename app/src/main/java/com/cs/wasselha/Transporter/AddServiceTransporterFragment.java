@@ -1,8 +1,10 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,6 +32,7 @@ import com.cs.wasselha.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +43,9 @@ public class AddServiceTransporterFragment extends Fragment {
     private static final String PREFERENCES_NAME = "MyPreferences";
     EditText price;
     NumberPicker hoursPicker, minutesPicker, amPmPicker;
+    DatePickerDialog.OnDateSetListener setListener;
     Button create;
+    TextView dateService;
     int sourceLocationID,destanitionLocationID;
 
 
@@ -54,6 +61,10 @@ public class AddServiceTransporterFragment extends Fragment {
 
         //References
         setUpReferences(view);
+        dateServiceSetup();
+
+
+
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +81,35 @@ public class AddServiceTransporterFragment extends Fragment {
 
         return view;
     }
+
+    private void dateServiceSetup()
+    {
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        dateService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,year, month, day
+                );
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month+1;
+                String date = day + "/" + month + "/" + year;
+                price.setText(date);
+            }
+        };
+
+    }
+
 
     private void createLocation(double latitude, double longitude, String title, String description,boolean isSource) {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
@@ -217,8 +257,10 @@ public class AddServiceTransporterFragment extends Fragment {
     //References
     private void setUpReferences(View view)
     {
-        create=view.findViewById(R.id.addServiceBtnInAddNewServicePage);
-        price=view.findViewById(R.id.priceInAddNewService);
+        dateService = view.findViewById(R.id.dateService);
+
+        create = view.findViewById(R.id.addServiceBtnInAddNewServicePage);
+        price = view.findViewById(R.id.priceInAddNewService);
         hoursPicker = view.findViewById(R.id.numPickerHourInAddNewService);
         hoursPicker.setTextColor(Color.WHITE);
         hoursPicker.setMinValue(1);
