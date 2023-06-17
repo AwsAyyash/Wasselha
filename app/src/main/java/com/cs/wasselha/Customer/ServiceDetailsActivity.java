@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cs.wasselha.R;
-import com.cs.wasselha.RegistrationActivity;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.cs.wasselha.model.Service;
@@ -33,6 +32,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     Button reserveBtnServiceDetailsPage;
     ImageView imageViewCar ;
 
+    TextView transporterReviewTXT;
 
 
 
@@ -40,8 +40,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_details);
-       getSupportActionBar().hide();
-        reserveBtnSetup();
+        getSupportActionBar().hide();
 
         setUpViews();
         Intent intent = getIntent();
@@ -51,13 +50,16 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             Log.d("inSDA2",intent.toString());
             String strObj = intent.getStringExtra("serviceDet");
             String transporterName = intent.getStringExtra("transporterName");
+            int transporterReview = Integer.parseInt(intent.getStringExtra("transporterReview"));
+
             Gson gson = new Gson();
             service = gson.fromJson(strObj, Service.class);
             String vehicleType = intent.getStringExtra("vehicleType");
 
             String imageUrl = intent.getStringExtra("imageUrl");
 
-            int transpoterId = Integer.parseInt(intent.getStringExtra("transpoterId"));
+            int transporterId = Integer.parseInt(intent.getStringExtra("transporterId"));
+            transporterReviewTXT.setText(String.valueOf(transporterReview));
             transporterNameInServiceDet.setText(transporterName);
             timeInCustomer.setText(service.getService_date().toString());
             try {
@@ -81,8 +83,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                // todo: here i should route it to the reserveAService activity Page
 
 
+                // todo: then issue a notification and store it in the database
 
             }
         });
@@ -103,18 +107,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         reserveBtnServiceDetailsPage = findViewById(R.id.reserveBtnServiceDetailsPage);
 
         imageViewCar = findViewById(R.id.imageViewVehicleInServiceDetails);
-    }
+        transporterReviewTXT = findViewById(R.id.transporterReviewInInServiceDetailsPage);
 
-    private void reserveBtnSetup()
-    {
-        reserveBtnServiceDetailsPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(ServiceDetailsActivity.this, ReservationDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 

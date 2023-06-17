@@ -1,42 +1,61 @@
 package com.cs.wasselha.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Claim {
 
-    private DeliveryServiceDetails deliveryServiceDetails;
-
-    private int writerId;
-    private int writtenToId;
-    private String writerType;
-    private String writtenToType;
-    private String message;
-
-    public int getWrittenToId() {
-        return writtenToId;
+    public int getId() {
+        return id;
     }
 
-    public Claim(DeliveryServiceDetails deliveryServiceDetails, int writerId, int writtenToId, String writerType, String writtenToType, String message, LocalDateTime date, int review) {
-        this.deliveryServiceDetails = deliveryServiceDetails;
-        this.writerId = writerId;
-        this.writtenToId = writtenToId;
-        this.writerType = writerType;
-        this.writtenToType = writtenToType;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+    private int delivery_service_details;
+
+    private int writer_id;
+    private int written_to_id;
+    private String writer_type;
+    private String written_to_type;
+    private String message;
+
+    private int review;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    private LocalDateTime date;
+
+    public int getWritten_to_id() {
+        return written_to_id;
+    }
+
+    public Claim(int id,int delivery_service_details, int writer_id, int written_to_id, String writer_type, String written_to_type, String message,
+                 int review, LocalDateTime date) {
+        this.id = id;
+        this.delivery_service_details = delivery_service_details;
+        this.writer_id = writer_id;
+        this.written_to_id = written_to_id;
+        this.writer_type = writer_type;
+        this.written_to_type = written_to_type;
         this.message = message;
         this.date = date;
         this.review = review;
     }
 
-    public void setWrittenToId(int writtenToId) {
-        this.writtenToId = writtenToId;
+    public void setWritten_to_id(int written_to_id) {
+        this.written_to_id = written_to_id;
     }
 
-    public String getWrittenToType() {
-        return writtenToType;
+    public String getWritten_to_type() {
+        return written_to_type;
     }
 
-    public void setWrittenToType(String writtenToType) {
-        this.writtenToType = writtenToType;
+    public void setWritten_to_type(String written_to_type) {
+        this.written_to_type = written_to_type;
     }
 
     public int getReview() {
@@ -47,42 +66,36 @@ public class Claim {
         this.review = review;
     }
 
-    private LocalDateTime date;
-    private int review;
+   // private LocalDateTime date;
+
 
     public Claim() {
     }
 
-    public Claim(DeliveryServiceDetails deliveryServiceDetails, int writerId, String writerType, String message, LocalDateTime date) {
-        this.deliveryServiceDetails = deliveryServiceDetails;
-        this.writerId = writerId;
-        this.writerType = writerType;
-        this.message = message;
-        this.date = date;
+
+
+    public int getDelivery_service_details() {
+        return delivery_service_details;
     }
 
-    public DeliveryServiceDetails getDeliveryServiceDetails() {
-        return deliveryServiceDetails;
+    public void setDelivery_service_details(int delivery_service_details) {
+        this.delivery_service_details = delivery_service_details;
     }
 
-    public void setDeliveryServiceDetails(DeliveryServiceDetails deliveryServiceDetails) {
-        this.deliveryServiceDetails = deliveryServiceDetails;
+    public int getWriter_id() {
+        return writer_id;
     }
 
-    public int getWriterId() {
-        return writerId;
+    public void setWriter_id(int writer_id) {
+        this.writer_id = writer_id;
     }
 
-    public void setWriterId(int writerId) {
-        this.writerId = writerId;
+    public String getWriter_type() {
+        return writer_type;
     }
 
-    public String getWriterType() {
-        return writerType;
-    }
-
-    public void setWriterType(String writerType) {
-        this.writerType = writerType;
+    public void setWriter_type(String writer_type) {
+        this.writer_type = writer_type;
     }
 
     public String getMessage() {
@@ -97,7 +110,18 @@ public class Claim {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return "Claim{" +
+
+
+                ", From=" + writer_id +
+
+                ", who is a='" + writer_type + '\'' +
+
+                ", message='" + message + '\'' +
+                ", review=" + review +
+                ", date=" + date +
+                '}';
     }
 }

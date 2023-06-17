@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainNameInProfilePage"
+        android:id="@+id/mainNameCustomerInProfilePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,6 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mainPhotoInProfilePage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
@@ -39,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainNameInProfilePage">
+        app:layout_constraintTop_toBottomOf="@+id/mainNameCustomerInProfilePage">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -88,8 +89,8 @@
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="@string/settings_in_profile_page"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -107,7 +108,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/claimsImage"
+                            android:id="@+id/claimsImageCustomer"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -121,9 +122,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_warning"
-                            app:layout_constraintBottom_toBottomOf="@+id/claimsImage"
-                            app:layout_constraintEnd_toEndOf="@+id/claimsImage"
-                            app:layout_constraintStart_toStartOf="@+id/claimsImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/claimsImageCustomer"
+                            app:layout_constraintEnd_toEndOf="@+id/claimsImageCustomer"
+                            app:layout_constraintStart_toStartOf="@+id/claimsImageCustomer"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 
@@ -132,8 +133,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="@string/claims_in_profile_page"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -177,8 +178,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="@string/history_in_profile_page"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -202,7 +203,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/logoutImage"
+                            android:id="@+id/logoutImageCustomer"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -216,10 +217,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"
-                            app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
-                            app:layout_constraintEnd_toEndOf="@+id/logoutImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/logoutImageCustomer"
+                            app:layout_constraintEnd_toEndOf="@+id/logoutImageCustomer"
                             app:layout_constraintHorizontal_bias="0.65"
-                            app:layout_constraintStart_toStartOf="@+id/logoutImage"
+                            app:layout_constraintStart_toStartOf="@+id/logoutImageCustomer"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -228,8 +229,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="@string/logout_in_profile_page"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />

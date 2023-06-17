@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class Notification {
 
 
-    private int userId;
-    private String userType;
+    private int user_id;
+    private String user_type;
     private String title;
 
     private String description;
@@ -15,28 +15,28 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(int userId, String userType, String title, String description, LocalDateTime date) {
-        this.userId = userId;
-        this.userType = userType;
+    public Notification(int user_id, String user_type, String title, String description, LocalDateTime date) {
+        this.user_id = user_id;
+        this.user_type = user_type;
         this.title = title;
         this.description = description;
         this.date = date;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getUser_type() {
+        return user_type;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 
     public String getTitle() {

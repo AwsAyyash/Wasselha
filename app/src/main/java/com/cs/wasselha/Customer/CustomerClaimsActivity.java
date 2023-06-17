@@ -1,17 +1,12 @@
 package com.cs.wasselha.Customer;
 
-import static android.content.Context.MODE_PRIVATE;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -20,8 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.cs.wasselha.Adapters.NotificationsCustomerAdapter;
+import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
+import com.cs.wasselha.Claims.Claims;
 import com.cs.wasselha.R;
+import com.cs.wasselha.model.Claim;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,61 +31,47 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class NotificationsCustomerFragment extends Fragment {
+public class CustomerClaimsActivity extends AppCompatActivity {
 
+    ListView claimsListView;
 
-    ListView notificationsListView;
-    private ArrayList<Notifications> notificationsCustomerData;
-
-    private static final String ID_KEY = "id";
-    private static final String LOGIN_TYPE_KEY = "loginType";
-    private static final String PREFERENCES_NAME = "MyPreferences";
-
-
-    private int customerId;
-    private String userType;
-
+    private ArrayList<Claims> claimsCustomerData;
+    private ArrayList<Claim> claimsDACustomerData;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notifications_customer, container, false);
-        notificationsListView = view.findViewById(R.id.listViewCustomerNotifications);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_customer_claims);
+        getSupportActionBar().hide();
 
-        getFromSharedPref();
-        populateNotificationsData();
+        Intent intent = getIntent();
 
-        NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsCustomerData);
-        notificationsListView.setAdapter(notificationsCustomerAdapter);
-
-        return view;
-    }
-
-    void getFromSharedPref(){
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-        userType = preferences.getString(LOGIN_TYPE_KEY, null);
-        customerId =Integer.parseInt( preferences.getString(ID_KEY,""));
-
+        int customerId = Integer.parseInt(intent.getStringExtra("customerId"));
+        //Calls
+        setupReference();
+        populateClaimsData(this,customerId);
+      //  ArrayAdapter<Claim> claimsAdapterItems = new ArrayAdapter<Claim>(this,
+        //        android.R.layout.simple_list_item_1, claimsCustomerData);
+        ClaimsTransporterAdapter claimsCAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view,
+                claimsCustomerData,claimsDACustomerData);
+        claimsListView.setAdapter(claimsCAdapter);
 
     }
 
-    private void populateNotificationsData()
+
+    //--------------Methods---------------------------------------------------------
+    //References
+    private void setupReference()
     {
-
-
-        notificationsCustomerData = new ArrayList<>();
-        getNotifications(getContext());
-
-        //notificationsCustomerData.add(new Notifications(R.drawable.notification, "Notification", "Reservation has been accepted", "11:30 PM"));
-        //notificationsCustomerData.add(new Notifications(R.drawable.notification, "Notification", "Reservation has not been accepted", "10:30 PM"));
-        //notificationsCustomerData.add(new Notifications(R.drawable.notification, "Notification", "Reservation has been accepted", "9:00 PM"));
+        claimsListView = findViewById(R.id.claimsCustomerListView);
     }
 
     private static String apiURL="http://176.119.254.198:8000/wasselha";
 
-    public void getNotifications(Context context) {
+    private void populateClaimsData(Context context,int customerId)
+    {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = apiURL + "/notifications/?user_type=customer&user_id="+ customerId ;
+        String url = apiURL + "/claims/?written_to_type=customer&written_to_id="+ customerId ;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -99,8 +82,8 @@ public class NotificationsCustomerFragment extends Fragment {
                             // Convert JSONArray to a list of JSONObjects
                             List<JSONObject> responseList = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject notification = response.getJSONObject(i);
-                                responseList.add(notification);
+                                JSONObject claim = response.getJSONObject(i);
+                                responseList.add(claim);
                             }
 
                             // Sort the list of JSONObjects by date
@@ -119,18 +102,27 @@ public class NotificationsCustomerFragment extends Fragment {
                             });
                             for (int i = 0; i < responseList.size(); i++) {
                                 int id=responseList.get(i).getInt("id");
-                                int user_id=responseList.get(i).getInt("user_id");
-                                String user_type=responseList.get(i).getString("user_type");
-                                String title=responseList.get(i).getString("title");
-                                String description=responseList.get(i).getString("description");
-                                String Datetime=responseList.get(i).getString("date");
+                                int delivery_service_details=responseList.get(i).getInt("delivery_service_details");
+                                String writer_id=responseList.get(i).getString("writer_id");
+                                String writer_type=responseList.get(i).getString("writer_type");
+                                String written_to_id=responseList.get(i).getString("written_to_id");
+                                String written_to_type=responseList.get(i).getString("written_to_type");
+                                String review=responseList.get(i).getString("review");
+                                String message=responseList.get(i).getString("message");
+                                String date1=responseList.get(i).getString("date");
+
                                 DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-                                LocalDateTime notificationDateTime = LocalDateTime.parse(Datetime, formatter);
+                                LocalDateTime claimsDateTime = LocalDateTime.parse(date1, formatter);
                                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-                                String date = notificationDateTime.format(dateFormatter);
-                                String time = notificationDateTime.format(timeFormatter);
-                                notificationsCustomerData.add(new Notifications(id,user_id,title,description,time,date,user_type));
+                                String date = claimsDateTime.format(dateFormatter);
+                                String time = claimsDateTime.format(timeFormatter);
+                                claimsDACustomerData.add(new Claim(id,delivery_service_details,
+                                        Integer.parseInt(writer_id),Integer.parseInt(written_to_id),writer_type,written_to_type,
+                                        message,Integer.parseInt(review),claimsDateTime));
+
+
+                                claimsCustomerData.add(new Claims(id,review,message,date+time,writer_type));
 
                             }
 
@@ -149,8 +141,6 @@ public class NotificationsCustomerFragment extends Fragment {
         });
 
         queue.add(jsonArrayRequest);
+
     }
-
-
-
 }

@@ -25,7 +25,7 @@ public class TransporterClaimsActivity extends AppCompatActivity {
         //Calls
         setupReference();
         populateClaimsData();
-        ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData);
+        ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
         claimsListView.setAdapter(claimsTransporterAdapter);
 
     }
@@ -42,8 +42,8 @@ public class TransporterClaimsActivity extends AppCompatActivity {
     {
         claimsTransporterData = new ArrayList<>();
 
-        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!"));
-        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!"));
-        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!"));
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans1"));
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans2"));
+        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","transporter3"));
     }
 }

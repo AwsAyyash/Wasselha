@@ -26,12 +26,22 @@ public class ServicesModel {
 
     int transporterId;
 
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
+    }
+
+    int review;
+
     public void setTransporterId(int transporterId) {
         this.transporterId = transporterId;
     }
 
     public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
-                         String imageUrl,String vehicleType)
+                         String imageUrl,String vehicleType,int review)
     {
         this.transporterId = transporterId;
         this.transporterName = transporterName;
@@ -40,6 +50,7 @@ public class ServicesModel {
         this.destinationCity = destinationCity;
        this.imageUrl = imageUrl;
        this.vehicleType = vehicleType;
+       this.review = review;
     }
 
 
