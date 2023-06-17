@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.cs.wasselha.R;
-import com.cs.wasselha.Transporter.TransporterSettingActivity;
 
 public class ProfileCustomerFragment extends Fragment
 {
@@ -35,7 +34,7 @@ public class ProfileCustomerFragment extends Fragment
     //References
     private void setupReferences(View view)
     {
-        settingImg = view.findViewById(R.id.settingImageInCustomerProfile);
+        settingImg = view.findViewById(R.id.settingImageInTransporterProfile);
     }
 
 

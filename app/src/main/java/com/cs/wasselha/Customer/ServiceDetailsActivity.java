@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cs.wasselha.R;
+import com.cs.wasselha.RegistrationActivity;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.cs.wasselha.model.Service;
@@ -39,7 +40,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_details);
-       // getSupportActionBar().hide();
+       getSupportActionBar().hide();
+        reserveBtnSetup();
 
         setUpViews();
         Intent intent = getIntent();
@@ -101,6 +103,18 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         reserveBtnServiceDetailsPage = findViewById(R.id.reserveBtnServiceDetailsPage);
 
         imageViewCar = findViewById(R.id.imageViewVehicleInServiceDetails);
+    }
+
+    private void reserveBtnSetup()
+    {
+        reserveBtnServiceDetailsPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ServiceDetailsActivity.this, ReservationDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

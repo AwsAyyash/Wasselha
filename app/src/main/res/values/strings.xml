@@ -187,4 +187,14 @@
     <string name="review_in_claim_list_view">Review:</string>
     <string name="claims_in_transporter_claims_page">Claims</string>
     <string name="requests_in_bottom_bar_transporter">Requests</string>
+    <string name="package_type_in_reservation_details">Package type:</string>
+    <string name="enter_package_type_hint">Enter package type</string>
+    <string name="enter_package_weight_hint">Enter package weight</string>
+    <string name="package_weight_in_reservations_details">Package weight:</string>
+    <string name="collect_from_in_reservations_details">Collect from:</string>
+    <string name="location_radio_button">Location</string>
+    <string name="collection_point_radio_button">Collection point</string>
+    <string name="handover_to_in_reservations_details">Handover to:</string>
+    <string name="enter_the_price_hint_in_reservations_details">Enter the price</string>
+    <string name="price_in_reservations_details">Price:</string>
 </resources>

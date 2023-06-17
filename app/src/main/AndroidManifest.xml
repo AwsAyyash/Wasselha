@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".Customer.ReservationDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".Customer.CustomerSettingActivity"
             android:exported="false" />
@@ -81,7 +83,7 @@
             android:name=".Customer.FilterActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name="RegistrationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
