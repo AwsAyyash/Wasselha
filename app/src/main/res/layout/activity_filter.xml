@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/search_filter_main_title"
+            android:fontFamily="@font/changabold"
             android:textColor="@color/dark_green"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -34,7 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="32dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
         android:layout_margin="20dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/filter_style"
@@ -48,53 +50,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:textStyle="bold"
             android:textColor="@color/light_selver"
             android:text="@string/source_in_filter" />
 
-        <EditText
-            android:id="@+id/sourceCityInFilterSearch"
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="300dp"
             android:layout_marginTop="5dp"
-            android:hint="@string/enter_the_source_city_hint"
-            android:padding="8dp"
-            android:ems="10"
-            android:textSize="16sp"
-            android:textColor="@color/light_selver"
-            android:background="@drawable/edit_text_filter_style"
-            android:textColorHint="@color/light_selver"
-            android:inputType="textPersonName" />
+            android:id="@+id/sourceCityInFilterActivityMap"
+            tools:context=".Customer.FilterActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
 
         <TextView
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:textColor="@color/light_selver"
             android:text="@string/destination_in_filter_main_title" />
 
-        <EditText
-            android:id="@+id/destinationCityInFilterSearch"
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="300dp"
             android:layout_marginTop="5dp"
-            android:textColor="@color/light_selver"
-            android:hint="@string/enter_the_destination_city_hint"
-            android:padding="8dp"
-            android:ems="10"
-            android:textSize="16sp"
-            android:background="@drawable/edit_text_filter_style"
-            android:textColorHint="@color/light_selver"
-            android:inputType="textPersonName"
-            />
+            android:id="@+id/destinationCityInFilterActivityMap"
+            tools:context=".Customer.FilterActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
 
         <TextView
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:textStyle="bold"
             android:textColor="@color/light_selver"
             android:text="@string/price_in_filter_title" />
@@ -106,6 +107,8 @@
             android:layout_marginTop="5dp"
             android:hint="@string/enter_the_price_in_filter_hint"
             android:padding="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:ems="10"
             android:textColor="@color/light_selver"
             android:textSize="16sp"
@@ -120,12 +123,16 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:textColor="@color/light_selver"
             android:text="@string/time_in_filter_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -152,6 +159,8 @@
             android:id="@+id/searchBtnInFilterSearch"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/signup_background"

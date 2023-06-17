@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/light_selver"
     tools:context=".Transporter.AddServiceTransporterFragment">
 
 
@@ -45,7 +45,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="32dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="32dp"
                 android:layout_margin="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/filter_style"
@@ -60,53 +61,50 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/light_selver"
                     android:text="@string/source_in_filter" />
 
-                <EditText
-                    android:id="@+id/sourceCityInAddNewService"
+                <fragment
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="300dp"
                     android:layout_marginTop="5dp"
-                    android:hint="@string/enter_the_source_city_hint"
-                    android:padding="8dp"
-                    android:ems="10"
-                    android:textSize="16sp"
-                    android:textColor="@color/light_selver"
-                    android:background="@drawable/edit_text_filter_style"
-                    android:textColorHint="@color/light_selver"
-                    android:inputType="textPersonName" />
+                    android:id="@+id/sourceCityInAddServiceMap"
+                    tools:context=".Transporter.AddServiceTransporterFragment"
+                    android:name="com.google.android.gms.maps.SupportMapFragment" />
 
                 <TextView
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/light_selver"
                     android:text="@string/destination_in_filter_main_title" />
 
-                <EditText
-                    android:id="@+id/destinationCityInAddNewService"
+                <fragment
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="300dp"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/light_selver"
-                    android:hint="@string/enter_the_destination_city_hint"
-                    android:padding="8dp"
-                    android:ems="10"
-                    android:textSize="16sp"
-                    android:background="@drawable/edit_text_filter_style"
-                    android:textColorHint="@color/light_selver"
-                    android:inputType="textPersonName"
-                    />
+                    android:id="@+id/destinationCityInAddServiceMap"
+                    tools:context=".Transporter.AddServiceTransporterFragment"
+                    android:name="com.google.android.gms.maps.SupportMapFragment" />
 
                 <TextView
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/light_selver"
                     android:text="@string/price_in_filter_title" />
 
@@ -117,6 +115,8 @@
                     android:layout_marginTop="5dp"
                     android:hint="@string/enter_the_price_in_filter_hint"
                     android:padding="8dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:ems="10"
                     android:textColor="@color/light_selver"
                     android:textSize="16sp"
@@ -132,12 +132,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/light_selver"
                     android:text="Date" />
 
                 <TextView
                     android:id="@+id/dateNewServiceTransporter"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:textSize="16sp"
@@ -145,6 +147,8 @@
                     android:paddingBottom="5dp"
                     android:background="@drawable/date_style"
                     android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textAlignment="center"
                     android:textColor="@color/light_selver"
                     android:textColorHint="@color/quantum_grey400"
@@ -155,6 +159,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/light_selver"
                     android:text="@string/time_in_filter_title" />
@@ -162,6 +168,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -188,6 +196,8 @@
                     android:id="@+id/addServiceBtnInAddNewServicePage"
                     style="@android:style/Widget.Button"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/signup_background"
