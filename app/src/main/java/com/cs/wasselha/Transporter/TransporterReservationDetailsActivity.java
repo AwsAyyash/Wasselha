@@ -1,8 +1,10 @@
-package com.cs.wasselha;
+package com.cs.wasselha.Transporter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cs.wasselha.R;
 
 public class TransporterReservationDetailsActivity extends AppCompatActivity {
 
