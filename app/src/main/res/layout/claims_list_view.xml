@@ -10,7 +10,7 @@
         android:id="@+id/imageInClaimsListView"
         android:layout_width="83dp"
         android:layout_height="90dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/ic_claim" />
 
     <LinearLayout

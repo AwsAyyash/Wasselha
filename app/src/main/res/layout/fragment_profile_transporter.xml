@@ -206,7 +206,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/reservationsImgInCustomerProfile"
+                            android:id="@+id/reservationsImgInCTransporterProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -220,10 +220,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_reservations"
-                            app:layout_constraintBottom_toBottomOf="@+id/reservationsImgInCustomerProfile"
-                            app:layout_constraintEnd_toEndOf="@+id/reservationsImgInCustomerProfile"
+                            app:layout_constraintBottom_toBottomOf="@+id/reservationsImgInCTransporterProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/reservationsImgInCTransporterProfile"
                             app:layout_constraintHorizontal_bias="0.43"
-                            app:layout_constraintStart_toStartOf="@+id/reservationsImgInCustomerProfile"
+                            app:layout_constraintStart_toStartOf="@+id/reservationsImgInCTransporterProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
