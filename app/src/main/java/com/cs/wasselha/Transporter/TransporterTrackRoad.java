@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,11 +46,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -163,6 +169,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
 
         requestQueue.add(servicesRequest);
     }
+
 
     private void getDeliveryServiceDetails(int serviceId) {
         String deliveryServiceDetailsUrl = BASE_URL + "/delivery-service-details/?service=" + serviceId;
@@ -336,7 +343,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
             // Check location permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
-                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Show satellite layer
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL); // Show normal layer
                 if (isNetworkConnected()) {
                     startLocationUpdates();
                     new Handler().postDelayed(new Runnable() {
@@ -362,6 +369,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                                             public void run() {
                                                 Log.e("addtoMap","latitude,longitude");
                                                 addCustomerAndCollectionPointsMarkers();
+                                                fetchDestinationCoordinates(transporterID);
                                             }
 
                                             }, 5000);
@@ -420,7 +428,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
             }, null);
         }
     }
-
+    private boolean initialZoomSet = false;
     private void updateTransporterLocation(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -446,8 +454,157 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
         } else {
             transporterMarker.setPosition(latLng);
         }
+        if (!initialZoomSet) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
+            initialZoomSet = true;
+        } else {
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
+    }
+
+    private void fetchDestinationCoordinates(int transporterId) {
+        new AsyncTask<Void, Void, LatLng>() {
+            @Override
+            protected LatLng doInBackground(Void... voids) {
+                try {
+                    String serviceUrl = BASE_URL + "/services/?transporter=" + transporterId + "&time=upper";
+                    URL url = new URL(serviceUrl);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    String response = reader.readLine();
+                    JSONArray jsonArray = new JSONArray(response);
+                    int destinationPlace = jsonArray.getJSONObject(0).getInt("destination_place");
+
+                    String locationUrl = BASE_URL + "/locations/" + destinationPlace + "/";
+                    url = new URL(locationUrl);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    inputStream = connection.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(inputStream));
+                    response = reader.readLine();
+                    JSONObject jsonObject = new JSONObject(response);
+                    double latitude = jsonObject.getDouble("latitude");
+                    double longitude = jsonObject.getDouble("longitude");
+
+                    return new LatLng(latitude, longitude);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    Log.e("addtoMap","error in get destination");
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(LatLng latLng) {
+                if (latLng != null) {
+                    Log.e("addtoMap","latitude,longitude"+transporterMarker.getPosition().toString()+","+latLng.toString());
+                    drawRouteToDestination(transporterMarker.getPosition(),latLng);
+                }
+            }
+        }.execute();
+    }
+    private void drawRouteToDestination(LatLng transporterPosition, LatLng destination) {
+        String apiKey = getString(R.string.MAPS_API_KEY);
+        String url = "https://maps.googleapis.com/maps/api/directions/json?origin="
+                + transporterPosition.latitude + "," + transporterPosition.longitude
+                + "&destination=" + destination.latitude + "," + destination.longitude
+                + "&key=" + apiKey;
+
+        new AsyncTask<String, Void, List<LatLng>>() {
+            @Override
+            protected List<LatLng> doInBackground(String... params) {
+                try {
+                    URL directionsUrl = new URL(params[0]);
+                    HttpURLConnection connection = (HttpURLConnection) directionsUrl.openConnection();
+                    connection.setRequestMethod("GET");
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    // Read the complete response
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                    String response = responseBuilder.toString();
+
+                    // Log the response
+                    Log.d("API_RESPONSE", response);
+
+                    // Now parse the JSON
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray routesArray = jsonObject.getJSONArray("routes");
+                    if (routesArray.length() > 0) {
+                        JSONObject route = routesArray.getJSONObject(0);
+                        JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
+                        String encodedPolyline = overviewPolyline.getString("points");
+                        return decodePoly(encodedPolyline);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("addtoMap", e.toString());
+                    Log.e("addtoMap", "ERROR in draw path");
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<LatLng> result) {
+                if (result != null) {
+                    PolylineOptions polylineOptions = new PolylineOptions();
+                    polylineOptions.addAll(result);
+                    polylineOptions.width(15);
+                    polylineOptions.color(Color.parseColor("#94e5ff"));
+                    mMap.addPolyline(polylineOptions);
+                }
+            }
+        }.execute(url);
+    }
+
+    private List<LatLng> decodePoly(String encoded) {
+        List<LatLng> poly = new ArrayList<>();
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+
+            LatLng latLng = new LatLng(((double) lat / 1E5),
+                    ((double) lng / 1E5));
+            poly.add(latLng);
+        }
+        return poly;
+    }
+
+
+    private void addDestinationMarker(LatLng latLng) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Destination");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        mMap.addMarker(markerOptions);
     }
 
     private boolean isNetworkConnected() {
