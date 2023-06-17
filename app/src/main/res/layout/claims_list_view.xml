@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageInClaimsListView"
+        android:layout_width="83dp"
+        android:layout_height="90dp"
         android:layout_marginTop="15dp"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_claim"/>
+        android:src="@drawable/ic_claim" />
 
     <LinearLayout
         android:id="@+id/titleNotificationTransporterLayout"
@@ -45,6 +45,17 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fromLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/pathLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,28 +64,39 @@
         android:layout_toEndOf="@+id/imageInClaimsListView"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/messageInClaimListView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Not available message!"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/dateInClaimListView"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_below="@+id/pathLinearLayout"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="56dp"
         android:layout_toEndOf="@+id/imageInClaimsListView"
-        android:layout_marginTop="4dp"
-        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         android:text="Not available Date!" />
 
+    <TextView
+        android:id="@+id/messageInClaimListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Not available message!"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fromInClaimListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="8dp"
+        android:text="Not available message!"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
 
 </RelativeLayout>

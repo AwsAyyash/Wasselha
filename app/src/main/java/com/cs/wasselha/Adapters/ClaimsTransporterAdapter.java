@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.cs.wasselha.Claims.Claims;
 import com.cs.wasselha.R;
+import com.cs.wasselha.model.Claim;
 
 import java.util.ArrayList;
 
@@ -20,12 +21,15 @@ public class ClaimsTransporterAdapter extends ArrayAdapter<Claims> {
 
 private Context context;
 private int cResource;
+        ArrayList<Claim> claimsDACustomerData ;
 
-public ClaimsTransporterAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Claims> objects)
+public ClaimsTransporterAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Claims> objects,
+                                ArrayList<Claim> claimsDACustomerData)
         {
         super(context, resource, objects);
         this.context = context;
         this.cResource = resource;
+        this.claimsDACustomerData = claimsDACustomerData;
         }
 
 @NonNull
@@ -40,11 +44,13 @@ public View getView(int position, @Nullable View convertView, @NonNull ViewGroup
         TextView massage = convertView.findViewById(R.id.messageInClaimListView);
         TextView date = convertView.findViewById(R.id.dateInClaimListView);
 
+        TextView from = convertView.findViewById(R.id.fromInClaimListView);
+
         claimImg.setImageResource(R.drawable.ic_claim);
         review.setText(getItem(position).getReview());
         massage.setText(getItem(position).getMessage());
         date.setText(getItem(position).getDate());
-
+        from.setText(getItem(position).getSentFrom());
         return convertView;
         }
 }

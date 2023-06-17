@@ -6,12 +6,23 @@ public class Claims {
     String review, message, date;
     int claimImg;
 
-    public Claims(int claimImg,String review, String message, String date)
+    public String getSentFrom() {
+        return sentFrom;
+    }
+
+    public void setSentFrom(String sentFrom) {
+        this.sentFrom = sentFrom;
+    }
+
+    String sentFrom;
+
+    public Claims(int claimImg,String review, String message, String date,String sentFrom)
     {
         this.claimImg = claimImg;
         this.review = review;
         this.message = message;
         this.date = date;
+        this.sentFrom = sentFrom;
     }
 
     public String getReview() {

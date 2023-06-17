@@ -109,7 +109,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/claimsImage"
+                            android:id="@+id/claimsImageCustomer"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -120,12 +120,13 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_warning"
-                            app:layout_constraintBottom_toBottomOf="@+id/claimsImage"
-                            app:layout_constraintEnd_toEndOf="@+id/claimsImage"
-                            app:layout_constraintStart_toStartOf="@+id/claimsImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/claimsImageCustomer"
+                            app:layout_constraintEnd_toEndOf="@+id/claimsImageCustomer"
+                            app:layout_constraintStart_toStartOf="@+id/claimsImageCustomer"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 
