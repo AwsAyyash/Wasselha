@@ -1,5 +1,7 @@
 package com.cs.wasselha.Transporter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -21,6 +23,9 @@ import java.util.ArrayList;
 
 public class TransporterClaimsActivity extends AppCompatActivity {
 
+    private static final String ID_KEY = "id";
+    private static final String LOGIN_TYPE_KEY = "loginType";
+    private static final String PREFERENCES_NAME = "MyPreferences";
     ListView claimsListView;
     private ArrayList<Claims> claimsTransporterData;
     private static String apiURL="http://176.119.254.198:8000/wasselha";
@@ -30,10 +35,12 @@ public class TransporterClaimsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_claims_transporter);
         getSupportActionBar().hide();
-
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        String id = preferences.getString(ID_KEY, null);
+        int transporterID=Integer.parseInt(id.trim());
         //Calls
         setupReference();
-        populateClaimsData();
+        populateClaimsData(transporterID);
         ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
         claimsListView.setAdapter(claimsTransporterAdapter);
 
@@ -55,9 +62,8 @@ public class TransporterClaimsActivity extends AppCompatActivity {
 //        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","trans2"));
 //        claimsTransporterData.add(new Claims(R.drawable.ic_claim, "Not available review", "Not available message!", "Not available Date!","transporter3"));
 //    }
-private void populateClaimsData() {
+private void populateClaimsData(int transporterID) {
     claimsTransporterData = new ArrayList<>();
-    String transporterID = "your-transporter-id";
 
     String url =  apiURL+ "/claims/?written_to_type=transporter&written_to_id=" + transporterID;
 
