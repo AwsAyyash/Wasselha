@@ -22,6 +22,7 @@ import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.interfaces.implementation.TransporterDA;
 import com.cs.wasselha.interfaces.implementation.VehiclesDA;
 import com.cs.wasselha.model.Service;
+import com.cs.wasselha.model.Transporter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -85,13 +86,21 @@ public class HomeCustomerFragment extends Fragment {
 
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
-            servicesModelList.add(new ServicesModel(new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter()).getFirst_name(),
+            Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
+            servicesModelList.add(new ServicesModel(
+                    transporter.getFirst_name(),
                     servicesModelDAList.get(i).getTransporter(),
                     servicesModelDAList.get(i).getService_date().toString(),
+
                     new LocationDA().getLocation(servicesModelDAList.get(i).getSource_place()).getTitle(),
+
                     new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle(),
+
                     new VehiclesDA().getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
-                    new VehiclesDA().getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())));
+
+                    new VehiclesDA().getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())
+                    ,
+                    transporter.getReview()));
         }
 
     }

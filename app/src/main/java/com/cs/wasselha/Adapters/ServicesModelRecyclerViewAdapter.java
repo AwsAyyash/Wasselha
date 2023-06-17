@@ -54,6 +54,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.time.setText(servicesModelList.get(position).getTime());
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
+        holder.review.setText(servicesModelList.get(position).getReview());
 
         setImage(apiURL +servicesModelList.get(position).getImageUrl(), context.getApplicationContext(), holder.cardImageView );
        /* try {
@@ -70,7 +71,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
         Service service =  servicesDA.get(position);
-        int transpoterId =  servicesDA.get(position).getTransporter();
+        int transporterId =  servicesDA.get(position).getTransporter();
         String transName = servicesModelList.get(position).getTransporterName();
         String vehicleType = servicesModelList.get(position).getVehicleType();
         String imageUrl = apiURL +servicesModelList.get(position).getImageUrl();
@@ -86,7 +87,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
                 intent.putExtra("transporterName",transName);
                 intent.putExtra("vehicleType",vehicleType);
                 intent.putExtra("imageUrl",imageUrl);
-                intent.putExtra("transpoterId",transpoterId);
+                intent.putExtra("transporterId",transporterId);
 
                 // Start the activity
                 view.getContext().startActivity(intent);
@@ -103,7 +104,8 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView cardImageView;
-        TextView transporterName, time, sourceCity, destinationCity;
+        TextView transporterName, time, sourceCity, destinationCity, review;
+
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -114,6 +116,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
             time = itemView.findViewById(R.id.timeInCustomerRecyclerView);
             sourceCity = itemView.findViewById(R.id.sourceCity);
             destinationCity = itemView.findViewById(R.id.destinationCity);
+            review = itemView.findViewById(R.id.transporterReviewInCustomerRecyclerView);
 
         }
     }
