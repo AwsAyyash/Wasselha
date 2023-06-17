@@ -170,7 +170,7 @@
             android:textColor="@color/quantum_grey700"
             android:layout_marginTop="8dp"
             style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-            android:text="10:00 AM" />
+            android:text="Not available time!" />
 
         <TextView
             android:id="@+id/rejectRequestBtnInRequestsListView"
