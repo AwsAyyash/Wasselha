@@ -54,7 +54,7 @@ public class RequestsTransporterFragment extends Fragment {
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String BASE_URL="http://176.119.254.198:8000/wasselha";
     ListView listView;
-    private ArrayList<Requests> requestsData;
+    public static ArrayList<Requests> requestsData;
     private RequestQueue requestQueue;
     private Gson gson = new Gson();
 
@@ -104,9 +104,9 @@ public class RequestsTransporterFragment extends Fragment {
     {
         requestsData = new ArrayList<>();
 
-        requestsData.add(new Requests("Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
-        requestsData.add(new Requests("Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
-        requestsData.add(new Requests("Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
+        requestsData.add(new Requests(1,"Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
+        requestsData.add(new Requests(1,"Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
+        requestsData.add(new Requests(1,"Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
 
     }
     private void populateServicesData(int transporterID, Context context) {
@@ -134,6 +134,7 @@ public class RequestsTransporterFragment extends Fragment {
                                     JSONObject deliveryDetail = deliveryResponse.getJSONObject(0);
                                     boolean responsed = deliveryDetail.getBoolean("responsed");
                                     String price = deliveryDetail.getString("price");
+                                    int deliveryDetailsId=deliveryDetail.getInt("id");
 
                                     final String[] customerName = {"Not available!"};
                                     final String[] customerReview = {"Not available!"};
@@ -177,7 +178,7 @@ public class RequestsTransporterFragment extends Fragment {
                                                     // You can use them here to add to your requestsData list
                                                     String dateTime = formatDate(serviceDate);
                                                     Log.e("claimmm","add");
-                                                    requestsData.add(new Requests(customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime));
+                                                    requestsData.add(new Requests(deliveryDetailsId,customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime));
                                                 }
                                             });
                                         }

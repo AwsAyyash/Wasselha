@@ -1,17 +1,26 @@
 package com.cs.wasselha.Transporter;
 
 public class Requests {
-
+    int id;
     String customerName, customerReview, sourceCity, destinationCity, price, time;
 
-    public Requests(String customerName, String customerReview, String sourceCity, String destinationCity, String price, String time)
+    public Requests(int id,String customerName, String customerReview, String sourceCity, String destinationCity, String price, String time)
     {
+        this.id=id;
         this.customerName = customerName;
         this.customerReview = customerReview;
         this.sourceCity = sourceCity;
         this.destinationCity = destinationCity;
         this.price = price;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCustomerName() {
