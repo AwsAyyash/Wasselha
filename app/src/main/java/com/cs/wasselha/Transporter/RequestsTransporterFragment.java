@@ -86,9 +86,14 @@ public class RequestsTransporterFragment extends Fragment {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("claimmm","size:"+ requestsData.size());
-                            RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
-                            listView.setAdapter(requestsAdapter);
+                            try {
+
+                                Log.e("claimmm","size:"+ requestsData.size());
+                                RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
+                                listView.setAdapter(requestsAdapter);
+                            }catch (Exception e){
+                                Log.e("RequestsTransporterFragment",e.toString());
+                            }
                         }
 
                     }, 2000);
@@ -138,7 +143,7 @@ public class RequestsTransporterFragment extends Fragment {
 
                                     final String[] customerName = {"Not available!"};
                                     final String[] customerReview = {"Not available!"};
-
+                                    Log.e("claimmm","responsed"+responsed);
                                     if (!responsed) {
                                         int customerId = deliveryDetail.getInt("customer");
                                         String customerUrl = BASE_URL + "/customers/" + customerId + "/";
@@ -147,21 +152,23 @@ public class RequestsTransporterFragment extends Fragment {
                                             @Override
                                             public void onResponse(JSONObject customerResponse) {
                                                 try {
+                                                    Log.e("claimmm","get name and review");
                                                     customerName[0] = customerResponse.getString("first_name") + " " + customerResponse.getString("last_name");
                                                     customerReview[0] = String.valueOf(customerResponse.getInt("review"));
                                                 } catch (JSONException e) {
+                                                    Log.e("claimmm","error in get name and review(exception)");
                                                     e.printStackTrace();
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
+                                                Log.e("claimmm","error in get name and review");
                                                 // Handle error
                                             }
                                         });
 
                                         requestQueue.add(customerRequest);
-                                    }
 
                                     int sourcePlace = deliveryDetail.getInt("source_place");
                                     JsonElement collectionPoint = gson.fromJson(deliveryDetail.toString(), JsonObject.class).get("source_collection_point");
@@ -178,11 +185,15 @@ public class RequestsTransporterFragment extends Fragment {
                                                     // You can use them here to add to your requestsData list
                                                     String dateTime = formatDate(serviceDate);
                                                     Log.e("claimmm","add");
-                                                    requestsData.add(new Requests(deliveryDetailsId,customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime));
+                                                    Requests request=new Requests(deliveryDetailsId,customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime);
+                                                    Log.e("request-value",request.toString());
+                                                    requestsData.add(request);
                                                 }
                                             });
                                         }
                                     });
+
+                                    }
 //                                    String sourceCity = getCityName(sourcePlace, collectionPoint);
 //                                    String destinationCity = getCityName(deliveryDetail.getInt("destination_place"), collectionPoint);
 //                                    String dateTime = formatDate(serviceDate);

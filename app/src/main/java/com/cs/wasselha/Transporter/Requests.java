@@ -70,4 +70,17 @@ public class Requests {
     public void setTime(String time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Requests{" +
+                "id=" + id +
+                ", customerName='" + customerName + '\'' +
+                ", customerReview='" + customerReview + '\'' +
+                ", sourceCity='" + sourceCity + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", price='" + price + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }
