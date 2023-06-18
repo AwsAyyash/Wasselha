@@ -1,5 +1,6 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
+import com.cs.wasselha.Adapters.ReservationsAdapter;
 import com.cs.wasselha.Claims.Claims;
 import com.cs.wasselha.R;
 
@@ -44,17 +46,44 @@ public class TransporterClaimsActivity extends AppCompatActivity {
         transporterID=Integer.parseInt(id.trim());
         //Calls
         setupReference();
-        populateClaimsData(transporterID);
-        new Handler().postDelayed(new Runnable() {
+        new AsyncTask<String, Void, Boolean>() {
+            private ProgressDialog progressDialog;
             @Override
-            public void run() {
-                    Log.e("claimmm","size:"+ claimsTransporterData.size());
-                    ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
-                    claimsListView.setAdapter(claimsTransporterAdapter);
-
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            protected Boolean doInBackground(String... params) {
+                try {
+                    populateClaimsData(transporterID);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
             }
 
-        }, 2000);
+            @Override
+            protected void onPostExecute(Boolean success) {
+                progressDialog.dismiss();
+                if (success) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("claimmm","size:"+ claimsTransporterData.size());
+                            ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
+                            claimsListView.setAdapter(claimsTransporterAdapter);
+
+                        }
+
+                    }, 1000);
+                }
+            }
+        }.execute();
+        populateClaimsData(transporterID);
 
     }
 

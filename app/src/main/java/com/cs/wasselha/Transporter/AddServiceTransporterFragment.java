@@ -30,6 +30,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,9 +45,6 @@ import android.Manifest;
 
 import com.cs.wasselha.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -157,6 +156,7 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
                     if (verifyInputsAndSubmit()) {
                         if (sourceLatLng != null && destinationLatLng != null) {
                             createLocation(sourceLatLng.latitude, sourceLatLng.longitude, destinationLatLng.latitude, destinationLatLng.longitude, transporterID);
+                            replaceFragment(new HomeTransporterFragment());
                         } else {
                             Toast.makeText(getContext(), "Please select both source and destination locations", Toast.LENGTH_SHORT).show();
                         }
@@ -270,60 +270,6 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
 private void createLocation(double src_latitude, double src_longitude, double dst_latitude, double dst_longitude, int transporterID) {
     createSingleLocation(src_latitude, src_longitude, true, 0, transporterID, dst_latitude, dst_longitude);
 }
-//
-//    private void createSingleLocation(double latitude, double longitude, boolean isSource, int sourceLocationId, int transporterID, double dst_latitude, double dst_longitude) {
-//        String title = getAddressFromCoordinates(latitude, longitude);
-//        String description = getAddressFromCoordinates(latitude, longitude);
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-//        String url = BASE_URL + "/locations/";
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        try {
-//            jsonObject.put("title", title);
-//            jsonObject.put("description", description);
-//            jsonObject.put("latitude", latitude+"");
-//            jsonObject.put("longitude", longitude+"");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            int locationID = response.getInt("id");
-//
-//                            if (locationID > 0) {
-//                                if (isSource) {
-//                                    Toast.makeText(getContext(), "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
-//                                    // Create destination location after the source has been created
-//                                    createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
-//                                } else {
-//                                    Toast.makeText(getContext(), "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
-//                                    // Code to handle successful creation of both source and destination locations
-//                                    createService(transporterID, sourceLocationId, locationID);
-//                                }
-//                            } else {
-//                                Toast.makeText(getContext(), "The information is not correct, try again!", Toast.LENGTH_LONG).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getContext(), "Network error, please try again later!", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//        requestQueue.add(jsonObjectRequest);
-//    }
-
 private void createSingleLocation(double latitude, double longitude, boolean isSource, int sourceLocationId, int transporterID, double dst_latitude, double dst_longitude) {
     String title = getAddressTitleFromCoordinates(latitude, longitude);
     String description = getAddressFromCoordinates(latitude, longitude);
@@ -564,5 +510,12 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
         }
 
         return address;
+    }
+    private void replaceFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainTransporterLayout,fragment);
+        fragmentTransaction.commit();
     }
 }

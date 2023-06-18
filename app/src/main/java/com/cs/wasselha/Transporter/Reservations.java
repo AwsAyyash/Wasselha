@@ -1,17 +1,26 @@
 package com.cs.wasselha.Transporter;
 
 public class Reservations {
-
+    int id;
     String customerName, packageType, sourceCity, destinationCity, time;
 
 
-    public Reservations(String customerName, String packageType, String sourceCity, String destinationCity, String time)
+    public Reservations(int id,String customerName, String packageType, String sourceCity, String destinationCity, String time)
     {
+        this.id=id;
         this.customerName = customerName;
         this.packageType = packageType;
         this.sourceCity = sourceCity;
         this.destinationCity = destinationCity;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCustomerName() {
@@ -52,5 +61,17 @@ public class Reservations {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservations{" +
+                "id=" + id +
+                ", customerName='" + customerName + '\'' +
+                ", packageType='" + packageType + '\'' +
+                ", sourceCity='" + sourceCity + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

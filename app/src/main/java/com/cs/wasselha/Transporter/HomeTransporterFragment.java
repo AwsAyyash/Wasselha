@@ -1,11 +1,15 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.cs.wasselha.Adapters.ReservationsAdapter;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Adapters.ServicesAdapter;
 
@@ -46,10 +51,45 @@ public class HomeTransporterFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
-        populateServicesData(transporterID);
+        new AsyncTask<String, Void, Boolean>() {
+            private ProgressDialog progressDialog;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            protected Boolean doInBackground(String... params) {
+                try {
+                    populateServicesData(transporterID);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
 
-        ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
-        listView.setAdapter(servicesAdapter);
+            @Override
+            protected void onPostExecute(Boolean success) {
+                progressDialog.dismiss();
+                if (success) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
+                                listView.setAdapter(servicesAdapter);
+                            } catch (Exception e) {
+                                Log.e("RequestsTransporterFragment", e.toString());
+                            }
+                        }
+
+                    }, 500);
+                }
+            }
+        }.execute();
 
         return view;
     }
@@ -91,9 +131,6 @@ public class HomeTransporterFragment extends Fragment {
                                     servicesData.add(new Services(id, transporterId, sourcePlace, destinationPlace, date, time, price));
                                 }
                             }
-
-                            // Notify the adapter that the data set has changed
-                            ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
                         } catch (JSONException | DateTimeParseException e) {
                             e.printStackTrace();
                         }

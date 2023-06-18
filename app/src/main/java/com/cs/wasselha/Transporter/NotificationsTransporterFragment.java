@@ -1,11 +1,14 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Adapters.NotificationsCustomerAdapter;
+import com.cs.wasselha.Adapters.ReservationsAdapter;
 import com.cs.wasselha.Customer.Notifications;
 import com.cs.wasselha.R;
 
@@ -99,10 +103,45 @@ public class NotificationsTransporterFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
-        populateNotificationsData(transporterID);
+        new AsyncTask<String, Void, Boolean>() {
+            private ProgressDialog progressDialog;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            protected Boolean doInBackground(String... params) {
+                try {
+                    populateNotificationsData(transporterID);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
 
-        NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
-        notificationsListView.setAdapter(notificationsCustomerAdapter);
+            @Override
+            protected void onPostExecute(Boolean success) {
+                progressDialog.dismiss();
+                if (success) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
+                                notificationsListView.setAdapter(notificationsCustomerAdapter);
+                            } catch (Exception e) {
+                                Log.e("RequestsTransporterFragment", e.toString());
+                            }
+                        }
+
+                    }, 500);
+                }
+            }
+        }.execute();
 
         return view;
     }

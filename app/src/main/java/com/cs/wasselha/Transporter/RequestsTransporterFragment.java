@@ -1,5 +1,6 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -70,6 +71,15 @@ public class RequestsTransporterFragment extends Fragment {
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
         new AsyncTask<String, Void, Boolean>() {
+            private ProgressDialog progressDialog;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
             @Override
             protected Boolean doInBackground(String... params) {
                 try {
@@ -82,6 +92,7 @@ public class RequestsTransporterFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Boolean success) {
+                progressDialog.dismiss();
                 if(success){
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -96,7 +107,7 @@ public class RequestsTransporterFragment extends Fragment {
                             }
                         }
 
-                    }, 2000);
+                    }, 500);
                 }
             }
         }.execute();
