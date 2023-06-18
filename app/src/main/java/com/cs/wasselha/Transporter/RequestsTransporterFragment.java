@@ -92,11 +92,11 @@ public class RequestsTransporterFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Boolean success) {
-                progressDialog.dismiss();
                 if(success){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            progressDialog.dismiss();
                             try {
 
                                 Log.e("claimmm","size:"+ requestsData.size());
@@ -107,7 +107,7 @@ public class RequestsTransporterFragment extends Fragment {
                             }
                         }
 
-                    }, 500);
+                    }, 2000);
                 }
             }
         }.execute();

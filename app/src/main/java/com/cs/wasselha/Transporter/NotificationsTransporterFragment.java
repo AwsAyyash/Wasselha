@@ -125,11 +125,11 @@ public class NotificationsTransporterFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Boolean success) {
-                progressDialog.dismiss();
                 if (success) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            progressDialog.dismiss();
                             try {
                                 NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
                                 notificationsListView.setAdapter(notificationsCustomerAdapter);
@@ -138,7 +138,7 @@ public class NotificationsTransporterFragment extends Fragment {
                             }
                         }
 
-                    }, 500);
+                    }, 2000);
                 }
             }
         }.execute();

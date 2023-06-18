@@ -81,11 +81,11 @@ public class TransporterReservationActivity extends AppCompatActivity {
 
                 @Override
                 protected void onPostExecute(Boolean success) {
-                    progressDialog.dismiss();
                     if (success) {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 try {
 
                                     Log.e("claimmmmmmm22", "size:" + reservationsData.size());
@@ -96,7 +96,7 @@ public class TransporterReservationActivity extends AppCompatActivity {
                                 }
                             }
 
-                        }, 1000);
+                        }, 2000);
                     }
                 }
             }.execute();

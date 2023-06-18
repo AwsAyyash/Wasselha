@@ -68,18 +68,18 @@ public class TransporterClaimsActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Boolean success) {
-                progressDialog.dismiss();
                 if (success) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            progressDialog.dismiss();
                             Log.e("claimmm","size:"+ claimsTransporterData.size());
                             ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
                             claimsListView.setAdapter(claimsTransporterAdapter);
 
                         }
 
-                    }, 1000);
+                    }, 2000);
                 }
             }
         }.execute();

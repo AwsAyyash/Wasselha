@@ -73,11 +73,11 @@ public class HomeTransporterFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Boolean success) {
-                progressDialog.dismiss();
                 if (success) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            progressDialog.dismiss();
                             try {
                                 ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
                                 listView.setAdapter(servicesAdapter);
@@ -86,7 +86,7 @@ public class HomeTransporterFragment extends Fragment {
                             }
                         }
 
-                    }, 500);
+                    }, 2000);
                 }
             }
         }.execute();
