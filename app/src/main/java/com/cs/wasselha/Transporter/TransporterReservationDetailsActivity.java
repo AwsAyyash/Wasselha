@@ -50,6 +50,7 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_reservation_details);
+        getSupportActionBar().hide();
 
         Intent intent = getIntent();
         final int deliveryServiceDetailsId = intent.getIntExtra("deliveryservicedetails", 0);
