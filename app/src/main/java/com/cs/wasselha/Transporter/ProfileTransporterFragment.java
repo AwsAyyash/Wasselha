@@ -39,7 +39,7 @@ public class ProfileTransporterFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
-    private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg;
+    private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg, reservationImg;
     private TextView name;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -91,6 +91,7 @@ public class ProfileTransporterFragment extends Fragment {
         settingSetup();
         claimsImgSetup();
         statusImgSetup();
+        reservationsSetup();
 
         return view;
     }
@@ -103,11 +104,12 @@ public class ProfileTransporterFragment extends Fragment {
     {
         mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
-        settingsImg = view.findViewById(R.id.settingImage);
+        settingsImg = view.findViewById(R.id.settingImageInTransporterProfile);
         claimsImg = view.findViewById(R.id.claimsImageCustomer);
-        carsImg = view.findViewById(R.id.carsImag);
+        carsImg = view.findViewById(R.id.vehicleInfoImgInTransporterProfile);
         statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImage);
+        reservationImg = view.findViewById(R.id.reservationsImgInCTransporterProfile);
     }
 
     //-----------Logout Setup------------------------------------------------------
@@ -139,6 +141,19 @@ public class ProfileTransporterFragment extends Fragment {
             }
         });
     }
+
+
+    private void reservationsSetup()
+    {
+        reservationImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TransporterReservationActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 
     private void carInfoSetup()
     {

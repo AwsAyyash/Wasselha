@@ -249,6 +249,7 @@
             android:textSize="18sp"
             android:background="@drawable/reserve_btn_background"
             android:text="@string/reserve_btn_in_service_details_page"
+            android:fontFamily="@font/changabold"
             android:textColor="@color/dark_green"
             android:textStyle="bold" />
 

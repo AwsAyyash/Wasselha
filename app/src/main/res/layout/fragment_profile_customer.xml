@@ -63,7 +63,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/settingImage"
+                            android:id="@+id/settingImageInTransporterProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -77,9 +77,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_setting"
-                            app:layout_constraintBottom_toBottomOf="@+id/settingImage"
-                            app:layout_constraintEnd_toEndOf="@+id/settingImage"
-                            app:layout_constraintStart_toStartOf="@+id/settingImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInTransporterProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/settingImageInTransporterProfile"
+                            app:layout_constraintStart_toStartOf="@+id/settingImageInTransporterProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -152,7 +152,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/carsImag"
+                            android:id="@+id/vehicleInfoImgInTransporterProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -166,10 +166,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_reservations"
-                            app:layout_constraintBottom_toBottomOf="@+id/carsImag"
-                            app:layout_constraintEnd_toEndOf="@+id/carsImag"
+                            app:layout_constraintBottom_toBottomOf="@+id/vehicleInfoImgInTransporterProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/vehicleInfoImgInTransporterProfile"
                             app:layout_constraintHorizontal_bias="0.43"
-                            app:layout_constraintStart_toStartOf="@+id/carsImag"
+                            app:layout_constraintStart_toStartOf="@+id/vehicleInfoImgInTransporterProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 

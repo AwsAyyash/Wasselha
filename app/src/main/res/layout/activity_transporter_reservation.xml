@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_selver"
-    tools:context=".Transporter.NotificationsTransporterFragment">
+    tools:context=".Transporter.TransporterReservationActivity">
+
 
     <TextView
         android:id="@+id/textView7"
@@ -14,16 +15,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:text="@string/title_notifications_customer_list_view"
-        android:textColor="@color/dark_green"
+        android:text="@string/reservations_in_bottom_bar_transporter"
+        android:textColor="@color/light_selver"
+        android:fontFamily="@font/changabold"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:fontFamily="@font/changabold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/listViewTransporterNotifications"
+        android:id="@+id/transporterReservationListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

@@ -18,6 +18,15 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Transporter.TransporterReservationDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transporter.TransporterReservationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.ReservationDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Customer.CustomerClaimsActivity"
             android:exported="false" />
         <activity

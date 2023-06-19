@@ -14,10 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:text="@string/your_services_in_main_transporter_page"
         android:textColor="@color/dark_green"
-        android:textSize="20sp"
+        android:fontFamily="@font/changabold"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

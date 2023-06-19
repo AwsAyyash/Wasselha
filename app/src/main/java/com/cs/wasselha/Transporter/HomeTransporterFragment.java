@@ -1,11 +1,15 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.cs.wasselha.Adapters.ReservationsAdapter;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Adapters.ServicesAdapter;
 
@@ -35,29 +40,44 @@ public class HomeTransporterFragment extends Fragment {
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
+    private ProgressDialog progressDialog;
     ListView listView;
     public static ArrayList<Services> servicesData;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        try {
         View view = inflater.inflate(R.layout.fragment_home_transporter, container, false);
         listView = view.findViewById(R.id.listViewInMainPageTransporter);
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         populateServicesData(transporterID);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                }
 
-        ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
-        listView.setAdapter(servicesAdapter);
+            }, 1000);
 
         return view;
+        }catch (Exception e){
+        Log.e("error:",e.toString());
+        return null;
+    }
     }
 
     private void populateServicesData(int transporterID)
     {
         servicesData = new ArrayList<>();
-        String url = "http://176.119.254.198:8000/wasselha/services/?transporter="+transporterID;
+
+        String url = "http://176.119.254.198:8000/wasselha/services/?transporter="+transporterID+ "&time=upper";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -90,9 +110,9 @@ public class HomeTransporterFragment extends Fragment {
                                     servicesData.add(new Services(id, transporterId, sourcePlace, destinationPlace, date, time, price));
                                 }
                             }
-
-                            // Notify the adapter that the data set has changed
-                            ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+                            ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
+                            listView.setAdapter(servicesAdapter);
+                            progressDialog.dismiss();
                         } catch (JSONException | DateTimeParseException e) {
                             e.printStackTrace();
                         }
