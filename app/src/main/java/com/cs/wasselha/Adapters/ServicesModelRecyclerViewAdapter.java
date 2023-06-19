@@ -3,6 +3,7 @@ package com.cs.wasselha.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.time.setText(servicesModelList.get(position).getTime());
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
-        holder.review.setText(servicesModelList.get(position).getReview());
+        //Log.d("SMRVAReview",servicesModelList.get(position).getReview()+"");
+       // holder.review.setText(servicesModelList.get(position).getReview());
 
         setImage(apiURL +servicesModelList.get(position).getImageUrl(), context, holder.cardImageView );
        /* try {
@@ -116,7 +118,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
             time = itemView.findViewById(R.id.timeInCustomerRecyclerView);
             sourceCity = itemView.findViewById(R.id.sourceCity);
             destinationCity = itemView.findViewById(R.id.destinationCity);
-            review = itemView.findViewById(R.id.transporterReviewInCustomerRecyclerView);
+            review = itemView.findViewById(R.id.transporterReviewInCustomerRecyclerView12);
 
         }
     }

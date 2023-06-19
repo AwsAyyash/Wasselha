@@ -40,11 +40,15 @@ public class NotificationsCustomerAdapter extends ArrayAdapter<Notifications>
         TextView descriptionNotification = convertView.findViewById(R.id.descriptionNotificationCustomer);
         TextView timeNotification = convertView.findViewById(R.id.timeNotificationCustomer);
 
-        imageView.setImageResource(getItem(position).getImage());
+        /*imageView.setImageResource(getItem(position).getImage());
         titleNotification.setText(getItem(position).getTitleNotification());
         descriptionNotification.setText(getItem(position).getDescriptionNotification());
-        timeNotification.setText(getItem(position).getNotificationTime());
+        timeNotification.setText(getItem(position).getNotificationTime());*/
 
+        imageView.setImageResource(R.drawable.notification);
+        titleNotification.setText(getItem(position).getTitleNotification());
+        descriptionNotification.setText(getItem(position).getDescriptionNotification());
+        timeNotification.setText(getItem(position).getNotificationDate()+" ,\t"+getItem(position).getNotificationTime());
 
         return convertView;
     }
