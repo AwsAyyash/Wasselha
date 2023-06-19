@@ -124,7 +124,8 @@ public class NotificationsTransporterFragment extends Fragment {
 
         }catch (Exception e){
             Log.e("error:",e.toString());
-            return null;
+            View view = inflater.inflate(R.layout.fragment_notifications_transporter, container, false);
+            return view;
         }
     }
     private void populateNotificationsData(int transporterID)
@@ -182,9 +183,13 @@ public class NotificationsTransporterFragment extends Fragment {
                                 notificationsTransporterData.add(new Notifications(id,user_id,title,description,time,date,user_type));
 
                             }
-                            NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
-                            notificationsListView.setAdapter(notificationsCustomerAdapter);
-                            progressDialog.dismiss();
+                            try{
+                                NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
+                                notificationsListView.setAdapter(notificationsCustomerAdapter);
+                                progressDialog.dismiss();
+                            }catch (Exception e) {
+                                Log.e("error:", e.toString());
+                            }
 
                         } catch (Exception e) {
                             Log.e("notification","notification not found");
