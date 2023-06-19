@@ -40,58 +40,37 @@ public class HomeTransporterFragment extends Fragment {
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
+    private ProgressDialog progressDialog;
     ListView listView;
     public static ArrayList<Services> servicesData;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        try {
         View view = inflater.inflate(R.layout.fragment_home_transporter, container, false);
         listView = view.findViewById(R.id.listViewInMainPageTransporter);
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
-        new AsyncTask<String, Void, Boolean>() {
-            private ProgressDialog progressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Loading...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
-            @Override
-            protected Boolean doInBackground(String... params) {
-                try {
-                    populateServicesData(transporterID);
-                    return true;
-                } catch (Exception e) {
-                    return false;
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        populateServicesData(transporterID);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
                 }
-            }
 
-            @Override
-            protected void onPostExecute(Boolean success) {
-                if (success) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            try {
-                                ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
-                                listView.setAdapter(servicesAdapter);
-                            } catch (Exception e) {
-                                Log.e("RequestsTransporterFragment", e.toString());
-                            }
-                        }
-
-                    }, 2000);
-                }
-            }
-        }.execute();
+            }, 1000);
 
         return view;
+        }catch (Exception e){
+        Log.e("error:",e.toString());
+        return null;
+    }
     }
 
     private void populateServicesData(int transporterID)
@@ -131,6 +110,9 @@ public class HomeTransporterFragment extends Fragment {
                                     servicesData.add(new Services(id, transporterId, sourcePlace, destinationPlace, date, time, price));
                                 }
                             }
+                            ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
+                            listView.setAdapter(servicesAdapter);
+                            progressDialog.dismiss();
                         } catch (JSONException | DateTimeParseException e) {
                             e.printStackTrace();
                         }

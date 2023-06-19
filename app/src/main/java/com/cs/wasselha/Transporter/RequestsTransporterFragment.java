@@ -3,7 +3,6 @@ package com.cs.wasselha.Transporter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
 import com.cs.wasselha.Adapters.RequestsAdapter;
 import com.cs.wasselha.R;
 import com.google.gson.Gson;
@@ -32,20 +32,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonElement;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 
 
 public class RequestsTransporterFragment extends Fragment {
@@ -58,65 +47,41 @@ public class RequestsTransporterFragment extends Fragment {
     public static ArrayList<Requests> requestsData;
     private RequestQueue requestQueue;
     private Gson gson = new Gson();
+    private ProgressDialog progressDialog;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
+        try {
         View view = inflater.inflate(R.layout.fragment_requests_transporter, container, false);
         listView = view.findViewById(R.id.listViewInRequestsTransporterFragment);
         SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
-        new AsyncTask<String, Void, Boolean>() {
-            private ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        populateRequestsData(transporterID,getContext());
+        new Handler().postDelayed(new Runnable() {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Loading...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
-            @Override
-            protected Boolean doInBackground(String... params) {
-                try {
-                    populateServicesData(transporterID,getContext());
-                    return true;
-                }catch (Exception e){
-                    return false;
-                }
+            public void run() {
+                progressDialog.dismiss();
             }
 
-            @Override
-            protected void onPostExecute(Boolean success) {
-                if(success){
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            try {
-
-                                Log.e("claimmm","size:"+ requestsData.size());
-                                RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
-                                listView.setAdapter(requestsAdapter);
-                            }catch (Exception e){
-                                Log.e("RequestsTransporterFragment",e.toString());
-                            }
-                        }
-
-                    }, 2000);
-                }
-            }
-        }.execute();
+        }, 1000);
 
         return view;
+        }catch (Exception e){
+            Log.e("error:",e.toString());
+            return null;
+        }
     }
 
 
-    private void populateServicesData()
+    private void populateRequestsData()
     {
         requestsData = new ArrayList<>();
 
@@ -125,7 +90,7 @@ public class RequestsTransporterFragment extends Fragment {
         requestsData.add(new Requests(1,"Not available!", "Not available!","Not available!", "Not available!", "Not available!", "Not available!"));
 
     }
-    private void populateServicesData(int transporterID, Context context) {
+    private void populateRequestsData(int transporterID, Context context) {
         requestQueue = Volley.newRequestQueue(context);
         requestsData = new ArrayList<>();
 
@@ -146,15 +111,17 @@ public class RequestsTransporterFragment extends Fragment {
                         JsonArrayRequest deliveryDetailsRequest = new JsonArrayRequest(Request.Method.GET, deliveryUrl, null, new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray deliveryResponse) {
+                                for (int ii = 0; ii < deliveryResponse.length(); ii++) {
                                 try {
-                                    JSONObject deliveryDetail = deliveryResponse.getJSONObject(0);
+                                    JSONObject deliveryDetail = deliveryResponse.getJSONObject(ii);
+
                                     boolean responsed = deliveryDetail.getBoolean("responsed");
                                     String price = deliveryDetail.getString("price");
-                                    int deliveryDetailsId=deliveryDetail.getInt("id");
+                                    int deliveryDetailsId = deliveryDetail.getInt("id");
 
                                     final String[] customerName = {"Not available!"};
                                     final String[] customerReview = {"Not available!"};
-                                    Log.e("claimmm","responsed"+responsed);
+                                    Log.e("claimmm", "responsed" + responsed);
                                     if (!responsed) {
                                         int customerId = deliveryDetail.getInt("customer");
                                         String customerUrl = BASE_URL + "/customers/" + customerId + "/";
@@ -163,46 +130,50 @@ public class RequestsTransporterFragment extends Fragment {
                                             @Override
                                             public void onResponse(JSONObject customerResponse) {
                                                 try {
-                                                    Log.e("claimmm","get name and review");
+                                                    Log.e("claimmm", "get name and review");
                                                     customerName[0] = customerResponse.getString("first_name") + " " + customerResponse.getString("last_name");
                                                     customerReview[0] = String.valueOf(customerResponse.getInt("review"));
                                                 } catch (JSONException e) {
-                                                    Log.e("claimmm","error in get name and review(exception)");
+                                                    Log.e("claimmm", "error in get name and review(exception)");
                                                     e.printStackTrace();
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
-                                                Log.e("claimmm","error in get name and review");
+                                                Log.e("claimmm", "error in get name and review");
                                                 // Handle error
                                             }
                                         });
 
                                         requestQueue.add(customerRequest);
 
-                                    int sourcePlace = deliveryDetail.getInt("source_place");
-                                    JsonElement collectionPoint = gson.fromJson(deliveryDetail.toString(), JsonObject.class).get("source_collection_point");
-                                    getCityName(sourcePlace, collectionPoint, new CityNameCallback() {
-                                        @Override
-                                        public void onCityNameReceived(String sourceCity) throws JSONException {
-                                            // This is called when the source city name is retrieved
-                                            getCityName(deliveryDetail.getInt("destination_place"), collectionPoint, new CityNameCallback() {
-                                                @Override
-                                                public void onCityNameReceived(String destinationCity) {
-                                                    // This is called when the destination city name is retrieved
+                                        int sourcePlace = deliveryDetail.getInt("source_place");
+                                        JsonElement collectionPoint = gson.fromJson(deliveryDetail.toString(), JsonObject.class).get("source_collection_point");
+                                        getCityName(sourcePlace, collectionPoint, new CityNameCallback() {
+                                            @Override
+                                            public void onCityNameReceived(String sourceCity) throws JSONException {
+                                                // This is called when the source city name is retrieved
+                                                getCityName(deliveryDetail.getInt("destination_place"), collectionPoint, new CityNameCallback() {
+                                                    @Override
+                                                    public void onCityNameReceived(String destinationCity) {
+                                                        // This is called when the destination city name is retrieved
 
-                                                    // Now you have both sourceCity and destinationCity
-                                                    // You can use them here to add to your requestsData list
-                                                    String dateTime = formatDate(serviceDate);
-                                                    Log.e("claimmm","add");
-                                                    Requests request=new Requests(deliveryDetailsId,customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime);
-                                                    Log.e("request-value",request.toString());
-                                                    requestsData.add(request);
-                                                }
-                                            });
-                                        }
-                                    });
+                                                        // Now you have both sourceCity and destinationCity
+                                                        // You can use them here to add to your requestsData list
+                                                        String dateTime = formatDate(serviceDate);
+                                                        Log.e("claimmm", "add");
+                                                        Requests request = new Requests(deliveryDetailsId, customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime);
+                                                        Log.e("request-value", request.toString());
+                                                        requestsData.add(request);
+                                                        RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
+                                                        listView.setAdapter(requestsAdapter);
+                                                        progressDialog.dismiss();
+                                                        Log.e("claimmm", "dismiss");
+                                                    }
+                                                });
+                                            }
+                                        });
 
                                     }
 //                                    String sourceCity = getCityName(sourcePlace, collectionPoint);
@@ -214,6 +185,7 @@ public class RequestsTransporterFragment extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
                             }
                         }, new Response.ErrorListener() {
                             @Override

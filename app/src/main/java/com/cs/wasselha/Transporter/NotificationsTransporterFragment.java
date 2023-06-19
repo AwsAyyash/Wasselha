@@ -49,6 +49,7 @@ public class NotificationsTransporterFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
+    private ProgressDialog progressDialog;
 
     ListView notificationsListView;
     private ArrayList<Notifications> notificationsTransporterData;
@@ -97,53 +98,34 @@ public class NotificationsTransporterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_notifications_transporter, container, false);
-        notificationsListView = view.findViewById(R.id.listViewTransporterNotifications);
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
-        new AsyncTask<String, Void, Boolean>() {
-            private ProgressDialog progressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Loading...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
-            @Override
-            protected Boolean doInBackground(String... params) {
-                try {
-                    populateNotificationsData(transporterID);
-                    return true;
-                } catch (Exception e) {
-                    return false;
+        try {
+            // Inflate the layout for this fragment
+            View view = inflater.inflate(R.layout.fragment_notifications_transporter, container, false);
+            notificationsListView = view.findViewById(R.id.listViewTransporterNotifications);
+            SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID = Integer.parseInt(id.trim());
+
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            populateNotificationsData(transporterID);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
                 }
-            }
 
-            @Override
-            protected void onPostExecute(Boolean success) {
-                if (success) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            try {
-                                NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
-                                notificationsListView.setAdapter(notificationsCustomerAdapter);
-                            } catch (Exception e) {
-                                Log.e("RequestsTransporterFragment", e.toString());
-                            }
-                        }
+            }, 1000);
 
-                    }, 2000);
-                }
-            }
-        }.execute();
+            return view;
 
-        return view;
+        }catch (Exception e){
+            Log.e("error:",e.toString());
+            return null;
+        }
     }
     private void populateNotificationsData(int transporterID)
     {
@@ -200,6 +182,9 @@ public class NotificationsTransporterFragment extends Fragment {
                                 notificationsTransporterData.add(new Notifications(id,user_id,title,description,time,date,user_type));
 
                             }
+                            NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
+                            notificationsListView.setAdapter(notificationsCustomerAdapter);
+                            progressDialog.dismiss();
 
                         } catch (Exception e) {
                             Log.e("notification","notification not found");

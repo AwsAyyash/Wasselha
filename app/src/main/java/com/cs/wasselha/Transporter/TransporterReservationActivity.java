@@ -36,6 +36,7 @@ import java.util.ArrayList;
 
 public class TransporterReservationActivity extends AppCompatActivity {
 
+    private ProgressDialog progressDialog;
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
@@ -57,49 +58,19 @@ public class TransporterReservationActivity extends AppCompatActivity {
             int transporterID = Integer.parseInt(id.trim());
 
             //Calls
+            progressDialog = new ProgressDialog(TransporterReservationActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             setupRefernces();
-
-            new AsyncTask<String, Void, Boolean>() {
-                private ProgressDialog progressDialog;
+            populateReservationsData(transporterID);
+            new Handler().postDelayed(new Runnable() {
                 @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    progressDialog = new ProgressDialog(TransporterReservationActivity.this);
-                    progressDialog.setMessage("Loading...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                }
-                @Override
-                protected Boolean doInBackground(String... params) {
-                    try {
-                        populateReservationsData(transporterID);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
+                public void run() {
+                    progressDialog.dismiss();
                 }
 
-                @Override
-                protected void onPostExecute(Boolean success) {
-                    if (success) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.dismiss();
-                                try {
-
-                                    Log.e("claimmmmmmm22", "size:" + reservationsData.size());
-                                    ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
-                                    listView.setAdapter(requestsAdapter);
-                                } catch (Exception e) {
-                                    Log.e("RequestsTransporterFragment", e.toString());
-                                }
-                            }
-
-                        }, 2000);
-                    }
-                }
-            }.execute();
+            }, 1000);
         }catch (Exception e){
             Log.e("TransporterReservationsListView",e.toString());
             Toast.makeText(this, "Networking error, please try later", Toast.LENGTH_SHORT).show();
@@ -118,17 +89,16 @@ public class TransporterReservationActivity extends AppCompatActivity {
     {
         reservationsData = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
-        reservationsData = new ArrayList<>();
 
         String url = BASE_URL + "/services/?transporter=" + transporterID + "&time=upper";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject service = response.getJSONObject(i);
+                        Log.e("service",service.toString());
                         int serviceId = service.getInt("id");
                         String serviceDate = service.getString("service_date");
 
@@ -138,12 +108,13 @@ public class TransporterReservationActivity extends AppCompatActivity {
                         JsonArrayRequest deliveryDetailsRequest = new JsonArrayRequest(Request.Method.GET, deliveryUrl, null, new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray deliveryResponse) {
+                                for (int ii = 0; ii < deliveryResponse.length(); ii++){
                                 try {
-                                    JSONObject deliveryDetail = deliveryResponse.getJSONObject(0);
-                                    Log.e("claimmm",deliveryDetail.toString());
+                                    JSONObject deliveryDetail = deliveryResponse.getJSONObject(ii);
+                                    Log.e("claimmm", deliveryDetail.toString());
                                     boolean responsed = deliveryDetail.getBoolean("responsed");
                                     boolean accepted = deliveryDetail.getBoolean("responsed");
-                                    int deliveryDetailsId=deliveryDetail.getInt("id");
+                                    int deliveryDetailsId = deliveryDetail.getInt("id");
 
                                     final String[] customerName = {"Not available!"};
                                     final String[] packageType = {"Not available!"};
@@ -155,40 +126,40 @@ public class TransporterReservationActivity extends AppCompatActivity {
                                             @Override
                                             public void onResponse(JSONObject customerResponse) {
                                                 try {
-                                                    Log.e("claimmm","get name");
+                                                    Log.e("claimmm", "get name");
                                                     customerName[0] = customerResponse.getString("first_name") + " " + customerResponse.getString("last_name");
                                                 } catch (JSONException e) {
-                                                    Log.e("claimmm","error in get name (exception)");
+                                                    Log.e("claimmm", "error in get name (exception)");
                                                     e.printStackTrace();
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
-                                                Log.e("claimmm","error in get name and review");
+                                                Log.e("claimmm", "error in get name and review");
                                                 // Handle error
                                             }
                                         });
 
                                         requestQueue.add(customerRequest);
-                                        String packageUrl = BASE_URL + "/packages/?deliveryservicedetails="+deliveryDetailsId;
+                                        String packageUrl = BASE_URL + "/packages/?deliveryservicedetails=" + deliveryDetailsId;
                                         // Nested JsonObjectRequest
                                         JsonArrayRequest packageRequest = new JsonArrayRequest(Request.Method.GET, customerUrl, null, new Response.Listener<JSONArray>() {
                                             @Override
                                             public void onResponse(JSONArray packageResponse) {
                                                 try {
                                                     JSONObject package_resource = packageResponse.getJSONObject(0);
-                                                    Log.e("claimmm","get package type");
+                                                    Log.e("claimmm", "get package type");
                                                     packageType[0] = package_resource.getString("type");
                                                 } catch (JSONException e) {
-                                                    Log.e("claimmm","error in get package type (exception)");
+                                                    Log.e("claimmm", "error in get package type (exception)");
                                                     e.printStackTrace();
                                                 }
                                             }
                                         }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
-                                                Log.e("claimmm","error in get name and review");
+                                                Log.e("claimmm", "error in get name and review");
                                                 // Handle error
                                             }
                                         });
@@ -207,26 +178,26 @@ public class TransporterReservationActivity extends AppCompatActivity {
                                                         // Now you have both sourceCity and destinationCity
                                                         // You can use them here to add to your requestsData list
                                                         String dateTime = formatDate(serviceDate);
-                                                        Log.e("claimmm","add");
+                                                        Log.e("claimmm", "add");
 //                                                        Requests request=new Requests(deliveryDetailsId,customerName[0], packageType[0], sourceCity, destinationCity, "price", dateTime);
-                                                        Reservations reservation=new Reservations(deliveryDetailsId,customerName[0], packageType[0],sourceCity, destinationCity, dateTime);
-                                                        Log.e("request-value",reservation.toString());
+                                                        Reservations reservation = new Reservations(deliveryDetailsId, customerName[0], packageType[0], sourceCity, destinationCity, dateTime);
+                                                        Log.e("request-value", reservation.toString());
                                                         reservationsData.add(reservation);
+                                                        Log.e("Reservations","size: "+reservationsData.size());
+                                                        // Set the adapter here
+                                                        ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
+                                                        listView.setAdapter(requestsAdapter);
+                                                        progressDialog.dismiss();
                                                     }
                                                 });
                                             }
                                         });
 
                                     }
-//                                    String sourceCity = getCityName(sourcePlace, collectionPoint);
-//                                    String destinationCity = getCityName(deliveryDetail.getInt("destination_place"), collectionPoint);
-//                                    String dateTime = formatDate(serviceDate);
-//
-//                                    requestsData.add(new Requests(customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime));
-
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
                             }
                         }, new Response.ErrorListener() {
                             @Override
@@ -241,6 +212,9 @@ public class TransporterReservationActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+//                ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
+//                listView.setAdapter(requestsAdapter);
+//                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override

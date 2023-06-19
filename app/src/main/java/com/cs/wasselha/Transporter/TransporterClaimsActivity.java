@@ -35,55 +35,35 @@ public class TransporterClaimsActivity extends AppCompatActivity {
     private ArrayList<Claims> claimsTransporterData;
     private static String apiURL="http://176.119.254.198:8000/wasselha";
     int transporterID;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_claims_transporter);
         getSupportActionBar().hide();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        transporterID=Integer.parseInt(id.trim());
-        //Calls
+        String id = preferences.getString(ID_KEY, null);transporterID=Integer.parseInt(id.trim());
+
         setupReference();
-        new AsyncTask<String, Void, Boolean>() {
-            private ProgressDialog progressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
-                progressDialog.setMessage("Loading...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
-            @Override
-            protected Boolean doInBackground(String... params) {
-                try {
-                    populateClaimsData(transporterID);
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Boolean success) {
-                if (success) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            Log.e("claimmm","size:"+ claimsTransporterData.size());
-                            ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
-                            claimsListView.setAdapter(claimsTransporterAdapter);
-
-                        }
-
-                    }, 2000);
-                }
-            }
-        }.execute();
+        //Calls
+        progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         populateClaimsData(transporterID);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+
+        }, 1000);
+    }catch (Exception e){
+        Log.e("error:",e.toString());
+    }
 
     }
 
@@ -141,6 +121,9 @@ private void populateClaimsData(int transporterID) {
                                         Log.e("claimmm","add to claims list");
                                         claimsTransporterData.add(new Claims(R.drawable.ic_claim, String.valueOf(review),
                                                 message, displayDate, firstName + " " + lastName));
+                                        ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsTransporterData,null);
+                                        claimsListView.setAdapter(claimsTransporterAdapter);
+                                        progressDialog.dismiss();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         Log.e("claimmm",e.toString());
