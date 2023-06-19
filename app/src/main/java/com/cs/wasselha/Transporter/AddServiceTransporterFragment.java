@@ -2,6 +2,7 @@ package com.cs.wasselha.Transporter;
 
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,7 +12,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +46,7 @@ import com.android.volley.toolbox.Volley;
 
 import android.Manifest;
 
+import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
 import com.cs.wasselha.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -58,10 +62,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -87,6 +95,8 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
     private Marker destinationMarker;
     private LatLng sourceLatLng;
     private LatLng destinationLatLng;
+
+    private ProgressDialog progressDialog;
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -154,21 +164,47 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
                 @Override
                 public void onClick(View v) {
                     if (verifyInputsAndSubmit()) {
-                        if (sourceLatLng != null && destinationLatLng != null) {
-                            createLocation(sourceLatLng.latitude, sourceLatLng.longitude, destinationLatLng.latitude, destinationLatLng.longitude, transporterID);
-                            replaceFragment(new HomeTransporterFragment());
-                        } else {
-                            Toast.makeText(getContext(), "Please select both source and destination locations", Toast.LENGTH_SHORT).show();
-                        }
+                        progressDialog = new ProgressDialog(getContext());
+                        progressDialog.setMessage("Loading...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        new AsyncTask<String, Void, Boolean>() {
+                                @Override
+                                protected Boolean doInBackground(String... params) {
+                                    try {
+                                        if (sourceLatLng != null && destinationLatLng != null) {
+                                            createLocation(sourceLatLng.latitude, sourceLatLng.longitude, destinationLatLng.latitude, destinationLatLng.longitude, transporterID);
+                                        } else {
+                                            Toast.makeText(getContext(), "Please select both source and destination locations", Toast.LENGTH_SHORT).show();
+                                        }
+                                        return true;
+                                    } catch (Exception e) {
+                                        return false;
+                                    }
+                                }
+                            @Override
+                            protected void onPostExecute(Boolean success) {
+                                progressDialog.dismiss();
+                                if (success) {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressDialog.dismiss();
+                                        }
+
+                                    }, 3000);
+                                }
+                            }
+                        }.execute();
                     }
                 }
             });
             return view;
         }catch(Exception e){
             Toast.makeText(getContext(), "Network Error, please try in anther time", Toast.LENGTH_SHORT).show();
-
+            View view = inflater.inflate(R.layout.fragment_add_service_transporter, container, false);
+            return view;
             }
-        return null;
     }
 
     private void setupMap(GoogleMap googleMap, boolean isSourceMap) {
@@ -188,8 +224,8 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
                             sourceMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
                         } else {
                             sourceLatLng = latLng;
-                            sourceMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-                            Toast.makeText(getContext(), "Source: "+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
+                            sourceMarker.setPosition(sourceLatLng);
+                            Toast.makeText(getContext(), "Source: "+sourceLatLng.toString()+","+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -205,8 +241,8 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
                             destinationMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
                         } else {
                             destinationLatLng = latLng;
-                            destinationMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-                            Toast.makeText(getContext(), "Destination:"+getAddressFromCoordinates(destinationLatLng.latitude,destinationLatLng.longitude), Toast.LENGTH_SHORT).show();
+                            destinationMarker.setPosition(destinationLatLng);
+                            Toast.makeText(getContext(), "Destination:"+destinationLatLng.toString()+","+getAddressFromCoordinates(destinationLatLng.latitude,destinationLatLng.longitude), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -317,6 +353,9 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getContext(), "Network error, please try again later!", Toast.LENGTH_LONG).show();
+                    if(!isSource){
+                        sendDeleteRequest(BASE_URL+"/locations/"+sourceLocationId+"/");
+                    }
                 }
             }){
     @Override
@@ -390,7 +429,9 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
                             int id = response.getInt("id");
 
                             if (id > 0) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getContext(), "Service Created Successfully", Toast.LENGTH_SHORT).show();
+                                replaceFragment(new HomeTransporterFragment());
                             } else {
                                 Toast.makeText(getContext(), "The information is not correct, try again!", Toast.LENGTH_LONG).show();
                             }
@@ -403,6 +444,8 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getContext(), "Network error, please try again later!", Toast.LENGTH_LONG).show();
+                        sendDeleteRequest(BASE_URL+"/locations/"+sourcePlace+"/");
+                        sendDeleteRequest(BASE_URL+"/locations/"+destinationPlace+"/");
                     }
                 }) {
             @Override
@@ -415,10 +458,30 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
 
         requestQueue.add(jsonObjectRequest);
     }
+    private boolean sendDeleteRequest(String url) {
+        try {
+            URL deleteUrl = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) deleteUrl.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setDoOutput(true);
 
-    private boolean verifyInputsAndSubmit() {
-        // Implement your input verification logic here
-        return true;
+            // Add any additional headers if needed
+            // connection.setRequestProperty("HeaderKey", "HeaderValue");
+
+            int responseCode = connection.getResponseCode();
+            // Handle the response code as per your requirement
+            connection.disconnect();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return true;
+
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle any exceptions that occur during the request
+            return false;
+        }
     }
 
     private void setUpReferences(View view) {
@@ -518,4 +581,56 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
         fragmentTransaction.replace(R.id.mainTransporterLayout,fragment);
         fragmentTransaction.commit();
     }
+    private boolean verifyInputsAndSubmit() {
+        Context context = getContext();
+
+        // Check if price is filled
+        String priceText = price.getText().toString();
+        if (priceText.isEmpty()) {
+            Toast.makeText(context, "Please enter the price", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Check if date and time is valid and not in the past
+        String dateText = dateService.getText().toString();
+        if (dateText.isEmpty()) {
+            Toast.makeText(context, "Please select a date", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            try {
+                // Get the selected time
+                int hour = hoursPicker.getValue();
+                int minute = minutesPicker.getValue();
+                String amPm = amPmPicker.getValue() == 0 ? "AM" : "PM";
+                if (amPm.equals("PM") && hour < 12) {
+                    hour += 12;
+                }
+
+                // Combine date and time
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
+                Date selectedDateTime = sdf.parse(dateText + " " + hour + ":" + minute + " " + amPm);
+                Date currentDateTime = new Date();
+                if (selectedDateTime != null && selectedDateTime.before(currentDateTime)) {
+                    Toast.makeText(context, "Date and time should be in the future", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } catch (ParseException e) {
+                Toast.makeText(context, "Invalid date or time format", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        // Check if source and destination markers are placed on the map
+        if (sourceLatLng == null) {
+            Toast.makeText(context, "Please place the source marker on the map", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (destinationLatLng == null) {
+            Toast.makeText(context, "Please place the destination marker on the map", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
 }
