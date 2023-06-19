@@ -56,7 +56,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
         holder.review.setText(servicesModelList.get(position).getReview());
 
-        setImage(apiURL +servicesModelList.get(position).getImageUrl(), context.getApplicationContext(), holder.cardImageView );
+        setImage(apiURL +servicesModelList.get(position).getImageUrl(), context, holder.cardImageView );
        /* try {
             HomeCustomerFragment.setImage(new VehiclesDA().getVehicleImageOfTransporter( servicesModelList.get(position).getTransporter()),holder.cardImageView);
         } catch (IOException e) {

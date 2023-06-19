@@ -29,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         getSupportActionBar().hide();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+       // SharedPreferences.Editor editor = preferences.edit();
         String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
         String id = preferences.getString(ID_KEY, null);
 

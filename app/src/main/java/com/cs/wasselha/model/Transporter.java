@@ -10,7 +10,7 @@ import java.util.List;
 public class Transporter {
 
     //@Expose(serialize = false)
-    private transient int id; // for the database
+    private  int id; // for the database
     private String first_name;
 
     public int getId() {
