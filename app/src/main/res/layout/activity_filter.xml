@@ -56,6 +56,11 @@
             android:textColor="@color/light_selver"
             android:text="@string/source_in_filter" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="5dp">
+
         <fragment
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -65,6 +70,12 @@
             android:id="@+id/sourceCityInFilterActivityMap"
             tools:context=".Customer.FilterActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+            <View
+                android:id="@+id/sourceCityInFilterActivityMapView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+        </FrameLayout>
 
 
         <TextView
@@ -78,6 +89,11 @@
             android:textColor="@color/light_selver"
             android:text="@string/destination_in_filter_main_title" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="5dp">
+
         <fragment
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -88,6 +104,12 @@
             tools:context=".Customer.FilterActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
 
+            <View
+                android:id="@+id/destinationCityInFilterActivityMapView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+        </FrameLayout>
 
         <TextView
             android:layout_marginTop="30dp"
