@@ -58,8 +58,6 @@ public class NotificationsCustomerFragment extends Fragment {
         getFromSharedPref();
         populateNotificationsData();
 
-        NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsCustomerData);
-        notificationsListView.setAdapter(notificationsCustomerAdapter);
 
         return view;
     }
@@ -133,6 +131,9 @@ public class NotificationsCustomerFragment extends Fragment {
                                 notificationsCustomerData.add(new Notifications(id,user_id,title,description,time,date,user_type));
 
                             }
+                            NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsCustomerData);
+                            notificationsListView.setAdapter(notificationsCustomerAdapter);
+
 
                         } catch (Exception e) {
                             Log.e("notification","notification not found");

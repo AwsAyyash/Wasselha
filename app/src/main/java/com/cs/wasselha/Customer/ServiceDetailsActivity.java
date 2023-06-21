@@ -50,7 +50,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             Log.d("inSDA2",intent.toString());
             String strObj = intent.getStringExtra("serviceDet");
             String transporterName = intent.getStringExtra("transporterName");
-            int transporterReview = Integer.parseInt(intent.getStringExtra("transporterReview"));
+
 
             Gson gson = new Gson();
             service = gson.fromJson(strObj, Service.class);
@@ -58,17 +58,20 @@ public class ServiceDetailsActivity extends AppCompatActivity {
 
             String imageUrl = intent.getStringExtra("imageUrl");
 
-            int transporterId = Integer.parseInt(intent.getStringExtra("transporterId"));
-            transporterReviewTXT.setText(String.valueOf(transporterReview));
+            String transporterId = intent.getStringExtra("transporterId");
+            String  transporterReview= intent.getStringExtra("reviewT");
+            String  srcCityName= intent.getStringExtra("srcCity");
+            String  destCityName= intent.getStringExtra("destCity");
+
+            transporterReviewTXT.setText(transporterReview);
             transporterNameInServiceDet.setText(transporterName);
             timeInCustomer.setText(service.getService_date().toString());
-            try {
-                srcCity.setText(new LocationDA().getLocation(service.getSource_place()).getTitle());
 
-                destCity.setText(new LocationDA().getLocation(service.getDestination_place()).getTitle());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
+                srcCity.setText(srcCityName);
+
+                destCity.setText(destCityName);
+
             vehicleTypeInServiceDet.setText(vehicleType);
             priceInServiceDet.setText(String.valueOf(service.getPrice()));
             Log.d("inSDA3",service.getPrice()+"");
@@ -82,6 +85,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent=new Intent(ServiceDetailsActivity.this,ReservationDetailsActivity.class);
+                startActivityForResult(intent, 2);// Activity is started with requestCode 2
 
                 // todo: here i should route it to the reserveAService activity Page
 
@@ -109,6 +114,18 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         imageViewCar = findViewById(R.id.imageViewVehicleInServiceDetails);
         transporterReviewTXT = findViewById(R.id.transporterReviewInInServiceDetailsPage);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {
+            String message=data.getStringExtra("MESSAGE");
+           // textView1.setText(message);
+        }
     }
 
 

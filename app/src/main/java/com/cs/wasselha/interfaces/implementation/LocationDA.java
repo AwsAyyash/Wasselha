@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -19,13 +20,20 @@ import okhttp3.Response;
 
 public class LocationDA {
 
-    OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient();/*.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+            .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+            .readTimeout(5, TimeUnit.MINUTES) // read timeout
+            .build();*/
     ArrayList<Location> locationListGlobal = new ArrayList<>();
 
     Gson gson = new Gson();
 
 
     public LocationDA() {
+       // OkHttpClient client = new OkHttpClient();
+        //client.setConnectTimeout(30, TimeUnit.SECONDS); // connect timeout
+        //client.setReadTimeout(30, TimeUnit.SECONDS);    // socket timeout
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);

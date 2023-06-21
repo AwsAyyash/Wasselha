@@ -78,27 +78,30 @@ public class HomeCustomerFragment extends Fragment {
 
 
     private void servicesModelSetup() throws IOException {
-        String[] transportersNames = getResources().getStringArray(R.array.services);
-        String[] times = getResources().getStringArray(R.array.times);
-        String[] sourceCities = getResources().getStringArray(R.array.sourceCities);
-        String[] destinationCities = getResources().getStringArray(R.array.destinationCities);
+       // String[] transportersNames = getResources().getStringArray(R.array.services);
+        //String[] times = getResources().getStringArray(R.array.times);
+        //String[] sourceCities = getResources().getStringArray(R.array.sourceCities);
+        //String[] destinationCities = getResources().getStringArray(R.array.destinationCities);
 
 
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
             Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
+            LocationDA locationDA = new LocationDA();
+            VehiclesDA vehiclesDA = new VehiclesDA();
             servicesModelList.add(new ServicesModel(
+
                     transporter.getFirst_name(),
                     servicesModelDAList.get(i).getTransporter(),
                     servicesModelDAList.get(i).getService_date().toString(),
 
-                    new LocationDA().getLocation(servicesModelDAList.get(i).getSource_place()).getTitle(),
+                    locationDA.getLocation(servicesModelDAList.get(i).getSource_place()).getTitle(),
 
-                    new LocationDA().getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle(),
+                    locationDA.getLocation(servicesModelDAList.get(i).getDestination_place()).getTitle(),
 
-                    new VehiclesDA().getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
+                    vehiclesDA.getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
 
-                    new VehiclesDA().getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())
+                    vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())
                     ,
                     transporter.getReview()));
         }
