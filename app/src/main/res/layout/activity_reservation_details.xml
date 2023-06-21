@@ -164,16 +164,15 @@
                 android:orientation="horizontal">
 
 
-                <fragment
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/collectFromReservationMap"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="250dp"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/collectFromReservationMap"
-                    tools:context=".Customer.ReservationDetailsActivity"
-                    android:name="com.google.android.gms.maps.SupportMapFragment" />
+                    android:layout_weight="1"
+                    tools:context=".Customer.ReservationDetailsActivity" />
 
                 <Spinner
                     android:id="@+id/collectFromCollectionPointSpinner"
@@ -262,37 +261,7 @@
                     android:background="@drawable/spinner_style" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/price_in_reservations_details"
-                    android:textColor="@color/dark_green"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/priceInReservationsDetailsPage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edittext_border"
-                    android:hint="@string/enter_the_price_hint_in_reservations_details"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:padding="8dp"
-                    android:textColor="@color/dark_green"
-                    android:textColorHint="@color/quantum_grey600" />
-            </LinearLayout>
 
 
             <LinearLayout

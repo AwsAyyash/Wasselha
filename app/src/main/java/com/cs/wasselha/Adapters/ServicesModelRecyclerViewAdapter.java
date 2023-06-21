@@ -55,8 +55,8 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.time.setText(servicesModelList.get(position).getTime());
         holder.sourceCity.setText(servicesModelList.get(position).getSourceCity());
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
-        //Log.d("SMRVAReview",servicesModelList.get(position).getReview()+"");
-       // holder.review.setText(servicesModelList.get(position).getReview());
+        Log.d("SMRVAReview",servicesModelList.get(position).getReview()+"");
+        holder.transporterReviewInCustomerRecyclerView12.setText(String.valueOf(servicesModelList.get(position).getReview()));
 
         setImage(apiURL +servicesModelList.get(position).getImageUrl(), context, holder.cardImageView );
        /* try {
@@ -71,12 +71,18 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 
        // holder.cardImageView.setImageResource(servicesModelList.get(position).getImage());
 
+        Log.d("SMAdabter","Hello");
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
         Service service =  servicesDA.get(position);
         int transporterId =  servicesDA.get(position).getTransporter();
         String transName = servicesModelList.get(position).getTransporterName();
         String vehicleType = servicesModelList.get(position).getVehicleType();
         String imageUrl = apiURL +servicesModelList.get(position).getImageUrl();
+        int reviewTrans = servicesModelList.get(position).getReview();
+        String srcCity= servicesModelList.get(position).getSourceCity();
+        String destCity= servicesModelList.get(position).getDestinationCity();
+        Log.d("SMAdabter2","review=" + reviewTrans);
+
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +95,10 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
                 intent.putExtra("transporterName",transName);
                 intent.putExtra("vehicleType",vehicleType);
                 intent.putExtra("imageUrl",imageUrl);
-                intent.putExtra("transporterId",transporterId);
+                intent.putExtra("srcCity",srcCity);
+                intent.putExtra("destCity",destCity);
+                intent.putExtra("reviewT",String.valueOf(reviewTrans));
+                intent.putExtra("transporterId",String.valueOf(transporterId));
 
                 // Start the activity
                 view.getContext().startActivity(intent);
@@ -106,7 +115,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView cardImageView;
-        TextView transporterName, time, sourceCity, destinationCity, review;
+        TextView transporterName, time, sourceCity, destinationCity, transporterReviewInCustomerRecyclerView12;
 
 
 
@@ -118,7 +127,8 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
             time = itemView.findViewById(R.id.timeInCustomerRecyclerView);
             sourceCity = itemView.findViewById(R.id.sourceCity);
             destinationCity = itemView.findViewById(R.id.destinationCity);
-            review = itemView.findViewById(R.id.transporterReviewInCustomerRecyclerView12);
+            transporterReviewInCustomerRecyclerView12
+                    = itemView.findViewById(R.id.transporterReviewInCustomerRecyclerView12);
 
         }
     }

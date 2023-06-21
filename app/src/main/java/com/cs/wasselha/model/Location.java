@@ -9,8 +9,16 @@ import java.util.List;
 
 public class Location {
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //@Expose(serialize = false)
-    private transient int id;
+    private  int id;
     private String title;
     private String description;
     private double latitude;
