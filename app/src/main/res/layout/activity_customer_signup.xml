@@ -162,7 +162,7 @@
                     android:name="com.google.android.gms.maps.SupportMapFragment" />
 
                     <View
-                        android:id="@+id/sourceMapTransparentView"
+                        android:id="@+id/customerAddressMapView"
                         android:layout_width="match_parent"
                         android:layout_height="300dp" />
                 </FrameLayout>
