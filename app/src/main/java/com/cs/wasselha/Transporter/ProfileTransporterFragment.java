@@ -76,24 +76,31 @@ public class ProfileTransporterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
-        setupReference(view);
+        try {
+            View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+            setupReference(view);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
-        setAndGetName(getContext(),transporterID);
-        getVehicleImageURLAndSetImage(getContext(),transporterID);
+            SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID = Integer.parseInt(id.trim());
+            setAndGetName(getContext(), transporterID);
+            getVehicleImageURLAndSetImage(getContext(), transporterID);
 
-        //Calls
-        logoutSetup();
-        carInfoSetup();
-        settingSetup();
-        claimsImgSetup();
-        statusImgSetup();
-        reservationsSetup();
+            //Calls
+            logoutSetup();
+            carInfoSetup();
+            settingSetup();
+            claimsImgSetup();
+            statusImgSetup();
+            reservationsSetup();
 
-        return view;
+            return view;
+
+        }catch (Exception e){
+            Log.e("error:",e.toString());
+            View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+            return view;
+        }
     }
 
 

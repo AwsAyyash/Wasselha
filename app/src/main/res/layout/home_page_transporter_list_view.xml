@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_selver"
+    android:background="@color/white"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/imageInCustomerNotificationsListView"
         android:layout_width="100dp"
-        android:layout_height="70dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/image_profile_style"
         />
 
@@ -18,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/imageInCustomerNotificationsListView"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/sourceCityInListViewMainPageTransporter"
@@ -33,11 +34,9 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="18sp"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:textSize="20sp"
             android:layout_weight="1"
             style="@style/TextAppearance.AppCompat.Title"
             android:text="to"
@@ -69,11 +68,10 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/pathLinearLayout"
         android:layout_alignParentEnd="true"
         android:background="@drawable/ic_close" />
 

@@ -76,7 +76,8 @@ public class RequestsTransporterFragment extends Fragment {
         return view;
         }catch (Exception e){
             Log.e("error:",e.toString());
-            return null;
+            View view = inflater.inflate(R.layout.fragment_requests_transporter, container, false);
+            return view;
         }
     }
 
@@ -166,10 +167,14 @@ public class RequestsTransporterFragment extends Fragment {
                                                         Requests request = new Requests(deliveryDetailsId, customerName[0], customerReview[0], sourceCity, destinationCity, price, dateTime);
                                                         Log.e("request-value", request.toString());
                                                         requestsData.add(request);
-                                                        RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
-                                                        listView.setAdapter(requestsAdapter);
-                                                        progressDialog.dismiss();
-                                                        Log.e("claimmm", "dismiss");
+                                                        try{
+                                                            RequestsAdapter requestsAdapter = new RequestsAdapter(requireContext(), R.layout.requests_list_view, requestsData);
+                                                            listView.setAdapter(requestsAdapter);
+                                                            progressDialog.dismiss();
+                                                            Log.e("claimmm", "dismiss");
+                                                        }catch (Exception e) {
+                                                            Log.e("error:", e.toString());
+                                                        }
                                                     }
                                                 });
                                             }

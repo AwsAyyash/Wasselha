@@ -69,7 +69,8 @@ public class HomeTransporterFragment extends Fragment {
         return view;
         }catch (Exception e){
         Log.e("error:",e.toString());
-        return null;
+        View view = inflater.inflate(R.layout.fragment_home_transporter, container, false);
+        return view;
     }
     }
 
@@ -110,9 +111,13 @@ public class HomeTransporterFragment extends Fragment {
                                     servicesData.add(new Services(id, transporterId, sourcePlace, destinationPlace, date, time, price));
                                 }
                             }
-                            ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
-                            listView.setAdapter(servicesAdapter);
-                            progressDialog.dismiss();
+                            try {
+                                ServicesAdapter servicesAdapter = new ServicesAdapter(requireContext(), R.layout.home_page_transporter_list_view, servicesData);
+                                listView.setAdapter(servicesAdapter);
+                                progressDialog.dismiss();
+                            }catch (Exception e) {
+                                Log.e("error:", e.toString());
+                            }
                         } catch (JSONException | DateTimeParseException e) {
                             e.printStackTrace();
                         }

@@ -64,19 +64,6 @@ public class NotificationsTransporterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NotificationsTransporterFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationsTransporterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NotificationsTransporterFragment newInstance(String param1, String param2) {
         NotificationsTransporterFragment fragment = new NotificationsTransporterFragment();
         Bundle args = new Bundle();
@@ -124,7 +111,8 @@ public class NotificationsTransporterFragment extends Fragment {
 
         }catch (Exception e){
             Log.e("error:",e.toString());
-            return null;
+            View view = inflater.inflate(R.layout.fragment_notifications_transporter, container, false);
+            return view;
         }
     }
     private void populateNotificationsData(int transporterID)
@@ -182,9 +170,13 @@ public class NotificationsTransporterFragment extends Fragment {
                                 notificationsTransporterData.add(new Notifications(id,user_id,title,description,time,date,user_type));
 
                             }
-                            NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
-                            notificationsListView.setAdapter(notificationsCustomerAdapter);
-                            progressDialog.dismiss();
+                            try{
+                                NotificationsCustomerAdapter notificationsCustomerAdapter = new NotificationsCustomerAdapter(requireContext(), R.layout.notifications_customer_list_view, notificationsTransporterData);
+                                notificationsListView.setAdapter(notificationsCustomerAdapter);
+                                progressDialog.dismiss();
+                            }catch (Exception e) {
+                                Log.e("error:", e.toString());
+                            }
 
                         } catch (Exception e) {
                             Log.e("notification","notification not found");

@@ -264,7 +264,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_status"
+                            android:src="@drawable/ic_tracking"
                             app:layout_constraintBottom_toBottomOf="@+id/statusImage"
                             app:layout_constraintEnd_toEndOf="@+id/statusImage"
                             app:layout_constraintStart_toStartOf="@+id/statusImage"
@@ -277,7 +277,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="@string/status_in_profile_page"
+                        android:text="@string/track_in_bottom_bar"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />
