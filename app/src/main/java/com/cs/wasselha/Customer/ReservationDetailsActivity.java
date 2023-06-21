@@ -39,6 +39,11 @@ public class ReservationDetailsActivity extends AppCompatActivity {
 
     ArrayList<CollectionPoint> collectionPoints;
     ArrayList<String> spinnerStrings = new ArrayList<>();
+
+    int fromCPLocationId;
+    int toCPLocationId;
+    Intent intent=new Intent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,43 +69,53 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             }
         });
 
-        int fromCPLocationId;
-        int toCPLocationId;
-        Intent intent=new Intent();
-        if (collectFromLocationRadioButtonInReservationsDetails.isChecked()){
-
-            // todo: here i have to handle the google map
-        }else {
-            // the collectionPoint is checked
-
-            fromCPLocationId = Integer.parseInt(collectFromCollectionPointSpinner.getSelectedItem().toString().split(" ")[0]);
-
-            intent.putExtra("fromCPLocationId",String.valueOf(fromCPLocationId));
-
-        }
 
 
-        if (handOverToLocationRadioButtonInReservationsDetails.isChecked()){
 
-            // todo: here i have to handle the google map
-        }else {
-            // the collectionPoint is checked
+        reserveBtnReservationDetailsPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            toCPLocationId = Integer.parseInt(collectFromCollectionPointSpinner.getSelectedItem().toString().split(" ")[0]);
-            intent.putExtra("toCPLocationId",String.valueOf(toCPLocationId));
+                if (collectFromLocationRadioButtonInReservationsDetails.isChecked()){
+
+                    // todo: here i have to handle the google map
+                }else {
+                    // the collectionPoint is checked
+
+                    fromCPLocationId = Integer.parseInt(collectFromCollectionPointSpinner.getSelectedItem().toString().split(" ")[0]);
+
+                    intent.putExtra("fromCPLocationId",String.valueOf(fromCPLocationId));
+
+                }
 
 
-        }
+                if (handOverToLocationRadioButtonInReservationsDetails.isChecked()){
 
-        //DeliveryServiceDetails deliveryServiceDetails = new DeliveryServiceDetails();
-        //deliveryServiceDetails
+                    // todo: here i have to handle the google map
+                }else {
+                    // the collectionPoint is checked
+
+                    toCPLocationId = Integer.parseInt(collectFromCollectionPointSpinner.getSelectedItem().toString().split(" ")[0]);
+                    intent.putExtra("toCPLocationId",String.valueOf(toCPLocationId));
 
 
-        intent.putExtra("packWeight",packWeight);
-        intent.putExtra("packType",packType);
-        intent.putExtra("packType",packType);
-        setResult(2,intent);
-        finish();//finishing activity
+                }
+
+                //DeliveryServiceDetails deliveryServiceDetails = new DeliveryServiceDetails();
+                //deliveryServiceDetails
+
+
+                intent.putExtra("packWeight",packWeight);
+                intent.putExtra("packType",packType);
+                intent.putExtra("packType",packType);
+                setResult(2,intent);
+                finish();//finishing activity
+
+
+
+            }
+        });
+
 
 
     }

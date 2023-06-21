@@ -85,8 +85,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Log.d("before1212","before go to the reservetion det");
                 Intent intent=new Intent(ServiceDetailsActivity.this,ReservationDetailsActivity.class);
                 startActivityForResult(intent, 2);// Activity is started with requestCode 2
+                Log.d("after1212","after go to the reservetion det");
 
                 // todo: here i should route it to the reserveAService activity Page
 

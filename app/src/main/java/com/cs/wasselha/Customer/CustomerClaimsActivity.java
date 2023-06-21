@@ -46,12 +46,13 @@ public class CustomerClaimsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        int customerId = Integer.parseInt(intent.getStringExtra("customerId"));
+        String customerId = intent.getStringExtra("customerId");
         //Calls
         setupReference();
         populateClaimsData(this,customerId);
-      //  ArrayAdapter<Claim> claimsAdapterItems = new ArrayAdapter<Claim>(this,
-        //        android.R.layout.simple_list_item_1, claimsCustomerData);
+
+       // ArrayAdapter<Claim> claimsAdapterItems = new ArrayAdapter<Claim>(this,
+         //       android.R.layout.simple_list_item_1, claimsCustomerData);
         ClaimsTransporterAdapter claimsCAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view,
                 claimsCustomerData,claimsDACustomerData);
         claimsListView.setAdapter(claimsCAdapter);
@@ -68,7 +69,7 @@ public class CustomerClaimsActivity extends AppCompatActivity {
 
     private static String apiURL="http://176.119.254.198:8000/wasselha";
 
-    private void populateClaimsData(Context context,int customerId)
+    private void populateClaimsData(Context context,String customerId)
     {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = apiURL + "/claims/?written_to_type=customer&written_to_id="+ customerId ;
@@ -125,6 +126,9 @@ public class CustomerClaimsActivity extends AppCompatActivity {
                                 claimsCustomerData.add(new Claims(id,review,message,date+time,writer_type));
 
                             }
+                            ClaimsTransporterAdapter claimsCAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view,
+                                    claimsCustomerData,claimsDACustomerData);
+                            claimsListView.setAdapter(claimsCAdapter);
 
                         } catch (Exception e) {
                             Log.e("notification","notification not found");
