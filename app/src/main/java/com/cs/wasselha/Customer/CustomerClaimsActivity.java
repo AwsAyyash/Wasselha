@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
 import com.cs.wasselha.Claims.Claims;
@@ -41,7 +42,7 @@ public class CustomerClaimsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_claims);
+        setContentView(R.layout.activity_claims_transporter);
         getSupportActionBar().hide();
 
         Intent intent = getIntent();
@@ -49,13 +50,13 @@ public class CustomerClaimsActivity extends AppCompatActivity {
         String customerId = intent.getStringExtra("customerId");
         //Calls
         setupReference();
-        populateClaimsData(this,customerId);
+        populateClaimsData(customerId);
 
        // ArrayAdapter<Claim> claimsAdapterItems = new ArrayAdapter<Claim>(this,
          //       android.R.layout.simple_list_item_1, claimsCustomerData);
-        ClaimsTransporterAdapter claimsCAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view,
-                claimsCustomerData,claimsDACustomerData);
-        claimsListView.setAdapter(claimsCAdapter);
+        //ClaimsTransporterAdapter claimsCAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view,
+          //      claimsCustomerData,claimsDACustomerData);
+        //claimsListView.setAdapter(claimsCAdapter);
 
     }
 
@@ -64,12 +65,12 @@ public class CustomerClaimsActivity extends AppCompatActivity {
     //References
     private void setupReference()
     {
-        claimsListView = findViewById(R.id.claimsCustomerListView);
+        claimsListView = findViewById(R.id.claimsTransporterListView);
     }
 
     private static String apiURL="http://176.119.254.198:8000/wasselha";
 
-    private void populateClaimsData(Context context,String customerId)
+    /*private void populateClaimsData(Context context,String customerId)
     {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = apiURL + "/claims/?written_to_type=customer&written_to_id="+ customerId ;
@@ -146,5 +147,78 @@ public class CustomerClaimsActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
 
+    }*/
+
+    private void populateClaimsData( String customerId) {
+        claimsCustomerData = new ArrayList<>();
+
+        //String url =  apiURL+ "/claims/?written_to_type=transporter&written_to_id=" + transporterID;
+        String url = apiURL + "/claims/?written_to_type=customer&written_to_id="+ customerId ;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    Log.e("claimmm","length"+response.length());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject claimObject = response.getJSONObject(i);
+
+                            int writerId = claimObject.getInt("writer_id");
+                            String writerType = claimObject.getString("writer_type");
+                            int review = claimObject.getInt("review");
+                            String message = claimObject.getString("message");
+                            String dateTime = claimObject.getString("date");
+
+                            String[] dateSplit = dateTime.split("T");
+                            String displayDate = dateSplit[0] + ", " + dateSplit[1].substring(0, dateSplit[1].indexOf('+'));
+
+                            String writerUrl = "";
+                            if ("customer".equals(writerType)) {
+                                writerUrl = apiURL + "/customers/" + writerId + "/";
+                            } else if ("collectionpointprovider".equals(writerType)) {
+                                writerUrl = apiURL + "/collection-point-providers/" + writerId + "/";
+                            } else {
+                                writerUrl = apiURL + "/transporters/" + writerId + "/";
+                            }
+
+                            JsonObjectRequest writerRequest = new JsonObjectRequest(Request.Method.GET, writerUrl, null,
+                                    writerResponse -> {
+                                        try {
+                                            String firstName = writerResponse.getString("first_name");
+                                            String lastName = writerResponse.getString("last_name");
+                                            Log.e("claimmm","add to claims list");
+                                            claimsCustomerData.add(new Claims(R.drawable.ic_claim, String.valueOf(review),
+                                                    message, displayDate, firstName + " " + lastName));
+                                            ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsCustomerData,null);
+                                            claimsListView.setAdapter(claimsTransporterAdapter);
+                                            //progressDialog.dismiss();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            Log.e("claimmm",e.toString());
+                                        }
+                                    },
+                                    error -> {
+                                        // Handle error for writer request
+                                        error.printStackTrace();
+                                        Log.e("claimmm",error.toString());
+                                    }
+                            );
+
+                            RequestQueue requestQueue = Volley.newRequestQueue(this);
+                            requestQueue.add(writerRequest);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("claimmm",e.toString());
+                        }
+                    }
+                },
+                error -> {
+                    // Handle error
+                    error.printStackTrace();
+                }
+        );
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
     }
 }

@@ -199,9 +199,10 @@ public class ProfileCustomerFragment extends Fragment {
         historyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(getContext(), ReservationsCustomerFragment.class);
+                Intent intent = new Intent(getContext(), MainCustomerActivity.class);
 
-                startActivity(intent);*/
+                intent.putExtra("fromProfile","profile");
+                startActivity(intent);
 
                // this is just to let him/her see their previous reservations
             }

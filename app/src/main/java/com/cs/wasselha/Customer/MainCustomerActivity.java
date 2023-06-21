@@ -32,7 +32,20 @@ public class MainCustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeCustomerFragment(this));
+
+        Intent intentFromProfileForHistory = getIntent();
+        if (intentFromProfileForHistory != null ){
+
+            if ( intentFromProfileForHistory.getStringExtra("fromProfile") != null )
+             replaceFragment(new ReservationsCustomerFragment() );
+            else
+                replaceFragment(new HomeCustomerFragment(this));
+
+        }
+
+        else
+            replaceFragment(new HomeCustomerFragment(this));
+
         getSupportActionBar().hide();
 
         binding.bottomBarInCustomerMainPage.setOnItemSelectedListener(item -> {

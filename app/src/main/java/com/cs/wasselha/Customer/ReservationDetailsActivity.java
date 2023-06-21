@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -56,16 +57,24 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         String packType = packageTypeInReservationsDetails.getText().toString();
         String packWeight = packageWeightInReservationsDetails.getText().toString();
 
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                onClickRadioCollectionPointForSpinners();
+            }
+        });
+        onClickRadioCollectionPointForSpinners();
         collectFromCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickRadioCollectionPointForSpinners();
+               // onClickRadioCollectionPointForSpinners();
             }
         });
         handOverToCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickRadioCollectionPointForSpinners();
+
             }
         });
 
