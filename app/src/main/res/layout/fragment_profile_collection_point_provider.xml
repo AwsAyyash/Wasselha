@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=""
+        android:text="Not available"
         android:textColor="@color/light_selver"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -33,7 +33,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/profile_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,6 +144,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
                     android:layout_margin="16dp"
                     android:orientation="vertical">
 

@@ -99,7 +99,8 @@ public class ProfileCustomerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+
         setupReference(view);
 
         getFromSharedPref();
@@ -126,7 +127,7 @@ public class ProfileCustomerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CustomerClaimsActivity.class);
-                intent.putExtra("customerId",customerId);
+                intent.putExtra("customerId",String.valueOf(customerId));
 
                 startActivity(intent);
             }
@@ -141,6 +142,7 @@ public class ProfileCustomerFragment extends Fragment {
        // carsImg = view.findViewById(R.id.carsImag);
        // statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImageCustomer);
+        historyImg = view.findViewById(R.id.historyCustomerProfile);
     }
 
     private void logoutSetup()
@@ -197,9 +199,12 @@ public class ProfileCustomerFragment extends Fragment {
         historyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ReservationsCustomerFragment.class);
+                Intent intent = new Intent(getContext(), MainCustomerActivity.class);
 
+                intent.putExtra("fromProfile","profile");
                 startActivity(intent);
+
+               // this is just to let him/her see their previous reservations
             }
         });
     }

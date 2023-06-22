@@ -71,7 +71,6 @@ public class AddCollectionPointFragment extends Fragment {
         amPmPickerCloseTime.setMaxValue(1);
         amPmPickerCloseTime.setDisplayedValues(new String[] {"AM", "PM"});
 
-        addLocationBtn = view.findViewById(R.id.locationOfCollectionPointBtn);
 
     }
 

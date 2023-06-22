@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,15 +58,25 @@ public class HomeCustomerFragment extends Fragment {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        try {
-            servicesModelSetup();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList,servicesModelDAList);
-        servicesAvailableRecyclerView.setAdapter(serviceAdapter);
-        servicesAvailableRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            Handler handler = new Handler();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        servicesModelSetup();
+                        ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList,servicesModelDAList);
+                        servicesAvailableRecyclerView.setAdapter(serviceAdapter);
+                        servicesAvailableRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+
+
+
 
         return view;
     }

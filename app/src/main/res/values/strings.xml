@@ -178,7 +178,7 @@
     <string name="select_type_of_login">Login as:</string>
     <string name="title_notifications_customer_list_view">Notifications</string>
     <string name="MAPS_API_KEY">AIzaSyCc0zpvvElMnKIwU1wL0GzUSjd0ALk2b28</string>
-    <string name="collection_points_in_profile_page">Collection Points</string>
+    <string name="collection_points_in_profile_page">Collection \nPoints</string>
     <string name="status_in_profile_page">Status</string>
     <string name="update_info_transporter">Update information</string>
     <string name="enter_your_new_email_hint">Enter your new email</string>
