@@ -97,6 +97,7 @@ public class HomeCustomerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home_customer, container, false);
         servicesAvailableRecyclerView = view.findViewById(R.id.servicesAvailableRecyclerView);
+        setComparator();
         try {
             getFromSharedPref();
         } catch (IOException e) {
@@ -109,9 +110,14 @@ public class HomeCustomerFragment extends Fragment {
                 @Override
                 public void run() {
                     try {
-                        servicesModelDAList = getServiceFromDA();
-                        Log.d("list222",servicesModelDAList.toString());
-                        servicesModelSetup();
+                        if(servicesModelDAList.size()==0){
+
+                            servicesModelDAList = getServiceFromDA();
+                            Log.d("list222",servicesModelDAList.toString());
+                            servicesModelSetup();
+                        }else {
+                            Collections.sort(servicesModelList, comparator);
+                        }
 
                         ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList,servicesModelDAList);
                         servicesAvailableRecyclerView.setAdapter(serviceAdapter);
@@ -154,6 +160,8 @@ public class HomeCustomerFragment extends Fragment {
 
             servicesModelList.add(new ServicesModel(
 
+
+                    servicesModelDAList.get(i).getId(),
                     transporter.getFirst_name(),
                     servicesModelDAList.get(i).getTransporter(),
                     servicesModelDAList.get(i).getService_date().toString(),

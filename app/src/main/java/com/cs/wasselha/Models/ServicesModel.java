@@ -4,6 +4,15 @@ import com.cs.wasselha.model.Location;
 
 public class ServicesModel implements Comparable<ServicesModel>{
 
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    int serviceId;
     String transporterName, time, sourceCity, destinationCity;
 
     public String getVehicleType() {
@@ -61,10 +70,11 @@ public class ServicesModel implements Comparable<ServicesModel>{
         this.transporterId = transporterId;
     }
 
-    public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
+    public ServicesModel(int serviceId,String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
                          String imageUrl, String vehicleType, int review,
                          /*for the sorting*/ Location srcLocation, Location destLocation)
     {
+        this.serviceId = serviceId;
         this.transporterId = transporterId;
         this.transporterName = transporterName;
         this.time = time;
@@ -106,6 +116,6 @@ public class ServicesModel implements Comparable<ServicesModel>{
 
     @Override
     public int compareTo(ServicesModel o) {
-        return review-o.getReview();
+        return o.getReview()-review;
     }
 }

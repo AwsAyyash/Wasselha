@@ -1,5 +1,6 @@
 package com.cs.wasselha.Customer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -81,34 +82,9 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
 //    int minutes = minutesPicker.getValue();
 //    String amPm = amPmPicker.getDisplayedValues()[amPmPicker.getValue()];
 
-    Intent intentToGoSearch = new Intent(FilterActivity.this, MainCustomerActivity.class);
-
-    private void searchOnClickMethod(){
-        searchInsideFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentToGoSearch.putExtra("fromFilter","true");
+    Intent intentToGoSearch;
 
 
-                createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
-                createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
-
-                intentToGoSearch.putExtra("srcLat",sourceLatLng.latitude+"");
-                intentToGoSearch.putExtra("srcLong",sourceLatLng.longitude+"");
-
-                intentToGoSearch.putExtra("destLat",destinationLatLng.latitude+"");
-                intentToGoSearch.putExtra("destLong",destinationLatLng.longitude+"");
-
-                //int priceMaxValue =  Integer.parseInt(price.getText().toString());
-                if(price.getText().toString().equals(""))
-                    intentToGoSearch.putExtra("priceMaxValue",10000000+"");
-                else
-                    intentToGoSearch.putExtra("priceMaxValue",price.getText().toString());
-                startActivity(intentToGoSearch);
-
-            }
-        });
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +92,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
         getSupportActionBar().hide();
 
 
+        intentToGoSearch = new Intent(this, MainCustomerActivity.class);
         //References
         setUpReferences();
         searchOnClickMethod();
@@ -172,6 +149,38 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
         });
     }
 
+    private void searchOnClickMethod(){
+        searchInsideFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (sourceLatLng == null ||destinationLatLng == null)
+                    return;
+
+                intentToGoSearch.putExtra("fromFilter","true");
+
+
+
+                createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
+                createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
+
+                intentToGoSearch.putExtra("srcLat",sourceLatLng.latitude+"");
+                intentToGoSearch.putExtra("srcLong",sourceLatLng.longitude+"");
+
+                intentToGoSearch.putExtra("destLat",destinationLatLng.latitude+"");
+                intentToGoSearch.putExtra("destLong",destinationLatLng.longitude+"");
+
+                //int priceMaxValue =  Integer.parseInt(price.getText().toString());
+                if(price.getText().toString().equals(""))
+                    intentToGoSearch.putExtra("priceMaxValue",10000000+"");
+                else
+                    intentToGoSearch.putExtra("priceMaxValue",price.getText().toString());
+                startActivity(intentToGoSearch);
+
+            }
+        });
+    }
     private void setupMap(GoogleMap googleMap, boolean isSourceMap) {
         googleMap.setOnMarkerDragListener(this);
         googleMap.getUiSettings().setZoomControlsEnabled(true); // Enable zoom controls
@@ -183,14 +192,14 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
                 // This block is for setting up the source map
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
-                    public void onMapClick(LatLng latLng) {
+                    public void onMapClick(@NonNull LatLng latLng) {
                         if (sourceMarker == null) {
                             sourceLatLng = latLng;
                             sourceMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
                         } else {
                             sourceLatLng = latLng;
                             sourceMarker.setPosition(sourceLatLng);
-                            Toast.makeText(getApplicationContext(), "Source: "+sourceLatLng.toString()+","+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FilterActivity.this, "Source: "+sourceLatLng.toString()+","+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -200,7 +209,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
                 // This block is for setting up the destination map
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
-                    public void onMapClick(LatLng latLng) {
+                    public void onMapClick(@NonNull LatLng latLng) {
                         if (destinationMarker == null) {
                             destinationLatLng = latLng;
                             destinationMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
@@ -235,6 +244,9 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL));
                     } else {
                         // Handle situation where location is null (could be due to GPS not being enabled or other issues)
+
+                      //  sourceMarker = googleMap.addMarker(new MarkerOptions().position(DESTINATION_LATLNG).draggable(true));
+                        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DESTINATION_LATLNG, ZOOM_LEVEL));
                     }
                 }
             });
