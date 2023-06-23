@@ -123,7 +123,8 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_warning"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/ic_reviews"
                             app:layout_constraintBottom_toBottomOf="@+id/claimsImageCustomer"
                             app:layout_constraintEnd_toEndOf="@+id/claimsImageCustomer"
                             app:layout_constraintStart_toStartOf="@+id/claimsImageCustomer"
@@ -136,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="@string/claims_in_profile_page"
+                        android:text="@string/reviews_in_profiles"
                         android:textColor="@color/dark_green"
                         android:textSize="16sp"
                         android:textStyle="bold" />

@@ -84,13 +84,15 @@
             android:name=".CollectionPointProvider.MainCollectionPointProviderActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
-            android:exported="false" />
-        <activity
             android:name=".Customer.FilterActivity"
             android:exported="false" />
+
         <activity
             android:name=".RegistrationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
