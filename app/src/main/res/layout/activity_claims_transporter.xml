@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/changabold"
-            android:text="@string/claims_in_transporter_claims_page"
+            android:text="@string/reviews_in_profiles"
             android:textColor="@color/light_selver"
             android:textSize="25sp"
             android:textStyle="bold"

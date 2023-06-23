@@ -1,10 +1,13 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -36,31 +39,63 @@ public class TransporterSettingActivity extends AppCompatActivity {
     private EditText phoneNumberEditText;
     private Button updateBtn;
     private TextView errorMessageTextView;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transporter_setting);
-        getSupportActionBar().hide();
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID = Integer.parseInt(id.trim());
 
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_transporter_setting);
+            getSupportActionBar().hide();
+
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID = Integer.parseInt(id.trim());
+
+            //Calls
+            setUpRefernces();
+
+            updateBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (validateInputs()) {
+                        updateTransporterInformation(transporterID);
+                    }
+                }
+            });
+
+        progressDialog = new ProgressDialog(TransporterSettingActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run()
+            {
+                progressDialog.dismiss();
+            }
+
+        }, 1000);
+        }
+        catch (Exception e)
+        {
+            Log.e("error:",e.toString());
+        }
+    }
+
+
+
+    //-------Methods------------------------------------------------------------------------
+    private void setUpRefernces()
+    {
         emailEditText = findViewById(R.id.newTransporterEmail);
         passwordEditText = findViewById(R.id.newTransporterPassword);
         phoneNumberEditText = findViewById(R.id.newTransporterPhoneNumber);
         updateBtn = findViewById(R.id.updateTransporterInformationBtn);
         errorMessageTextView = findViewById(R.id.errorMessageInUpdateTransporterInformation);
-
-        updateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(validateInputs()){
-                    updateTransporterInformation(transporterID);
-                }
-            }
-        });
     }
+
 
     private void updateTransporterInformation(int transporterID) {
         String email = emailEditText.getText().toString().trim();
@@ -96,7 +131,7 @@ public class TransporterSettingActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(TransporterSettingActivity.this, "email or phone is used please select another email or phone number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TransporterSettingActivity.this, "Email or phone is used please select another email or phone number", Toast.LENGTH_SHORT).show();
                         emailEditText.setText("");
                         passwordEditText.setText("");
                         phoneNumberEditText.setText("");
@@ -112,20 +147,22 @@ public class TransporterSettingActivity extends AppCompatActivity {
         String phoneNumber = phoneNumberEditText.getText().toString().trim();
 
         // Validating the input fields
-        if (email.isEmpty() && password.isEmpty() && phoneNumber.isEmpty()) {
+        if (email.isEmpty() && password.isEmpty() && phoneNumber.isEmpty())
+        {
             Toast.makeText(this, "please fill all fields", Toast.LENGTH_SHORT).show();
+            errorMessageTextView.setText("Please fill one field at least, and try again!");
             return false;
         }
 
         // Email validation
         if (!email.isEmpty() && !isValidEmail(email)) {
-            Toast.makeText(this, "invalid email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid email address!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // Phone number validation
         if (!phoneNumber.isEmpty() && !isValidPhoneNumber(phoneNumber)) {
-            Toast.makeText(this, "invalid phone bumber", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid phone number!", Toast.LENGTH_SHORT).show();
             return false;
         }
 

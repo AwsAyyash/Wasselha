@@ -46,7 +46,7 @@ public View getView(int position, @Nullable View convertView, @NonNull ViewGroup
 
         TextView from = convertView.findViewById(R.id.fromInClaimListView);
 
-        claimImg.setImageResource(R.drawable.ic_claim);
+        claimImg.setImageResource(R.drawable.ic_review_list_view);
         review.setText(getItem(position).getReview());
         massage.setText(getItem(position).getMessage());
         date.setText(getItem(position).getDate());

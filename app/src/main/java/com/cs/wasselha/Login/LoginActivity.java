@@ -150,24 +150,31 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString(ID_KEY, id+"");
                                         editor.apply();
                                         String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
+
                                         if(loginType !=null)
                                         {
                                             isUserLoggedIn = true;
-                                            if(loginType.equals("customer")){
+
+                                            if(loginType.equals("customer"))
+                                            {
                                                 Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                                 email.setText("");
                                                 password.setText("");
                                                 errorMessage.setText("");
-                                            }else if(loginType.equals("transporter")){
+                                            }
+                                            else if(loginType.equals("transporter"))
+                                            {
                                                 Intent intent = new Intent(LoginActivity.this, MainTransporterActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                                 email.setText("");
                                                 password.setText("");
                                                 errorMessage.setText("");
-                                            }else if(loginType.equals("collectionpointprovider")){
+                                            }
+                                            else if(loginType.equals("collectionpointprovider"))
+                                            {
                                                 Intent intent = new Intent(LoginActivity.this, MainCollectionPointProviderActivity.class);
                                                 startActivity(intent);
                                                 finish();
