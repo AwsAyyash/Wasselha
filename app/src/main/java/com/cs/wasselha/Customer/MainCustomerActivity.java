@@ -33,11 +33,14 @@ public class MainCustomerActivity extends AppCompatActivity {
         binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intentFromProfileForHistory = getIntent();
-        if (intentFromProfileForHistory != null ){
+        Intent intentFromProfileForHistoryOrFilter = getIntent();
+        if (intentFromProfileForHistoryOrFilter != null ){
 
-            if ( intentFromProfileForHistory.getStringExtra("fromProfile") != null )
+            if ( intentFromProfileForHistoryOrFilter.getStringExtra("fromProfile") != null )
              replaceFragment(new ReservationsCustomerFragment() );
+            else if (intentFromProfileForHistoryOrFilter.getStringExtra("fromFilter") != null &&
+                    intentFromProfileForHistoryOrFilter.getStringExtra("fromFilter").equals("true"))
+                replaceFragment(new HomeCustomerFragment(this,true,intentFromProfileForHistoryOrFilter));
             else
                 replaceFragment(new HomeCustomerFragment(this));
 

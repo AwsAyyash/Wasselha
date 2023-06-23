@@ -606,6 +606,7 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
                     hour += 12;
                 }
 
+
                 // Combine date and time
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
                 Date selectedDateTime = sdf.parse(dateText + " " + hour + ":" + minute + " " + amPm);
