@@ -562,8 +562,8 @@ public class TransporterSignupActivity extends AppCompatActivity {
             errorMessage.setText("Please enter a valid email address!");
             return false;
         } else if (!password.equals(repeatPassword)) {
-            showToastMessage("Passwords do not match!");
-            errorMessage.setText("Passwords do not match!");
+            showToastMessage("Passwords does not match!");
+            errorMessage.setText("Passwords does not match!");
             return false;
         } else if (vehiclePhotoBtnText.equals("Upload image")) {
             showToastMessage("Please upload a vehicle photo!");

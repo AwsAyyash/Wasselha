@@ -102,9 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (email.length() > 0 && password.length() > 0)
                 {
                     LoginUser();
-                    email.setText("");
-                    password.setText("");
-                    errorMessage.setText("");
                 }
                 else
                 {
@@ -153,20 +150,30 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString(ID_KEY, id+"");
                                         editor.apply();
                                         String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
-                                        if(loginType !=null){
+                                        if(loginType !=null)
+                                        {
                                             isUserLoggedIn = true;
                                             if(loginType.equals("customer")){
                                                 Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
                                                 startActivity(intent);
                                                 finish();
+                                                email.setText("");
+                                                password.setText("");
+                                                errorMessage.setText("");
                                             }else if(loginType.equals("transporter")){
                                                 Intent intent = new Intent(LoginActivity.this, MainTransporterActivity.class);
                                                 startActivity(intent);
                                                 finish();
+                                                email.setText("");
+                                                password.setText("");
+                                                errorMessage.setText("");
                                             }else if(loginType.equals("collectionpointprovider")){
                                                 Intent intent = new Intent(LoginActivity.this, MainCollectionPointProviderActivity.class);
                                                 startActivity(intent);
                                                 finish();
+                                                email.setText("");
+                                                password.setText("");
+                                                errorMessage.setText("");
                                             }
                                         }
                                         Toast.makeText(LoginActivity.this, "Login succeeded!", Toast.LENGTH_SHORT).show();
@@ -186,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error)
                             {
-                                Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                errorMessage.setText("The information is not correct, try again!");
                             }
                         }) {
                     @Override

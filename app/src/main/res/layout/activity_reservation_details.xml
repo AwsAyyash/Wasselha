@@ -157,24 +157,32 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp">
 
                 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/collectFromReservationMap"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginTop="5dp"
-                    android:layout_weight="1"
                     tools:context=".Customer.ReservationDetailsActivity" />
 
-
+                    <View
+                        android:id="@+id/collectFromReservationMapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+                </FrameLayout>
 
                 <Spinner
                     android:id="@+id/collectFromCollectionPointSpinner"
@@ -241,17 +249,28 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp">
 
                 <fragment
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginTop="5dp"
                     android:id="@+id/handOverToReservationMap"
                     tools:context=".Customer.ReservationDetailsActivity"
                     android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+
+                    <View
+                        android:id="@+id/handOverToReservationMapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+                </FrameLayout>
 
                 <Spinner
                     android:id="@+id/handOverToCollectionPointSpinner"

@@ -144,6 +144,12 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp">
 
                 <fragment
                     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -155,12 +161,17 @@
                     tools:context=".Customer.CustomerSignupActivity"
                     android:name="com.google.android.gms.maps.SupportMapFragment" />
 
+                    <View
+                        android:id="@+id/customerAddressMapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/emailCustomerSignupTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="18dp"
                     android:text="@string/email_customer_signup_textview"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"

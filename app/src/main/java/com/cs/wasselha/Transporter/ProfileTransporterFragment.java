@@ -1,10 +1,12 @@
 package com.cs.wasselha.Transporter;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,8 @@ public class ProfileTransporterFragment extends Fragment {
     private static String apiURL="http://176.119.254.198:8000/wasselha";
     private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg, reservationImg;
     private TextView name;
+
+    private ProgressDialog progressDialog;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -83,6 +87,19 @@ public class ProfileTransporterFragment extends Fragment {
             SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
             String id = preferences.getString(ID_KEY, null);
             int transporterID = Integer.parseInt(id.trim());
+
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                }
+
+            }, 1000);
+
             setAndGetName(getContext(), transporterID);
             getVehicleImageURLAndSetImage(getContext(), transporterID);
 
@@ -93,6 +110,7 @@ public class ProfileTransporterFragment extends Fragment {
             claimsImgSetup();
             statusImgSetup();
             reservationsSetup();
+
 
             return view;
 
