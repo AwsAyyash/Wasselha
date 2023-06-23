@@ -150,9 +150,11 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString(ID_KEY, id+"");
                                         editor.apply();
                                         String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
+
                                         if(loginType !=null)
                                         {
                                             isUserLoggedIn = true;
+
                                             if(loginType.equals("customer"))
                                             {
                                                 Intent intent = new Intent(LoginActivity.this, MainCustomerActivity.class);
