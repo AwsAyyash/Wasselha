@@ -18,9 +18,11 @@ import com.bumptech.glide.Glide;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Customer.ServiceDetailsActivity;
 import com.cs.wasselha.Models.ServicesModel;
+import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.model.Service;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<ServicesModelRecyclerViewAdapter.MyViewHolder>
@@ -73,8 +75,15 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
 
         Log.d("SMAdabter","Hello");
         Button detailsBtn = holder.itemView.findViewById(R.id.detailsBtnInCustomerCardRecyclerView);
-        Service service =  servicesDA.get(position);
-        int transporterId =  servicesDA.get(position).getTransporter();
+        int serviceId =  servicesModelList.get(position).getServiceId();
+        Service service ;
+        try {
+            service = new ServiceDA().getService(serviceId);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int transporterId =  servicesModelList.get(position).getTransporterId();
+
         String transName = servicesModelList.get(position).getTransporterName();
         String vehicleType = servicesModelList.get(position).getVehicleType();
         String imageUrl = apiURL +servicesModelList.get(position).getImageUrl();

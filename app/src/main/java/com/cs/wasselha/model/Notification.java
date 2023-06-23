@@ -5,17 +5,26 @@ import java.time.LocalDateTime;
 public class Notification {
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private int user_id;
     private String user_type;
     private String title;
 
     private String description;
-    private LocalDateTime date;
+    private String date;
 
     public Notification() {
     }
 
-    public Notification(int user_id, String user_type, String title, String description, LocalDateTime date) {
+    public Notification(int user_id, String user_type, String title, String description, String date) {
         this.user_id = user_id;
         this.user_type = user_type;
         this.title = title;
@@ -55,11 +64,11 @@ public class Notification {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

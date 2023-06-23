@@ -8,7 +8,7 @@ public class Service {
 
 
    // @Expose(serialize = false)
-    private  transient int id;
+    private   int id;
 
     public int getId() {
         return id;

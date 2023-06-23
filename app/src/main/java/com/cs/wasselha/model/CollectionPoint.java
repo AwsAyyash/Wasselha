@@ -26,6 +26,16 @@ public class CollectionPoint {
 
 
     int collection_point_provider; // id
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name;
     String status; // open, closed
     String open_time;
     String close_time;
