@@ -1,6 +1,8 @@
 package com.cs.wasselha.Models;
 
-public class ServicesModel {
+import com.cs.wasselha.model.Location;
+
+public class ServicesModel implements Comparable<ServicesModel>{
 
     String transporterName, time, sourceCity, destinationCity;
 
@@ -25,6 +27,25 @@ public class ServicesModel {
     }
 
     int transporterId;
+    Location srcLocation;
+
+    public Location getSrcLocation() {
+        return srcLocation;
+    }
+
+    public void setSrcLocation(Location srcLocation) {
+        this.srcLocation = srcLocation;
+    }
+
+    public Location getDestLocation() {
+        return destLocation;
+    }
+
+    public void setDestLocation(Location destLocation) {
+        this.destLocation = destLocation;
+    }
+
+    Location destLocation;
 
     public int getReview() {
         return review;
@@ -41,7 +62,8 @@ public class ServicesModel {
     }
 
     public ServicesModel(String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
-                         String imageUrl,String vehicleType,int review)
+                         String imageUrl, String vehicleType, int review,
+                         /*for the sorting*/ Location srcLocation, Location destLocation)
     {
         this.transporterId = transporterId;
         this.transporterName = transporterName;
@@ -51,6 +73,8 @@ public class ServicesModel {
        this.imageUrl = imageUrl;
        this.vehicleType = vehicleType;
        this.review = review;
+       this.srcLocation = srcLocation;
+       this.destLocation = destLocation;
     }
 
 
@@ -80,4 +104,8 @@ public class ServicesModel {
         return imageUrl;
     }
 
+    @Override
+    public int compareTo(ServicesModel o) {
+        return review-o.getReview();
+    }
 }
