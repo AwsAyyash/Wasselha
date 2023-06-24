@@ -117,8 +117,8 @@
     <string name="reservation_in_bottom_bar">Reservation</string>
     <string name="track_in_bottom_bar">Track</string>
     <string name="profile_in_bottom_bar">Profile</string>
-    <string name="ads_text">Free delivery</string>
-    <string name="date_offer">May 2 - June 10</string>
+    <string name="ads_text">Offer delivery</string>
+    <string name="date_offer">June 25 - July 10</string>
     <string name="service_available_main_title">Services Available</string>
     <string name="transporter_name_in_customer_recyclerView">Transporter:</string>
     <string name="time_in_customer_recyclerView">Time:</string>

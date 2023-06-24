@@ -53,7 +53,7 @@ public class HistoryCustomerReservationsAdapter  extends ArrayAdapter<DeliverySe
 
 
 
-        imageView.setImageResource(R.drawable.ic_history);
+        imageView.setImageResource(R.drawable.ic_past_reservation);
 
         referenceNumber.setText(String.valueOf(getItem(position).getId()));
 

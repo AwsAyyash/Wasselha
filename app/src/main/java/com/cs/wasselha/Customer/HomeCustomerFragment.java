@@ -2,6 +2,7 @@ package com.cs.wasselha.Customer;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +56,8 @@ public class HomeCustomerFragment extends Fragment {
     private String userType;
     Customer customerObj;
     Location locationOfCustomer;
+
+    private ProgressDialog progressDialog;
     public HomeCustomerFragment(Context context2 ) {
         context = context2;
         //this.servicesModelList = servicesModelList;
@@ -98,9 +101,25 @@ public class HomeCustomerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_customer, container, false);
         servicesAvailableRecyclerView = view.findViewById(R.id.servicesAvailableRecyclerView);
         setComparator();
-        try {
+
+        try
+        {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run()
+                {
+                    progressDialog.dismiss();
+                }
+
+            }, 3000);
             getFromSharedPref();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
 
@@ -127,10 +146,6 @@ public class HomeCustomerFragment extends Fragment {
                     }
                 }
             });
-
-
-
-
 
         return view;
     }

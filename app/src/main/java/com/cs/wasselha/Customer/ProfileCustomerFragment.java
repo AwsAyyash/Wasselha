@@ -2,6 +2,7 @@ package com.cs.wasselha.Customer;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +59,8 @@ public class ProfileCustomerFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ProgressDialog progressDialog;
+
     public ProfileCustomerFragment() {
         // Required empty public constructor
     }
@@ -98,8 +102,23 @@ public class ProfileCustomerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+        try
+        {
+             // Inflate the layout for this fragment
+             View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                }
+
+            }, 500);
+
 
         setupReference(view);
 
@@ -115,9 +134,17 @@ public class ProfileCustomerFragment extends Fragment {
         historySetup();
        // settingSetup();
         claimsImgSetup();
-       // statusImgSetup();
+       // statusImgSetup();return view;
 
-        return view;
+            return view;
+        }
+        catch (Exception e)
+        {
+            Log.e("error:",e.toString());
+            View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+            return view;
+        }
+
         //return inflater.inflate(R.layout.fragment_profile_customer, container, false);
     }
 
