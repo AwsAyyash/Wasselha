@@ -217,4 +217,10 @@
     <string name="collection_from_in_customer_delivery_status">Collection from:</string>
     <string name="delivery_status_title">Delivery status</string>
     <string name="handover_to_in_customer_delivery_status">Handover to:</string>
+    <string name="add_review_btn_customer_delivery_satus">Add review</string>
+    <string name="add_review_title">Add review</string>
+    <string name="review_in_add_review_a_transporter">Review</string>
+    <string name="message_in_add_review_a_transporter">Notes</string>
+    <string name="enter_the_review_in_add_review_a_transporter">Enter the review</string>
+    <string name="enter_the_notes_in_add_review_a_transporter">Enter the notes...</string>
 </resources>

@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs.wasselha.Adapters.DeliveryStatusAdapter;
+import com.cs.wasselha.AddReviewForATransporterActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.DeliveryStatusDA;
 import com.cs.wasselha.model.DeliveryServiceDetails;
@@ -28,6 +31,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
 
+    private Button addReviewBtn;
 
     private int customerId;
     private String userType;
@@ -39,20 +43,47 @@ public class DeliveryStatusActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+        //Calls
+        setupRefernces();
+        addReviewBtnSetup();
+
+
         Intent intent = getIntent();
         if (intent != null)
             delSerDetId = Integer.parseInt(intent.getStringExtra("delSerDetId"));
 
-        detailsListView = findViewById(R.id.deliveryStatusCustomerListView);
-
         getFromSharedPref();
-        try {
+
+        try
+        {
             populateNotificationsData();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
 
 
+    }
+
+
+    //-------------Methods---------------------------------------------------------
+    private void setupRefernces()
+    {
+        detailsListView = findViewById(R.id.deliveryStatusCustomerListView);
+        addReviewBtn = findViewById(R.id.addReviewBtnInCustomerDeliveryStatusPage);
+    }
+
+    private void addReviewBtnSetup()
+    {
+        addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(DeliveryStatusActivity.this, AddReviewForATransporterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     void getFromSharedPref() {
@@ -69,9 +100,10 @@ public class DeliveryStatusActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
-            public void run() {
-
-                try {
+            public void run()
+            {
+                try
+                {
                     delivaryDetailsReservationsForCustomerData = new DeliveryStatusDA().getDelStatuses(delSerDetId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

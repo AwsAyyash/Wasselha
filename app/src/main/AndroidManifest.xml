@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddReviewForATransporterActivity"
+            android:exported="false" />
+        <activity
             android:name=".Customer.DeliveryStatusActivity"
             android:exported="false" />
         <activity

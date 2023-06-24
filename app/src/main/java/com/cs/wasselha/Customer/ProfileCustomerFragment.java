@@ -123,6 +123,7 @@ public class ProfileCustomerFragment extends Fragment {
         setupReference(view);
 
         getFromSharedPref();
+        settingBtnSetup();
         //SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
        // String id = preferences.getString(ID_KEY, null);
         //int transporterID=Integer.parseInt(id.trim());
@@ -132,7 +133,6 @@ public class ProfileCustomerFragment extends Fragment {
         //Calls
         logoutSetup();
         historySetup();
-       // settingSetup();
         claimsImgSetup();
        // statusImgSetup();return view;
 
@@ -164,7 +164,7 @@ public class ProfileCustomerFragment extends Fragment {
     {
        // mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCustomerInProfilePage);
-       // settingsImg = view.findViewById(R.id.settingImage);
+        settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
         claimsImg = view.findViewById(R.id.claimsImageCustomer);
        // carsImg = view.findViewById(R.id.carsImag);
        // statusImg = view.findViewById(R.id.statusImage);
@@ -232,6 +232,18 @@ public class ProfileCustomerFragment extends Fragment {
                 startActivity(intent);
 
                // this is just to let him/her see their previous reservations
+            }
+        });
+    }
+
+    private void settingBtnSetup()
+    {
+        settingsImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(), CustomerSettingActivity.class);
+                startActivity(intent);
             }
         });
     }
