@@ -1,6 +1,7 @@
 package com.cs.wasselha.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cs.wasselha.Claims.Claims;
+import com.cs.wasselha.Customer.DeliveryStatusActivity;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.interfaces.implementation.TransporterDA;
@@ -55,7 +57,8 @@ public class HistoryCustomerReservationsAdapter  extends ArrayAdapter<DeliverySe
 
         imageView.setImageResource(R.drawable.ic_history);
 
-        referenceNumber.setText(String.valueOf(getItem(position).getId()));
+        int refNoDelDet = getItem(position).getId();
+        referenceNumber.setText(String.valueOf(refNoDelDet));
 
         int serviceId = getItem(position).getService();
         int transId ;
@@ -94,6 +97,15 @@ public class HistoryCustomerReservationsAdapter  extends ArrayAdapter<DeliverySe
         statusInReservationCustomerListView.setText(statusAcceptedOrNot);
         dateInReservationCustomerListView.setText(getItem(position).getCollection_time());
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DeliveryStatusActivity.class);
+                intent.putExtra("delSerDetId",String.valueOf(refNoDelDet));
+
+                getContext().startActivity(intent);
+            }
+        });
 
 
         return convertView;

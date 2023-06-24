@@ -208,7 +208,7 @@
     <string name="rservation_details">Rservation details</string>
     <string name="select_type_of_delivery_in_reservation_details_acivity">Select type of delivery:</string>
     <string name="reviews_in_profiles">Reviews</string>
-    <string name="source_in_reservation_customer_listView">Source:</string>
+    <string name="source_in_reservation_customer_listView">Handover To:</string>
     <string name="destination_in_reservation_customer_listView">Destination:</string>
     <string name="status_in_reservation_customer_listView">Status:</string>
     <string name="date_in_reservation_customer_listView">Date:</string>
