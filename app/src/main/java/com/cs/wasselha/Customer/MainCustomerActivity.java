@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -34,20 +35,54 @@ public class MainCustomerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intentFromProfileForHistoryOrFilter = getIntent();
+        Handler handler  = new Handler();
         if (intentFromProfileForHistoryOrFilter != null ){
 
-            if ( intentFromProfileForHistoryOrFilter.getStringExtra("fromProfile") != null )
-             replaceFragment(new ReservationsCustomerFragment() );
+            if ( intentFromProfileForHistoryOrFilter.getStringExtra("fromProfile") != null ){
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        replaceFragment(new ReservationsCustomerFragment() );
+
+                    }
+                });
+            }
             else if (intentFromProfileForHistoryOrFilter.getStringExtra("fromFilter") != null &&
-                    intentFromProfileForHistoryOrFilter.getStringExtra("fromFilter").equals("true"))
-                replaceFragment(new HomeCustomerFragment(this,true,intentFromProfileForHistoryOrFilter));
+                    intentFromProfileForHistoryOrFilter.getStringExtra("fromFilter").equals("true")){
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        replaceFragment(new HomeCustomerFragment(MainCustomerActivity.this,true,intentFromProfileForHistoryOrFilter));
+
+                    }
+                });
+            }
             else
-                replaceFragment(new HomeCustomerFragment(this));
+            {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        replaceFragment(new HomeCustomerFragment(MainCustomerActivity.this));
+
+                    }
+                });
+            }
 
         }
 
         else
-            replaceFragment(new HomeCustomerFragment(this));
+        {
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    replaceFragment(new HomeCustomerFragment(MainCustomerActivity.this));
+
+                }
+            });
+        }
 
         getSupportActionBar().hide();
 
@@ -56,7 +91,13 @@ public class MainCustomerActivity extends AppCompatActivity {
             switch(item.getItemId())
             {
                 case R.id.nav_home_transporter:
-                    replaceFragment(new HomeCustomerFragment(this));
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            replaceFragment(new HomeCustomerFragment(MainCustomerActivity.this));
+
+                        }
+                    });
 
 
                     break;

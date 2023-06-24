@@ -1,14 +1,26 @@
 package com.cs.wasselha.Customer;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.cs.wasselha.Adapters.HistoryCustomerReservationsAdapter;
+import com.cs.wasselha.Adapters.NotificationsCustomerAdapter;
 import com.cs.wasselha.R;
+import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
+import com.cs.wasselha.model.DeliveryServiceDetails;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +37,20 @@ public class ReservationsCustomerFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    ListView reservationsListView;
+    private ArrayList<DeliveryServiceDetails> delivaryDetailsReservationsForCustomerData;
+
+
+    private static final String ID_KEY = "id";
+    private static final String LOGIN_TYPE_KEY = "loginType";
+    private static final String PREFERENCES_NAME = "MyPreferences";
+
+
+    private int customerId;
+    private String userType;
+
 
     public ReservationsCustomerFragment() {
         // Required empty public constructor
@@ -61,6 +87,49 @@ public class ReservationsCustomerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservations_customer, container, false);
+        View view = inflater.inflate(R.layout.fragment_reservations_customer, container, false);
+
+        reservationsListView = view.findViewById(R.id.reservationCustomerHistoryListView);
+
+        getFromSharedPref();
+        try {
+            populateNotificationsData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return view;
+
     }
+
+    void getFromSharedPref() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+        userType = preferences.getString(LOGIN_TYPE_KEY, null);
+        customerId = Integer.parseInt(preferences.getString(ID_KEY, ""));
+
+
+    }
+
+    private void populateNotificationsData() throws IOException {
+
+
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    delivaryDetailsReservationsForCustomerData = new DeliveryServiceDetailsDA().getDSDsForACustomer(customerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                HistoryCustomerReservationsAdapter historyCustomerReservationsAdapter =
+                        new HistoryCustomerReservationsAdapter(requireContext(), R.layout.reservation_customer_list_view, delivaryDetailsReservationsForCustomerData);
+                reservationsListView.setAdapter(historyCustomerReservationsAdapter);
+            }
+        });
+
+    }
+
 }

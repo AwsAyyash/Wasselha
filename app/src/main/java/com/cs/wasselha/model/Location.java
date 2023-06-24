@@ -31,7 +31,8 @@ public class Location {
     //@Expose(serialize = false)
     transient List<Location> locations = new ArrayList<>();
 
-    public Location() {
+    public Location(){}
+    /*public Location() {
         Faker faker = new Faker();
         int i = 0;
         while (i < 30) {
@@ -48,7 +49,7 @@ public class Location {
             i++;
         }
         Log.d("locations",locations.toString());
-    }
+    }*/
 
     /* public Location() throws FileNotFoundException {
 

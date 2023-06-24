@@ -35,7 +35,7 @@ public class Customer {
     //private String documentId; // this is for the firebase database
 
     //List<Customer> customers = new ArrayList<>();
-    public Customer(List<Customer> customers) {
+    /*public Customer(List<Customer> customers) {
         Faker faker = new Faker();
 
         int i = 0;
@@ -61,7 +61,7 @@ public class Customer {
 
         //Log.d("customers",customers.toString());
     }
-
+*/
     public Customer(String email, String firstName, String last_name, String phone_number,
                     boolean is_verified, String password, int review, int location) {
         //this.id = id;

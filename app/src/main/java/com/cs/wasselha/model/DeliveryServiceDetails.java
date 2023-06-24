@@ -1,10 +1,10 @@
 package com.cs.wasselha.model;
 
-import java.time.LocalDateTime;
+import java.lang.String;
 
 public class DeliveryServiceDetails {
 
-    private transient int id;
+    private  int id;
 
     public int getId() {
         return id;
@@ -19,9 +19,54 @@ public class DeliveryServiceDetails {
     private int source_collection_point;
     private int destination_collection_point;
     private boolean is_paid;
-    private LocalDateTime collection_time;
+    private String collection_time;
+    private String source_place;
+    private String destination_place;
+    private double price;
+    private boolean accepted;
+    private boolean responsed;
 
-    private LocalDateTime handover_time;
+    public String getSource_place() {
+        return source_place;
+    }
+
+    public void setSource_place(String source_place) {
+        this.source_place = source_place;
+    }
+
+    public String getDestination_place() {
+        return destination_place;
+    }
+
+    public void setDestination_place(String destination_place) {
+        this.destination_place = destination_place;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isResponsed() {
+        return responsed;
+    }
+
+    public void setResponsed(boolean responsed) {
+        this.responsed = responsed;
+    }
+
+    private String handover_time;
    // private String status;
 
     public DeliveryServiceDetails() {
@@ -31,7 +76,7 @@ public class DeliveryServiceDetails {
 
     public DeliveryServiceDetails(int service, int customer, int source_collection_point,
                                   int destination_collection_point, boolean is_paid,
-                                  LocalDateTime collection_time, LocalDateTime handover_time) {
+                                  String collection_time, String handover_time) {
         this.service = service;
         this.customer = customer;
         this.source_collection_point = source_collection_point;
@@ -82,19 +127,19 @@ public class DeliveryServiceDetails {
         this.is_paid = is_paid;
     }
 
-    public LocalDateTime getCollection_time() {
+    public String getCollection_time() {
         return collection_time;
     }
 
-    public void setCollection_time(LocalDateTime collection_time) {
+    public void setCollection_time(String collection_time) {
         this.collection_time = collection_time;
     }
 
-    public LocalDateTime getHandover_time() {
+    public String getHandover_time() {
         return handover_time;
     }
 
-    public void setHandover_time(LocalDateTime handover_time) {
+    public void setHandover_time(String handover_time) {
         this.handover_time = handover_time;
     }
 
