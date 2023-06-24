@@ -64,6 +64,33 @@ public class DeliveryServiceDetailsDA {
 
     }
 
+    public ArrayList<DeliveryServiceDetails> getDSDsForACustomer(int customerId) throws IOException {
+
+
+        //String url = "http://176.119.254.198:8000/wasselha/locations/";
+        String url = "http://176.119.254.198:8000/wasselha/delivery-service-details/?customer=" + customerId;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            Gson gson = new Gson();
+            Type dsdListType = new TypeToken<ArrayList<DeliveryServiceDetails>>() {
+            }.getType();
+            dsdListGlobal = new ArrayList<>();
+            dsdListGlobal = gson.fromJson(response.peekBody(5048).string(), dsdListType);
+            // todo: here i should fill the data into the activity
+            //Log.d("response.body().string()", response.body().string());
+
+        }
+
+
+        return dsdListGlobal;
+
+
+    }
+
 
     // @Override
     public DeliveryServiceDetails getDSD(int id) throws IOException {

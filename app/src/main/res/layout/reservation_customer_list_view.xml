@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imageInClaimsListView"
+        android:id="@+id/imageInHistoryReservationsListView"
         android:layout_marginTop="45dp"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_below="@+id/rferenceNumberLayout"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/TransporterNameLayout"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pathLinearLayout"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
@@ -143,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/destinationLinearLayout"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/statusLinearLayout"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/imageInClaimsListView"
+        android:layout_toEndOf="@+id/imageInHistoryReservationsListView"
         android:orientation="horizontal">
 
         <TextView
