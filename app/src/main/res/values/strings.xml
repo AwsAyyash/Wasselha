@@ -213,4 +213,7 @@
     <string name="status_in_reservation_customer_listView">Status:</string>
     <string name="date_in_reservation_customer_listView">Date:</string>
     <string name="your_reservation_history_in_reservation_customer_listView">Your reservation history</string>
+    <string name="action_time_in_customer_delivery_status">Action time:</string>
+    <string name="collection_from_in_customer_delivery_status">Collection from:</string>
+    <string name="delivery_status_title">Delivery status</string>
 </resources>
