@@ -216,4 +216,5 @@
     <string name="action_time_in_customer_delivery_status">Action time:</string>
     <string name="collection_from_in_customer_delivery_status">Collection from:</string>
     <string name="delivery_status_title">Delivery status</string>
+    <string name="handover_to_in_customer_delivery_status">Handover to:</string>
 </resources>
