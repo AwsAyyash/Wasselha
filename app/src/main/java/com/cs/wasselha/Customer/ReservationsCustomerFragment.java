@@ -2,6 +2,7 @@ package com.cs.wasselha.Customer;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -46,6 +47,7 @@ public class ReservationsCustomerFragment extends Fragment {
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
+    private ProgressDialog progressDialog;
 
 
     private int customerId;
@@ -92,9 +94,25 @@ public class ReservationsCustomerFragment extends Fragment {
         reservationsListView = view.findViewById(R.id.reservationCustomerHistoryListView);
 
         getFromSharedPref();
-        try {
+        try
+        {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run()
+                {
+                    progressDialog.dismiss();
+                }
+
+            }, 2000);
+
             populateNotificationsData();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
 

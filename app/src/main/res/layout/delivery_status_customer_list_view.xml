@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:text="@string/source_in_reservation_customer_listView"
+            android:text="@string/handover_to_in_customer_delivery_status"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
