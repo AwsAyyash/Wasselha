@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.util.Log;
@@ -27,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.RegistrationActivity;
+import com.cs.wasselha.SplashActivity;
 import com.cs.wasselha.Transporter.TransporterClaimsActivity;
 import com.cs.wasselha.Transporter.VehicleInformationActivity;
 
@@ -184,8 +187,10 @@ public class ProfileCustomerFragment extends Fragment {
                 editor.remove(ID_KEY);
                 editor.remove(LOGIN_TYPE_KEY);
                 editor.apply();
-                Intent intent = new Intent(getContext(), TypeLoginActivity.class);
+                Intent intent = new Intent(getContext(), SplashActivity.class);
+                getActivity().finish();
                 startActivity(intent);
+
             }
         });
     }
@@ -226,16 +231,26 @@ public class ProfileCustomerFragment extends Fragment {
         historyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainCustomerActivity.class);
 
-                intent.putExtra("fromProfile","profile");
-                startActivity(intent);
+                replaceFragment(new ReservationsCustomerFragment());
+                //Intent intent = new Intent(getContext(), MainCustomerActivity.class);
+
+               // intent.putExtra("fromProfile","profile");
+                //startActivity(intent);
 
                // this is just to let him/her see their previous reservations
             }
         });
     }
 
+    private void replaceFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainCustomerLayout,fragment);
+        fragmentTransaction.commit();
+
+    }
     private void settingBtnSetup()
     {
         settingsImg.setOnClickListener(new View.OnClickListener() {

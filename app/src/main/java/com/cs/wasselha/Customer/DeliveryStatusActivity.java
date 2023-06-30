@@ -80,8 +80,13 @@ public class DeliveryStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(DeliveryStatusActivity.this, AddReviewForATransporterActivity.class);
-                startActivity(intent);
+                Intent intentReview = new Intent(DeliveryStatusActivity.this, AddReviewForATransporterActivity.class);
+                intentReview.putExtra("delSerDetId",delSerDetId+"");
+                intentReview.putExtra("writer_id",customerId+"");
+
+
+
+                startActivity(intentReview);
             }
         });
     }
