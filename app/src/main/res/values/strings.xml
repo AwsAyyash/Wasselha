@@ -117,8 +117,8 @@
     <string name="reservation_in_bottom_bar">Reservation</string>
     <string name="track_in_bottom_bar">Track</string>
     <string name="profile_in_bottom_bar">Profile</string>
-    <string name="ads_text">Free delivery</string>
-    <string name="date_offer">May 2 - June 10</string>
+    <string name="ads_text">Offer delivery</string>
+    <string name="date_offer">June 25 - July 10</string>
     <string name="service_available_main_title">Services Available</string>
     <string name="transporter_name_in_customer_recyclerView">Transporter:</string>
     <string name="time_in_customer_recyclerView">Time:</string>
@@ -207,4 +207,20 @@
     <string name="path_in_request_list_view">Path:</string>
     <string name="rservation_details">Rservation details</string>
     <string name="select_type_of_delivery_in_reservation_details_acivity">Select type of delivery:</string>
+    <string name="reviews_in_profiles">Reviews</string>
+    <string name="source_in_reservation_customer_listView">Handover To:</string>
+    <string name="destination_in_reservation_customer_listView">Destination:</string>
+    <string name="status_in_reservation_customer_listView">Status:</string>
+    <string name="date_in_reservation_customer_listView">Date:</string>
+    <string name="your_reservation_history_in_reservation_customer_listView">Your reservation history</string>
+    <string name="action_time_in_customer_delivery_status">Action time:</string>
+    <string name="collection_from_in_customer_delivery_status">Collection from:</string>
+    <string name="delivery_status_title">Delivery status</string>
+    <string name="handover_to_in_customer_delivery_status">Handover to:</string>
+    <string name="add_review_btn_customer_delivery_satus">Add review</string>
+    <string name="add_review_title">Add review</string>
+    <string name="review_in_add_review_a_transporter">Review</string>
+    <string name="message_in_add_review_a_transporter">Notes</string>
+    <string name="enter_the_review_in_add_review_a_transporter">Enter the review</string>
+    <string name="enter_the_notes_in_add_review_a_transporter">Enter the notes...</string>
 </resources>

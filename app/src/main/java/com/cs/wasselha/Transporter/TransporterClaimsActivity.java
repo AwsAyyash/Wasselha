@@ -41,29 +41,30 @@ public class TransporterClaimsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         try {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_claims_transporter);
-        getSupportActionBar().hide();
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);transporterID=Integer.parseInt(id.trim());
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_claims_transporter);
+                getSupportActionBar().hide();
+                SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+                String id = preferences.getString(ID_KEY, null);transporterID=Integer.parseInt(id.trim());
 
-        setupReference();
-        //Calls
-        progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        populateClaimsData(transporterID);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.dismiss();
+                //Calls
+                setupReference();
+
+                progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                populateClaimsData(transporterID);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+
+                }, 1000);
+            }catch (Exception e){
+                Log.e("error:",e.toString());
             }
-
-        }, 1000);
-    }catch (Exception e){
-        Log.e("error:",e.toString());
-    }
 
     }
 

@@ -2,13 +2,17 @@ package com.cs.wasselha.Customer;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.RegistrationActivity;
+import com.cs.wasselha.SplashActivity;
 import com.cs.wasselha.Transporter.TransporterClaimsActivity;
 import com.cs.wasselha.Transporter.VehicleInformationActivity;
 
@@ -56,6 +61,8 @@ public class ProfileCustomerFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ProgressDialog progressDialog;
 
     public ProfileCustomerFragment() {
         // Required empty public constructor
@@ -98,12 +105,28 @@ public class ProfileCustomerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+        try
+        {
+             // Inflate the layout for this fragment
+             View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                }
+
+            }, 500);
+
 
         setupReference(view);
 
         getFromSharedPref();
+        settingBtnSetup();
         //SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
        // String id = preferences.getString(ID_KEY, null);
         //int transporterID=Integer.parseInt(id.trim());
@@ -113,11 +136,18 @@ public class ProfileCustomerFragment extends Fragment {
         //Calls
         logoutSetup();
         historySetup();
-       // settingSetup();
         claimsImgSetup();
-       // statusImgSetup();
+       // statusImgSetup();return view;
 
-        return view;
+            return view;
+        }
+        catch (Exception e)
+        {
+            Log.e("error:",e.toString());
+            View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+            return view;
+        }
+
         //return inflater.inflate(R.layout.fragment_profile_customer, container, false);
     }
 
@@ -137,7 +167,7 @@ public class ProfileCustomerFragment extends Fragment {
     {
        // mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCustomerInProfilePage);
-       // settingsImg = view.findViewById(R.id.settingImage);
+        settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
         claimsImg = view.findViewById(R.id.claimsImageCustomer);
        // carsImg = view.findViewById(R.id.carsImag);
        // statusImg = view.findViewById(R.id.statusImage);
@@ -157,8 +187,10 @@ public class ProfileCustomerFragment extends Fragment {
                 editor.remove(ID_KEY);
                 editor.remove(LOGIN_TYPE_KEY);
                 editor.apply();
-                Intent intent = new Intent(getContext(), TypeLoginActivity.class);
+                Intent intent = new Intent(getContext(), SplashActivity.class);
+                getActivity().finish();
                 startActivity(intent);
+
             }
         });
     }
@@ -199,12 +231,34 @@ public class ProfileCustomerFragment extends Fragment {
         historyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainCustomerActivity.class);
 
-                intent.putExtra("fromProfile","profile");
-                startActivity(intent);
+                replaceFragment(new ReservationsCustomerFragment());
+                //Intent intent = new Intent(getContext(), MainCustomerActivity.class);
+
+               // intent.putExtra("fromProfile","profile");
+                //startActivity(intent);
 
                // this is just to let him/her see their previous reservations
+            }
+        });
+    }
+
+    private void replaceFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainCustomerLayout,fragment);
+        fragmentTransaction.commit();
+
+    }
+    private void settingBtnSetup()
+    {
+        settingsImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(), CustomerSettingActivity.class);
+                startActivity(intent);
             }
         });
     }

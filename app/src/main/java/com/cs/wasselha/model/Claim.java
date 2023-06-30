@@ -1,6 +1,5 @@
 package com.cs.wasselha.model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Claim {
@@ -23,18 +22,18 @@ public class Claim {
     private String message;
 
     private int review;
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    private LocalDateTime date;
+    private String date;
 
     public int getWritten_to_id() {
         return written_to_id;
     }
 
     public Claim(int id,int delivery_service_details, int writer_id, int written_to_id, String writer_type, String written_to_type, String message,
-                 int review, LocalDateTime date) {
+                 int review, String date) {
         this.id = id;
         this.delivery_service_details = delivery_service_details;
         this.writer_id = writer_id;
@@ -66,7 +65,7 @@ public class Claim {
         this.review = review;
     }
 
-   // private LocalDateTime date;
+   // private String date;
 
 
     public Claim() {
@@ -106,7 +105,7 @@ public class Claim {
         this.message = message;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 

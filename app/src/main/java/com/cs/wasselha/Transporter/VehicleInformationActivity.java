@@ -2,9 +2,11 @@ package com.cs.wasselha.Transporter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,16 +30,40 @@ public class VehicleInformationActivity extends AppCompatActivity {
     private static String apiURL="http://176.119.254.198:8000/wasselha";
     ImageView vehicleImage,vehicleLicense;
     TextView vehicleNumber,vehicleType;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle_information);
-        getSupportActionBar().hide();
-        setupReference();
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        String id = preferences.getString(ID_KEY, null);
-        int transporterID=Integer.parseInt(id.trim());
-        getAndSetCarInfo(transporterID);
+        try
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_vehicle_information);
+            getSupportActionBar().hide();
+
+            setupReference();
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            String id = preferences.getString(ID_KEY, null);
+            int transporterID=Integer.parseInt(id.trim());
+            getAndSetCarInfo(transporterID);
+
+            progressDialog = new ProgressDialog(VehicleInformationActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run()
+                {
+                    progressDialog.dismiss();
+                }
+
+            }, 1000);
+        }
+        catch (Exception e)
+        {
+            Log.e("error:",e.toString());
+        }
+
 
     }
 

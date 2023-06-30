@@ -4,50 +4,51 @@ import java.time.LocalDateTime;
 
 public class DeliveryStatus {
 
-    private DeliveryServiceDetails deliveryServiceDetails;
-    private LocalDateTime actionTime;
-    private String collectionFrom;
-    private String handoverTo;
+    private int id;
+    private int delivery_service_details;
+    private String action_time;
+    private String collection_from;
+    private String handover_to;
 
     public DeliveryStatus() {
     }
 
-    public DeliveryStatus(DeliveryServiceDetails deliveryServiceDetails, LocalDateTime actionTime, String collectionFrom, String handoverTo) {
-        this.deliveryServiceDetails = deliveryServiceDetails;
-        this.actionTime = actionTime;
-        this.collectionFrom = collectionFrom;
-        this.handoverTo = handoverTo;
+    public DeliveryStatus(int delivery_service_details, String actionTime, String collectionFrom, String handoverTo) {
+        this.delivery_service_details = delivery_service_details;
+        this.action_time = actionTime;
+        this.collection_from = collectionFrom;
+        this.handover_to = handoverTo;
     }
 
-    public DeliveryServiceDetails getDeliveryServiceDetails() {
-        return deliveryServiceDetails;
+    public int getDeliveryServiceDetails() {
+        return delivery_service_details;
     }
 
-    public void setDeliveryServiceDetails(DeliveryServiceDetails deliveryServiceDetails) {
-        this.deliveryServiceDetails = deliveryServiceDetails;
+    public void setDeliveryServiceDetails(int delivery_service_details) {
+        this.delivery_service_details = delivery_service_details;
     }
 
-    public LocalDateTime getActionTime() {
-        return actionTime;
+    public String getActionTime() {
+        return action_time;
     }
 
-    public void setActionTime(LocalDateTime actionTime) {
-        this.actionTime = actionTime;
+    public void setActionTime(String actionTime) {
+        this.action_time = actionTime;
     }
 
     public String getCollectionFrom() {
-        return collectionFrom;
+        return collection_from;
     }
 
     public void setCollectionFrom(String collectionFrom) {
-        this.collectionFrom = collectionFrom;
+        this.collection_from = collectionFrom;
     }
 
     public String getHandoverTo() {
-        return handoverTo;
+        return handover_to;
     }
 
     public void setHandoverTo(String handoverTo) {
-        this.handoverTo = handoverTo;
+        this.handover_to = handoverTo;
     }
 }

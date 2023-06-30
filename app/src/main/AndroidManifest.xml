@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddReviewForATransporterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.DeliveryStatusActivity"
+            android:exported="false" />
+        <activity
             android:name=".Transporter.TransporterReservationDetailsActivity"
             android:exported="false" />
         <activity
@@ -38,6 +44,10 @@
         <activity
             android:name=".Transporter.TransporterSettingActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Customer.CustomerSettingActivity"
+            android:exported="false" />
         <activity
             android:name=".Transporter.TransporterTrackRoad"
             android:exported="false">
@@ -56,9 +66,9 @@
             android:name=".Login.TypeLoginActivity"
             android:exported="false" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Transporter.MainTransporterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Customer.ServiceDetailsActivity"
             android:exported="false" />
@@ -84,13 +94,13 @@
             android:name=".CollectionPointProvider.MainCollectionPointProviderActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
-            android:exported="false" />
-        <activity
             android:name=".Customer.FilterActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

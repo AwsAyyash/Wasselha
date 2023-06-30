@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionPointProvider {
-    private transient int id; // for the database
+    private  int id; // for the database
     private String first_name;
     private String last_name;
     private String email;
@@ -23,7 +23,7 @@ public class CollectionPointProvider {
     }
 
     transient List<CollectionPointProvider> collectionPointProviders = new ArrayList<>();
-    public CollectionPointProvider(){
+   /* public CollectionPointProvider(){
         Faker faker = new Faker();
 
         int i=0;
@@ -46,7 +46,8 @@ public class CollectionPointProvider {
         }
 
         Log.d("collectionPointProviders",collectionPointProviders.toString());
-    }
+    }*/
+    public CollectionPointProvider(){}
     public CollectionPointProvider(int id, String first_name, String last_name, String email, String password,
                                    String phone_number, String national_id, boolean is_verified) {
         this.id = id;
