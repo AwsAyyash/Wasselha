@@ -44,6 +44,10 @@
         <activity
             android:name=".Transporter.TransporterSettingActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Customer.CustomerSettingActivity"
+            android:exported="false" />
         <activity
             android:name=".Transporter.TransporterTrackRoad"
             android:exported="false">

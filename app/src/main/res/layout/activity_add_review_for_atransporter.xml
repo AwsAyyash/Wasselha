@@ -98,7 +98,7 @@
                         android:background="@drawable/edit_text_filter_style"
                         android:ems="10"
                         android:hint="@string/enter_the_notes_in_add_review_a_transporter"
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:padding="8dp"
                         android:textColor="@color/light_selver"
                         android:textColorHint="@color/light_selver"

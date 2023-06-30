@@ -22,6 +22,8 @@ import com.cs.wasselha.model.DeliveryServiceDetails;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -138,6 +140,13 @@ public class ReservationsCustomerFragment extends Fragment {
 
                 try {
                     delivaryDetailsReservationsForCustomerData = new DeliveryServiceDetailsDA().getDSDsForACustomer(customerId);
+                    delivaryDetailsReservationsForCustomerData.sort(new Comparator<DeliveryServiceDetails>() {
+                        @Override
+                        public int compare(DeliveryServiceDetails o1, DeliveryServiceDetails o2) {
+                            return  o2.getId()-o1.getId();
+                        }
+                    });
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
