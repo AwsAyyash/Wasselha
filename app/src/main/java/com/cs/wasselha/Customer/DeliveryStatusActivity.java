@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs.wasselha.Adapters.DeliveryStatusAdapter;
-import com.cs.wasselha.AddReviewForATransporterActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.DeliveryStatusDA;
-import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.cs.wasselha.model.DeliveryStatus;
 
 import java.io.IOException;

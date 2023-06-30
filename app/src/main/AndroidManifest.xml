@@ -18,7 +18,7 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AddReviewForATransporterActivity"
+            android:name=".Customer.AddReviewForATransporterActivity"
             android:exported="false" />
         <activity
             android:name=".Customer.DeliveryStatusActivity"
@@ -79,6 +79,9 @@
             android:exported="false" />
         <activity
             android:name=".Customer.CustomerSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.CustomerSettingActivity"
             android:exported="false" />
         <activity
             android:name=".Signup.TypeSignupActivity"

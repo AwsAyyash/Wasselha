@@ -41,9 +41,9 @@ public class NotificationsTransporterAdapter extends ArrayAdapter<Notifications>
         TextView timeNotification = convertView.findViewById(R.id.timeNotificationTransporter);
 
         imageView.setImageResource(R.drawable.notification);
-        titleNotification.setText(getItem(position).getTitleNotification());
-        descriptionNotification.setText(getItem(position).getDescriptionNotification());
-        timeNotification.setText(getItem(position).getNotificationDate()+" ,\t"+getItem(position).getNotificationTime());
+        titleNotification.setText(getItem(position).getTitleNotification() + "\n ");
+        descriptionNotification.setText("\n " + getItem(position).getDescriptionNotification() + " ");
+        timeNotification.setText(getItem(position).getNotificationDate()+" \t"+getItem(position).getNotificationTime());
 
 
         return convertView;

@@ -1,8 +1,10 @@
-package com.cs.wasselha;
+package com.cs.wasselha.Customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cs.wasselha.R;
 
 public class AddReviewForATransporterActivity extends AppCompatActivity {
 
@@ -10,5 +12,6 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review_for_atransporter);
+        getSupportActionBar().hide();
     }
 }
