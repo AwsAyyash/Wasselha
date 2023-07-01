@@ -119,7 +119,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
 
                             transporterMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(31.896064, 35.205644))
+                                    .position(new LatLng(31.9038, 35.2034))
                                     .icon(BitmapDescriptorFactory.fromBitmap(resource))
                                     .anchor(0.5f, 0.5f)
                                     .title("Transporter"));
@@ -130,7 +130,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                     .findFragmentById(R.id.trackingCustomerActivityMapFrag);
             mapFragment.getMapAsync(this);
 
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            //fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         } catch (Exception e) {
             Toast.makeText(this, "Network failed or location permission denied", Toast.LENGTH_LONG).show();
         }
@@ -220,7 +220,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
     }
 
 
-
+    int count =0;
     private void startLocationUpdates() {
         /*LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -244,6 +244,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
 
         Handler handler = new Handler();
+
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -261,12 +262,15 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
                 drawRouteToDestination(transporterMarker.getPosition(),currentLatLng);
 
-                while (true){
+                while (count<1){
                     handler.postDelayed(this, UPDATE_INTERVAL);
+                    count++;
                 }
+
 
             }
         });
+        count=0;
     }
 
     LatLng currentLatLng;
