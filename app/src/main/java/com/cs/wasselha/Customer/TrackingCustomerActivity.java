@@ -101,6 +101,8 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         customerId = Integer.parseInt(id.trim());
         try {
             prepareAndGetLocation();
+            setCurrentLatLog();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -119,7 +121,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
 
                             transporterMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(31.9038, 35.2034))
+                                    .position(currentLatLng)
                                     .icon(BitmapDescriptorFactory.fromBitmap(resource))
                                     .anchor(0.5f, 0.5f)
                                     .title("Transporter"));
@@ -204,7 +206,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     mMap.setMyLocationEnabled(true);
-                    startLocationUpdates();
+                    //startLocationUpdates();
                 }
             } else {
                 Toast.makeText(this, "Location permission denied.", Toast.LENGTH_SHORT).show();
