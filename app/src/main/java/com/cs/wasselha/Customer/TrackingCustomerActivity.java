@@ -16,17 +16,16 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.cs.wasselha.R;
-import com.cs.wasselha.Transporter.TransporterTrackRoad;
 import com.cs.wasselha.interfaces.implementation.CollectionPointDA;
 import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
@@ -36,13 +35,8 @@ import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.cs.wasselha.model.Location;
 import com.cs.wasselha.model.Service;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -81,7 +75,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
     private List<LatLng> collectionPointsLocations = new ArrayList<>();
 
     private int currentTransporterLocationId;
-    private Location CurrentTransLocation;
+    private Location currentTransLocation;
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Marker transporterMarker;
@@ -101,7 +95,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         customerId = Integer.parseInt(id.trim());
         try {
             prepareAndGetLocation();
-            setCurrentLatLog();
+            setDestLatLog();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -121,10 +115,14 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
 
                             transporterMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(currentLatLng)
+                                    .position(new LatLng(currentTransLocation.getLatitude(), currentTransLocation.getLongitude()))
                                     .icon(BitmapDescriptorFactory.fromBitmap(resource))
                                     .anchor(0.5f, 0.5f)
                                     .title("Transporter"));
+
+
+                            drawRouteToDestination(new LatLng(currentTransLocation.getLatitude(), currentTransLocation.getLongitude()),
+                                    destLatLng);
                         }
                     });
 
@@ -148,8 +146,9 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                 mMap.setMyLocationEnabled(true);
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL); // Show normal layer
                 if (isNetworkConnected()) {
+
                     startLocationUpdates();
-                    new Handler().postDelayed(new Runnable() {
+                   /* new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             new AsyncTask<String, Void, Boolean>() {
@@ -170,13 +169,14 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Log.e("addtoMap","latitude,longitude");
+
                                                 //addCustomerAndCollectionPointsMarkers();
                                                 //fetchDestinationCoordinates(transporterID);
                                                 //drawRouteToDestination(transporterMarker.getPosition(),latLng);
-                                                setCurrentLatLog();
+                                               // setDestLatLog();
 
-                                                drawRouteToDestination(transporterMarker.getPosition(),currentLatLng);
+                                                drawRouteToDestination(transporterMarker.getPosition(), destLatLng);
+                                                Log.d("addtoMap","latitude=" + destLatLng.latitude+", longitude="+ destLatLng.longitude);
                                             }
 
                                         }, 5000);
@@ -186,7 +186,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
 
                         }
-                    }, 2000);
+                    }, 2000);*/
                 } else {
                     Toast.makeText(TrackingCustomerActivity.this, "No internet connection. Please check your network settings.", Toast.LENGTH_SHORT).show();
                 }
@@ -199,7 +199,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
     }
 
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
@@ -212,7 +212,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                 Toast.makeText(this, "Location permission denied.", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 
 
     private boolean isNetworkConnected() {
@@ -259,15 +259,26 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                     throw new RuntimeException(e);
                 }
 
-                updateTransporterLocation(location);
-                setCurrentLatLog();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                drawRouteToDestination(transporterMarker.getPosition(),currentLatLng);
+                        //setDestLatLog();
+                        updateTransporterLocation(currentTransLocation);
 
-                while (count<1){
-                    handler.postDelayed(this, UPDATE_INTERVAL);
+                        drawRouteToDestination(transporterMarker.getPosition(), destLatLng);
+                    }
+                });
+
+
+                /*while (count<1){
+                    Handler handler1 = new Handler();
+                    handler1.postDelayed(this,UPDATE_INTERVAL);
+                    //handler.postDelayed(this, UPDATE_INTERVAL);
                     count++;
-                }
+                    Log.d("logCount" , count+"");
+                    SystemClock.sleep(UPDATE_INTERVAL);
+                }*/
 
 
             }
@@ -275,8 +286,8 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         count=0;
     }
 
-    LatLng currentLatLng;
-    private LatLng setCurrentLatLog() {
+    LatLng destLatLng;
+    private LatLng setDestLatLog() {
 
         Location locationDest;
         if (deliveryServiceDetailsCurrent.getDestination_collection_point() != 0){
@@ -307,8 +318,9 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
             }
         }
 
-         currentLatLng = new LatLng(locationDest.getLatitude(),locationDest.getLongitude());
-        return currentLatLng;
+         //destLatLng = new LatLng(locationDest.getLatitude(),locationDest.getLongitude());
+        destLatLng = new LatLng(32.2243079,35.2270797); // nablus
+        return destLatLng;
     }
 
     private boolean initialZoomSet = false;
@@ -391,10 +403,11 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         getServiceAndSetLocationIdForTransporter();
 
 
-        CurrentTransLocation = new LocationDA().getLocation(currentTransporterLocationId);
+       // currentTransLocation = new LocationDA().getLocation(currentTransporterLocationId);
+        currentTransLocation = new LocationDA().getLocation(2);
 
 
-        return CurrentTransLocation;
+        return currentTransLocation;
 
     }
 
