@@ -85,9 +85,6 @@
             android:name=".Customer.CustomerSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".Customer.CustomerSettingActivity"
-            android:exported="false" />
-        <activity
             android:name=".Signup.TypeSignupActivity"
             android:exported="false" />
         <activity
