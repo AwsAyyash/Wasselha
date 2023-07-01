@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_selver"
     tools:context=".Customer.CustomerSettingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,11 +78,11 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/edit_text_filter_style"
                         android:ems="10"
+                        android:textColorHint="@color/quantum_grey400"
                         android:hint="@string/enter_your_new_email_hint"
                         android:inputType="textEmailAddress"
                         android:padding="8dp"
                         android:textColor="@color/light_selver"
-                        android:textColorHint="@color/light_selver"
                         android:textSize="16sp" />
 
                     <TextView
@@ -100,11 +101,11 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/edit_text_filter_style"
                         android:ems="10"
+                        android:textColorHint="@color/quantum_grey400"
                         android:hint="@string/enter_your_new_password_hint"
                         android:inputType="textPassword"
                         android:padding="8dp"
                         android:textColor="@color/light_selver"
-                        android:textColorHint="@color/light_selver"
                         android:textSize="16sp" />
 
                     <TextView
@@ -126,8 +127,8 @@
                         android:hint="@string/enter_your_new_phone_number_hint"
                         android:inputType="phone"
                         android:padding="8dp"
+                        android:textColorHint="@color/quantum_grey400"
                         android:textColor="@color/light_selver"
-                        android:textColorHint="@color/light_selver"
                         android:textSize="16sp" />
 
 
