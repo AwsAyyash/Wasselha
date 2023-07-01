@@ -1,5 +1,6 @@
 package com.cs.wasselha.Customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
 import com.cs.wasselha.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,10 @@ import com.cs.wasselha.R;
  * create an instance of this fragment.
  */
 public class TrackingCustomerFragment extends Fragment {
+
+
+    Button openTrackBtn ;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +76,16 @@ public class TrackingCustomerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tracking_customer, container, false);
+        View view= inflater.inflate(R.layout.fragment_tracking_customer, container, false);
+
+        openTrackBtn= view.findViewById(R.id.openTrackBtn);
+        openTrackBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(getContext(), TrackingCustomerActivity.class);
+               startActivity(intent);
+           }
+       });
+        return view;
     }
 }

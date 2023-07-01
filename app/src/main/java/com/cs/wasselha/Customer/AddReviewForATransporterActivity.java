@@ -1,4 +1,4 @@
-package com.cs.wasselha;
+package com.cs.wasselha.Customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cs.wasselha.Customer.ServiceDetailsActivity;
+import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.ClaimsDA;
 import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
 import com.cs.wasselha.interfaces.implementation.ServiceDA;
@@ -34,6 +35,7 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review_for_atransporter);
+        getSupportActionBar().hide();
 
 
         setRefs();

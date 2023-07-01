@@ -27,7 +27,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notification"
+            android:text="Not available!"
             android:textColor="@color/black"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Your reservation has been accepted"
+            android:text="Not available!"
             android:textSize="16sp"
             android:textColor="@color/black" />
 
@@ -59,11 +59,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="@color/quantum_grey600"
         android:layout_below="@+id/pathLinearLayout"
         android:layout_toEndOf="@+id/imageInCustomerNotificationsListView"
         android:layout_marginTop="4dp"
         style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        android:text="10:00 AM" />
+        android:text="Not available time!" />
 
 
 
