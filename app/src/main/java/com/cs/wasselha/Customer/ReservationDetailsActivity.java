@@ -146,7 +146,11 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                     if (sourceLatLng != null ){
 
-                        createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
+                        try {
+                            createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
 
                         //intent.putExtra("fromLocationId",""+fromLocationId+"");
 
@@ -170,7 +174,11 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                 if (handOverToLocationRadioButtonInReservationsDetails.isChecked()){
 
                     if (destinationLatLng != null){
-                        createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
+                        try {
+                            createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         //intent.putExtra("toLocationId",""+toLocationId);
 
                     }
@@ -213,7 +221,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                         intent.getStringExtra("fromLocationId") == null&&
                         intent.getStringExtra("toLocationId") == null){
                     Toast.makeText(ReservationDetailsActivity.this,
-                            "Try Again, location is being created! ", Toast.LENGTH_SHORT).show();
+                            "Wait!, location is being created! ", Toast.LENGTH_SHORT).show();
                 return;
                 }
 
@@ -382,18 +390,47 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
     public void onMarkerDragEnd(Marker marker) {
         // Code to handle the event when marker drag ends
     }
-    private void createLocation(double src_latitude, double src_longitude,boolean isSource) {
+    private void createLocation(double src_latitude, double src_longitude,boolean isSource) throws IOException {
         createSingleLocation(src_latitude, src_longitude, isSource);
     }
 
-    private void createSingleLocation(double latitude, double longitude,boolean isSource) {
+    private void createSingleLocation(double latitude, double longitude,boolean isSource) throws IOException {
         String title = getAddressTitleFromCoordinates(latitude, longitude);
         String description = getAddressFromCoordinates(latitude, longitude);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = BASE_URL + "/locations/";
 
-        JSONObject jsonObject = new JSONObject();
+
+        Location location = new Location();
+        location.setDescription(description);
+        location.setTitle(title);
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+
+      LocationDA locationDA =   new LocationDA();
+       int locationID = locationDA.saveLocation(location);
+
+        if (isSource) {
+            fromLocationId = locationID;
+            intent.putExtra("fromLocationId",""+fromLocationId+"");
+            //intent
+            //intent.putExtra("sourceLocationId",String.valueOf(locationID));
+            Log.d("11fromLocationId",String.valueOf(fromLocationId));
+            //Toast.makeText(FilterActivity.this, "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
+            // Create destination location after the source has been created
+            //createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
+        } else {
+            toLocationId = locationID;
+            intent.putExtra("toLocationId",""+toLocationId+"");
+            //intent.putExtra("destLocationId",String.valueOf(locationID));
+            Log.d("11toLocationId",String.valueOf(toLocationId));
+
+            // Toast.makeText(FilterActivity.this, "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
+            // Code to handle successful creation of both source and destination locations
+            //createService(transporterID, sourceLocationId, locationID);
+        }
+       /* JSONObject jsonObject = new JSONObject();
 
         try {
             jsonObject.put("title", title);
@@ -456,7 +493,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                 return headers;
             }};
 
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequest);*/
     }
 
     private String getAddressFromCoordinates(double latitude, double longitude) {
