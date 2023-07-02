@@ -11,6 +11,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -147,7 +148,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                         createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
 
-                        intent.putExtra("fromLocationId",""+fromLocationId+"");
+                        //intent.putExtra("fromLocationId",""+fromLocationId+"");
 
                     }else{
                         Toast.makeText(ReservationDetailsActivity.this,
@@ -170,7 +171,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                     if (destinationLatLng != null){
                         createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
-                        intent.putExtra("toLocationId",""+toLocationId);
+                        //intent.putExtra("toLocationId",""+toLocationId);
 
                     }
 
@@ -207,6 +208,15 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
 
 
+                if (intent.getStringExtra("fromCPLocationId") == null &&
+                        intent.getStringExtra("toCPLocationId") ==null &&
+                        intent.getStringExtra("fromLocationId") == null&&
+                        intent.getStringExtra("toLocationId") == null){
+                    Toast.makeText(ReservationDetailsActivity.this,
+                            "Try Again, location is being created! ", Toast.LENGTH_SHORT).show();
+                return;
+                }
+
 
 
                 //createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
@@ -217,6 +227,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                 intent.putExtra("packWeight",packWeight);
                 intent.putExtra("packType",packType);
                // intent.putExtra("packType",packType);
+                //SystemClock.sleep(2000);
                 setResult(2,intent);
                 finish();//finishing activity
 
@@ -301,6 +312,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                             sourceMarker.setPosition(sourceLatLng);
                             Toast.makeText(ReservationDetailsActivity.this, "Source: "+sourceLatLng.toString()+","+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
                         }
+                        //createLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
                     }
                 });
                 // Set initial position for source map
@@ -320,6 +332,8 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                             destinationMarker.setPosition(destinationLatLng);
                             Toast.makeText(ReservationDetailsActivity.this, "Destination:"+destinationLatLng.toString()+","+getAddressFromCoordinates(destinationLatLng.latitude,destinationLatLng.longitude), Toast.LENGTH_SHORT).show();
                         }
+                        //createLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
+
                     }
                 });
                 // Set an initial position for the destination marker
@@ -400,16 +414,18 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                             if (locationID > 0) {
                                 if (isSource) {
                                     fromLocationId = locationID;
+                                    intent.putExtra("fromLocationId",""+fromLocationId+"");
                                     //intent
                                     //intent.putExtra("sourceLocationId",String.valueOf(locationID));
-                                    Log.d("11fromLocationId",String.valueOf(locationID));
+                                    Log.d("11fromLocationId",String.valueOf(fromLocationId));
                                     //Toast.makeText(FilterActivity.this, "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
                                     // Create destination location after the source has been created
                                     //createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
                                 } else {
                                     toLocationId = locationID;
+                                    intent.putExtra("toLocationId",""+toLocationId+"");
                                     //intent.putExtra("destLocationId",String.valueOf(locationID));
-                                    Log.d("11toLocationId",String.valueOf(locationID));
+                                    Log.d("11toLocationId",String.valueOf(toLocationId));
 
                                     // Toast.makeText(FilterActivity.this, "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
                                     // Code to handle successful creation of both source and destination locations
