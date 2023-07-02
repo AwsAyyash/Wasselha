@@ -93,6 +93,9 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
     int fromCPLocationId;
     int toCPLocationId;
 
+    int fromLocationId;
+    int toLocationId;
+
 
     Intent intent=new Intent();
 
@@ -118,18 +121,18 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
             }
         });
 
-        collectFromCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
+        /*collectFromCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // onClickRadioCollectionPointForSpinners();
             }
-        });
-        handOverToCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
+        });*/
+       /* handOverToCollectionPointRadioButtonInReservationsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
 
 
@@ -144,8 +147,14 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                         createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude,true);
 
-                    }else
+                        intent.putExtra("fromLocationId",""+fromLocationId+"");
+
+                    }else{
+                        Toast.makeText(ReservationDetailsActivity.this,
+                                "Click on the map to choose a src location! ", Toast.LENGTH_SHORT).show();
                         return;
+                    }
+
                     // todo: here i have to handle the google map
                 }else {
                     // the collectionPoint is checked
@@ -159,10 +168,18 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                 if (handOverToLocationRadioButtonInReservationsDetails.isChecked()){
 
-                    if (destinationLatLng != null)
+                    if (destinationLatLng != null){
                         createSingleLocation(destinationLatLng.latitude,destinationLatLng.longitude,false);
-                    else
+                        intent.putExtra("toLocationId",""+toLocationId);
+
+                    }
+
+                    else{
+                        Toast.makeText(ReservationDetailsActivity.this,
+                                "Click on the map to choose a dest location! ", Toast.LENGTH_SHORT).show();
                         return;
+                    }
+
                     // todo: here i have to handle the google map
                 }else {
                     // the collectionPoint is checked
@@ -277,6 +294,8 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                         if (sourceMarker == null) {
                             sourceLatLng = latLng;
                             sourceMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+                            Toast.makeText(ReservationDetailsActivity.this, "Source: "+sourceLatLng.toString()+","+getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude), Toast.LENGTH_SHORT).show();
+
                         } else {
                             sourceLatLng = latLng;
                             sourceMarker.setPosition(sourceLatLng);
@@ -294,6 +313,7 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
                         if (destinationMarker == null) {
                             destinationLatLng = latLng;
                             destinationMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+                            Toast.makeText(ReservationDetailsActivity.this, "Destination:"+destinationLatLng.toString()+","+getAddressFromCoordinates(destinationLatLng.latitude,destinationLatLng.longitude), Toast.LENGTH_SHORT).show();
 
                         } else {
                             destinationLatLng = latLng;
@@ -379,13 +399,17 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                             if (locationID > 0) {
                                 if (isSource) {
+                                    fromLocationId = locationID;
                                     //intent
-                                    intent.putExtra("sourceLocationId",locationID);
+                                    //intent.putExtra("sourceLocationId",String.valueOf(locationID));
+                                    Log.d("11fromLocationId",String.valueOf(locationID));
                                     //Toast.makeText(FilterActivity.this, "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
                                     // Create destination location after the source has been created
                                     //createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
                                 } else {
-                                    intent.putExtra("destLocationId",locationID);
+                                    toLocationId = locationID;
+                                    //intent.putExtra("destLocationId",String.valueOf(locationID));
+                                    Log.d("11toLocationId",String.valueOf(locationID));
 
                                     // Toast.makeText(FilterActivity.this, "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
                                     // Code to handle successful creation of both source and destination locations

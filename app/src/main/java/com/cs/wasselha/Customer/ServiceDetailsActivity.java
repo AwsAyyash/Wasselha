@@ -158,14 +158,23 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         if (requestCode == 2) {
             // String message=data.getStringExtra("MESSAGE");
 
+
             String fromCPLocationId = data.getStringExtra("fromCPLocationId");
+            Log.d("fromCPLocationId",fromCPLocationId+"");
             String toCPLocationId = data.getStringExtra("toCPLocationId");
+            Log.d("toCPLocationId",toCPLocationId+"");
 
             String packWeight = data.getStringExtra("packWeight");
             String packType = data.getStringExtra("packType");
+            Log.d("SDApackWeight",packWeight);
 
-            String sourceLocationId = data.getStringExtra("sourceLocationId");
-            String destLocationId = data.getStringExtra("destLocationId");
+
+            String sourceLocationId = data.getStringExtra("fromLocationId");
+            String destLocationId = data.getStringExtra("toLocationId");
+
+            Log.d("SDAsourceLocationId",sourceLocationId+"");
+            Log.d("SDAdestLocationId",destLocationId+"");
+
             addDelServiceDetails(fromCPLocationId, toCPLocationId, packWeight, packType, sourceLocationId, destLocationId);
 
             // textView1.setText(message);
@@ -209,21 +218,21 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             jsonObject.put("customer", String.valueOf(customerId));
 
             if (fromCPLocationId != null) {
-                jsonObject.put("source_collection_point", fromCPLocationId);
+                jsonObject.put("source_collection_point", Integer.parseInt(fromCPLocationId));
             }
             if (toCPLocationId != null) {
-                jsonObject.put("destination_collection_point", toCPLocationId);
+                jsonObject.put("destination_collection_point", Integer.parseInt(toCPLocationId));
             }
             if (sourceLocationId != null) {
-                jsonObject.put("source_place", sourceLocationId);
+                jsonObject.put("source_place", Integer.parseInt(sourceLocationId));
             }
             if (destLocationId != null) {
-                jsonObject.put("destination_place", destLocationId);
+                jsonObject.put("destination_place", Integer.parseInt(destLocationId));
             }
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
             String dateTextCollection = (service.getService_date().getYear()+1900) +"-"
-                    +(service.getService_date().getMonth()+1) + "-" + (service.getService_date().getDate());
+                    +(service.getService_date().getMonth()) + "-" + (service.getService_date().getDate());
            // String dateTextHandover = (service.getService_date().getYear()+1900) +"-"
              //       +(service.getService_date().getMonth()+1) + "-" + (service.getService_date().getDate());
           //  Date selectedDateTimeCollection = sdf.parse(dateTextCollection + " " +
@@ -257,7 +266,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             String dateTimeStringHand = String.format(
                     "%sT%02d:%02d:00", // Format as "yyyy-MM-ddTHH:mm:ss"
                     dateTextCollection,
-                    service.getService_date().getHours()+1,
+                    service.getService_date().getHours(),
                     service.getService_date().getMinutes()
             );
             String serviceDateHand= String.format(
