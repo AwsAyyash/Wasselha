@@ -135,7 +135,6 @@ public class ProfileCustomerFragment extends Fragment {
 
         //Calls
         logoutSetup();
-        historySetup();
         claimsImgSetup();
         settingBtnSetup();
        // statusImgSetup();return view;
@@ -166,14 +165,10 @@ public class ProfileCustomerFragment extends Fragment {
     }
     private void setupReference(View view)
     {
-       // mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
         name = view.findViewById(R.id.mainNameCustomerInProfilePage);
         settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
         claimsImg = view.findViewById(R.id.claimsImageCustomer);
-       // carsImg = view.findViewById(R.id.carsImag);
-       // statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutImageCustomer);
-        historyImg = view.findViewById(R.id.historyCustomerProfile);
     }
 
     private void logoutSetup()
@@ -226,22 +221,6 @@ public class ProfileCustomerFragment extends Fragment {
         });
 
         queue.add(jsonObjectRequest);
-    }
-    private void historySetup()
-    {
-        historyImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                replaceFragment(new ReservationsCustomerFragment());
-                //Intent intent = new Intent(getContext(), MainCustomerActivity.class);
-
-               // intent.putExtra("fromProfile","profile");
-                //startActivity(intent);
-
-               // this is just to let him/her see their previous reservations
-            }
-        });
     }
 
     private void replaceFragment(Fragment fragment)
