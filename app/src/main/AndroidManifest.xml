@@ -23,7 +23,7 @@
             android:name=".Customer.TrackingCustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".AddReviewForATransporterActivity"
+            android:name=".Customer.AddReviewForATransporterActivity"
             android:exported="false" />
         <activity
             android:name=".Customer.DeliveryStatusActivity"

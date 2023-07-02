@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Customer.HomeCustomerFragment">
+    android:background="@color/light_selver"
+    tools:context=".Customer.TrackingCustomerFragment">
 
 
     <LinearLayout
@@ -18,14 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView66"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Open tracking Page"
-            android:textColor="@color/dark_green"
-            android:textSize="25sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/openTrackBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/details_btn_in_card_customer_recycler_view"
+            android:text="Open tracking page"
+            android:textColor="@color/light_selver"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

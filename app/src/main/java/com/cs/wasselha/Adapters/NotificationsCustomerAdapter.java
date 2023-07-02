@@ -47,7 +47,7 @@ public class NotificationsCustomerAdapter extends ArrayAdapter<Notifications>
 
         imageView.setImageResource(R.drawable.notification);
         titleNotification.setText(getItem(position).getTitleNotification());
-        descriptionNotification.setText(getItem(position).getDescriptionNotification());
+        descriptionNotification.setText(getItem(position).getDescriptionNotification() + " ");
         timeNotification.setText(getItem(position).getNotificationDate()+" ,\t"+getItem(position).getNotificationTime());
 
         return convertView;

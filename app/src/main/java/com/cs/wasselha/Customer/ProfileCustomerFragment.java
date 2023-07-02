@@ -31,6 +31,7 @@ import com.cs.wasselha.R;
 import com.cs.wasselha.RegistrationActivity;
 import com.cs.wasselha.SplashActivity;
 import com.cs.wasselha.Transporter.TransporterClaimsActivity;
+import com.cs.wasselha.Transporter.TransporterSettingActivity;
 import com.cs.wasselha.Transporter.VehicleInformationActivity;
 
 import org.json.JSONObject;
@@ -126,7 +127,6 @@ public class ProfileCustomerFragment extends Fragment {
         setupReference(view);
 
         getFromSharedPref();
-        settingBtnSetup();
         //SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
        // String id = preferences.getString(ID_KEY, null);
         //int transporterID=Integer.parseInt(id.trim());
@@ -137,6 +137,7 @@ public class ProfileCustomerFragment extends Fragment {
         logoutSetup();
         historySetup();
         claimsImgSetup();
+        settingBtnSetup();
        // statusImgSetup();return view;
 
             return view;
@@ -255,11 +256,11 @@ public class ProfileCustomerFragment extends Fragment {
     {
         settingsImg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CustomerSettingActivity.class);
                 startActivity(intent);
             }
         });
     }
+
 }
