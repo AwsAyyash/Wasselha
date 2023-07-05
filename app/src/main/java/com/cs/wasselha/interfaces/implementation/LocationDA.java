@@ -96,7 +96,7 @@ public class LocationDA {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     // @Override
-    public String saveLocation(Location location) throws IOException {
+    public int saveLocation(Location location) throws IOException {
 
        // Gson gson = new GsonBuilder()
          //       .excludeFieldsWithoutExposeAnnotation()
@@ -109,9 +109,10 @@ public class LocationDA {
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            Log.d("toJsonTransLocations2",gson.toJson(location));
-            Log.d("res2",response.peekBody(2048).string());
-            return response.peekBody(2048).string();
+            Log.d("locationPost",gson.toJson(location));
+            Location locationResponse = gson.fromJson(response.peekBody(8048).string(),Location.class);
+            //Log.d("locationPostResponse",);
+            return locationResponse.getId();
         }
 
     }

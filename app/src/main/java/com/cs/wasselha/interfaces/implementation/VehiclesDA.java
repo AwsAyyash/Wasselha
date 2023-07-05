@@ -120,7 +120,7 @@ public class VehiclesDA {
         for (int i = 0; i < vehiclesListGlobal.size(); i++) {
             Vehicle vehicle = vehiclesListGlobal.get(i);
 
-            Log.d("veh111",vehicle.toString());
+           // Log.d("veh111",vehicle.toString());
 
             if (vehicle.getTransporter()  == transporterID) {
                 Log.d("getVehicle_image",vehicle.getVehicle_image().toString());
@@ -134,15 +134,16 @@ public class VehiclesDA {
 
     public String getVehicleImageURLOfTransporter(int transporterID) throws IOException {
 
-        getVehicles();
+        if (vehiclesListGlobal.size() ==0)
+            getVehicles();
 
-        Log.d("size11",vehiclesListGlobal.size() +"");
-        Log.d("size1111", vehiclesListGlobal.toString());
+        //Log.d("size11",vehiclesListGlobal.size() +"");
+        //Log.d("size1111", vehiclesListGlobal.toString());
         // JSONArray vehicles = response.getJSONArray("vehicles");
         for (int i = 0; i < vehiclesListGlobal.size(); i++) {
             Vehicle vehicle = vehiclesListGlobal.get(i);
 
-            Log.d("veh111",vehicle.toString());
+           // Log.d("veh111",vehicle.toString());
 
             if (vehicle.getTransporter()  == transporterID) {
                 Log.d("getVehicle_image",vehicle.getVehicle_image().toString());

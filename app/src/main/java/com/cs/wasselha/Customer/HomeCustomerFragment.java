@@ -132,7 +132,7 @@ public class HomeCustomerFragment extends Fragment {
                         if(servicesModelDAList.size()==0){
 
                             servicesModelDAList = getServiceFromDA();
-                            Log.d("list222",servicesModelDAList.toString());
+                           // Log.d("list222",servicesModelDAList.toString());
                             servicesModelSetup();
                         }else {
                             Collections.sort(servicesModelList, comparator);
