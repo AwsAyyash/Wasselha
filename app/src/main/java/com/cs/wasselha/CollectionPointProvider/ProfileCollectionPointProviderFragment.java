@@ -27,7 +27,7 @@ public class ProfileCollectionPointProviderFragment extends Fragment {
                              Bundle savedInstanceState) {
         try
         {
-            View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+            View view = inflater.inflate(R.layout.fragment_profile_collection_point_provider, container, false);
             setupReference(view);
 
             progressDialog = new ProgressDialog(getContext());
@@ -52,7 +52,7 @@ public class ProfileCollectionPointProviderFragment extends Fragment {
         catch (Exception e)
         {
             Log.e("error:",e.toString());
-            View view = inflater.inflate(R.layout.fragment_profile_transporter, container, false);
+            View view = inflater.inflate(R.layout.fragment_profile_collection_point_provider, container, false);
             return view;
         }
     }

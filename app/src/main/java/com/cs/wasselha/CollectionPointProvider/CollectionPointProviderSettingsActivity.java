@@ -14,7 +14,7 @@ public class CollectionPointProviderSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_point_provider_settings);
-        getActionBar().hide();
+        getSupportActionBar().hide();
 
         //calls
 

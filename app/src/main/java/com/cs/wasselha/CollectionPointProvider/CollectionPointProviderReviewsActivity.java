@@ -12,7 +12,7 @@ public class CollectionPointProviderReviewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_point_provider_reviews);
-        getActionBar().hide();
+        getSupportActionBar().hide();
 
         //calls
     }
