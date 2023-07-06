@@ -304,9 +304,9 @@ public class AddServiceTransporterFragment extends Fragment implements GoogleMap
     }
 
 private void createLocation(double src_latitude, double src_longitude, double dst_latitude, double dst_longitude, int transporterID) {
-    createSingleLocation(src_latitude, src_longitude, true, 0, transporterID, dst_latitude, dst_longitude);
+    createSingleLocation(src_latitude, src_longitude, true,false, 0,0, transporterID, dst_latitude, dst_longitude);
 }
-private void createSingleLocation(double latitude, double longitude, boolean isSource, int sourceLocationId, int transporterID, double dst_latitude, double dst_longitude) {
+private void createSingleLocation(double latitude, double longitude, boolean isSource,boolean isTransporterLocationCreated, int sourceLocationId, int dst_LocationId, int transporterID, double dst_latitude, double dst_longitude) {
     String title = getAddressTitleFromCoordinates(latitude, longitude);
     String description = getAddressFromCoordinates(latitude, longitude);
 
@@ -335,11 +335,15 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
                             if (isSource) {
                                 Toast.makeText(getContext(), "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
                                 // Create destination location after the source has been created
-                                createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
+                                createSingleLocation(dst_latitude, dst_longitude, false,false, locationID,0, transporterID, latitude, longitude);
                             } else {
                                 Toast.makeText(getContext(), "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
                                 // Code to handle successful creation of both source and destination locations
-                                createService(transporterID, sourceLocationId, locationID);
+                                if(!isTransporterLocationCreated){
+                                    createSingleLocation(dst_latitude, dst_longitude, false,true, sourceLocationId,locationID, transporterID, 0, 0);
+                                }else{
+                                    createService(transporterID, sourceLocationId,dst_LocationId, locationID);
+                                }
                             }
                         } else {
                             Toast.makeText(getContext(), "The information is not correct, try again!", Toast.LENGTH_LONG).show();
@@ -371,7 +375,7 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
 
 
 
-    private void createService(int transporterId, int sourcePlace, int destinationPlace) {
+    private void createService(int transporterId, int sourcePlace, int destinationPlace,int transporterPlace) {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         String url = BASE_URL +"/services/";
         // Obtain the selected date
@@ -416,6 +420,7 @@ private void createSingleLocation(double latitude, double longitude, boolean isS
             jsonObject.put("transporter", transporterId);
             jsonObject.put("source_place", sourcePlace);
             jsonObject.put("destination_place", destinationPlace);
+            jsonObject.put("transporter_location", transporterPlace);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -24,6 +24,8 @@ import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -59,6 +61,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TransporterTrackRoad extends AppCompatActivity implements OnMapReadyCallback {
@@ -77,6 +80,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Marker transporterMarker;
     private RequestQueue requestQueue;
+    private Integer transporterLocationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,9 +158,8 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                         try {
                             JSONObject service = response.getJSONObject(i);
                             int serviceId = service.getInt("id");
-
+                            transporterLocationId=service.getInt("transporter_location");
                             getDeliveryServiceDetails(serviceId);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -453,6 +456,64 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
                     });
         } else {
             transporterMarker.setPosition(latLng);
+            // Get the current date
+            Calendar calendar = Calendar.getInstance();
+            // Get the current minute
+            int minute = calendar.get(Calendar.MINUTE);
+            // Check if the minute is divisible by 3
+            if (minute % 3 == 0) {
+                //send post request to this location resource transporterLocationId
+                // , url="http://176.119.254.198:8000/wasselha/locations/1/"
+                RequestQueue queue = Volley.newRequestQueue(this);
+                String url = "http://176.119.254.198:8000/wasselha/locations/" + transporterLocationId + "/";
+
+                // Request a JsonObject response from the provided URL.
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.PUT, url, null, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    // Assuming the returned response contains the updated values
+                                    response.put("latitude", latLng.latitude);
+                                    response.put("longitude", latLng.longitude);
+                                    response.put("title", "transporter location");
+                                    response.put("description", "location of transporter in road");
+
+                                    // Again, make a PUT request with the updated JSON
+                                    JsonObjectRequest updateRequest = new JsonObjectRequest(Request.Method.PUT, url, response,
+                                            new Response.Listener<JSONObject>() {
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    // TODO: Handle the response
+                                                    Log.d("Update Success", response.toString());
+                                                }
+                                            }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            // TODO: Handle error
+                                            Log.e("Update Error", error.toString());
+                                        }
+                                    });
+
+                                    // Add the request to the RequestQueue.
+                                    queue.add(updateRequest);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO: Handle error
+                                Log.e("Fetch Error", error.toString());
+                            }
+                        });
+
+                // Add the request to the RequestQueue.
+                queue.add(jsonObjectRequest);
+            }
+
         }
         if (!initialZoomSet) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));

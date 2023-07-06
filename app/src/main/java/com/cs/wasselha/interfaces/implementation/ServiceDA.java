@@ -42,7 +42,7 @@ public class ServiceDA {
     public ArrayList<Service> getServices() throws IOException {
 
 
-        String url = "http://176.119.254.198:8000/wasselha/services/";
+        String url = "http://176.119.254.198:8000/wasselha/services/?time=upper";
         Request request = new Request.Builder()
                 .url(url)
                 .build();

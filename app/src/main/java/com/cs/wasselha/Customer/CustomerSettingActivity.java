@@ -27,9 +27,13 @@ import com.cs.wasselha.R;
 import com.cs.wasselha.RegistrationActivity;
 import com.cs.wasselha.Transporter.MainTransporterActivity;
 import com.cs.wasselha.Transporter.TransporterSettingActivity;
+import com.cs.wasselha.interfaces.implementation.CustomerDA;
+import com.cs.wasselha.model.Customer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class CustomerSettingActivity extends AppCompatActivity {
 
@@ -59,7 +63,11 @@ public class CustomerSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateInputs()) {
-                    updateCustomerInformation(customerID);
+                    try {
+                        updateCustomerInformation(customerID);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -92,14 +100,26 @@ public class CustomerSettingActivity extends AppCompatActivity {
 
     }
 
-    private void updateCustomerInformation(int customerId) {
+    private void updateCustomerInformation(int customerId) throws IOException {
+
+        CustomerDA customerda=new CustomerDA();
+        Customer customer=customerda.getCustomer(customerId);
+
         String email = newCustomerEmail.getText().toString().trim();
         String password = newCustomerPassword.getText().toString().trim();
         String phoneNumber = newCustomerPhoneNumber.getText().toString().trim();
-
         // Create a JSON object with the updated information
         JSONObject requestData = new JSONObject();
         try {
+
+            requestData.put("email", customer.getEmail());
+            requestData.put("first_name", customer.getFirst_name());
+            requestData.put("last_name", customer.getLast_name());
+            requestData.put("password", customer.getPassword());
+            requestData.put("phone_number", customer.getPhone_number());
+            requestData.put("is_verified", customer.isIs_verified());
+            requestData.put("review", customer.getReview());
+            requestData.put("location", customer.getLocation());
             if (!email.isEmpty()) {
                 requestData.put("email", email);
             }

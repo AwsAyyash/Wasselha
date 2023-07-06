@@ -59,8 +59,6 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         holder.destinationCity.setText(servicesModelList.get(position).getDestinationCity());
         Log.d("SMRVAReview",servicesModelList.get(position).getReview()+"");
         holder.transporterReviewInCustomerRecyclerView12.setText(String.valueOf(servicesModelList.get(position).getReview()));
-
-        setImage(apiURL +servicesModelList.get(position).getImageUrl(), context, holder.cardImageView );
        /* try {
             HomeCustomerFragment.setImage(new VehiclesDA().getVehicleImageOfTransporter( servicesModelList.get(position).getTransporter()),holder.cardImageView);
         } catch (IOException e) {
@@ -90,6 +88,7 @@ public class ServicesModelRecyclerViewAdapter extends RecyclerView.Adapter<Servi
         int reviewTrans = servicesModelList.get(position).getReview();
         String srcCity= servicesModelList.get(position).getSourceCity();
         String destCity= servicesModelList.get(position).getDestinationCity();
+        setImage(apiURL +servicesModelList.get(position).getImageUrl(), context, holder.cardImageView );
         Log.d("SMAdabter2","review=" + reviewTrans);
 
         detailsBtn.setOnClickListener(new View.OnClickListener() {
