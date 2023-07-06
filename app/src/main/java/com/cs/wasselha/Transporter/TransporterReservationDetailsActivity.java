@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,12 +40,13 @@ import java.util.Map;
 
 public class TransporterReservationDetailsActivity extends AppCompatActivity {
 
-
     private static final String ID_KEY = "id";
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String BASE_URL="http://176.119.254.198:8000/wasselha";
     private static String transporterName="me";
+
+    Button addReviewAboutCustomerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +54,12 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transporter_reservation_details);
         getSupportActionBar().hide();
 
+        //calls
+        addReviewAboutCustomerSetup();
+
         Intent intent = getIntent();
         final int deliveryServiceDetailsId = intent.getIntExtra("deliveryservicedetails", 0);
-
+        addReviewAboutCustomerBtn = findViewById(R.id.addReviewAboutCustomerBtn);
         final Spinner deliveryTypeSpinner = findViewById(R.id.deliveryTypeSpinner);
         final EditText personNameEditText = findViewById(R.id.personNameInReservationsDetailsPage);
         AppCompatButton reserveButton = findViewById(R.id.reserveBtnServiceDetailsPage);
@@ -145,5 +150,20 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(postRequest);
+    }
+
+
+    //-------------------Methods--------------------------------------------------------------
+
+    private void addReviewAboutCustomerSetup()
+    {
+        addReviewAboutCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(TransporterReservationDetailsActivity.this, AddReviewForCustomerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -108,13 +108,38 @@
                 android:textColorHint="@color/quantum_grey600"
                 android:hint="Enter the person name"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/add_review_about_customer"
+                android:textColor="@color/dark_green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addReviewAboutCustomerBtn"
+                style="@android:style/Widget.Button"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_login_btn"
+                android:text="Add review"
+                android:layout_gravity="center"
+                android:fontFamily="@font/changabold"
+                android:textColor="@color/light_selver"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/reserveBtnServiceDetailsPage"
                 style="@android:style/Widget.Button"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="75dp"
                 android:layout_marginBottom="5dp"
                 android:layout_gravity="center"
                 android:textSize="18sp"

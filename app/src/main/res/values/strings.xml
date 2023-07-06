@@ -204,7 +204,7 @@
     <string name="enter_the_price_hint_in_reservations_details">Enter the price</string>
     <string name="price_in_reservations_details">Price:</string>
     <string name="customer_review_in_request_list_view">Customer review:</string>
-    <string name="path_in_request_list_view">Path:</string>
+    <string name="path_in_request_list_view">Path: </string>
     <string name="rservation_details">Rservation details</string>
     <string name="select_type_of_delivery_in_reservation_details_acivity">Select type of delivery:</string>
     <string name="reviews_in_profiles">Reviews</string>
@@ -218,9 +218,12 @@
     <string name="delivery_status_title">Delivery status</string>
     <string name="handover_to_in_customer_delivery_status">Handover to:</string>
     <string name="add_review_btn_customer_delivery_satus">Add review</string>
-    <string name="add_review_title">Add review</string>
+    <string name="add_review_title">Add review about transporter</string>
     <string name="review_in_add_review_a_transporter">Review</string>
     <string name="message_in_add_review_a_transporter">Notes</string>
     <string name="enter_the_review_in_add_review_a_transporter">Enter the review</string>
     <string name="enter_the_notes_in_add_review_a_transporter">Enter the notes...</string>
+    <string name="add_review_about_transporter_title">Add review about transporter</string>
+    <string name="add_review_about_customer_title">Add review about customer</string>
+    <string name="add_review_about_customer">Add review about the customer (optional)</string>
 </resources>
