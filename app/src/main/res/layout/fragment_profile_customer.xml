@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainNameCollectionPointProviderInProfilePage"
+        android:id="@+id/mainNameCustomerInProfilePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainNameCollectionPointProviderInProfilePage">
+        app:layout_constraintTop_toBottomOf="@+id/mainNameCustomerInProfilePage">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/settingImageInCollectionPointProviderProfile"
+                            android:id="@+id/settingImageInCustomerProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -77,9 +77,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_setting"
-                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInCollectionPointProviderProfile"
-                            app:layout_constraintEnd_toEndOf="@+id/settingImageInCollectionPointProviderProfile"
-                            app:layout_constraintStart_toStartOf="@+id/settingImageInCollectionPointProviderProfile"
+                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInCustomerProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/settingImageInCustomerProfile"
+                            app:layout_constraintStart_toStartOf="@+id/settingImageInCustomerProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -153,7 +153,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/logoutImageInCollectionPointProviderProfile"
+                            android:id="@+id/logoutImageCustomer"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -167,10 +167,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"
-                            app:layout_constraintBottom_toBottomOf="@+id/logoutImageInCollectionPointProviderProfile"
-                            app:layout_constraintEnd_toEndOf="@+id/logoutImageInCollectionPointProviderProfile"
+                            app:layout_constraintBottom_toBottomOf="@+id/logoutImageCustomer"
+                            app:layout_constraintEnd_toEndOf="@+id/logoutImageCustomer"
                             app:layout_constraintHorizontal_bias="0.65"
-                            app:layout_constraintStart_toStartOf="@+id/logoutImageInCollectionPointProviderProfile"
+                            app:layout_constraintStart_toStartOf="@+id/logoutImageCustomer"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 

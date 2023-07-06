@@ -62,7 +62,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/settingImageInTransporterProfile"
+                            android:id="@+id/settingImageInCollectionPointProviderProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -77,9 +77,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_setting"
-                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInTransporterProfile"
-                            app:layout_constraintEnd_toEndOf="@+id/settingImageInTransporterProfile"
-                            app:layout_constraintStart_toStartOf="@+id/settingImageInTransporterProfile"
+                            app:layout_constraintBottom_toBottomOf="@+id/settingImageInCollectionPointProviderProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/settingImageInCollectionPointProviderProfile"
+                            app:layout_constraintStart_toStartOf="@+id/settingImageInCollectionPointProviderProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
@@ -108,7 +108,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/claimsImageCustomer"
+                            android:id="@+id/ReviewsImageInCollectionPointProviderProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -124,9 +124,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:src="@drawable/ic_reviews"
-                            app:layout_constraintBottom_toBottomOf="@+id/claimsImageCustomer"
-                            app:layout_constraintEnd_toEndOf="@+id/claimsImageCustomer"
-                            app:layout_constraintStart_toStartOf="@+id/claimsImageCustomer"
+                            app:layout_constraintBottom_toBottomOf="@+id/ReviewsImageInCollectionPointProviderProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/ReviewsImageInCollectionPointProviderProfile"
+                            app:layout_constraintStart_toStartOf="@+id/ReviewsImageInCollectionPointProviderProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 
@@ -155,7 +155,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/logoutImage"
+                            android:id="@+id/logoutImageInCollectionPointProviderProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -169,10 +169,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"
-                            app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
-                            app:layout_constraintEnd_toEndOf="@+id/logoutImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/logoutImageInCollectionPointProviderProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/logoutImageInCollectionPointProviderProfile"
                             app:layout_constraintHorizontal_bias="0.65"
-                            app:layout_constraintStart_toStartOf="@+id/logoutImage"
+                            app:layout_constraintStart_toStartOf="@+id/logoutImageInCollectionPointProviderProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 
