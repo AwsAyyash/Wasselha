@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_green"
-    tools:context=".Customer.HomeCustomerFragment">
+    tools:context=".Customer.ProfileCustomerFragment">
 
     <ImageView
         android:id="@+id/mainPhotoInProfilePage"
@@ -108,7 +108,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/ReviewsImageInCollectionPointProviderProfile"
+                            android:id="@+id/ReviewsImageInCustomerProfile"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -123,9 +123,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:src="@drawable/ic_reviews"
-                            app:layout_constraintBottom_toBottomOf="@+id/ReviewsImageInCollectionPointProviderProfile"
-                            app:layout_constraintEnd_toEndOf="@+id/ReviewsImageInCollectionPointProviderProfile"
-                            app:layout_constraintStart_toStartOf="@+id/ReviewsImageInCollectionPointProviderProfile"
+                            app:layout_constraintBottom_toBottomOf="@+id/ReviewsImageInCustomerProfile"
+                            app:layout_constraintEnd_toEndOf="@+id/ReviewsImageInCustomerProfile"
+                            app:layout_constraintStart_toStartOf="@+id/ReviewsImageInCustomerProfile"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 

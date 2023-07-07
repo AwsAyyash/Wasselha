@@ -8,7 +8,7 @@
     tools:context=".Transporter.ProfileTransporterFragment">
 
     <ImageView
-        android:id="@+id/mainPhotoInProfileCollectionPointProviderPage"
+        android:id="@+id/mainPhotoInProfileTransporterPage"
         android:layout_width="300dp"
         android:layout_height="160dp"
         android:layout_marginTop="30dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainNameCollectionPointProviderProfilePage"
+        android:id="@+id/mainNameTransporterProfilePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,9 +27,9 @@
         android:textColor="@color/light_selver"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/mainPhotoInProfileCollectionPointProviderPage"
-        app:layout_constraintStart_toStartOf="@+id/mainPhotoInProfileCollectionPointProviderPage"
-        app:layout_constraintTop_toBottomOf="@+id/mainPhotoInProfileCollectionPointProviderPage" />
+        app:layout_constraintEnd_toEndOf="@+id/mainPhotoInProfileTransporterPage"
+        app:layout_constraintStart_toStartOf="@+id/mainPhotoInProfileTransporterPage"
+        app:layout_constraintTop_toBottomOf="@+id/mainPhotoInProfileTransporterPage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainNameCollectionPointProviderProfilePage">
+        app:layout_constraintTop_toBottomOf="@+id/mainNameTransporterProfilePage">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/claimsImageCustomer"
+                            android:id="@+id/claimsImageTransporter"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -125,9 +125,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:src="@drawable/ic_reviews"
-                            app:layout_constraintBottom_toBottomOf="@+id/claimsImageCustomer"
-                            app:layout_constraintEnd_toEndOf="@+id/claimsImageCustomer"
-                            app:layout_constraintStart_toStartOf="@+id/claimsImageCustomer"
+                            app:layout_constraintBottom_toBottomOf="@+id/claimsImageTransporter"
+                            app:layout_constraintEnd_toEndOf="@+id/claimsImageTransporter"
+                            app:layout_constraintStart_toStartOf="@+id/claimsImageTransporter"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.55" />
 
@@ -296,7 +296,7 @@
                         android:background="@drawable/light_selver_background">
 
                         <ImageView
-                            android:id="@+id/logoutImage"
+                            android:id="@+id/logoutTransporterImage"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="8dp"
@@ -310,10 +310,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"
-                            app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
-                            app:layout_constraintEnd_toEndOf="@+id/logoutImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/logoutTransporterImage"
+                            app:layout_constraintEnd_toEndOf="@+id/logoutTransporterImage"
                             app:layout_constraintHorizontal_bias="0.65"
-                            app:layout_constraintStart_toStartOf="@+id/logoutImage"
+                            app:layout_constraintStart_toStartOf="@+id/logoutTransporterImage"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.63" />
 

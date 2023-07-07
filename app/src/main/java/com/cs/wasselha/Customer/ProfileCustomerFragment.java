@@ -50,7 +50,7 @@ public class ProfileCustomerFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
-    private ImageView mainImage, settingsImg, claimsImg, historyImg, statusImg, logoutImg;
+    private ImageView settingsImg, claimsImg, logoutImg;
     private TextView name;
 
     private int customerId;
@@ -111,6 +111,8 @@ public class ProfileCustomerFragment extends Fragment {
              // Inflate the layout for this fragment
              View view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
 
+            setupReference(view);
+
             progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage("Loading...");
             progressDialog.setCancelable(false);
@@ -124,7 +126,7 @@ public class ProfileCustomerFragment extends Fragment {
             }, 500);
 
 
-        setupReference(view);
+
 
         getFromSharedPref();
         //SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -137,7 +139,6 @@ public class ProfileCustomerFragment extends Fragment {
         logoutSetup();
         claimsImgSetup();
         settingBtnSetup();
-       // statusImgSetup();return view;
 
             return view;
         }
@@ -167,7 +168,7 @@ public class ProfileCustomerFragment extends Fragment {
     {
         name = view.findViewById(R.id.mainNameCustomerInProfilePage);
         settingsImg = view.findViewById(R.id.settingImageInCustomerProfile);
-        claimsImg = view.findViewById(R.id.claimsImageCustomer);
+        claimsImg = view.findViewById(R.id.ReviewsImageInCustomerProfile);
         logoutImg = view.findViewById(R.id.logoutImageCustomer);
     }
 

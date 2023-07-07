@@ -94,6 +94,7 @@
             android:text="From "
             android:textSize="17sp"
             android:textStyle="bold"
+            android:layout_marginStart="10dp"
             style="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/dark_yellow2" />
 
@@ -112,7 +113,7 @@
         android:id="@+id/pathToRequestLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+
         android:layout_marginTop="8dp"
         android:layout_below="@+id/pathFromRequestLayout"
         android:orientation="horizontal">
@@ -120,8 +121,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="5dp"
             android:textSize="18sp"
             android:layout_weight="1"
             style="@style/TextAppearance.AppCompat.Title"
@@ -134,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Not available"
+            android:layout_marginStart="25dp"
             android:textSize="17sp"
             style="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/black" />
