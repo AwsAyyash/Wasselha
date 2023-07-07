@@ -84,9 +84,7 @@ public class TransporterReservationActivity extends AppCompatActivity {
         listView = findViewById(R.id.transporterReservationListView);
     }
 
-
-    private void populateReservationsData(int transporterID)
-    {
+    private void populateReservationsData(int transporterID) {
         reservationsData = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
 
@@ -98,123 +96,14 @@ public class TransporterReservationActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject service = response.getJSONObject(i);
-                        Log.e("service",service.toString());
                         int serviceId = service.getInt("id");
                         String serviceDate = service.getString("service_date");
 
-                        String deliveryUrl = BASE_URL + "/delivery-service-details/?service=" + serviceId ;
-
-                        // Nested JsonArrayRequest
-                        JsonArrayRequest deliveryDetailsRequest = new JsonArrayRequest(Request.Method.GET, deliveryUrl, null, new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray deliveryResponse) {
-                                for (int ii = 0; ii < deliveryResponse.length(); ii++){
-                                try {
-                                    JSONObject deliveryDetail = deliveryResponse.getJSONObject(ii);
-                                    Log.e("claimmm", deliveryDetail.toString());
-                                    boolean responsed = deliveryDetail.getBoolean("responsed");
-                                    boolean accepted = deliveryDetail.getBoolean("responsed");
-                                    int deliveryDetailsId = deliveryDetail.getInt("id");
-
-                                    final String[] customerName = {"Not available!"};
-                                    final String[] packageType = {"Not available!"};
-                                    if (responsed & accepted) {
-                                        int customerId = deliveryDetail.getInt("customer");
-                                        String customerUrl = BASE_URL + "/customers/" + customerId + "/";
-                                        // Nested JsonObjectRequest
-                                        JsonObjectRequest customerRequest = new JsonObjectRequest(Request.Method.GET, customerUrl, null, new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject customerResponse) {
-                                                try {
-                                                    Log.e("claimmm", "get name");
-                                                    customerName[0] = customerResponse.getString("first_name") + " " + customerResponse.getString("last_name");
-                                                } catch (JSONException e) {
-                                                    Log.e("claimmm", "error in get name (exception)");
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Log.e("claimmm", "error in get name and review");
-                                                // Handle error
-                                            }
-                                        });
-
-                                        requestQueue.add(customerRequest);
-                                        String packageUrl = BASE_URL + "/packages/?deliveryservicedetails=" + deliveryDetailsId;
-                                        // Nested JsonObjectRequest
-                                        JsonArrayRequest packageRequest = new JsonArrayRequest(Request.Method.GET, customerUrl, null, new Response.Listener<JSONArray>() {
-                                            @Override
-                                            public void onResponse(JSONArray packageResponse) {
-                                                try {
-                                                    JSONObject package_resource = packageResponse.getJSONObject(0);
-                                                    Log.e("claimmm", "get package type");
-                                                    packageType[0] = package_resource.getString("type");
-                                                } catch (JSONException e) {
-                                                    Log.e("claimmm", "error in get package type (exception)");
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Log.e("claimmm", "error in get name and review");
-                                                // Handle error
-                                            }
-                                        });
-
-                                        int sourcePlace = deliveryDetail.getInt("source_place");
-                                        JsonElement collectionPoint = gson.fromJson(deliveryDetail.toString(), JsonObject.class).get("source_collection_point");
-                                        getCityName(sourcePlace, collectionPoint, new RequestsTransporterFragment.CityNameCallback() {
-                                            @Override
-                                            public void onCityNameReceived(String sourceCity) throws JSONException {
-                                                // This is called when the source city name is retrieved
-                                                getCityName(deliveryDetail.getInt("destination_place"), collectionPoint, new RequestsTransporterFragment.CityNameCallback() {
-                                                    @Override
-                                                    public void onCityNameReceived(String destinationCity) {
-                                                        // This is called when the destination city name is retrieved
-
-                                                        // Now you have both sourceCity and destinationCity
-                                                        // You can use them here to add to your requestsData list
-                                                        String dateTime = formatDate(serviceDate);
-                                                        Log.e("claimmm", "add");
-//                                                        Requests request=new Requests(deliveryDetailsId,customerName[0], packageType[0], sourceCity, destinationCity, "price", dateTime);
-                                                        Reservations reservation = new Reservations(deliveryDetailsId, customerName[0], packageType[0], sourceCity, destinationCity, dateTime);
-                                                        Log.e("request-value", reservation.toString());
-                                                        reservationsData.add(reservation);
-                                                        Log.e("Reservations","size: "+reservationsData.size());
-                                                        // Set the adapter here
-                                                        ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
-                                                        listView.setAdapter(requestsAdapter);
-                                                        progressDialog.dismiss();
-                                                    }
-                                                });
-                                            }
-                                        });
-
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // Handle error
-                            }
-                        });
-
-                        requestQueue.add(deliveryDetailsRequest);
-
+                        processServiceDetails(serviceId, serviceDate);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-//                ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
-//                listView.setAdapter(requestsAdapter);
-//                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -225,74 +114,166 @@ public class TransporterReservationActivity extends AppCompatActivity {
 
         requestQueue.add(jsonArrayRequest);
     }
-    private void getCityName(int place, JsonElement collectionPoint, RequestsTransporterFragment.CityNameCallback callback) throws JSONException {
-        if (place != 0) {
-            String url = BASE_URL + "/locations/" + place + "/";
 
-            JsonObjectRequest locationRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
+    private void processServiceDetails(int serviceId, String serviceDate) {
+        String deliveryUrl = BASE_URL + "/delivery-service-details/?service=" + serviceId ;
+
+        JsonArrayRequest deliveryDetailsRequest = new JsonArrayRequest(Request.Method.GET, deliveryUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray deliveryResponse) {
+                for (int ii = 0; ii < deliveryResponse.length(); ii++){
                     try {
-                        String title = response.getString("title");
-                        callback.onCityNameReceived(title);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        try {
-                            callback.onCityNameReceived("Not available!");
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
+                        JSONObject deliveryDetail = deliveryResponse.getJSONObject(ii);
+                        boolean responsed = deliveryDetail.getBoolean("responsed");
+                        boolean accepted = deliveryDetail.getBoolean("accepted");  // I guess you want to get accepted, not responsed
+                        int deliveryDetailsId = deliveryDetail.getInt("id");
+
+                        if (responsed & accepted) {
+                            Log.e("reserveee",deliveryDetail.toString());
+                            processAcceptedServiceDetails(serviceDate, deliveryDetail, deliveryDetailsId);
                         }
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    try {
-                        callback.onCityNameReceived("Not available!");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error
+            }
+        });
+
+        requestQueue.add(deliveryDetailsRequest);
+    }
+
+    private void processAcceptedServiceDetails(String serviceDate, JSONObject deliveryDetail, int deliveryDetailsId) {
+        try {
+            int customerId = deliveryDetail.getInt("customer");
+            String customerUrl = BASE_URL + "/customers/" + customerId + "/";
+            String packageUrl = BASE_URL + "/packages/?deliveryservicedetails=" + deliveryDetailsId;
+
+            JsonObjectRequest customerRequest = new JsonObjectRequest(Request.Method.GET, customerUrl, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject customerResponse) {
+                    try {
+                        String customerName = customerResponse.getString("first_name") + " " + customerResponse.getString("last_name");
+
+                        JsonArrayRequest packageRequest = new JsonArrayRequest(Request.Method.GET, packageUrl, null, new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray packageResponse) {
+                                try {
+                                    String packageType="there is no package found";
+                                    if(packageResponse != null && packageResponse.length()>0) {
+                                        JSONObject package_resource = packageResponse.getJSONObject(0);
+                                        if(package_resource.has("type"))
+                                        packageType = package_resource.getString("type");
+                                    }
+
+                                    processLocations(serviceDate, deliveryDetail, deliveryDetailsId, customerName, packageType,customerId);
+                                } catch (JSONException e) {
+                                    Log.e("claimmm", "error in getting package details");
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, error -> {
+                            Log.e("claimmm", "error in getting package details");
+                        });
+
+                        requestQueue.add(packageRequest);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, error -> {
+                Log.e("claimmm", "error in getting customer details");
             });
 
-            requestQueue.add(locationRequest);
-
-        } else if (collectionPoint != null) {
-            int collectionPointId = collectionPoint.getAsInt();
-            String url = BASE_URL + "/collection-points/" + collectionPointId + "/";
-
-            JsonObjectRequest collectionPointRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        String title = response.getString("title");
-                        callback.onCityNameReceived(title);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        try {
-                            callback.onCityNameReceived("Not available!");
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    try {
-                        callback.onCityNameReceived("Not available!");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            requestQueue.add(collectionPointRequest);
-
-        } else {
-            callback.onCityNameReceived("Not available!");
+            requestQueue.add(customerRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
+
+    private void processLocations(String serviceDate, JSONObject deliveryDetail, int deliveryDetailsId, String customerName, String packageType,int customerId) throws JSONException {
+        int sourcePlace = deliveryDetail.optInt("source_place", -1);
+        int sourceCollectionPoint = deliveryDetail.optInt("source_collection_point", -1);
+        getCityName(sourcePlace, sourceCollectionPoint, new RequestsTransporterFragment.CityNameCallback() {
+            @Override
+            public void onCityNameReceived(String sourceCity) {
+                int destinationPlace = deliveryDetail.optInt("destination_place", -1);
+                int destinationCollectionPoint = deliveryDetail.optInt("destination_collection_point", -1);
+                getCityName(destinationPlace, destinationCollectionPoint, new RequestsTransporterFragment.CityNameCallback() {
+                    @Override
+                    public void onCityNameReceived(String destinationCity) {
+                        String dateTime = formatDate(serviceDate);
+                        Reservations reservation = new Reservations(deliveryDetailsId, customerName, packageType, sourceCity, destinationCity, dateTime, customerId);
+                        Log.e("reserveee",reservation.toString());
+                        reservationsData.add(reservation);
+
+                        ReservationsAdapter requestsAdapter = new ReservationsAdapter(getApplicationContext(), R.layout.transporter_reservation_list_view, reservationsData);
+                        listView.setAdapter(requestsAdapter);
+                        progressDialog.dismiss();
+                    }
+                });
+            }
+        });
+    }
+
+    private void getCityName(int place, int collectionPoint, RequestsTransporterFragment.CityNameCallback callback) {
+        String url = "";
+
+        if (place > 0) {
+            url = BASE_URL + "/locations/" + place + "/";
+        } else if (collectionPoint > 0) {
+            url = BASE_URL + "/collection-points/" + collectionPoint + "/";
+        } else {
+            try {
+                callback.onCityNameReceived("Not available!");
+            } catch (JSONException e) {
+                Log.e("getCityName", "JSON exception", e);
+            }
+            return;
+        }
+
+        JsonObjectRequest locationRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String title = "Not available!";
+                            if(place > 0) {
+                                title = response.getString("title");
+                            } else if(collectionPoint > 0){
+                                title = response.getString("name");
+                            }
+                            callback.onCityNameReceived(title);
+                        } catch (JSONException e) {
+                            Log.e("getCityName", "JSON exception", e);
+                            try {
+                                callback.onCityNameReceived("Not available!");
+                            } catch (JSONException ex) {
+                                Log.e("getCityName", "JSON exception", ex);
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("getCityName", "Error: " + error.getMessage(), error);
+                        try {
+                            callback.onCityNameReceived("Not available!");
+                        } catch (JSONException e) {
+                            Log.e("getCityName", "JSON exception", e);
+                        }
+                    }
+                }
+        );
+
+        requestQueue.add(locationRequest);
+    }
+
 
     private String formatDate(String serviceDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;

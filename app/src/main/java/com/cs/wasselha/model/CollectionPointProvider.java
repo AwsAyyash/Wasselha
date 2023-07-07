@@ -73,6 +73,46 @@ public class CollectionPointProvider {
         //this.review = review;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public void setIs_verified(boolean is_verified) {
+        this.is_verified = is_verified;
+    }
+
+    public void setNational_id(String national_id) {
+        this.national_id = national_id;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
+    }
+
     public String getFirst_name() {
         return first_name;
     }
