@@ -14,10 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.cs.wasselha.R;
+import com.cs.wasselha.RegistrationActivity;
 
 
 public class ProfileCollectionPointProviderFragment extends Fragment {
 
+    private static final String ID_KEY = "id";
+    private static final String LOGIN_TYPE_KEY = "loginType";
+    private static final String PREFERENCES_NAME = "MyPreferences";
 
     private ImageView settingCollectionPointProviderImg, ReviewsCollectionPointProviderImg, logoutCollectionPointProviderImg;
     private ProgressDialog progressDialog;
@@ -43,6 +47,7 @@ public class ProfileCollectionPointProviderFragment extends Fragment {
             }, 1000);
 
             //Calls
+            logoutCollectionPointProviderSetup();
             settingCollectionPointProviderSetup();
             reviewsCollectionPointProviderSetup();
 
@@ -64,6 +69,24 @@ public class ProfileCollectionPointProviderFragment extends Fragment {
         settingCollectionPointProviderImg = view.findViewById(R.id.settingImageInCollectionPointProviderProfile);
         ReviewsCollectionPointProviderImg = view.findViewById(R.id.ReviewsImageInCollectionPointProviderProfile);
         logoutCollectionPointProviderImg = view.findViewById(R.id.logoutImageInCollectionPointProviderProfile);
+    }
+
+    private void logoutCollectionPointProviderSetup()
+    {
+        logoutCollectionPointProviderImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                //delete info from shared preferences
+                SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove(ID_KEY);
+                editor.remove(LOGIN_TYPE_KEY);
+                editor.apply();
+                Intent intent = new Intent(getContext(), RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void settingCollectionPointProviderSetup()
