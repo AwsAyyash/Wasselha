@@ -58,6 +58,7 @@ public class ReservationsAdapter  extends ArrayAdapter<Reservations> {
             {
                 Intent intent = new Intent(getContext(), TransporterReservationDetailsActivity.class);
                 intent.putExtra("deliveryservicedetails",getItem(position).getId());
+                intent.putExtra("customerid",getItem(position).getCustomerId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

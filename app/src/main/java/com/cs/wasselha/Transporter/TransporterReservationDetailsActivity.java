@@ -45,24 +45,23 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String BASE_URL="http://176.119.254.198:8000/wasselha";
     private static String transporterName="me";
-
-    Button addReviewAboutCustomerBtn;
+    private ProgressDialog progressDialog ;
+//    AppCompatButton addReviewAboutCustomerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transporter_reservation_details);
         getSupportActionBar().hide();
-
-        //calls
-        addReviewAboutCustomerSetup();
+        progressDialog = new ProgressDialog(this);
 
         Intent intent = getIntent();
         final int deliveryServiceDetailsId = intent.getIntExtra("deliveryservicedetails", 0);
-        addReviewAboutCustomerBtn = findViewById(R.id.addReviewAboutCustomerBtn);
+        final int customerId = intent.getIntExtra("customerid", 0);
         final Spinner deliveryTypeSpinner = findViewById(R.id.deliveryTypeSpinner);
         final EditText personNameEditText = findViewById(R.id.personNameInReservationsDetailsPage);
         AppCompatButton reserveButton = findViewById(R.id.reserveBtnServiceDetailsPage);
+        AppCompatButton addReviewAboutCustomerBtn = findViewById(R.id.addReviewAboutCustomerBtn);
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
@@ -80,6 +79,18 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
                     handoverTo = transporterName;
                 }
                 personNameEditText.setText("");
+                progressDialog.setMessage("change package status...");
+                progressDialog.show();
+                sendPostRequest(deliveryServiceDetailsId,actionTime,collectionFrom,handoverTo,customerId);
+            }
+        });
+        addReviewAboutCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddReviewForCustomerActivity.class);
+                intent.putExtra("deliveryservicedetails",deliveryServiceDetailsId);
+                intent.putExtra("customerid",customerId);
+                startActivity(intent);
             }
         });
     }
@@ -116,7 +127,7 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private void sendPostRequest(final int deliveryServiceDetailsId, final String actionTime, final String collectionFrom, final String handoverTo) {
+    private void sendPostRequest(final int deliveryServiceDetailsId, final String actionTime, final String collectionFrom, final String handoverTo,final int customerId) {
         String url = BASE_URL + "/delivery-status/";
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -127,7 +138,7 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressDialog.dismiss();
+                        sendNotificationToCustomer(customerId,"update package status","package collected from "+collectionFrom+" to "+handoverTo);
                         Toast.makeText(getApplicationContext(), "Data sent successfully!", Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
@@ -152,18 +163,48 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
+    private void sendNotificationToCustomer(final int customerId, final String title, final String description) {
+        String url = BASE_URL + "/notifications/";
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Intent intent = new Intent(getApplicationContext(), MainTransporterActivity.class);
+                        getApplicationContext().startActivity(intent);
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Notification sent successfully!", Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Intent intent = new Intent(getApplicationContext(), MainTransporterActivity.class);
+                startActivity(intent);
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Error sending notification", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", String.valueOf(customerId));
+                params.put("user_type", "customer");
+                params.put("title", title);
+                params.put("description", description);
+                params.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())); // Current date and time
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(postRequest);
+    }
 
     //-------------------Methods--------------------------------------------------------------
 
-    private void addReviewAboutCustomerSetup()
-    {
-        addReviewAboutCustomerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(TransporterReservationDetailsActivity.this, AddReviewForCustomerActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+//    private void addReviewAboutCustomerSetup()
+//    {
+//
+//    }
 }

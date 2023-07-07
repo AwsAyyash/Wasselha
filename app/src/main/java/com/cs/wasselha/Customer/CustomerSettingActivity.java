@@ -134,7 +134,7 @@ public class CustomerSettingActivity extends AppCompatActivity {
         }
 
         // Send the update request to the server
-        String url = "http://176.119.254.198:8000/wasselha/customers/"+customerId+"/"; // Replace with your API endpoint URL
+        String url = "http://176.119.254.198:8000/wasselha/collection-point-providers/"+customerId+"/"; // Replace with your API endpoint URL
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, requestData,
                 new Response.Listener<JSONObject>() {
                     @Override

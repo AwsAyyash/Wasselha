@@ -62,6 +62,31 @@ public class CollectionPointDA {
 
 
     }
+    //    @Override
+    public ArrayList<CollectionPoint> getCollectionPsByCPPid(int id) throws IOException {
+
+
+        String url = "http://176.119.254.198:8000/wasselha/collection-points/?collectionpointprovider="+id;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            Gson gson = new Gson();
+            Type collectionPsListType = new TypeToken<ArrayList<CollectionPoint>>() {
+            }.getType();
+            collectionPDAListGlobal = new ArrayList<>();
+            collectionPDAListGlobal = gson.fromJson(response.peekBody(5048).string(), collectionPsListType);
+            // todo: here i should fill the data into the activity
+            //Log.d("response.body().string()", response.body().string());
+
+        }
+
+
+        return collectionPDAListGlobal;
+
+
+    }
 
 
     // @Override

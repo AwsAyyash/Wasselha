@@ -1,9 +1,18 @@
 package com.cs.wasselha.Transporter;
 
 public class Reservations {
-    int id;
+    int id,customerId;
     String customerName, packageType, sourceCity, destinationCity, time;
-
+    public Reservations(int id,String customerName, String packageType, String sourceCity, String destinationCity, String time,int customerId)
+    {
+        this.id=id;
+        this.customerName = customerName;
+        this.packageType = packageType;
+        this.sourceCity = sourceCity;
+        this.destinationCity = destinationCity;
+        this.time = time;
+        this.customerId = customerId;
+    }
 
     public Reservations(int id,String customerName, String packageType, String sourceCity, String destinationCity, String time)
     {
@@ -21,6 +30,14 @@ public class Reservations {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {

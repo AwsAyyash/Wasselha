@@ -4,10 +4,16 @@ import android.widget.Button;
 
 public class CollectionPoints {
 
-    int image;
+    int id,image;
     String collectionPointName;
     Button manageBtn;
-
+    public CollectionPoints(int id,int image, String collectionPointName, Button manageBtn)
+    {
+        this.id = id;
+        this.image = image;
+        this.collectionPointName = collectionPointName;
+        this.manageBtn = manageBtn;
+    }
     public CollectionPoints(int image, String collectionPointName, Button manageBtn)
     {
         this.image = image;
