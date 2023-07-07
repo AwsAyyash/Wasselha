@@ -25,24 +25,11 @@
             android:id="@+id/nameCollectionPointInListViewMainPageCollectionPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ramallah"
+            android:text="Not available"
             android:textSize="18sp"
             style="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/black"
             android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:text="@string/collection_point_cpmplete_in_list_view_collection_point"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

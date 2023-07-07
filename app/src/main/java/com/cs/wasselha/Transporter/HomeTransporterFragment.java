@@ -67,7 +67,9 @@ public class HomeTransporterFragment extends Fragment {
             }, 1000);
 
         return view;
-        }catch (Exception e){
+        }
+        catch (Exception e)
+        {
         Log.e("error:",e.toString());
         View view = inflater.inflate(R.layout.fragment_home_transporter, container, false);
         return view;

@@ -127,13 +127,13 @@ public class ProfileTransporterFragment extends Fragment {
     //References
     private void setupReference(View view)
     {
-        mainImage = view.findViewById(R.id.mainPhotoInProfileCollectionPointProviderPage);
-        name = view.findViewById(R.id.mainNameCollectionPointProviderProfilePage);
+        mainImage = view.findViewById(R.id.mainPhotoInProfileTransporterPage);
+        name = view.findViewById(R.id.mainNameTransporterProfilePage);
         settingsImg = view.findViewById(R.id.settingImageInTransporterProfile);
-        claimsImg = view.findViewById(R.id.claimsImageCustomer);
+        claimsImg = view.findViewById(R.id.claimsImageTransporter);
         carsImg = view.findViewById(R.id.vehicleInfoImgInTransporterProfile);
         statusImg = view.findViewById(R.id.statusImage);
-        logoutImg = view.findViewById(R.id.logoutImage);
+        logoutImg = view.findViewById(R.id.logoutTransporterImage);
         reservationImg = view.findViewById(R.id.reservationsImgInCTransporterProfile);
     }
 
