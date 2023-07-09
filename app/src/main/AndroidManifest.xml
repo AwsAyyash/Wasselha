@@ -19,6 +19,13 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".LanguageSelection"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CollectionPointProvider.CollectionPointProviderReviewsActivity"
             android:exported="false" />
         <activity

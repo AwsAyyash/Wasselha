@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.cs.wasselha.Dialogs.ForgetRegistrationDialog;
 import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.Signup.TypeSignupActivity;
@@ -18,6 +20,7 @@ public class RegistrationActivity extends AppCompatActivity
 {
     private Button loginBtn, signupBtn;
     ImageView skipBtn;
+    TextView changeLanguage;
     private ProgressDialog progressDialog;
 
     @Override
@@ -33,6 +36,7 @@ public class RegistrationActivity extends AppCompatActivity
             setupReference();
             loginSetup();
             signupSetup();
+            changeLanguageSetup();
             //skipSetup();
 
             progressDialog = new ProgressDialog(RegistrationActivity.this);
@@ -46,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity
                     progressDialog.dismiss();
                 }
 
-            }, 1000);
+            }, 200);
         }
         catch(Exception e)
         {
@@ -62,6 +66,7 @@ public class RegistrationActivity extends AppCompatActivity
         loginBtn = findViewById(R.id.loginBtnInLoginPage);
         signupBtn = findViewById(R.id.signupBtnInRegisterPage);
         //skipBtn = findViewById(R.id.skipBtnInRegisterPage);
+        changeLanguage =findViewById(R.id.changelang);
     }
 
     private void loginSetup() {
@@ -81,6 +86,16 @@ public class RegistrationActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 Intent intent = new Intent(RegistrationActivity.this, TypeSignupActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void changeLanguageSetup() {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(RegistrationActivity.this, LanguageSelection.class);
                 startActivity(intent);
             }
         });

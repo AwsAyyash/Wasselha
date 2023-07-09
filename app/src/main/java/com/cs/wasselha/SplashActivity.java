@@ -2,15 +2,21 @@ package com.cs.wasselha;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.cs.wasselha.CollectionPointProvider.MainCollectionPointProviderActivity;
 import com.cs.wasselha.Customer.MainCustomerActivity;
 import com.cs.wasselha.Transporter.MainTransporterActivity;
+
+import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -31,7 +37,15 @@ public class SplashActivity extends AppCompatActivity {
             // SharedPreferences.Editor editor = preferences.edit();
             String loginType = preferences.getString(LOGIN_TYPE_KEY, null);
             String id = preferences.getString(ID_KEY, null);
+//            String lang = preferences.getString("Settings", null);
 
+            String langPref = "my_lang";
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+            String lang = prefs.getString(langPref, null);
+            if(lang!=null){
+                Log.e("laaaanguage","language: "+lang);
+                setLocale(lang);
+            }
             if (loginType != null && id != null)
             {
                 if (loginType.equals("customer"))
@@ -104,5 +118,20 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 1000);
+    }
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.setLocale(myLocale);
+        res.updateConfiguration(conf, dm);
+        getApplicationContext().getSharedPreferences("Settings", 0).edit().putString("my_lang", lang).apply();
+    }
+
+    private void restartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }

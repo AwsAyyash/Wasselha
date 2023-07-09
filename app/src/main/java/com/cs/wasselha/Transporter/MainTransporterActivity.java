@@ -65,6 +65,7 @@ public class MainTransporterActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.mainTransporterLayout,fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.cs.wasselha.LanguageSelection;
 import com.cs.wasselha.R;
 
 import android.content.Context;
@@ -41,7 +42,7 @@ public class ProfileTransporterFragment extends Fragment {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private static String apiURL="http://176.119.254.198:8000/wasselha";
-    private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg, reservationImg;
+    private ImageView mainImage, settingsImg, claimsImg, carsImg, statusImg, logoutImg, reservationImg,changeLanguage;
     private TextView name;
 
     private ProgressDialog progressDialog;
@@ -110,6 +111,7 @@ public class ProfileTransporterFragment extends Fragment {
             claimsImgSetup();
             statusImgSetup();
             reservationsSetup();
+            changeLanguageSetup();
 
 
             return view;
@@ -135,6 +137,7 @@ public class ProfileTransporterFragment extends Fragment {
         statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutTransporterImage);
         reservationImg = view.findViewById(R.id.reservationsImgInCTransporterProfile);
+        changeLanguage = view.findViewById(R.id.languageImageTransporter);
     }
 
     //-----------Logout Setup------------------------------------------------------
@@ -208,6 +211,16 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TransporterTrackRoad.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void changeLanguageSetup() {
+        changeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getContext(), LanguageSelection.class);
                 startActivity(intent);
             }
         });

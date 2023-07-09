@@ -1,0 +1,232 @@
+<resources>
+    <string-array name="vehicle_type">
+        <item>سيارة</item>
+        <item>فان</item>
+        <item>شاحنة</item>
+    </string-array>
+
+    <string-array name="delivery_type">
+        <item>استلام من</item>
+        <item>تسليم إلى</item>
+    </string-array>
+
+    <string-array name="services">
+        <item>محمد</item>
+        <item>أحمد</item>
+        <item>صلاح</item>
+        <item>غسان</item>
+        <item>محمد</item>
+        <item>أوس</item>
+        <item>عماد</item>
+        <item>سامي</item>
+        <item>عمر</item>
+        <item>عديب</item>
+        <item>بهاء</item>
+        <item>إياد</item>
+    </string-array>
+
+    <string-array name="times">
+        <item>9:00 صباحًا</item>
+        <item>9:30 صباحًا</item>
+        <item>9:50 صباحًا</item>
+        <item>10:00 صباحًا</item>
+        <item>10:15 صباحًا</item>
+        <item>10:30 صباحًا</item>
+        <item>10:50 صباحًا</item>
+        <item>11:00 صباحًا</item>
+        <item>11:30 صباحًا</item>
+        <item>12:00 ظهرًا</item>
+        <item>12:30 ظهرًا</item>
+        <item>1:00 ظهرًا</item>
+    </string-array>
+
+    <string-array name="sourceCities">
+        <item>رام الله</item>
+        <item>نابلس</item>
+        <item>جنين</item>
+        <item>الخليل</item>
+        <item>القدس</item>
+        <item>سلفيت</item>
+        <item>طولكرم</item>
+        <item>رام الله</item>
+        <item>الخليل</item>
+        <item>نابلس</item>
+        <item>سلفيت</item>
+        <item>جنين</item>
+    </string-array>
+
+    <string-array name="destinationCities">
+        <item>نابلس</item>
+        <item>جنين</item>
+        <item>الخليل</item>
+        <item>القدس</item>
+        <item>رام الله</item>
+        <item>نابلس</item>
+        <item>جنين</item>
+        <item>نابلس</item>
+        <item>القدس</item>
+        <item>جنين</item>
+        <item>رام الله</item>
+        <item>سلفيت</item>
+    </string-array>
+    <string name="app_name">وصلها</string>
+    <string name="main_title">وصلها</string>
+    <string name="welcome">أهلا بك في وصلها</string>
+    <string name="need">كل ما تحتاجه في مكان واحد</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="signup">تسجيل</string>
+    <string name="login_title">تسجيل الدخول إلى وصلها</string>
+    <string name="username_or_phone_number_hint">البريد الإلكتروني</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="main_login_btn">تسجيل الدخول</string>
+    <string name="question_signup">ليس لديك حساب؟</string>
+    <string name="question_login">هل لديك حساب؟</string>
+    <string name="signup_in_question"><u>تسجيل</u></string>
+    <string name="login_in_question"><u>تسجيل الدخول</u></string>
+    <string name="select_type_of_signup">تسجيل كـ:</string>
+    <string name="signup_as_customer">العميل</string>
+    <string name="signup_as_transporter">ناقل</string>
+    <string name="signup_as_collection_point_provider">مزود نقطة التجميع</string>
+    <string name="first_name_customer">الاسم الأول</string>
+    <string name="first_name_customer_hint">أدخل اسمك الأول</string>
+    <string name="last_name_customer">الاسم الأخير</string>
+    <string name="last_name_customer_hint">أدخل اسمك الأخير</string>
+    <string name="email_customer_signup_textview">البريد الإلكتروني</string>
+    <string name="email_signup_customer_hint">أدخل بريدك الإلكتروني</string>
+    <string name="passwordc_customer_signup_textview">كلمة المرور</string>
+    <string name="phone_number_customer_signup_textview">رقم الهاتف</string>
+    <string name="phone_number_customer_signup_hint">أدخل رقم هاتفك</string>
+    <string name="password_customer_signup_hint">أدخل كلمة المرور</string>
+    <string name="customer_signup_top_title">تسجيل العميل</string>
+    <string name="re_repeat_password_customer_signup">إعادة إدخال كلمة المرور</string>
+    <string name="re_repeat_password_hint">أعد إدخال كلمة المرور</string>
+    <string name="address_customer_signup_textview">العنوان</string>
+    <string name="address_customer_signup_hint">أدخل عنوانك</string>
+    <string name="transporter_signup_top_title">تسجيل الناقل</string>
+    <string name="national_id_transporter_signup_hint">أدخل الهوية الوطنية</string>
+    <string name="national_id_signup_textview">الهوية الوطنية</string>
+    <string name="upload_image">تحميل الصورة</string>
+    <string name="vehicle_license_photo">صورة رخصة السيارة</string>
+    <string name="personal_license_photo">صورة الرخصة الشخصية</string>
+    <string name="vehicle_type_transporter_signup_text_view">نوع السيارة</string>
+    <string name="collection_point_provider_signup_top_title">تسجيل مزود نقطة التجميع</string>
+    <string name="home_in_bottom_bar">الصفحة الرئيسية</string>
+    <string name="reservation_in_bottom_bar">الحجز</string>
+    <string name="track_in_bottom_bar">تتبع</string>
+    <string name="profile_in_bottom_bar">الملف الشخصي</string>
+    <string name="ads_text">عرض التوصيل</string>
+    <string name="date_offer">25 يونيو - 10 يوليو</string>
+    <string name="service_available_main_title">الخدمات المتاحة</string>
+    <string name="transporter_name_in_customer_recyclerView">الناقل:</string>
+    <string name="time_in_customer_recyclerView">الوقت:</string>
+    <string name="details_in_customer_card_recycler_view">تفاصيل</string>
+    <string name="notifications_in_bottom_bar">الإشعارات</string>
+    <string name="main_search_area_hint">ابحث عن ما تحتاجه...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">مرحبا بك في المُركبة الفارغة</string>
+    <string name="search_filter_main_title">تصفية البحث</string>
+    <string name="source_in_filter">المصدر</string>
+    <string name="destination_in_filter">الوجهة</string>
+    <string name="enter_the_source_city_hint">أدخل المصدر</string>
+    <string name="enter_the_destination_city_hint">أدخل الوجهة</string>
+    <string name="destination_in_filter_main_title">الوجهة</string>
+    <string name="price_in_filter">السعر</string>
+    <string name="search_btn_in_filter_search">بحث</string>
+    <string name="price_in_filter_title">السعر</string>
+    <string name="enter_the_price_in_filter_hint">أدخل السعر</string>
+    <string name="time_in_filter_title">الوقت</string>
+    <string name="service_details_main_title">تفاصيل الخدمة</string>
+    <string name="path_in_service_details_page">المسار:</string>
+    <string name="vehicle_type_in_service_details_page">سيارة</string>
+    <string name="price_in_service_details_page">السعر:</string>
+    <string name="reserve_btn_in_service_details_page">حجز</string>
+    <string name="vehicle_number_transporter_signup_hint">أدخل رقم السيارة</string>
+    <string name="vehicle_number_customer_signup_textview">رقم السيارة</string>
+    <string name="vehicle_photo_transporter_signup">صورة السيارة</string>
+    <string name="settings_in_profile_page">الإعدادات</string>
+    <string name="claims_in_profile_page">الشكاوى</string>
+    <string name="favorites__in_profile_page">المفضلة</string>
+    <string name="logout_in_profile_page">تسجيل خروج</string>
+    <string name="inbox_in_profile_page">صندوق الوارد</string>
+    <string name="history_in_profile_page">السجل</string>
+    <string name="home_in_bottom_bar_transporter">الرئيسية</string>
+    <string name="new_service_in_bottom_bar_transporter">خدمة جديدة</string>
+    <string name="reservations_in_bottom_bar_transporter">الحجوزات</string>
+    <string name="profile_in_bottom_bar_transporter">الملف الشخصي</string>
+    <string name="notifications_in_bottom_bar_transporter">الإشعارات</string>
+    <string name="cars_in_profile_page">السيارات</string>
+    <string name="skip_btn_in_registration_page">تخطي</string>
+    <string name="add_new_service_main_title">أضف خدمة جديدة</string>
+    <string name="create_btn_in_add_new_service">إنشاء</string>
+    <string name="your_services_in_main_transporter_page">خدماتك</string>
+    <string name="notifications_in_bottom_bar_in_collection_point_provider">الإشعارات</string>
+    <string name="profile_in_bottom_bar_in_collection_point_provider">الملف الشخصي</string>
+    <string name="new_collection_point_in_bottom_bar_in_collection_point_provider">نقطة تجميع جديدة</string>
+    <string name="name_collection_point">الاسم</string>
+    <string name="enter_name_of_collection_point_hint">أدخل اسم نقطة التجميع</string>
+    <string name="open_time_collection_point">وقت الافتتاح</string>
+    <string name="add_btn_in_add_collection_point">أضف</string>
+    <string name="add_new_collection_point">أضف نقطة تجميع جديدة</string>
+    <string name="close_time_collection_point">وقت الإغلاق</string>
+    <string name="location_collection_point">الموقع</string>
+    <string name="add_location_collection_point">أضف الموقع</string>
+    <string name="manage_btn_in_home_list_view_collection_point">إدارة</string>
+    <string name="collection_point_cpmplete_in_list_view_collection_point">نقطة التجميع</string>
+    <string name="select_type_of_login">تسجيل الدخول كـ:</string>
+    <string name="title_notifications_customer_list_view">الإشعارات</string>
+    <string name="MAPS_API_KEY">AIzaSyCc0zpvvElMnKIwU1wL0GzUSjd0ALk2b28</string>
+    <string name="collection_points_in_profile_page">نقاط \nالتجميع</string>
+    <string name="status_in_profile_page">الحالة</string>
+    <string name="update_info_transporter">تحديث المعلومات</string>
+    <string name="enter_your_new_email_hint">أدخل بريدك الإلكتروني الجديد</string>
+    <string name="enter_your_new_password_hint">أدخل كلمة المرور الجديدة</string>
+    <string name="enter_your_new_phone_number_hint">أدخل رقم هاتفك الجديد</string>
+    <string name="update_btn">تحديث</string>
+    <string name="vehicle_image_in_car_info_page">صورة السيارة:</string>
+    <string name="vehicle_license_in_car_info_page">رخصة السيارة:</string>
+    <string name="back_to_profile_page_btn">العودة إلى صفحة الملف الشخصي</string>
+    <string name="vehicle_information_main_title">معلومات السيارة</string>
+    <string name="vehicle_ninformation_in_transporter_profile">معلومات \nالسيارة</string>
+    <string name="review_in_claim_list_view">مراجعة:</string>
+    <string name="claims_in_transporter_claims_page">الشكاوى</string>
+    <string name="requests_in_bottom_bar_transporter">الطلبات</string>
+    <string name="package_type_in_reservation_details">نوع الحزمة:</string>
+    <string name="enter_package_type_hint">أدخل نوع الحزمة</string>
+    <string name="enter_package_weight_hint">أدخل وزن الحزمة</string>
+    <string name="package_weight_in_reservations_details">وزن الحزمة:</string>
+    <string name="collect_from_in_reservations_details">التجميع من:</string>
+    <string name="location_radio_button">الموقع</string>
+    <string name="collection_point_radio_button">نقطة التجميع</string>
+    <string name="handover_to_in_reservations_details">تسليم إلى:</string>
+    <string name="enter_the_price_hint_in_reservations_details">أدخل السعر</string>
+    <string name="price_in_reservations_details">السعر:</string>
+    <string name="customer_review_in_request_list_view">مراجعة العميل:</string>
+    <string name="path_in_request_list_view">المسار: </string>
+    <string name="rservation_details">تفاصيل الحجز</string>
+    <string name="select_type_of_delivery_in_reservation_details_acivity">اختر نوع التوصيل:</string>
+    <string name="reviews_in_profiles">المراجعات</string>
+    <string name="source_in_reservation_customer_listView">تسليم إلى:</string>
+    <string name="destination_in_reservation_customer_listView">الوجهة:</string>
+    <string name="status_in_reservation_customer_listView">الحالة:</string>
+    <string name="date_in_reservation_customer_listView">التاريخ:</string>
+    <string name="your_reservation_history_in_reservation_customer_listView">سجل الحجز الخاص بك</string>
+    <string name="action_time_in_customer_delivery_status">وقت الإجراء:</string>
+    <string name="collection_from_in_customer_delivery_status">التجميع من:</string>
+    <string name="delivery_status_title">حالة التوصيل</string>
+    <string name="handover_to_in_customer_delivery_status">تسليم إلى:</string>
+    <string name="add_review_btn_customer_delivery_satus">أضف مراجعة</string>
+    <string name="add_review_title">أضف مراجعة عن الناقل</string>
+    <string name="review_in_add_review_a_transporter">المراجعة</string>
+    <string name="message_in_add_review_a_transporter">ملاحظات</string>
+    <string name="enter_the_review_in_add_review_a_transporter">أدخل المراجعة</string>
+    <string name="enter_the_notes_in_add_review_a_transporter">أدخل الملاحظات...</string>
+    <string name="add_review_about_transporter_title">أضف مراجعة عن الناقل</string>
+    <string name="add_review_about_customer_title">أضف مراجعة عن العميل</string>
+    <string name="add_review_about_customer">أضف مراجعة عن العميل (اختياري)</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="english">الإنجليزية</string>
+    <string name="arabic">العربية</string>
+    <string name="change_language">تغيير اللغة ؟</string>
+
+</resources>
+

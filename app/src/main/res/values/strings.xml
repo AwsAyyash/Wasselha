@@ -226,4 +226,8 @@
     <string name="add_review_about_transporter_title">Add review about transporter</string>
     <string name="add_review_about_customer_title">Add review about customer</string>
     <string name="add_review_about_customer">Add review about the customer (optional)</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="change_language">Change Language?</string>
 </resources>

@@ -97,7 +97,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtnInLoginPage" />
 
-<!--    <ImageView-->
+    <TextView
+        android:id="@+id/changelang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_language"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupBtnInRegisterPage" />
+    <!--    <ImageView-->
 <!--        android:id="@+id/skipBtnInRegisterPage"-->
 <!--        android:layout_width="85dp"-->
 
