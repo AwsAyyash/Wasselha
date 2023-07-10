@@ -1,8 +1,7 @@
-package com.cs.wasselha.Customer;
+package com.cs.wasselha.CollectionPointProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +12,14 @@ import com.cs.wasselha.R;
 import com.cs.wasselha.Transporter.TransporterSettingActivity;
 import com.cs.wasselha.Transporter.UpdateTransporterInformationActivity;
 
-public class CustomerSettingActivity extends AppCompatActivity
+public class CollectionPointProviderSettingActivity extends AppCompatActivity
 {
-    private Button updateBtn, changeLanguageBtn;
+    private Button updateCollectionPointProviderInfoBtn, changeCollectionPointProviderLanguageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_setting);
+        setContentView(R.layout.activity_collection_point_provider_setting);
         getSupportActionBar().hide();
 
         //Calls
@@ -30,22 +29,20 @@ public class CustomerSettingActivity extends AppCompatActivity
 
     }
 
-
-
     //------------------------Methods---------------------------------------------
     private void setUpRefernces()
     {
-        updateBtn = findViewById(R.id.updateCustomerInformationBtnInSettingPage);
-        changeLanguageBtn = findViewById(R.id.changeLanguageBtnInCustomerSettingPage);
+        updateCollectionPointProviderInfoBtn = findViewById(R.id.updateCollectionPointProviderInformationBtnInSettingPage);
+        changeCollectionPointProviderLanguageBtn = findViewById(R.id.changeLanguageBtnInCollectionPointProviderSettingPage);
     }
 
     private void updateInfoSetup()
     {
-        updateBtn.setOnClickListener(new View.OnClickListener() {
+        updateCollectionPointProviderInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(CustomerSettingActivity.this, UpdateCustomerInformationActivity.class);
+                Intent intent = new Intent(CollectionPointProviderSettingActivity.this, UpdateCollectionPointProviderInformationActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,11 +50,11 @@ public class CustomerSettingActivity extends AppCompatActivity
 
     private void changeLanguageBtnSetup()
     {
-        changeLanguageBtn.setOnClickListener(new View.OnClickListener() {
+        changeCollectionPointProviderLanguageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(CustomerSettingActivity.this, LanguageSelection.class);
+                Intent intent = new Intent(CollectionPointProviderSettingActivity.this, LanguageSelection.class);
                 startActivity(intent);
             }
         });

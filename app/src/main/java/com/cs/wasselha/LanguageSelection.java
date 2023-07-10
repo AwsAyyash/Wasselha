@@ -21,6 +21,7 @@ public class LanguageSelection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_selection);
+        getSupportActionBar().hide();
 
         englishButton = findViewById(R.id.english_button);
         arabicButton = findViewById(R.id.arabic_button);

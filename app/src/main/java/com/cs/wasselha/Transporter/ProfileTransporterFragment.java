@@ -111,8 +111,6 @@ public class ProfileTransporterFragment extends Fragment {
             claimsImgSetup();
             statusImgSetup();
             reservationsSetup();
-            changeLanguageSetup();
-
 
             return view;
 
@@ -137,7 +135,6 @@ public class ProfileTransporterFragment extends Fragment {
         statusImg = view.findViewById(R.id.statusImage);
         logoutImg = view.findViewById(R.id.logoutTransporterImage);
         reservationImg = view.findViewById(R.id.reservationsImgInCTransporterProfile);
-        changeLanguage = view.findViewById(R.id.languageImageTransporter);
     }
 
     //-----------Logout Setup------------------------------------------------------
@@ -211,16 +208,6 @@ public class ProfileTransporterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TransporterTrackRoad.class);
-                startActivity(intent);
-            }
-        });
-    }
-    private void changeLanguageSetup() {
-        changeLanguage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(getContext(), LanguageSelection.class);
                 startActivity(intent);
             }
         });

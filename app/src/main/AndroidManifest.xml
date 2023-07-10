@@ -4,9 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- <uses-permission -->
-    <!-- android:name="android.permission.ACCESS_FINE_LOCATION" -->
-    <!-- tools:ignore="CoarseFineLocation" /> -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -19,6 +17,9 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Transporter.UpdateTransporterInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".LanguageSelection"
             android:exported="false">
             <meta-data
@@ -29,7 +30,7 @@
             android:name=".CollectionPointProvider.CollectionPointProviderReviewsActivity"
             android:exported="false" />
         <activity
-            android:name=".CollectionPointProvider.CollectionPointProviderSettingsActivity"
+            android:name=".CollectionPointProvider.UpdateCollectionPointProviderInformationActivity"
             android:exported="false" />
         <activity
             android:name=".Transporter.AddReviewForCustomerActivity"
@@ -42,6 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".Customer.DeliveryStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.CustomerSettingActivity"
             android:exported="false" />
         <activity
             android:name=".Transporter.TransporterReservationDetailsActivity"
@@ -65,7 +69,7 @@
             android:name=".Transporter.TransporterSettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Customer.CustomerSettingActivity"
+            android:name=".Customer.UpdateCustomerInformationActivity"
             android:exported="false" />
         <activity
             android:name=".Transporter.TransporterTrackRoad"

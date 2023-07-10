@@ -95,7 +95,7 @@ public class ProfileCollectionPointProviderFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(), CollectionPointProviderSettingsActivity.class);
+                Intent intent = new Intent(getContext(), CollectionPointProviderSettingActivity.class);
                 startActivity(intent);
             }
         });

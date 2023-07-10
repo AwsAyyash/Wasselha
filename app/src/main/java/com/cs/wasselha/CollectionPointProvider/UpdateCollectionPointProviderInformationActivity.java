@@ -12,7 +12,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +20,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.cs.wasselha.Customer.CustomerSettingActivity;
-import com.cs.wasselha.Customer.MainCustomerActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.CollectionPointProviderDA;
-import com.cs.wasselha.interfaces.implementation.CustomerDA;
 import com.cs.wasselha.model.CollectionPointProvider;
-import com.cs.wasselha.model.Customer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class CollectionPointProviderSettingsActivity extends AppCompatActivity {
+public class UpdateCollectionPointProviderInformationActivity extends AppCompatActivity {
     EditText newCollectionPointProviderEmail, newCollectionPointProviderPassword, newCollectionPointProviderPhoneNumber;
     Button updateCollectionPointProviderInfoBtn;
 
@@ -46,7 +41,7 @@ public class CollectionPointProviderSettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection_point_provider_settings);
+        setContentView(R.layout.activity_update_collection_point_provider_information);
         getSupportActionBar().hide();
         setupReferences();
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -120,14 +115,14 @@ public class CollectionPointProviderSettingsActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Intent intent = new Intent(CollectionPointProviderSettingsActivity.this, MainCollectionPointProviderActivity.class);
+                        Intent intent = new Intent(UpdateCollectionPointProviderInformationActivity.this, MainCollectionPointProviderActivity.class);
                         startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(CollectionPointProviderSettingsActivity.this, "Email or phone is used please select another email or phone number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateCollectionPointProviderInformationActivity.this, "Email or phone is used please select another email or phone number", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(CustomerSettingActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                         //Log.d("sett19",error.getMessage() );
                         newCollectionPointProviderEmail.setText("");

@@ -26,13 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.cs.wasselha.Login.TypeLoginActivity;
 import com.cs.wasselha.R;
-import com.cs.wasselha.RegistrationActivity;
 import com.cs.wasselha.SplashActivity;
-import com.cs.wasselha.Transporter.TransporterClaimsActivity;
-import com.cs.wasselha.Transporter.TransporterSettingActivity;
-import com.cs.wasselha.Transporter.VehicleInformationActivity;
 
 import org.json.JSONObject;
 
