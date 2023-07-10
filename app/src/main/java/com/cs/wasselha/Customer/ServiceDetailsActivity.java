@@ -22,9 +22,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.cs.wasselha.R;
+import com.cs.wasselha.interfaces.implementation.CollectionPointDA;
+import com.cs.wasselha.interfaces.implementation.CustomerDA;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.interfaces.implementation.NotificationsDA;
 import com.cs.wasselha.interfaces.implementation.PackageDA;
+import com.cs.wasselha.model.CollectionPoint;
 import com.cs.wasselha.model.Customer;
 import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.cs.wasselha.model.Location;
@@ -328,13 +331,64 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                         );
 
 
-                                        Notification notif = new Notification(service.getTransporter(),"transporter",
-                                                ("Request a service: id= "+ service.getId() ),
-                                                ("Customer = "+customerId +"Requests this delivery request From= ," + srcCity.getText().toString() + ", To= " +
-                                                        destCity.getText().toString() ),
-                                                serviceDateNow);
+                                        String customerName ;
+                                        String phoneNumber;
                                         try {
-                                            new  NotificationsDA().saveNotification(notif);
+                                            Customer customer = (new  CustomerDA()).getCustomer(customerId);
+                                            customerName=  customer.getFirst_name();
+                                            phoneNumber =  customer.getPhone_number();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        Notification notifTrans = new Notification(service.getTransporter(),"transporter",
+                                                ("Request a service: id= "+ service.getId() ),
+                                                ("Customer = "+customerName +" wants to requests this delivery service From= ," + srcCity.getText().toString() + ", To= " +
+                                                        destCity.getText().toString() + ", His Phone No. = " + phoneNumber ),
+                                                serviceDateNow);
+
+                                        Notification notifCPPSrc;
+                                        Notification notifCPPDest;
+
+                                        if (fromCPLocationId != null) {
+                                            CollectionPoint collectionPointSrcc;
+                                            try {
+                                                collectionPointSrcc= new CollectionPointDA().getCollectionP(Integer.parseInt(fromCPLocationId));
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                            notifCPPSrc = new Notification(collectionPointSrcc.getCollection_point_provider(),"collectionpointprovider",
+                                                    ("Request a Collection Point: id= "+ fromCPLocationId ),
+                                                    ("Customer = "+customerName +" wants to requests this collection point as a src located at= ," +collectionPointSrcc.getName() + ", His Phone No. = " + phoneNumber ),
+                                                    serviceDateNow);
+
+                                            try {
+                                                new  NotificationsDA().saveNotification(notifCPPSrc);
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+
+                                        }
+                                        if (toCPLocationId != null) {
+                                            CollectionPoint collectionPointDestt;
+                                            try {
+                                                collectionPointDestt= new CollectionPointDA().getCollectionP(Integer.parseInt(toCPLocationId));
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                            notifCPPDest = new Notification(collectionPointDestt.getCollection_point_provider(),"collectionpointprovider",
+                                                    ("Request a Collection Point: id= "+ toCPLocationId ),
+                                                    ("Customer = "+customerName +" wants to requests this collection point as a dest located at= ," +collectionPointDestt.getName() + ", His Phone No. = " + phoneNumber ),
+                                                    serviceDateNow);
+
+                                            try {
+                                                new  NotificationsDA().saveNotification(notifCPPDest);
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+
+                                        try {
+                                            new  NotificationsDA().saveNotification(notifTrans);
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }
