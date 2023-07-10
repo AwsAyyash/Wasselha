@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter the name of person that collect from \nor handover to:"
+                android:text="@string/enter_the_name_of_person_that_collect_from_nor_handover_to"
                 android:textColor="@color/dark_green"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -106,7 +106,33 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/quantum_grey600"
-                android:hint="Enter the person name"/>
+                android:hint="@string/enter_the_person_name"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/if_send_message"
+                android:textColor="@color/dark_green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/sendMessageToCustomerBtn"
+                style="@android:style/Widget.Button"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_login_btn"
+                android:text="@string/send_message"
+                android:layout_gravity="center"
+                android:fontFamily="@font/changabold"
+                android:textColor="@color/light_selver"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,14 +145,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/customerReviewInTransporterReservationDetailsRadio"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer"
+                        android:textColor="@color/dark_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/collectionPointReviewInTransporterReservationDetailsRadio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/collection_point_provider"
+                        android:textColor="@color/dark_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addReviewAboutCustomerBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/background_login_btn"
-                android:text="Add review"
+                android:text="@string/add_review"
                 android:layout_gravity="center"
                 android:fontFamily="@font/changabold"
                 android:textColor="@color/light_selver"

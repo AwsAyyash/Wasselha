@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/changasemibold"
-            android:text="@string/add_review_about_customer_title"
+            android:text="@string/add_review"
             android:textColor="@color/light_selver"
             android:textSize="25sp"
             android:textStyle="bold"

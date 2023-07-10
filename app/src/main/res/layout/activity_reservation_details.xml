@@ -288,6 +288,42 @@
 
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/enter_the_name_of_the_person_receiving_the_package"
+                    android:textColor="@color/dark_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/personHandoverName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edittext_border"
+                    android:ems="10"
+                    android:textColor="@color/black"
+                    android:hint="@string/enter_the_name_person"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:padding="8dp"
+                    android:textColorHint="@color/quantum_grey600" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -308,9 +344,7 @@
                         android:textColor="@color/light_selver"
                         android:textSize="18sp" />
             </LinearLayout>
-
-
-
+\
         </LinearLayout>
     </ScrollView>
 
