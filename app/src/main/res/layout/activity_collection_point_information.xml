@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_selver"
-    tools:context=".CollectionPointInformationActivity">
+    tools:context=".CollectionPointProvider.CollectionPointInformationActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,24 +86,29 @@
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
-        <Spinner
-            android:id="@+id/statusCollectionPointSpinner"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/spinner_style" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/close"
+            android:textColor="@color/dark_green"
+            android:fontFamily="@font/changabold"
+            android:textSize="18sp"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/updateStatusBtnInCollectionPointProviderInformationPage"
-            style="@android:style/Widget.Button"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="90dp"
-            android:background="@drawable/details_btn_in_card_customer_recycler_view"
-            android:text="@string/update_btn"
-            android:textColor="@color/light_selver"
-            android:textStyle="bold"
-            android:textSize="14sp"/>
+        <Switch
+            android:id="@+id/changeStatusSwitchInCollectionPointInformationPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/open"
+            android:textColor="@color/dark_green"
+            android:fontFamily="@font/changabold"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
@@ -149,7 +154,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/colse_time"
+        android:text="@string/close_time"
         android:textColor="@color/dark_green"
         android:fontFamily="@font/changabold"
         android:textSize="18sp"/>

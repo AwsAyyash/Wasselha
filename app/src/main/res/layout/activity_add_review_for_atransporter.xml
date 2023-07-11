@@ -59,6 +59,49 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/addNewServiceMainTitle">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_review_about_customer"
+                        android:textColor="@color/light_selver"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/transporterReviewInCustomerReservationDetailsRadio"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/signup_as_transporter"
+                                android:textColor="@color/light_selver"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <RadioButton
+                                android:id="@+id/collectionPointReviewInCustomerReservationDetailsRadio"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/collection_point_provider"
+                                android:textColor="@color/light_selver"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RadioGroup>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"

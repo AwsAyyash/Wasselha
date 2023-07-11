@@ -19,7 +19,6 @@ import com.cs.wasselha.Signup.TypeSignupActivity;
 public class RegistrationActivity extends AppCompatActivity
 {
     private Button loginBtn, signupBtn;
-    ImageView skipBtn;
     TextView changeLanguage;
     private ProgressDialog progressDialog;
 
@@ -32,15 +31,14 @@ public class RegistrationActivity extends AppCompatActivity
             setContentView(R.layout.activity_registration);
             getSupportActionBar().hide();
 
-            //References
+            //Calls
             setupReference();
             loginSetup();
             signupSetup();
             changeLanguageSetup();
-            //skipSetup();
 
             progressDialog = new ProgressDialog(RegistrationActivity.this);
-            progressDialog.setMessage("Loading...");
+            progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {
@@ -65,7 +63,6 @@ public class RegistrationActivity extends AppCompatActivity
     private void setupReference() {
         loginBtn = findViewById(R.id.loginBtnInLoginPage);
         signupBtn = findViewById(R.id.signupBtnInRegisterPage);
-        //skipBtn = findViewById(R.id.skipBtnInRegisterPage);
         changeLanguage =findViewById(R.id.changelang);
     }
 
@@ -90,8 +87,9 @@ public class RegistrationActivity extends AppCompatActivity
             }
         });
     }
+
     private void changeLanguageSetup() {
-        signupBtn.setOnClickListener(new View.OnClickListener() {
+        changeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -99,22 +97,6 @@ public class RegistrationActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-    }
-
-//    private void skipSetup() {
-//        skipBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                openDialog();
-//            }
-//        });
-//    }
-
-    private void openDialog()
-    {
-        ForgetRegistrationDialog forgetRegistration = new ForgetRegistrationDialog();
-        forgetRegistration.show(getSupportFragmentManager(), "Test");
     }
 
 

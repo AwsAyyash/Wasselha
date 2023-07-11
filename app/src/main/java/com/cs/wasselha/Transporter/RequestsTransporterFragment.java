@@ -61,7 +61,7 @@ public class RequestsTransporterFragment extends Fragment {
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
         populateRequestsData(transporterID,getContext());

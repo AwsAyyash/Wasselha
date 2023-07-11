@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/mainImgRegister"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:scaleType="fitXY"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,11 @@
         android:id="@+id/logoImgInRegisterPage"
         android:layout_width="382dp"
         android:layout_height="443dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintBottom_toBottomOf="@+id/mainImgRegister"
         app:layout_constraintEnd_toEndOf="@+id/mainImgRegister"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="@+id/mainImgRegister"
+        app:layout_constraintTop_toTopOf="@+id/mainImgRegister"
         app:srcCompat="@drawable/maincover" />
 
 
@@ -35,6 +36,7 @@
         android:id="@+id/mainTitleInPageRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/changasemibold"
         android:text="@string/main_title"
         android:textColor="@color/light_selver"
@@ -101,8 +103,8 @@
         android:id="@+id/changelang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/change_language"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupBtnInRegisterPage" />

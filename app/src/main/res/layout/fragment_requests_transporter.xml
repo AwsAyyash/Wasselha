@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:text="Requests"
+        android:text="@string/requests"
         android:textColor="@color/dark_green"
         android:fontFamily="@font/changabold"
         android:textSize="25sp"
