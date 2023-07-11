@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Wasselha"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CollectionPointInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".Transporter.UpdateTransporterInformationActivity"
             android:exported="false" />
         <activity
