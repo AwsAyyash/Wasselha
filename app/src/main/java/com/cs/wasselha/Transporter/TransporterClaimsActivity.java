@@ -51,7 +51,7 @@ public class TransporterClaimsActivity extends AppCompatActivity {
                 setupReference();
 
                 progressDialog = new ProgressDialog(TransporterClaimsActivity.this);
-                progressDialog.setMessage("Loading...");
+                progressDialog.setMessage(getString(R.string.loading));
                 progressDialog.setCancelable(false);
                 progressDialog.show();
                 populateClaimsData(transporterID);

@@ -59,7 +59,7 @@ public class TransporterReservationActivity extends AppCompatActivity {
 
             //Calls
             progressDialog = new ProgressDialog(TransporterReservationActivity.this);
-            progressDialog.setMessage("Loading...");
+            progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
             progressDialog.show();
             setupRefernces();

@@ -99,7 +99,7 @@ public class ReservationsCustomerFragment extends Fragment {
         try
         {
             progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Loading...");
+            progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {

@@ -1,8 +1,10 @@
-package com.cs.wasselha;
+package com.cs.wasselha.CollectionPointProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cs.wasselha.R;
 
 public class CollectionPointInformationActivity extends AppCompatActivity {
 

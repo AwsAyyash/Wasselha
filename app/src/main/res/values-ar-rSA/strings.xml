@@ -69,8 +69,8 @@
         <item>رام الله</item>
         <item>سلفيت</item>
     </string-array>
-    <string name="app_name">Wassleha</string>
-    <string name="main_title">Wassleha</string>
+    <string name="app_name">Wasselha</string>
+    <string name="main_title">Wasselha</string>
     <string name="welcome">أهلاً بك</string>
     <string name="need">كل ما تحتاجه في مكان واحد</string>
     <string name="login">تسجيل الدخول</string>
@@ -115,7 +115,7 @@
     <string name="track_in_bottom_bar">تتبع</string>
     <string name="profile_in_bottom_bar">الملف الشخصي</string>
     <string name="ads_text">عرض على  التوصيل</string>
-    <string name="date_offer">25 يونيو - 10 يوليو</string>
+    <string name="date_offer">25 يونيو - 10 أُغسطس</string>
     <string name="service_available_main_title">الخدمات المتاحة</string>
     <string name="transporter_name_in_customer_recyclerView">:السائق</string>
     <string name="time_in_customer_recyclerView">الوقت:</string>
@@ -185,7 +185,7 @@
     <string name="vehicle_license_in_car_info_page">رخصة المركبة:</string>
     <string name="back_to_profile_page_btn">العودة إلى صفحة الملف الشخصي</string>
     <string name="vehicle_information_main_title">معلومات المركبة</string>
-    <string name="vehicle_ninformation_in_transporter_profile">معلومات \nالسيارة</string>
+    <string name="vehicle_ninformation_in_transporter_profile">معلومات \nالمركبة</string>
     <string name="review_in_claim_list_view">مراجعة:</string>
     <string name="claims_in_transporter_claims_page">الشكاوى</string>
     <string name="requests_in_bottom_bar_transporter">الطلبات</string>
@@ -225,7 +225,7 @@
     <string name="select_language">اختر اللغة</string>
     <string name="english">الإنجليزية</string>
     <string name="arabic">العربية</string>
-    <string name="change_language">تغيير اللغة ؟</string>
+    <string name="change_language"><u>تغيير اللغة ؟</u></string>
     <string name="settings_title">الإعدادات</string>
     <string name="update_my_information">تحديث معلوماتي الشخصية</string>
     <string name="change_the_language">تغيير اللغة</string>
@@ -248,6 +248,11 @@
     <string name="open_time">وقت الافتتاح:</string>
     <string name="colse_time">وقت الإغلاق:</string>
     <string name="location">الموقع:</string>
+    <string name="loading">جارِ التحميل…</string>
+    <string name="requests">الطلبات</string>
+    <string name="to">إلى</string>
+    <string name="vehicle_type_in_service_details">نوع المركبة:</string>
+    <string name="choose_filter">اختر أهم تفضيلاتك:</string>
 
 </resources>
 

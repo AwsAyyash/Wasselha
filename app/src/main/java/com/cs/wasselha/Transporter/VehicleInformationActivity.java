@@ -47,7 +47,7 @@ public class VehicleInformationActivity extends AppCompatActivity {
             getAndSetCarInfo(transporterID);
 
             progressDialog = new ProgressDialog(VehicleInformationActivity.this);
-            progressDialog.setMessage("Loading...");
+            progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {

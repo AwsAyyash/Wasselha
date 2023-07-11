@@ -13,6 +13,7 @@
         android:id="@+id/topNavCustomer"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layoutDirection="ltr"
         android:background="@drawable/main_title_customer_page_style"
         android:backgroundTint="@color/dark_green"
         app:layout_constraintBottom_toTopOf="@id/mainCustomerLayout"
@@ -29,6 +30,7 @@
             <TextView
                 android:id="@+id/maniTitleInCustomerPage"
                 android:layout_width="0dp"
+                android:layoutDirection="inherit"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
@@ -43,6 +45,7 @@
                 android:id="@+id/searchImg"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
+                android:layoutDirection="inherit"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 app:srcCompat="@drawable/ic_search" />
