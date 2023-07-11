@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import com.cs.wasselha.CollectionPointProvider.CollectionPointInformationActivity;
 import com.cs.wasselha.CollectionPointProvider.CollectionPoints;
 import com.cs.wasselha.R;
+import com.cs.wasselha.Transporter.TransporterReservationDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,8 @@ public class CollectionPointsAdapter extends ArrayAdapter<CollectionPoints> {
         manageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CollectionPointInformationActivity.class);
+                context.startActivity(intent);
                 Toast.makeText(context, "Coming soon...", Toast.LENGTH_SHORT).show();
             }
         });

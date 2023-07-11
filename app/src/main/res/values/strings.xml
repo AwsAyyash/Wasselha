@@ -17,68 +17,6 @@
         <item>Review</item>
     </string-array>
 
-
-    <string-array name="services">
-        <item>Mohammad</item>
-        <item>Ahmad</item>
-        <item>Salah</item>
-        <item>Ghassan</item>
-        <item>Mohammad</item>
-        <item>Aws</item>
-        <item>Emad</item>
-        <item>Sami</item>
-        <item>Omar</item>
-        <item>Adeeb</item>
-        <item>Bahaa</item>
-        <item>Iyad</item>
-    </string-array>
-
-    <string-array name="times">
-        <item>9:00 AM</item>
-        <item>9:30 AM</item>
-        <item>9:50 AM</item>
-        <item>10:00 AM</item>
-        <item>10:15 AM</item>
-        <item>10:30 AM</item>
-        <item>10:50 AM</item>
-        <item>11:00 AM</item>
-        <item>11:30 AM</item>
-        <item>12:00 PM</item>
-        <item>12:30 PM</item>
-        <item>1:00 PM</item>
-    </string-array>
-
-    <string-array name="sourceCities">
-        <item>Ramallah</item>
-        <item>Nablus</item>
-        <item>Jenin</item>
-        <item>Hebron</item>
-        <item>Jerusalem</item>
-        <item>Salfit</item>
-        <item>Tulkarim</item>
-        <item>Ramallah</item>
-        <item>Hebron</item>
-        <item>Nablus</item>
-        <item>Salfit</item>
-        <item>Jenin</item>
-    </string-array>
-
-    <string-array name="destinationCities">
-        <item>Nablus</item>
-        <item>Jenin</item>
-        <item>Hebron</item>
-        <item>Jerusalem</item>
-        <item>Ramallah</item>
-        <item>Nablus</item>
-        <item>Jenin</item>
-        <item>Nablus</item>
-        <item>Jerusalem</item>
-        <item>Jenin</item>
-        <item>Ramallah</item>
-        <item>Salfit</item>
-    </string-array>
-
-
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
     <string name="welcome">Welcome to Wasselha</string>
@@ -256,11 +194,15 @@
     <string name="name">Name:</string>
     <string name="edit"><u>Edit</u></string>
     <string name="open_time">Open time:</string>
-    <string name="colse_time">Colse time:</string>
+    <string name="close_time">Close time:</string>
     <string name="location">Location:</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="requests">Requests</string>
     <string name="to">to</string>
     <string name="vehicle_type_in_service_details">Vehicle type:</string>
     <string name="choose_filter">Choose your most important preference:</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="enter_the_package_type">Enter the package type</string>
+
 </resources>

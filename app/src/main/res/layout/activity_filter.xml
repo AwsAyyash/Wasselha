@@ -78,8 +78,36 @@
                     android:layout_marginEnd="20dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="30dp"
+                    android:layoutDirection="ltr"
                     android:background="@drawable/filter_spinner_style"
                     android:entries="@array/preferences" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/package_type_in_reservation_details"
+                    android:textColor="@color/light_selver"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/packageNameInFilterSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/edit_text_filter_style"
+                    android:ems="10"
+                    android:hint="@string/enter_the_package_type"
+                    android:inputType="number"
+                    android:layout_marginBottom="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/light_selver"
+                    android:textColorHint="@color/quantum_grey400"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
