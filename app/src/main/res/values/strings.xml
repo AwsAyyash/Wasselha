@@ -204,5 +204,8 @@
     <string name="close">Close</string>
     <string name="open">Open</string>
     <string name="enter_the_package_type">Enter the package type</string>
+    <string name="customer_name">Customer name:</string>
+    <string name="from">From</string>
+    <string name="open_tracking_page">Open tracking page</string>
 
 </resources>

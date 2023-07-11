@@ -205,6 +205,9 @@
     <string name="close">مُغلقة</string>
     <string name="enter_the_package_type">أدخل نوع الطَرد</string>
     <string name="open">مُتاحة</string>
+    <string name="customer_name">اسم الزَبون:</string>
+    <string name="from">من</string>
+    <string name="open_tracking_page">فَتح صفحة تتبع الطرد</string>
 
 </resources>
 

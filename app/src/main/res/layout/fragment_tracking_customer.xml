@@ -28,7 +28,7 @@
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/details_btn_in_card_customer_recycler_view"
-            android:text="Open tracking page"
+            android:text="@string/open_tracking_page"
             android:textColor="@color/light_selver"
             android:textSize="18sp"
             android:textStyle="bold" />
