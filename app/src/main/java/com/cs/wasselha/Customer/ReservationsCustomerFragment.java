@@ -109,7 +109,7 @@ public class ReservationsCustomerFragment extends Fragment {
                     progressDialog.dismiss();
                 }
 
-            }, 2000);
+            }, 500);
 
             populateNotificationsData();
         }

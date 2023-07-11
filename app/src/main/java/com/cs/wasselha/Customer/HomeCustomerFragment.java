@@ -117,7 +117,7 @@ public class HomeCustomerFragment extends Fragment {
                     progressDialog.dismiss();
                 }
 
-            }, 3000);
+            }, 1000);
             getFromSharedPref();
         }
         catch (IOException e)
@@ -158,17 +158,33 @@ public class HomeCustomerFragment extends Fragment {
         return serviceDA.getServices();
     }
 
+    private boolean alreadyReservedByThisCustomer(int serviceId){
+        for (int j = 0 ; j < delivaryDetailsReservationsForCustomerData.size() ; j++){
 
+            if(delivaryDetailsReservationsForCustomerData.get(j).getService() == serviceId)
+                return true;
+        }
+        return false;
+    }
+
+    ArrayList<DeliveryServiceDetails> delivaryDetailsReservationsForCustomerData;
     private void servicesModelSetup() throws IOException {
 
 
 
+        delivaryDetailsReservationsForCustomerData = new DeliveryServiceDetailsDA().getDSDsForACustomer(customerId);
 
+        
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
+
+            if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
+                continue;
             // this is for the filter
             if (servicesModelDAList.get(i).getPrice() > maxPriceFilter)
                 continue;
+            
+            
             Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
             LocationDA locationDA = new LocationDA();
             VehiclesDA vehiclesDA = new VehiclesDA();

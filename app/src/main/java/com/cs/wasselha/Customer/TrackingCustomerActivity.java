@@ -318,8 +318,8 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
             }
         }
 
-         //destLatLng = new LatLng(locationDest.getLatitude(),locationDest.getLongitude());
-        destLatLng = new LatLng(32.2243079,35.2270797); // nablus
+         destLatLng = new LatLng(locationDest.getLatitude(),locationDest.getLongitude());
+        //destLatLng = new LatLng(32.2243079,35.2270797); // nablus
         return destLatLng;
     }
 
@@ -403,8 +403,8 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         getServiceAndSetLocationIdForTransporter();
 
 
-       // currentTransLocation = new LocationDA().getLocation(currentTransporterLocationId);
-        currentTransLocation = new LocationDA().getLocation(2);
+       currentTransLocation = new LocationDA().getLocation(currentTransporterLocationId);
+       // currentTransLocation = new LocationDA().getLocation(2);
 
 
         return currentTransLocation;
