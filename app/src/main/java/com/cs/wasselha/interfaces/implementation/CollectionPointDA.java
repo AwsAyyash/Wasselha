@@ -125,5 +125,18 @@ public class CollectionPointDA {
             return response.peekBody(2048).string();
         }
     }
+    public String updateCollectionP(int id, CollectionPoint updatedCollectionP) throws IOException {
+        String url = "http://176.119.254.198:8000/wasselha/collection-points/" + id + "/";
+        RequestBody body = RequestBody.create(gson.toJson(updatedCollectionP), JSON);
+        Request request = new Request.Builder()
+                .url(url)
+                .put(body)  // Use PUT for update
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            Log.d("updateCollectionP", response.peekBody(2048).string());
+            return response.peekBody(2048).string();
+        }
+    }
+
 
 }
