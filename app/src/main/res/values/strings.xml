@@ -207,5 +207,12 @@
     <string name="customer_name">Customer name:</string>
     <string name="from">From</string>
     <string name="open_tracking_page">Open tracking page</string>
+    <string name="not_correct">The information is not correct, try again!</string>
+    <string name="fill_fields">Fill all fields, and try again!</string>
+    <string name="done_login">Login succeeded!</string>
+    <string name="from_with_points">From:</string>
+    <string name="your_collection_points">Your collection points</string>
+    <string name="enter_the_message">Enter the message...</string>
+    <string name="done">Done</string>
 
 </resources>

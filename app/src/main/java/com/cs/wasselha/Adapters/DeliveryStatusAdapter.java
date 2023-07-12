@@ -51,7 +51,7 @@ public class DeliveryStatusAdapter extends ArrayAdapter<DeliveryStatus> {
 
 
 
-        imageView.setImageResource(R.drawable.ic_history);
+        imageView.setImageResource(R.drawable.ic_past_reservation);
 
         actionTimeView.setText(getItem(position).getActionTime().toString());
         collectionFromInCustomerDeliveryStatusListView.setText(getItem(position).getCollectionFrom());
