@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
     private LatLng destinationLatLng;
 
     private ProgressDialog progressDialog;
+    private Spinner spinnerPref;
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 //    int hours = hoursPicker.getValue();
@@ -171,6 +173,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
                 intentToGoSearch.putExtra("destLat",destinationLatLng.latitude+"");
                 intentToGoSearch.putExtra("destLong",destinationLatLng.longitude+"");
 
+                intentToGoSearch.putExtra("prefSpinner",spinnerPref.getSelectedItem().toString());
                 //int priceMaxValue =  Integer.parseInt(price.getText().toString());
                 if(price.getText().toString().equals(""))
                     intentToGoSearch.putExtra("priceMaxValue",10000000+"");
@@ -409,9 +412,12 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
     {
 
 
+
+        spinnerPref = findViewById(R.id.CustomerImportantPreferenceSpinner);
         price = findViewById(R.id.priceInFilterSearch);
         scrollView = findViewById(R.id.scroll_view_id);
         searchInsideFilter = findViewById(R.id.searchBtnInFilterSearch);
+
 
         hoursPicker = findViewById(R.id.numPickerHour);
         hoursPicker.setTextColor(Color.WHITE);
