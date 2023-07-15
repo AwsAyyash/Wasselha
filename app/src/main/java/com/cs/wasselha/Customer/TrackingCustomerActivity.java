@@ -16,7 +16,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -237,7 +236,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                     if (locationResult != null) {
                         Location location = locationResult.getLastLocation();
                         if (location != null) {
-                            updateTransporterLocation(location);
+                            updateTransporterLocationOnMap(location);
                         }
                     }
                 }
@@ -264,9 +263,9 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
                     public void run() {
 
                         //setDestLatLog();
-                        updateTransporterLocation(currentTransLocation);
+                        updateTransporterLocationOnMap(currentTransLocation);
 
-                        drawRouteToDestination(transporterMarker.getPosition(), destLatLng);
+                        drawRouteToDestination(new LatLng(currentTransLocation.getLatitude(), currentTransLocation.getLongitude()), destLatLng);
                     }
                 });
 
@@ -312,7 +311,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
         }else {
             try {
-                locationDest = new LocationDA().getLocation(2);
+                locationDest = new LocationDA().getLocation(1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -325,7 +324,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
 
     private boolean initialZoomSet = false;
 
-    private void updateTransporterLocation(com.cs.wasselha.model.Location location) {
+    private void updateTransporterLocationOnMap(com.cs.wasselha.model.Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         if (transporterMarker == null) {
@@ -382,6 +381,7 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         return delivaryDetailsReservationsForCustomerData.get(0);
     }
 
@@ -389,12 +389,14 @@ public class TrackingCustomerActivity extends AppCompatActivity implements OnMap
     public void getServiceAndSetLocationIdForTransporter() throws IOException {
         deliveryServiceDetailsCurrent = getTheLastServiceForTheCustomer();
 
-       int serviceServiceId =  deliveryServiceDetailsCurrent.getService();
 
+       int serviceServiceId =  deliveryServiceDetailsCurrent.getService();
+        Log.d("sId1",serviceServiceId+"");
       Service service =  new ServiceDA().getService(serviceServiceId);
 
-      currentTransporterLocationId = service.getTransporter_place();
+      currentTransporterLocationId = service.getTransporter_location();
 
+      Log.d("transporter_location",currentTransporterLocationId+"");
 
     }
 

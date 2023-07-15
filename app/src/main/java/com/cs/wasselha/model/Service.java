@@ -24,15 +24,15 @@ public class Service {
     private Date service_date;
     private double price;
 
-    public int getTransporter_place() {
-        return transporter_place;
+    public int getTransporter_location() {
+        return transporter_location;
     }
 
-    public void setTransporter_place(int transporter_place) {
-        this.transporter_place = transporter_place;
+    public void setTransporter_location(int transporter_location) {
+        this.transporter_location = transporter_location;
     }
 
-    private int transporter_place; // current transporter location
+    private int transporter_location; // current transporter location
 
     public List<Service> getServices() {
         return services;
@@ -74,14 +74,14 @@ public class Service {
         Log.d("services",services.toString());
     }*/
 
-    public Service(int id, int transporter, int source_place, int destination_place, Date service_date, double price,int transporter_place) {
+    public Service(int id, int transporter, int source_place, int destination_place, Date service_date, double price,int transporter_location) {
         this.id = id;
         this.transporter = transporter;
         this.source_place = source_place;
         this.destination_place = destination_place;
         this.service_date = service_date;
         this.price = price;
-        this.transporter_place=transporter_place;
+        this.transporter_location = transporter_location;
     }
 
 
