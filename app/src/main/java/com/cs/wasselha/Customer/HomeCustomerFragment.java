@@ -39,6 +39,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 public class HomeCustomerFragment extends Fragment {
 
@@ -82,13 +84,16 @@ public class HomeCustomerFragment extends Fragment {
     double latDestFilter;
     double latSrcFilter;
     int maxPriceFilter = 10000000;
-
+    String prefSpin = "Location";;
     private void fromFilterMethod() {
         longSrcFilter =  Double.parseDouble(intentFromFilter.getStringExtra("srcLong"));
         longDestFilter =  Double.parseDouble(intentFromFilter.getStringExtra("destLong"));
         latDestFilter =  Double.parseDouble(intentFromFilter.getStringExtra("destLat"));
         latSrcFilter =  Double.parseDouble(intentFromFilter.getStringExtra("srcLat"));
         maxPriceFilter =  Integer.parseInt(intentFromFilter.getStringExtra("priceMaxValue"));
+        prefSpin = intentFromFilter.getStringExtra("prefSpinner");
+        if (prefSpin == null)
+            prefSpin = "Location";
     }
 
     public HomeCustomerFragment( ) {
@@ -131,14 +136,15 @@ public class HomeCustomerFragment extends Fragment {
                 @Override
                 public void run() {
                     try {
-                        if(servicesModelDAList.size()==0){
+                        /*if(servicesModelDAList.size()==0){*/
 
-                            servicesModelDAList = getServiceFromDA();
+                        servicesModelDAList = getServiceFromDA();
                            // Log.d("list222",servicesModelDAList.toString());
-                            servicesModelSetup();
-                        }else {
-                            Collections.sort(servicesModelList, comparator);
-                        }
+                        servicesModelSetup();
+                       /* }else {
+                            trySort();
+                            //Collections.sort(servicesModelList, comparatorLocation);
+                        }*/
 
                         ServicesModelRecyclerViewAdapter serviceAdapter = new ServicesModelRecyclerViewAdapter(getContext(), servicesModelList,servicesModelDAList);
                         servicesAvailableRecyclerView.setAdapter(serviceAdapter);
@@ -150,6 +156,39 @@ public class HomeCustomerFragment extends Fragment {
             });
 
         return view;
+    }
+
+    private void trySort() {
+
+        if (prefSpin.equalsIgnoreCase("Location") ||prefSpin.equalsIgnoreCase("الموقع")){
+
+            Collections.sort(servicesModelList, comparatorLocation);
+        }else if(prefSpin.equalsIgnoreCase("Price") ||prefSpin.equalsIgnoreCase("السعر")){
+
+
+            servicesModelList.sort(new Comparator<ServicesModel>() {
+                @Override
+                public int compare(ServicesModel o1, ServicesModel o2) {
+                    return (int) (o1.getPrice() - o2.getPrice());
+                }
+            });
+        }else if(prefSpin.equalsIgnoreCase("Time") ||prefSpin.equalsIgnoreCase("الوقت")){
+
+            servicesModelList.sort(new Comparator<ServicesModel>() {
+                @Override
+                public int compare(ServicesModel o1, ServicesModel o2) {
+                    return  new Date(o1.getTime()).compareTo(new Date(o2.getTime())) ;
+                }
+            });
+        }else if(prefSpin.equalsIgnoreCase("Review") ||prefSpin.equalsIgnoreCase("التقييم")){
+
+            servicesModelList.sort(new Comparator<ServicesModel>() {
+                @Override
+                public int compare(ServicesModel o1, ServicesModel o2) {
+                    return  (o1.getReview() - o2.getReview()) ;
+                }
+            });
+        }
     }
 
     private ArrayList<Service> getServiceFromDA() throws IOException {
@@ -209,18 +248,20 @@ public class HomeCustomerFragment extends Fragment {
                     ,
                     transporter.getReview(),
                     srcLocation,
-                    destLocation));
+                    destLocation,
+                    servicesModelDAList.get(i).getPrice()));
         }
 
-        Collections.sort(servicesModelList, comparator);
+        trySort();
+
 
 
     }
 
-    Comparator<ServicesModel> comparator;
+    Comparator<ServicesModel> comparatorLocation;
     private void setComparator(){
 
-          comparator = new Comparator<ServicesModel>() {
+        comparatorLocation = new Comparator<ServicesModel>() {
 
 
             // Method

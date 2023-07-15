@@ -66,13 +66,22 @@ public class ServicesModel implements Comparable<ServicesModel>{
 
     int review;
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    double price;
     public void setTransporterId(int transporterId) {
         this.transporterId = transporterId;
     }
 
     public ServicesModel(int serviceId,String transporterName, int transporterId, String time, String sourceCity, String destinationCity,
                          String imageUrl, String vehicleType, int review,
-                         /*for the sorting*/ Location srcLocation, Location destLocation)
+                         /*for the sorting*/ Location srcLocation, Location destLocation,double price)
     {
         this.serviceId = serviceId;
         this.transporterId = transporterId;
@@ -85,6 +94,7 @@ public class ServicesModel implements Comparable<ServicesModel>{
        this.review = review;
        this.srcLocation = srcLocation;
        this.destLocation = destLocation;
+       this.price = price;
     }
 
 
