@@ -8,14 +8,18 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.cs.wasselha.Customer.ServiceDetailsActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.ClaimsDA;
+import com.cs.wasselha.interfaces.implementation.CollectionPointDA;
 import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
 import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.model.Claim;
+import com.cs.wasselha.model.CollectionPoint;
+import com.cs.wasselha.model.DeliveryServiceDetails;
 
 import java.io.IOException;
 import java.util.Date;
@@ -30,6 +34,8 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
     EditText reviewAboutTransporterEditText;
     EditText noteAboutTransporterInReviewTransporter;
     Button addReviewAboutTransporterBtn;
+    RadioButton transporterReviewInCustomerReservationDetailsRadio;
+    RadioButton collectionPointReviewInCustomerReservationDetailsRadio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,9 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
         reviewAboutTransporterEditText = findViewById(R.id.reviewAboutTransporterEditText);
         noteAboutTransporterInReviewTransporter = findViewById(R.id.noteAboutTransporterInReviewTransporter);
         addReviewAboutTransporterBtn = findViewById(R.id.addReviewAboutTransporterBtn);
+        transporterReviewInCustomerReservationDetailsRadio = findViewById(R.id.transporterReviewInCustomerReservationDetailsRadio);
+        collectionPointReviewInCustomerReservationDetailsRadio = findViewById(R.id.collectionPointReviewInCustomerReservationDetailsRadio);
+
 
     }
 
@@ -71,9 +80,25 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
 
                         int serviceId;
                         int transId;
+                        DeliveryServiceDetails deliveryServiceDetails;
+                        CollectionPoint collectionPointSrc ;
+                        CollectionPoint collectionPointDest;
+                        CollectionPointDA collectionPointDa = new CollectionPointDA();
+                        int srcCPP=0;
+                        int destCPP=0;
                         try {
-                            serviceId=   new DeliveryServiceDetailsDA().getDSD(delSerDetId).getService();
+                            deliveryServiceDetails = new DeliveryServiceDetailsDA().getDSD(delSerDetId);
+                            serviceId=   deliveryServiceDetails.getService();
                             transId = new ServiceDA().getService(serviceId).getTransporter();
+                            if (deliveryServiceDetails.getSource_collection_point() != 0){
+                                collectionPointSrc= collectionPointDa.getCollectionP(deliveryServiceDetails.getSource_collection_point());
+                                srcCPP = collectionPointSrc.getCollection_point_provider();
+                            }
+                            if (deliveryServiceDetails.getDestination_collection_point() !=0){
+                                collectionPointDest =  collectionPointDa.getCollectionP(deliveryServiceDetails.getDestination_collection_point());
+                                destCPP = collectionPointDest.getCollection_point_provider();
+
+                            }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -108,11 +133,36 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                         );
 
 
-                        Claim claim = new Claim(0, delSerDetId, writer_id, transId,
-                                "customer","transporter",msg,Integer.parseInt(review),serviceDateNow);
+                        Claim claimTrans =null;
+                        Claim claimSrc=null;
+                        Claim claimDest=null;
+                        ClaimsDA claimsDA = new ClaimsDA();
+                        if (collectionPointReviewInCustomerReservationDetailsRadio.isSelected()){
+
+                            if (srcCPP != 0)
+                                claimSrc = new Claim(0, delSerDetId, writer_id, srcCPP,
+                                        "customer","collectionpointprovider",msg,Integer.parseInt(review),serviceDateNow);
+
+                            if (destCPP != 0)
+                                claimDest = new Claim(0, delSerDetId, writer_id, destCPP,
+                                        "customer","collectionpointprovider",msg,Integer.parseInt(review),serviceDateNow);
+
+                        }else {
+
+                            claimTrans = new Claim(0, delSerDetId, writer_id, transId,
+                                    "customer","transporter",msg,Integer.parseInt(review),serviceDateNow);
+
+
+                        }
 
                         try {
-                            new ClaimsDA().saveClaim(claim);
+
+                            if (claimTrans !=null)
+                                claimsDA.saveClaim(claimTrans);
+                            if (claimSrc !=null)
+                                claimsDA.saveClaim(claimSrc);
+                            if (claimDest !=null)
+                                claimsDA.saveClaim(claimDest);
                             Toast.makeText(AddReviewForATransporterActivity.this, "Review added, Thanks!", Toast.LENGTH_LONG).show();
                             finish();
                         } catch (IOException e) {

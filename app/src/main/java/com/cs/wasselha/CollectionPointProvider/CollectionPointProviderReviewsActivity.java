@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Adapters.ClaimsCollectionPPAdapter;
+import com.cs.wasselha.Adapters.ClaimsTransporterAdapter;
 import com.cs.wasselha.Claims.Claims;
 import com.cs.wasselha.R;
 
@@ -37,7 +38,7 @@ public class CollectionPointProviderReviewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection_point_provider_reviews);
+        setContentView(R.layout.activity_claims_transporter);
         getSupportActionBar().hide();
 
         //calls
@@ -54,7 +55,7 @@ public class CollectionPointProviderReviewsActivity extends AppCompatActivity {
     }
     private void setupReference()
     {
-        claimsListView = findViewById(R.id.reviewsCollectionPointProviderListView);
+        claimsListView = findViewById(R.id.claimsTransporterListView);
     }
 
     private static String apiURL="http://176.119.254.198:8000/wasselha";
@@ -98,8 +99,10 @@ public class CollectionPointProviderReviewsActivity extends AppCompatActivity {
                                             Log.e("claimmm","add to claims list");
                                             claimsCollectionPPData.add(new Claims(R.drawable.ic_claim, String.valueOf(review),
                                                     message, displayDate, firstName + " " + lastName));
-                                            ClaimsCollectionPPAdapter claimsCollectionPPAdapter = new ClaimsCollectionPPAdapter(getApplicationContext(), R.layout.reviews_collectionpp_list_view, claimsCollectionPPData);
-                                            claimsListView.setAdapter(claimsCollectionPPAdapter);
+                                            //ClaimsCollectionPPAdapter claimsCollectionPPAdapter = new ClaimsCollectionPPAdapter(getApplicationContext(), R.layout.reviews_collectionpp_list_view, claimsCollectionPPData);
+                                            ClaimsTransporterAdapter claimsTransporterAdapter = new ClaimsTransporterAdapter(getApplicationContext(), R.layout.claims_list_view, claimsCollectionPPData,null);
+
+                                            claimsListView.setAdapter(claimsTransporterAdapter);
                                             //progressDialog.dismiss();
                                         } catch (JSONException e) {
                                             e.printStackTrace();
