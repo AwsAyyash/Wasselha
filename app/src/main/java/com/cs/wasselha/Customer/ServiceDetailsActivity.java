@@ -27,6 +27,7 @@ import com.cs.wasselha.interfaces.implementation.CustomerDA;
 import com.cs.wasselha.interfaces.implementation.LocationDA;
 import com.cs.wasselha.interfaces.implementation.NotificationsDA;
 import com.cs.wasselha.interfaces.implementation.PackageDA;
+import com.cs.wasselha.interfaces.implementation.TransporterDA;
 import com.cs.wasselha.model.CollectionPoint;
 import com.cs.wasselha.model.Customer;
 import com.cs.wasselha.model.DeliveryServiceDetails;
@@ -34,6 +35,7 @@ import com.cs.wasselha.model.Location;
 import com.cs.wasselha.model.Notification;
 import com.cs.wasselha.model.Package;
 import com.cs.wasselha.model.Service;
+import com.cs.wasselha.model.Transporter;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -169,6 +171,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
 
             String packWeight = data.getStringExtra("packWeight");
             String packType = data.getStringExtra("packType");
+            String personHandoverNameStr = data.getStringExtra("personHandoverNameStr");
+
             Log.d("SDApackWeight",packWeight);
 
 
@@ -178,7 +182,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             Log.d("SDAsourceLocationId",sourceLocationId+"");
             Log.d("SDAdestLocationId",destLocationId+"");
 
-            addDelServiceDetails(fromCPLocationId, toCPLocationId, packWeight, packType, sourceLocationId, destLocationId);
+            addDelServiceDetails(fromCPLocationId, toCPLocationId, packWeight, packType, sourceLocationId, destLocationId,personHandoverNameStr);
 
             // textView1.setText(message);
         }
@@ -207,7 +211,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     private void addDelServiceDetails(String fromCPLocationId,
                                       String toCPLocationId, String packWeight,
                                       String packType, String sourceLocationId,
-                                      String destLocationId) {
+                                      String destLocationId,
+                                        String personHandoverNameStr) {
         // String title = getAddressTitleFromCoordinates(latitude, longitude);
         //String description = getAddressFromCoordinates(latitude, longitude);
 
@@ -343,12 +348,12 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                         Notification notifTrans = new Notification(service.getTransporter(),"transporter",
                                                 ("Request a service: id= "+ service.getId() ),
                                                 ("Customer = "+customerName +" wants to requests this delivery service From= ," + srcCity.getText().toString() + ", To= " +
-                                                        destCity.getText().toString() + ", His Phone No. = " + phoneNumber ),
+                                                        destCity.getText().toString() + ", His Phone No. = " + phoneNumber + ", deliver it to person called"+personHandoverNameStr ),
                                                 serviceDateNow);
 
                                         Notification notifCPPSrc;
                                         Notification notifCPPDest;
-
+                                        Transporter transporter = null;
                                         if (fromCPLocationId != null) {
                                             CollectionPoint collectionPointSrcc;
                                             try {
@@ -356,9 +361,16 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                             } catch (IOException e) {
                                                 throw new RuntimeException(e);
                                             }
+
+                                            try {
+                                                 transporter =  new TransporterDA().getTransporter(service.getTransporter());
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
                                             notifCPPSrc = new Notification(collectionPointSrcc.getCollection_point_provider(),"collectionpointprovider",
                                                     ("Request a Collection Point: id= "+ fromCPLocationId ),
-                                                    ("Customer = "+customerName +" wants to requests this collection point as a src located at= ," +collectionPointSrcc.getName() + ", His Phone No. = " + phoneNumber ),
+                                                    ("Customer = "+customerName +" wants to requests this collection point as a src located at= ," +collectionPointSrcc.getName() + ", His Phone No. = " + phoneNumber
+                                                            + ", transporter ="+transporter.getFirst_name()+" will collect it"),
                                                     serviceDateNow);
 
                                             try {
@@ -377,7 +389,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                             }
                                             notifCPPDest = new Notification(collectionPointDestt.getCollection_point_provider(),"collectionpointprovider",
                                                     ("Request a Collection Point: id= "+ toCPLocationId ),
-                                                    ("Customer = "+customerName +" wants to requests this collection point as a dest located at= ," +collectionPointDestt.getName() + ", His Phone No. = " + phoneNumber ),
+                                                    ("Customer = "+customerName +" wants to requests this collection point as a dest located at= ," +collectionPointDestt.getName() + ", His Phone No. = " + phoneNumber
+                                                    + " transporter =" + transporter.getFirst_name() +" will deliver it, and handover it to person called = " + personHandoverNameStr),
                                                     serviceDateNow);
 
                                             try {

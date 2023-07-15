@@ -78,6 +78,8 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
 
     private ProgressDialog progressDialog;
     private Spinner spinnerPref;
+    private Spinner spinnerPackType;
+
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 //    int hours = hoursPicker.getValue();
@@ -174,6 +176,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
                 intentToGoSearch.putExtra("destLong",destinationLatLng.longitude+"");
 
                 intentToGoSearch.putExtra("prefSpinner",spinnerPref.getSelectedItem().toString());
+                intentToGoSearch.putExtra("spinnerPackType",spinnerPackType.getSelectedItem().toString());
                 //int priceMaxValue =  Integer.parseInt(price.getText().toString());
                 if(price.getText().toString().equals(""))
                     intentToGoSearch.putExtra("priceMaxValue",10000000+"");
@@ -414,6 +417,7 @@ public class FilterActivity extends AppCompatActivity implements GoogleMap.OnMar
 
 
         spinnerPref = findViewById(R.id.CustomerImportantPreferenceSpinner);
+        spinnerPackType = findViewById(R.id.CustomerPackageTypeSpinnerInFilterSearch);
         price = findViewById(R.id.priceInFilterSearch);
         scrollView = findViewById(R.id.scroll_view_id);
         searchInsideFilter = findViewById(R.id.searchBtnInFilterSearch);

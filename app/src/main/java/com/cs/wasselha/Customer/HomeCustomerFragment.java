@@ -85,6 +85,7 @@ public class HomeCustomerFragment extends Fragment {
     double latSrcFilter;
     int maxPriceFilter = 10000000;
     String prefSpin = "Location";;
+    String spinnerPackType = "car";
     private void fromFilterMethod() {
         longSrcFilter =  Double.parseDouble(intentFromFilter.getStringExtra("srcLong"));
         longDestFilter =  Double.parseDouble(intentFromFilter.getStringExtra("destLong"));
@@ -92,6 +93,8 @@ public class HomeCustomerFragment extends Fragment {
         latSrcFilter =  Double.parseDouble(intentFromFilter.getStringExtra("srcLat"));
         maxPriceFilter =  Integer.parseInt(intentFromFilter.getStringExtra("priceMaxValue"));
         prefSpin = intentFromFilter.getStringExtra("prefSpinner");
+        spinnerPackType = intentFromFilter.getStringExtra("spinnerPackType");
+
         if (prefSpin == null)
             prefSpin = "Location";
     }
@@ -190,6 +193,23 @@ public class HomeCustomerFragment extends Fragment {
             });
         }
     }
+    private boolean isValidPackageSpinnerType(String vehicleType) {
+
+        if (spinnerPackType.equalsIgnoreCase("Small (Car)") ||spinnerPackType.equalsIgnoreCase("صغير الحجم (سيارة)")){
+
+            if (vehicleType.equalsIgnoreCase("car"))
+                return true;
+        }else if (spinnerPackType.equalsIgnoreCase("Normal (Van)") ||spinnerPackType.equalsIgnoreCase("متوسط الحجم (شاحنة صغيرة)")){
+
+            if (vehicleType.equalsIgnoreCase("van"))
+                return true;
+        }else if (spinnerPackType.equalsIgnoreCase("Big (Truck)") ||spinnerPackType.equalsIgnoreCase("كبير الحجم (شاحنة)")){
+
+            if (vehicleType.equalsIgnoreCase("truck"))
+                return true;
+        }
+        return false;
+    }
 
     private ArrayList<Service> getServiceFromDA() throws IOException {
 
@@ -217,6 +237,10 @@ public class HomeCustomerFragment extends Fragment {
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
 
+            VehiclesDA vehiclesDA = new VehiclesDA();
+           String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
+            if (!isValidPackageSpinnerType(vehicleType) )
+                continue;
             if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
                 continue;
             // this is for the filter
@@ -226,7 +250,7 @@ public class HomeCustomerFragment extends Fragment {
             
             Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
             LocationDA locationDA = new LocationDA();
-            VehiclesDA vehiclesDA = new VehiclesDA();
+
             Location srcLocation = locationDA.getLocation(servicesModelDAList.get(i).getSource_place());
             Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
 
@@ -244,7 +268,7 @@ public class HomeCustomerFragment extends Fragment {
 
                     vehiclesDA.getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
 
-                    vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter())
+                    vehicleType
                     ,
                     transporter.getReview(),
                     srcLocation,

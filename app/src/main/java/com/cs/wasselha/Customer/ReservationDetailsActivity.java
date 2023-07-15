@@ -60,6 +60,7 @@ import java.util.Map;
 public class ReservationDetailsActivity extends AppCompatActivity  implements GoogleMap.OnMarkerDragListener{
 
     EditText  packageTypeInReservationsDetails;
+    EditText  personHandoverName;
     EditText  packageWeightInReservationsDetails;
     RadioButton collectFromLocationRadioButtonInReservationsDetails;
     RadioButton collectFromCollectionPointRadioButtonInReservationsDetails;
@@ -234,6 +235,8 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
 
                 intent.putExtra("packWeight",packWeight);
                 intent.putExtra("packType",packType);
+                intent.putExtra("personHandoverName",personHandoverName.getText().toString());
+
                // intent.putExtra("packType",packType);
                 //SystemClock.sleep(2000);
                 setResult(2,intent);
@@ -590,6 +593,8 @@ public class ReservationDetailsActivity extends AppCompatActivity  implements Go
         handOverToCollectionPointSpinner = findViewById(R.id.handOverToCollectionPointSpinner);
 
         reserveBtnReservationDetailsPage = findViewById(R.id.reserveBtnReservationDetailsPage);
+        personHandoverName = findViewById(R.id.personHandoverName);
+
 
     }
 
