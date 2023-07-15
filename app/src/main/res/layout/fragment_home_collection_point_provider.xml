@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Your collection points"
+        android:text="@string/your_collection_points"
         android:fontFamily="@font/changabold"
         android:textColor="@color/dark_green"
         android:textSize="25sp"

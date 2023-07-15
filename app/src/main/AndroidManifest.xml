@@ -33,6 +33,9 @@
             android:name=".CollectionPointProvider.CollectionPointProviderReviewsActivity"
             android:exported="false" />
         <activity
+            android:name=".CollectionPointProvider.CollectionPointProviderSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".CollectionPointProvider.UpdateCollectionPointProviderInformationActivity"
             android:exported="false" />
         <activity

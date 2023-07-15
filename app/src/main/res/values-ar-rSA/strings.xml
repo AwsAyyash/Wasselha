@@ -152,7 +152,7 @@
     <string name="path_in_request_list_view">المسار: </string>
     <string name="rservation_details">تفاصيل الحجز</string>
     <string name="select_type_of_delivery_in_reservation_details_acivity">اختر نوع التوصيل:</string>
-    <string name="reviews_in_profiles">المراجعات</string>
+    <string name="reviews_in_profiles">التقييمات</string>
     <string name="source_in_reservation_customer_listView">تسليم إلى:</string>
     <string name="destination_in_reservation_customer_listView">الوجهة:</string>
     <string name="status_in_reservation_customer_listView">الحالة:</string>
@@ -208,6 +208,13 @@
     <string name="customer_name">اسم الزَبون:</string>
     <string name="from">من</string>
     <string name="open_tracking_page">فَتح صفحة تتبع الطرد</string>
+    <string name="not_correct">البيانات المُدخلة غير صحيحة، حاول مرة أخرى!</string>
+    <string name="fill_fields">أملئ جميع الحقول وحاول مرة أخرى!</string>
+    <string name="done_login">تم تسجيل الدخول بنجاح!</string>
+    <string name="from_with_points">من:</string>
+    <string name="your_collection_points">نقاط التجميع الخاصة بك</string>
+    <string name="enter_the_message">أدخل نص الرسالة…</string>
+    <string name="done">تم</string>
 
 </resources>
 

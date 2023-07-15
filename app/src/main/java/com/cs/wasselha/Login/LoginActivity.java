@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "Fill all fields, and try again!", Toast.LENGTH_SHORT).show();
-                    errorMessage.setText("Fill all fields, and try again!");
+                    Toast.makeText(LoginActivity.this, getString(R.string.fill_fields)+"", Toast.LENGTH_SHORT).show();
+                    errorMessage.setText(getString(R.string.fill_fields));
                 }
             }
         });
@@ -183,11 +183,12 @@ public class LoginActivity extends AppCompatActivity {
                                                 errorMessage.setText("");
                                             }
                                         }
-                                        Toast.makeText(LoginActivity.this, "Login succeeded!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, getString(R.string.done_login)+"", Toast.LENGTH_SHORT).show();
                                     }
                                     else
                                     {
-                                        errorMessage.setText("The information is not correct, try again!");
+                                        errorMessage.setText(getString(R.string.not_correct));
+                                        Toast.makeText(LoginActivity.this, getString(R.string.not_correct)+"", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 catch (JSONException e)
@@ -200,7 +201,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error)
                             {
-                                errorMessage.setText("The information is not correct, try again!");
+                                errorMessage.setText(getString(R.string.not_correct));
+                                Toast.makeText(LoginActivity.this, getString(R.string.not_correct)+"", Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override

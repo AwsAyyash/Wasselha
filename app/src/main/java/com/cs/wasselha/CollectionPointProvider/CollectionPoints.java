@@ -21,6 +21,13 @@ public class CollectionPoints {
         this.manageBtn = manageBtn;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getImage() {
         return image;

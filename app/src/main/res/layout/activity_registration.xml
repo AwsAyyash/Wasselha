@@ -104,32 +104,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@color/quantum_grey600"
         android:text="@string/change_language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupBtnInRegisterPage" />
-    <!--    <ImageView-->
-<!--        android:id="@+id/skipBtnInRegisterPage"-->
-<!--        android:layout_width="85dp"-->
-
-<!--        android:layout_height="80dp"-->
-<!--        android:padding="0dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/mainImgRegister"-->
-<!--        app:srcCompat="@drawable/btn_login" />-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/skip_btn_in_registration_page"-->
-<!--        android:textColor="@color/dark_yellow2"-->
-<!--        android:textSize="15sp"-->
-<!--        android:layout_marginTop="-10dp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/skipBtnInRegisterPage"-->
-<!--        app:layout_constraintHorizontal_bias="0.85"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/skipBtnInRegisterPage"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/skipBtnInRegisterPage" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

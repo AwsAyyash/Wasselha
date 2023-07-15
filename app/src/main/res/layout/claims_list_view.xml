@@ -55,7 +55,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="From: "
+            android:text="@string/from_with_points"
             android:textColor="@color/dark_green"
             android:textSize="17sp"
             android:textStyle="bold" />

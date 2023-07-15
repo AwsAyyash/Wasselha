@@ -51,8 +51,8 @@ public class CollectionPointsAdapter extends ArrayAdapter<CollectionPoints> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CollectionPointInformationActivity.class);
+                intent.putExtra("id",getItem(position).getId());
                 context.startActivity(intent);
-                Toast.makeText(context, "Coming soon...", Toast.LENGTH_SHORT).show();
             }
         });
 
