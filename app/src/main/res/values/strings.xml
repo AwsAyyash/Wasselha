@@ -17,6 +17,12 @@
         <item>Review</item>
     </string-array>
 
+    <string-array name="packageType">
+        <item>Small (Car)</item>
+        <item>Normal (Van)</item>
+        <item>Big (Truck)</item>
+    </string-array>
+
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
     <string name="welcome">Welcome to Wasselha</string>
@@ -214,5 +220,6 @@
     <string name="your_collection_points">Your collection points</string>
     <string name="enter_the_message">Enter the message...</string>
     <string name="done">Done</string>
+    <string name="update_status">Status updated!</string>
 
 </resources>

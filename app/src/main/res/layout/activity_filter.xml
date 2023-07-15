@@ -74,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
+                    android:textDirection="ltr"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:layout_gravity="center"
@@ -92,22 +93,19 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/packageNameInFilterSearch"
+                <Spinner
+                    android:id="@+id/CustomerPackageTypeSpinnerInFilterSearch"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
+                    android:textDirection="ltr"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_filter_style"
-                    android:ems="10"
-                    android:hint="@string/enter_the_package_type"
-                    android:inputType="textPersonName"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="30dp"
-                    android:padding="8dp"
-                    android:textColor="@color/light_selver"
-                    android:textColorHint="@color/quantum_grey400"
-                    android:textSize="16sp" />
+                    android:layoutDirection="ltr"
+                    android:background="@drawable/filter_spinner_style"
+                    android:entries="@array/packageType" />
 
                 <TextView
                     android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.CollectionPointDA;
@@ -27,6 +28,9 @@ public class CollectionPointInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_point_information);
+        getSupportActionBar().hide();
+
+        
         setupReferences();
         int id=getIntent().getIntExtra("id",-1);
         CollectionPointDA cA=new CollectionPointDA();
@@ -50,6 +54,7 @@ public class CollectionPointInformationActivity extends AppCompatActivity {
                         try {
                             int id = 1; // Replace this with the ID of the collection point you want to update
                             cA.updateCollectionP(id, collectionPoint);
+                            Toast.makeText(CollectionPointInformationActivity.this, getString(R.string.update_status)+"", Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -60,8 +65,6 @@ public class CollectionPointInformationActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-        getSupportActionBar().hide();
     }
     private void setupReferences(){
         // Setup references
