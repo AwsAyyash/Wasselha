@@ -254,7 +254,8 @@ public class AddCollectionPointFragment extends Fragment implements GoogleMap.On
     private void setupMap(GoogleMap googleMap) {
         googleMap.setOnMarkerDragListener(this);
         googleMap.getUiSettings().setZoomControlsEnabled(true); // Enable zoom controls
-
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
 
                 // This block is for setting up the source map
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -275,7 +276,7 @@ public class AddCollectionPointFragment extends Fragment implements GoogleMap.On
                 });
 
 
-    }
+    }}
 
 
 

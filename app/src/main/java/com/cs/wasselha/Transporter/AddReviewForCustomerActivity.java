@@ -12,11 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.cs.wasselha.Customer.AddReviewForATransporterActivity;
 import com.cs.wasselha.R;
 import com.cs.wasselha.interfaces.implementation.ClaimsDA;
-import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
-import com.cs.wasselha.interfaces.implementation.ServiceDA;
 import com.cs.wasselha.model.Claim;
 
 import java.io.IOException;
@@ -31,8 +28,9 @@ public class AddReviewForCustomerActivity extends AppCompatActivity
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
     private int writer_id;
-    private int customerId;
+    private int writenToId;
     private int delSerDetId;
+    private String writenToType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,8 @@ public class AddReviewForCustomerActivity extends AppCompatActivity
         getSupportActionBar().hide();
         Intent intent = getIntent();
          delSerDetId = intent.getIntExtra("deliveryservicedetails", 0);
-        customerId = intent.getIntExtra("customerid", 0);
+        writenToId = intent.getIntExtra("writenToId", 0);
+        writenToType=intent.getStringExtra("writenToType");
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
@@ -101,8 +100,8 @@ public class AddReviewForCustomerActivity extends AppCompatActivity
                         );
 
 
-                        Claim claim = new Claim(0, delSerDetId, writer_id, customerId,
-                                "transporter","customer",msg,Integer.parseInt(review),serviceDateNow);
+                        Claim claim = new Claim(0, delSerDetId, writer_id, writenToId,
+                                "transporter",writenToType,msg,Integer.parseInt(review),serviceDateNow);
 
                         try {
                             new ClaimsDA().saveClaim(claim);

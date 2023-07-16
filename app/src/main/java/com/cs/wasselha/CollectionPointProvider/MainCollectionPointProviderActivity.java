@@ -60,11 +60,19 @@ public class MainCollectionPointProviderActivity extends AppCompatActivity {
 
     }
 
+//    private void replaceFragment(Fragment fragment)
+//    {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.mainCollectionPointProviderLayout,fragment);
+//        fragmentTransaction.commit();
+//    }
     private void replaceFragment(Fragment fragment)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.mainCollectionPointProviderLayout,fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

@@ -299,7 +299,7 @@ public class TransporterTrackRoad extends AppCompatActivity implements OnMapRead
     private void addCustomerAndCollectionPointsMarkers() {
 
         float scalingFactor = 0.25f; // Adjust the scaling factor as needed
-        float visibilityRadius = 5000; // Visibility radius in meters (5km)
+        float visibilityRadius = 35000; // Visibility radius in meters (35km)
 
         // Load smaller-sized icons for customers and collection points
         Bitmap customerBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_person);

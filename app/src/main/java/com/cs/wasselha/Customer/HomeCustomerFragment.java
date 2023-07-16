@@ -267,8 +267,7 @@ public class HomeCustomerFragment extends Fragment {
 
                     vehiclesDA.getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
 
-                    vehicleType
-                    ,
+                    vehicleType,
                     transporter.getReview(),
                     srcLocation,
                     destLocation,

@@ -5,6 +5,9 @@ import android.util.Log;
 
 import com.cs.wasselha.model.DeliveryServiceDetails;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -128,10 +131,32 @@ public class DeliveryServiceDetailsDA {
                 .build();
         DeliveryServiceDetails deliveryServiceDetails;
         try (Response response = client.newCall(request).execute()) {
+            String responseString = response.body().string();
+
+            JsonElement jsonElement = JsonParser.parseString(responseString);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+            // Check if "id" is null and set to -1 if it is
+            if (jsonObject.get("source_collection_point").isJsonNull()) {
+                jsonObject.addProperty("source_collection_point", -1);
+            }
+            // Check if "id" is null and set to -1 if it is
+            if (jsonObject.get("destination_collection_point").isJsonNull()) {
+                jsonObject.addProperty("destination_collection_point", -1);
+            }
+            // Check if "id" is null and set to -1 if it is
+            if (jsonObject.get("source_place").isJsonNull()) {
+                jsonObject.addProperty("source_place", -1);
+            }
+            // Check if "id" is null and set to -1 if it is
+            if (jsonObject.get("destination_place").isJsonNull()) {
+                jsonObject.addProperty("destination_place", -1);
+            }
+
 
             //Type customerListType = new TypeToken<ArrayList<Customer>>() {}.getType();
             //customerListGlobal = new ArrayList<>();
-            deliveryServiceDetails = gson.fromJson(response.peekBody(2048).string(), DeliveryServiceDetails.class);
+            deliveryServiceDetails = gson.fromJson(jsonObject, DeliveryServiceDetails.class);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
