@@ -85,7 +85,7 @@ public class HomeCustomerFragment extends Fragment {
     double latSrcFilter;
     int maxPriceFilter = 10000000;
     String prefSpin = "Location";;
-    String spinnerPackType = "car";
+    String spinnerPackType = "default";
     private void fromFilterMethod() {
         longSrcFilter =  Double.parseDouble(intentFromFilter.getStringExtra("srcLong"));
         longDestFilter =  Double.parseDouble(intentFromFilter.getStringExtra("destLong"));
@@ -195,6 +195,8 @@ public class HomeCustomerFragment extends Fragment {
     }
     private boolean isValidPackageSpinnerType(String vehicleType) {
 
+        if (spinnerPackType.equalsIgnoreCase("default"))
+            return true;
         if (spinnerPackType.equalsIgnoreCase("Small (Car)") ||spinnerPackType.equalsIgnoreCase("صغير الحجم (سيارة)")){
 
             if (vehicleType.equalsIgnoreCase("car"))
