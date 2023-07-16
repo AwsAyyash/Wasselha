@@ -10,6 +10,8 @@
 
 
     <ScrollView
+        android:id="@+id/scroll_view_id"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,7 +66,7 @@
                     android:text="@string/name_collection_point" />
 
                 <EditText
-                    android:id="@+id/sourceCityInAddNewService"
+                    android:id="@+id/sourceCityInAddNewCollectionP"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
