@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -52,4 +53,77 @@ public class ClaimsDA {
         }
 
     }
+    public ArrayList<Claim> getClaimsByServiceDetails(int id) throws IOException {
+        Request request = new Request.Builder()
+                .url(url+"?delivery_service_details_id="+id)
+                .get()
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            Log.d("claims response", responseBody);
+
+            // Now convert the JSON string into Claim objects
+            Claim[] claimArray = gson.fromJson(responseBody, Claim[].class);
+
+            // Convert array to ArrayList and return
+            ArrayList<Claim> claimList = new ArrayList<>(Arrays.asList(claimArray));
+            return claimList;
+        }
+    }
+
+    public ArrayList<Claim> getClaimsByWritenToId(int id) throws IOException {
+        Request request = new Request.Builder()
+                .url(url+"?written_to_id="+id)
+                .get()
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            Log.d("claims response", responseBody);
+
+            // Now convert the JSON string into Claim objects
+            Claim[] claimArray = gson.fromJson(responseBody, Claim[].class);
+
+            // Convert array to ArrayList and return
+            ArrayList<Claim> claimList = new ArrayList<>(Arrays.asList(claimArray));
+            return claimList;
+        }
+    }
+
+    public ArrayList<Claim> getClaims() throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            Log.d("claims response", responseBody);
+
+            // Now convert the JSON string into Claim objects
+            Claim[] claimArray = gson.fromJson(responseBody, Claim[].class);
+
+            // Convert array to ArrayList and return
+            ArrayList<Claim> claimList = new ArrayList<>(Arrays.asList(claimArray));
+            return claimList;
+        }
+    }
+
+
+    public ArrayList<Claim> getClaimsByWritenToIdAndDeliveryServiceDetails(int writenToId,int deliveryServiceDetailsId) throws IOException {
+        Request request = new Request.Builder()
+                .url(url+"?written_to_id="+writenToId+"&delivery_service_details_id="+deliveryServiceDetailsId)
+                .get()
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            Log.d("claims response", responseBody);
+
+            // Now convert the JSON string into Claim objects
+            Claim[] claimArray = gson.fromJson(responseBody, Claim[].class);
+
+            // Convert array to ArrayList and return
+            ArrayList<Claim> claimList = new ArrayList<>(Arrays.asList(claimArray));
+            return claimList;
+        }
+    }
+
 }
