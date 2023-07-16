@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +29,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cs.wasselha.Adapters.ReservationsAdapter;
 import com.cs.wasselha.R;
+import com.cs.wasselha.interfaces.implementation.ClaimsDA;
+import com.cs.wasselha.interfaces.implementation.DeliveryServiceDetailsDA;
+import com.cs.wasselha.interfaces.implementation.NotificationsDA;
+import com.cs.wasselha.model.Claim;
+import com.cs.wasselha.model.DeliveryServiceDetails;
+import com.cs.wasselha.model.Notification;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -60,8 +69,11 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
         final int customerId = intent.getIntExtra("customerid", 0);
         final Spinner deliveryTypeSpinner = findViewById(R.id.deliveryTypeSpinner);
         final EditText personNameEditText = findViewById(R.id.personNameInReservationsDetailsPage);
+        final EditText sendMessageToCustomerIfAnyProblemBox = findViewById(R.id.sendMessageToCustomerIfAnyProblemBox);
         AppCompatButton reserveButton = findViewById(R.id.reserveBtnServiceDetailsPage);
         AppCompatButton addReviewAboutCustomerBtn = findViewById(R.id.addReviewAboutCustomerBtn);
+        AppCompatButton sendMessageToCustomerBtn = findViewById(R.id.sendMessageToCustomerBtn);
+        RadioGroup radioGroup = findViewById(R.id.radioGroupTransporter);
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         String id = preferences.getString(ID_KEY, null);
         int transporterID=Integer.parseInt(id.trim());
@@ -84,16 +96,93 @@ public class TransporterReservationDetailsActivity extends AppCompatActivity {
                 sendPostRequest(deliveryServiceDetailsId,actionTime,collectionFrom,handoverTo,customerId);
             }
         });
+        sendMessageToCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationsDA nDA=new NotificationsDA();
+                try {
+                    Date nowDate = new Date();
+                    String dateTextNow = (nowDate.getYear()+1900) +"-"
+                            +(nowDate.getMonth()+1) + "-" + (nowDate.getDate());
+                    String dateTimeStringNow = String.format(
+                            "%sT%02d:%02d:00", // Format as "yyyy-MM-ddTHH:mm:ss"
+                            dateTextNow,
+                            nowDate.getHours(),
+                            nowDate.getMinutes()
+                    );
+
+                    nDA.saveNotification(new Notification(customerId,"customer","important massage from transporter",sendMessageToCustomerIfAnyProblemBox.getText().toString(),dateTimeStringNow));
+                    sendMessageToCustomerIfAnyProblemBox.setText("");
+                    Toast.makeText(TransporterReservationDetailsActivity.this, "Notification Send Successfully", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Toast.makeText(TransporterReservationDetailsActivity.this, "There is Network error in send Notification, please try again Later", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
         addReviewAboutCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddReviewForCustomerActivity.class);
-                intent.putExtra("deliveryservicedetails",deliveryServiceDetailsId);
-                intent.putExtra("customerid",customerId);
-                startActivity(intent);
+                DeliveryServiceDetailsDA dsdDA=new DeliveryServiceDetailsDA();
+                DeliveryServiceDetails dsd=null;
+                try {
+                    dsd=dsdDA.getDSD(deliveryServiceDetailsId);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                int to_id=-1;
+                String type="customer";
+                //Then, get the id of the selected RadioButton
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                //Check which RadioButton was selected
+                if (selectedId == R.id.customerReviewInTransporterReservationDetailsRadio) {
+                    //The "Customer" RadioButton was selected
+                    to_id = dsd.getCustomer();
+                    type="collectionpointprovider";
+                } else if (selectedId == R.id.srccollectionPointReviewInTransporterReservationDetailsRadio) {
+                    //The "SRC Collection Point Provider" RadioButton was selected
+                    to_id = dsd.getSource_collection_point();
+                    type="collectionpointprovider";
+                } else if (selectedId == R.id.dstcollectionPointReviewInTransporterReservationDetailsRadio) {
+                    //The "DST Collection Point Provider" RadioButton was selected
+                    to_id = dsd.getDestination_collection_point();
+                    type="customer";
+                }
+                try {
+                    if(to_id==-1) {
+                        if (isExistReview(deliveryServiceDetailsId, to_id)) {
+                            Intent intent = new Intent(getApplicationContext(), AddReviewForCustomerActivity.class);
+                            intent.putExtra("deliveryservicedetails", deliveryServiceDetailsId);
+                            intent.putExtra("writenToId", to_id);
+                            intent.putExtra("writenToType", type);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(TransporterReservationDetailsActivity.this, "You're already review the person", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(TransporterReservationDetailsActivity.this, "You doesn't put the package in this collection point", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
+
+    private boolean isExistReview(int deliveryServiceDetailsId, int to_id) throws IOException {
+        ClaimsDA cDA=new ClaimsDA();
+        ArrayList<Claim> c=cDA.getClaimsByWritenToIdAndDeliveryServiceDetails(to_id,deliveryServiceDetailsId);
+        if(c==null){
+            return true;
+        }else if(c.size()<=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public void setAndGetName(Context context, int transporterID) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = BASE_URL + "/transporters/" + transporterID + "/";
