@@ -223,5 +223,6 @@
     <string name="update_status">Status updated!</string>
     <string name="source_collection_point_provider">source Collection Point Provider</string>
     <string name="destination_collection_point_provider">destination Collection Point Provider</string>
+    <string name="collection_point">collection point</string>
 
 </resources>

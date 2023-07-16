@@ -222,6 +222,7 @@
     <string name="enter_the_message">أدخل نص الرسالة…</string>
     <string name="done">تم</string>
     <string name="update_status">تم تحديث الحالة!</string>
+    <string name="collection_point">نقطة تجميع</string>
 
 </resources>
 

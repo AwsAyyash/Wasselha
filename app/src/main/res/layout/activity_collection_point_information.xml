@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/black"
             android:fontFamily="@font/changabold"
             android:textSize="18sp" />
 
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/status_in_profile_page"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/black"
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:text="@string/close"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/red"
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/open"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/green"
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/open_time"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/black"
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
@@ -155,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/close_time"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/black"
         android:fontFamily="@font/changabold"
         android:textSize="18sp"/>
 
@@ -184,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location"
-            android:textColor="@color/dark_green"
+            android:textColor="@color/black"
             android:fontFamily="@font/changabold"
             android:textSize="18sp"/>
 
