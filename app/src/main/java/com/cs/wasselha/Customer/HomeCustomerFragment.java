@@ -229,15 +229,31 @@ public class HomeCustomerFragment extends Fragment {
     }
 
     ArrayList<DeliveryServiceDetails> delivaryDetailsReservationsForCustomerData;
-    private void servicesModelSetup() throws IOException
-    {
+    private void servicesModelSetup() throws IOException {
+
+
+
         delivaryDetailsReservationsForCustomerData = new DeliveryServiceDetailsDA().getDSDsForACustomer(customerId);
 
+
+
+        if(prefSpin.equalsIgnoreCase("Location") ||prefSpin.equalsIgnoreCase("الموقع"))
+            defaultGetDataAndLocation();
+        else
+            getDataForAll();
+
+        trySort();
+
+
+
+    }
+
+    private void getDataForAll() throws IOException {
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
 
             VehiclesDA vehiclesDA = new VehiclesDA();
-           String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
+            String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
             if (!isValidPackageSpinnerType(vehicleType) )
                 continue;
             if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
@@ -245,13 +261,61 @@ public class HomeCustomerFragment extends Fragment {
             // this is for the filter
             if (servicesModelDAList.get(i).getPrice() > maxPriceFilter)
                 continue;
-            
-            
+
+
             Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
             LocationDA locationDA = new LocationDA();
 
             Location srcLocation = locationDA.getLocation(servicesModelDAList.get(i).getSource_place());
             Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
+
+            if ((int) ( calcDistanceFromLongLat(srcLocation.getLatitude(),srcLocation.getLongitude(),latSrcFilter,longSrcFilter)+
+                    calcDistanceFromLongLat(destLocation.getLatitude(),destLocation.getLongitude(),latDestFilter,longDestFilter)  ) >10 )
+                continue;
+            servicesModelList.add(new ServicesModel(
+
+
+                    servicesModelDAList.get(i).getId(),
+                    transporter.getFirst_name(),
+                    servicesModelDAList.get(i).getTransporter(),
+                    servicesModelDAList.get(i).getService_date().toString(),
+
+                    srcLocation.getTitle(),
+
+                    destLocation.getTitle(),
+
+                    vehiclesDA.getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
+
+                    vehicleType,
+                    transporter.getReview(),
+                    srcLocation,
+                    destLocation,
+                    servicesModelDAList.get(i).getPrice()));
+        }
+    }
+
+    private void defaultGetDataAndLocation() throws IOException {
+        for(int i = 0 ; i < servicesModelDAList.size() ; i++)
+        {
+
+            VehiclesDA vehiclesDA = new VehiclesDA();
+            String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
+            if (!isValidPackageSpinnerType(vehicleType) )
+                continue;
+            if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
+                continue;
+            // this is for the filter
+            if (servicesModelDAList.get(i).getPrice() > maxPriceFilter)
+                continue;
+
+
+            Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
+            LocationDA locationDA = new LocationDA();
+
+            Location srcLocation = locationDA.getLocation(servicesModelDAList.get(i).getSource_place());
+            Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
+
+
 
             servicesModelList.add(new ServicesModel(
 
@@ -273,21 +337,20 @@ public class HomeCustomerFragment extends Fragment {
                     destLocation,
                     servicesModelDAList.get(i).getPrice()));
         }
-
-        trySort();
-
     }
 
     Comparator<ServicesModel> comparatorLocation;
+    private void setComparator(){
 
-    private void setComparator()
-    {
         comparatorLocation = new Comparator<ServicesModel>() {
+
 
             // Method
             @Override
-            public int compare(ServicesModel s1, ServicesModel s2)
-            {
+            public int compare(ServicesModel s1, ServicesModel s2) {
+
+
+
                 double latSrc = s1.getSrcLocation().getLatitude();
                 double longSrc =  s1.getSrcLocation().getLongitude();
 
@@ -299,53 +362,66 @@ public class HomeCustomerFragment extends Fragment {
                 double latDestFilterIn;
                 double latSrcFilterIn;
 
-                if (intentFromFilter != null)
-                {
+                if (intentFromFilter != null){
                     longSrcFilterIn= longSrcFilter ;
                     longDestFilterIn= longDestFilter ;
                     latDestFilterIn=   latDestFilter ;
                     latSrcFilterIn= latSrcFilter ;
-                }
-                else
-                {
-                    if (userType !=null)
-                    {
-                        longSrcFilterIn = locationOfCustomer.getLongitude();
-                        latSrcFilterIn = locationOfCustomer.getLatitude();
-                        longDestFilterIn = 0; // defalut value , it is not true, for false for all , means ok!
-                        latDestFilterIn = 0;
-                    }
-                    else
-                    {
+                }else {
+
+                    if (userType !=null){
+
+
+                            
+                            longSrcFilterIn = locationOfCustomer.getLongitude();
+                            latSrcFilterIn = locationOfCustomer.getLatitude();
+                            longDestFilterIn = 0; // defalut value , it is not true, for false for all , means ok!
+                            latDestFilterIn = 0;
+                           
+
+
+                    }else {
                         return 0;
                     }
+
                 }
 
 
              return  (int) ( calcDistanceFromLongLat(latSrc,longSrc,latSrcFilterIn,longSrcFilterIn)+
-                        calcDistanceFromLongLat(latDest,longDest,latDestFilterIn,longDestFilterIn) );
+                        calcDistanceFromLongLat(latDest,longDest,latDestFilterIn,longDestFilterIn)  )
+                ;
+
+
             }
         };
     }
 
-    private double calcDistanceFromLongLat(double lat1,double lon1,double lat2,double lon2)
-    {
+    private double calcDistanceFromLongLat(double lat1,double lon1,double lat2,double lon2) {
         int R = 6371; // Radius of the earth in km
         double dLat = deg2rad(lat2-lat1);  // deg2rad below
         double dLon = deg2rad(lon2-lon1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2)
-                   + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2))
-                   * Math.sin(dLon/2) * Math.sin(dLon/2);
+        double a =
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                                Math.sin(dLon/2) * Math.sin(dLon/2)
+                ;
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         double d = R * c; // Distance in km
         return d;
     }
 
-    double deg2rad(double deg)
-    {
+
+
+    double deg2rad(double deg) {
         return deg * (Math.PI/180);
     }
 
+    /*private String getImageUrl(Service service) {
+
+
+        getVehicleImageURLAndSetImage(context,service.getTransporter().getId());
+
+    }*/
 
 
     void getFromSharedPref() throws IOException {
@@ -359,41 +435,6 @@ public class HomeCustomerFragment extends Fragment {
 
     }
 
-    /* public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
-         RequestQueue queue = Volley.newRequestQueue(context);
-         String url = apiURL + "vehicles/";
 
-         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                 new Response.Listener<JSONObject>() {
-                     @Override
-                     public void onResponse(JSONObject response) {
-                         try {
-                             // Assume the vehicles are inside a JSONArray called "vehicles" in the response
-                             JSONArray vehicles = response.getJSONArray("vehicles");
-                             for (int i = 0; i < vehicles.length(); i++) {
-                                 JSONObject vehicle = vehicles.getJSONObject(i);
-                                 if (vehicle.getInt("transporter") == transporterID) {
 
-                                     setImage(apiURL+vehicle.getString("vehicle_image"));
-                                     return;
-                                 }
-                             }
-                         } catch (Exception e) {
-                             Log.e("profile","Transporter not found");
-                         }
-                     }
-                 }, new Response.ErrorListener() {
-             @Override
-             public void onErrorResponse(VolleyError error) {
-                 Log.e("profile","failed loading image(Network Issue )");
-             }
-         });
-
-         queue.add(jsonObjectRequest);
-     }*/
-    public static void setImage(String imageUrl, ImageView imageView){
-        Glide.with(context)
-                .load(imageUrl)
-                .into(imageView);
-    }
 }
