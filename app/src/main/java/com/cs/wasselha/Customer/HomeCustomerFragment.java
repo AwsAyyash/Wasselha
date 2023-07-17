@@ -235,12 +235,25 @@ public class HomeCustomerFragment extends Fragment {
 
         delivaryDetailsReservationsForCustomerData = new DeliveryServiceDetailsDA().getDSDsForACustomer(customerId);
 
-        
+
+
+        if(prefSpin.equalsIgnoreCase("Location") ||prefSpin.equalsIgnoreCase("الموقع"))
+            defaultGetDataAndLocation();
+        else
+            getDataForAll();
+
+        trySort();
+
+
+
+    }
+
+    private void getDataForAll() throws IOException {
         for(int i = 0 ; i < servicesModelDAList.size() ; i++)
         {
 
             VehiclesDA vehiclesDA = new VehiclesDA();
-           String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
+            String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
             if (!isValidPackageSpinnerType(vehicleType) )
                 continue;
             if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
@@ -248,13 +261,61 @@ public class HomeCustomerFragment extends Fragment {
             // this is for the filter
             if (servicesModelDAList.get(i).getPrice() > maxPriceFilter)
                 continue;
-            
-            
+
+
             Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
             LocationDA locationDA = new LocationDA();
 
             Location srcLocation = locationDA.getLocation(servicesModelDAList.get(i).getSource_place());
             Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
+
+            if ((int) ( calcDistanceFromLongLat(srcLocation.getLatitude(),srcLocation.getLongitude(),latSrcFilter,longSrcFilter)+
+                    calcDistanceFromLongLat(destLocation.getLatitude(),destLocation.getLongitude(),latDestFilter,longDestFilter)  ) >10 )
+                continue;
+            servicesModelList.add(new ServicesModel(
+
+
+                    servicesModelDAList.get(i).getId(),
+                    transporter.getFirst_name(),
+                    servicesModelDAList.get(i).getTransporter(),
+                    servicesModelDAList.get(i).getService_date().toString(),
+
+                    srcLocation.getTitle(),
+
+                    destLocation.getTitle(),
+
+                    vehiclesDA.getVehicleImageURLOfTransporter(servicesModelDAList.get(i).getTransporter()),
+
+                    vehicleType,
+                    transporter.getReview(),
+                    srcLocation,
+                    destLocation,
+                    servicesModelDAList.get(i).getPrice()));
+        }
+    }
+
+    private void defaultGetDataAndLocation() throws IOException {
+        for(int i = 0 ; i < servicesModelDAList.size() ; i++)
+        {
+
+            VehiclesDA vehiclesDA = new VehiclesDA();
+            String vehicleType =  vehiclesDA.getVehicleTypeOfTransporter(servicesModelDAList.get(i).getTransporter());
+            if (!isValidPackageSpinnerType(vehicleType) )
+                continue;
+            if (alreadyReservedByThisCustomer(servicesModelDAList.get(i).getId()))
+                continue;
+            // this is for the filter
+            if (servicesModelDAList.get(i).getPrice() > maxPriceFilter)
+                continue;
+
+
+            Transporter transporter =  new TransporterDA().getTransporter(servicesModelDAList.get(i).getTransporter());
+            LocationDA locationDA = new LocationDA();
+
+            Location srcLocation = locationDA.getLocation(servicesModelDAList.get(i).getSource_place());
+            Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
+
+
 
             servicesModelList.add(new ServicesModel(
 
@@ -276,11 +337,6 @@ public class HomeCustomerFragment extends Fragment {
                     destLocation,
                     servicesModelDAList.get(i).getPrice()));
         }
-
-        trySort();
-
-
-
     }
 
     Comparator<ServicesModel> comparatorLocation;
@@ -335,14 +391,7 @@ public class HomeCustomerFragment extends Fragment {
                         calcDistanceFromLongLat(latDest,longDest,latDestFilterIn,longDestFilterIn)  )
                 ;
 
-                //intentFromFilter = new Intent();
 
-
-                // For ascending order
-                //return rollno1 - rollno2;
-               // return 0;
-                // For descending order
-                // rollno2-rollno1;
             }
         };
     }
@@ -386,41 +435,6 @@ public class HomeCustomerFragment extends Fragment {
 
     }
 
-    /* public void getVehicleImageURLAndSetImage(Context context, int transporterID) {
-         RequestQueue queue = Volley.newRequestQueue(context);
-         String url = apiURL + "vehicles/";
 
-         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                 new Response.Listener<JSONObject>() {
-                     @Override
-                     public void onResponse(JSONObject response) {
-                         try {
-                             // Assume the vehicles are inside a JSONArray called "vehicles" in the response
-                             JSONArray vehicles = response.getJSONArray("vehicles");
-                             for (int i = 0; i < vehicles.length(); i++) {
-                                 JSONObject vehicle = vehicles.getJSONObject(i);
-                                 if (vehicle.getInt("transporter") == transporterID) {
 
-                                     setImage(apiURL+vehicle.getString("vehicle_image"));
-                                     return;
-                                 }
-                             }
-                         } catch (Exception e) {
-                             Log.e("profile","Transporter not found");
-                         }
-                     }
-                 }, new Response.ErrorListener() {
-             @Override
-             public void onErrorResponse(VolleyError error) {
-                 Log.e("profile","failed loading image(Network Issue )");
-             }
-         });
-
-         queue.add(jsonObjectRequest);
-     }*/
-    public static void setImage(String imageUrl, ImageView imageView){
-        Glide.with(context)
-                .load(imageUrl)
-                .into(imageView);
-    }
 }
