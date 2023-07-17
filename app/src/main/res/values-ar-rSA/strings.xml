@@ -223,6 +223,8 @@
     <string name="done">تم</string>
     <string name="update_status">تم تحديث الحالة!</string>
     <string name="collection_point">نقطة تجميع</string>
+    <string name="source_collection_point_provider">نقطة التجميع المصدر</string>
+    <string name="destination_collection_point_provider">نقطة التجميع الهدف</string>
 
 </resources>
 

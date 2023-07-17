@@ -195,7 +195,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_style" />
+                    android:background="@drawable/spinner_style2" />
             </LinearLayout>
 
             <TextView
@@ -283,7 +283,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_style" />
+                    android:background="@drawable/spinner_style2" />
             </LinearLayout>
 
 

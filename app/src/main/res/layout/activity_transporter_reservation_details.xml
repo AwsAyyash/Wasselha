@@ -85,7 +85,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="8dp"
                         android:textDirection="ltr"
-                        android:background="@drawable/filter_spinner_style"
+                        android:background="@drawable/spinner_style2"
                         android:entries="@array/delivery_type" />
                 </LinearLayout>
 
@@ -179,16 +179,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:background="@drawable/edittext_border"
                         android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
+                        android:padding="10dp"
+                        android:orientation="vertical">
 
                         <RadioGroup
                             android:id="@+id/radioGroupTransporter"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
                             <RadioButton
                                 android:id="@+id/customerReviewInTransporterReservationDetailsRadio"
@@ -201,18 +201,16 @@
 
                             <RadioButton
                                 android:id="@+id/srccollectionPointReviewInTransporterReservationDetailsRadio"
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="@string/source_collection_point_provider"
                                 android:textColor="@color/dark_green"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
                             <RadioButton
                                 android:id="@+id/dstcollectionPointReviewInTransporterReservationDetailsRadio"
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="@string/destination_collection_point_provider"
                                 android:textColor="@color/dark_green"
                                 android:textSize="15sp"
@@ -227,7 +225,7 @@
                         android:layout_width="200dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/background_login_btn"
                         android:fontFamily="@font/changabold"
                         android:text="@string/add_review"

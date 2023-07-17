@@ -184,7 +184,7 @@
                     android:layout_height="50dp"
                     android:entries="@array/vehicle_type"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/spinner_style"/>
+                    android:background="@drawable/spinner_style2"/>
 
                 <TextView
                     android:id="@+id/emailTransporterSignupTextView"
