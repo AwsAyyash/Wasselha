@@ -138,19 +138,19 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                         }
                         else
                         {
-                            errorMessage.setText("Passwords is not match!");
+                            errorMessage.setText(getString(R.string.pass_not_match));
                         }
                     }
                     else
                     {
-                        errorMessage.setText("Password must contain more than 8 characters!");
+                        errorMessage.setText(getString(R.string.pass_more_than_8chr));
                     }
 
                 }
                 else
                 {
-                    Toast.makeText(CustomerSignupActivity.this, "Fill all fields, and try again!", Toast.LENGTH_SHORT).show();
-                    errorMessage.setText("Fill all fields, and try again!");
+                    Toast.makeText(CustomerSignupActivity.this, getString(R.string.fill_fields) + "", Toast.LENGTH_SHORT).show();
+                    errorMessage.setText(getString(R.string.fill_fields));
                 }
             }
         });
@@ -206,7 +206,7 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                             }
                             else
                             {
-                                errorMessage.setText("The information is not correct, try again!");                                    }
+                                errorMessage.setText(getString(R.string.not_correct));                                    }
                         }
                         catch (JSONException e)
                         {
@@ -219,8 +219,8 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Toast.makeText(CustomerSignupActivity.this, "Email or phone number already exists!", Toast.LENGTH_SHORT).show();
-                        errorMessage.setText("Email or phone number already exists!");
+                        Toast.makeText(CustomerSignupActivity.this, getString(R.string.already_exist) + "", Toast.LENGTH_SHORT).show();
+                        errorMessage.setText(getString(R.string.already_exist));
                     }
                 }) {
             @Override

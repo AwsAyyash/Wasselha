@@ -218,11 +218,15 @@
     <string name="done_login">Login succeeded!</string>
     <string name="from_with_points">From:</string>
     <string name="your_collection_points">Your collection points</string>
-    <string name="enter_the_message">Enter the message...</string>
+    <string name="enter_the_message">Enter the message…</string>
     <string name="done">Done</string>
     <string name="update_status">Status updated!</string>
     <string name="source_collection_point_provider">Source collection Point Provider</string>
     <string name="destination_collection_point_provider">Destination collection Point Provider</string>
     <string name="collection_point">collection point</string>
+    <string name="pass_not_match">Passwords is not match!</string>
+    <string name="pass_more_than_8chr">Password must contain more than 8 characters!</string>
+    <string name="already_exist">Email or phone number already exists!</string>
+    <string name="done_signup">Signup Successfully</string>
 
 </resources>

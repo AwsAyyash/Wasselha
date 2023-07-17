@@ -492,7 +492,7 @@ public class TransporterSignupActivity extends AppCompatActivity {
             if(createSuccefully){
                 Intent intent = new Intent(TransporterSignupActivity.this, TypeLoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(TransporterSignupActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TransporterSignupActivity.this, getString(R.string.done_signup) + "", Toast.LENGTH_SHORT).show();
             }
         }
     }
