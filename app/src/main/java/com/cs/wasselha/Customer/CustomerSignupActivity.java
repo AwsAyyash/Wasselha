@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -126,7 +127,7 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
             public void onClick(View v)
             {
 
-                if (email.length() > 0 && firstName.length() > 0 && lastName.length() > 0 &&  password.length() > 0 && phoneNumber.length() > 0 && address.length() > 0 && repeatPassword.length() > 0)
+                if (email.length() > 0 && firstName.length() > 0 && lastName.length() > 0 &&  password.length() > 0 && phoneNumber.length() > 0 && repeatPassword.length() > 0)
                 {
                     if (password.getText().length() > 8 && repeatPassword.getText().length() > 8)
                     {
@@ -173,7 +174,7 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
             jsonObject.put("password", password.getText().toString());
             jsonObject.put("phone_number", phoneNumber.getText().toString());
             jsonObject.put("is_verified", false);
-            jsonObject.put("review", 3);
+            jsonObject.put("review", 0);
             jsonObject.put("location", locationID);
 
         }
