@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Reference number:"
+            android:text="@string/reference_number"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginStart="5dp"
-            android:text="Not available!" />
+            android:text="@string/not_available" />
 
     </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Transporter name:"
+            android:text="@string/transporter_name_in_customer_recyclerView"
             android:textColor="@color/black"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
@@ -71,7 +71,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/black"
             android:layout_marginStart="5dp"
-            android:text="Not available!" />
+            android:text="@string/not_available" />
 
     </LinearLayout>
 
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Not available!"
+            android:text="@string/not_available"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Not available!"
+            android:text="@string/not_available"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Not available!"
+            android:text="@string/not_available"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -193,14 +193,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Not available!"
+            android:text="@string/not_available"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
     </LinearLayout>
-
-
-
-
 
 </RelativeLayout>

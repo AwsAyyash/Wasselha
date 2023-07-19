@@ -125,7 +125,7 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
             public void onClick(View v)
             {
                 try {
-                    createSingleLocation(sourceLatLng.longitude,sourceLatLng.latitude);
+                    createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

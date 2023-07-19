@@ -38,7 +38,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginStart="5dp"
-            android:text="Not available!" />
+            android:text="@string/not_available" />
 
     </LinearLayout>
 
@@ -70,7 +70,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/black"
             android:layout_marginStart="5dp"
-            android:text="Not available!" />
+            android:text="@string/not_available" />
 
     </LinearLayout>
 
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Not available!"
+            android:text="@string/not_available"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>

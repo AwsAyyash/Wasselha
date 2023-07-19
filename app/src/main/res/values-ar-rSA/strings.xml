@@ -229,6 +229,7 @@
     <string name="pass_more_than_8chr">يجب أن تحتوي كلمة المرور على أكثر من 8 حروف أو أرقام!</string>
     <string name="already_exist">رقم الهاتف أو الإيميل موجود بالفعل!</string>
     <string name="done_signup">تم إنشاء حساب جديد</string>
+    <string name="reference_number">رقم المرجع:</string>
 
 </resources>
 

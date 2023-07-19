@@ -228,5 +228,6 @@
     <string name="pass_more_than_8chr">Password must contain more than 8 characters!</string>
     <string name="already_exist">Email or phone number already exists!</string>
     <string name="done_signup">Signup Successfully</string>
+    <string name="reference_number">Reference number:</string>
 
 </resources>
