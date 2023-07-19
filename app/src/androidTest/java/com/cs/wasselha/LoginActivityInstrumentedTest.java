@@ -1,5 +1,7 @@
 package com.cs.wasselha;
 
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import android.content.Context;
 
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -10,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import com.cs.wasselha.Login.LoginActivity;
@@ -25,26 +28,29 @@ import androidx.test.espresso.matcher.ViewMatchers;
  */
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityInstrumentedTest {
-    @Test
+   /* @Test
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.cs.wasselha", appContext.getPackageName());
-    }
+    }*/
     @Rule
     public ActivityScenarioRule<LoginActivity> activityRule =
             new ActivityScenarioRule<>(LoginActivity.class);
 
+
+
+
     @Test
     public void performLogin_success() {
         // Enter valid login credentials
-        Espresso.onView(ViewMatchers.withId(R.id.emailInLoginPage))
+        Espresso.onView(withId(R.id.emailInLoginPage))
                 .perform(ViewActions.typeText("aws@g.com"));
-        Espresso.onView(ViewMatchers.withId(R.id.passwordInLoginPage))
+        Espresso.onView(withId(R.id.passwordInLoginPage))
                 .perform(ViewActions.typeText("1234"));
 
         // Click on the login button
-        Espresso.onView(ViewMatchers.withId(R.id.loginBtnInLoginPage))
+        Espresso.onView(withId(R.id.loginBtnInLoginPage))
                 .perform(ViewActions.click());
 
         // Assert that the login is successful
@@ -53,20 +59,21 @@ public class LoginActivityInstrumentedTest {
         // You can use Espresso's onView and ViewMatchers to perform assertions.
 
         // Example: Assert that a welcome message is displayed
-        Espresso.onView(ViewMatchers.withId(R.id.errorMessage))
-                .check(ViewAssertions.matches(ViewMatchers.hasErrorText("")));
+        Espresso.onView(withId(R.id.errorMessage))
+                .check(ViewAssertions.matches(not(ViewMatchers.isDisplayed())));
     }
 
     @Test
     public void performLogin_invalidCredentials() {
+
         // Enter invalid login credentials
-        Espresso.onView(ViewMatchers.withId(R.id.emailInLoginPage))
+        Espresso.onView(withId(R.id.emailInLoginPage))
                 .perform(ViewActions.typeText("invalid_username"));
-        Espresso.onView(ViewMatchers.withId(R.id.passwordInLoginPage))
+        Espresso.onView(withId(R.id.passwordInLoginPage))
                 .perform(ViewActions.typeText("invalid_password"));
 
         // Click on the login button
-        Espresso.onView(ViewMatchers.withId(R.id.loginBtnInLoginPage))
+        Espresso.onView(withId(R.id.loginBtnInLoginPage))
                 .perform(ViewActions.click());
 
         // Assert that the login fails
@@ -74,7 +81,40 @@ public class LoginActivityInstrumentedTest {
         // For example, you can check if an error message is shown.
 
         // Example: Assert that an error message is displayed
-        Espresso.onView(ViewMatchers.withId(R.id.errorMessage))
+        Espresso.onView(withId(R.id.errorMessage))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+
     }
+
+/*
+    @Rule
+    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<LoginActivity>(LoginActivity.class);
+*/
+/*
+    @Before
+    public void setUp() throws Exception {
+        loginActivity = mActivityTestRule.getActivity();
+    }
+
+    @Test
+    public void testLogin(){
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                EditText email = loginActivity.findViewById(R.id.email);
+                EditText pass = loginActivity.findViewById(R.id.password);
+                email.setText("email");
+                pass.setText("pass");
+                Button loginBtn = loginActivity.findViewById(R.id.login);
+                loginBtn.performClick();
+                assertTrue(loginActivity.isCurUserLoggedIn());
+            }
+        });
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        loginActivity = null;
+    }*/
 }

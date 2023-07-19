@@ -124,6 +124,11 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
             @Override
             public void onClick(View v)
             {
+                try {
+                    createSingleLocation(sourceLatLng.longitude,sourceLatLng.latitude);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 if (email.length() > 0 && firstName.length() > 0 && lastName.length() > 0 &&  password.length() > 0 && phoneNumber.length() > 0 && repeatPassword.length() > 0)
                 {
