@@ -52,7 +52,7 @@ import java.util.Map;
 public class CustomerSignupActivity extends AppCompatActivity implements GoogleMap.OnMarkerDragListener {
 
     Button signupBtnInCustomerSignupPage;
-    EditText firstName, lastName,email, phoneNumber, address, password, repeatPassword;
+    EditText firstName, lastName,email, phoneNumber, password, repeatPassword;
     TextView errorMessage;
 
     ScrollView scrollView;
@@ -95,10 +95,8 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                 setupMap(source_mMap); // true means this is for the source map
             }
         });
+
         customerSignupSetup();
-
-
-
     }
 
 
@@ -139,18 +137,21 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                         else
                         {
                             errorMessage.setText(getString(R.string.pass_not_match));
+                            Toast.makeText(CustomerSignupActivity.this, getString(R.string.pass_not_match)+"", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                     else
                     {
                         errorMessage.setText(getString(R.string.pass_more_than_8chr));
+                        Toast.makeText(CustomerSignupActivity.this, getString(R.string.pass_more_than_8chr)+"", Toast.LENGTH_SHORT).show();
                     }
 
                 }
                 else
                 {
-                    Toast.makeText(CustomerSignupActivity.this, getString(R.string.fill_fields) + "", Toast.LENGTH_SHORT).show();
                     errorMessage.setText(getString(R.string.fill_fields));
+                    Toast.makeText(CustomerSignupActivity.this, getString(R.string.fill_fields) + "", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -202,7 +203,6 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                                 phoneNumber.setText("");
                                 password.setText("");
                                 repeatPassword.setText("");
-                                address.setText("");
                             }
                             else
                             {
@@ -271,25 +271,32 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
 
 
     String addressGeoCoder;
-    private void setupMap(GoogleMap googleMap) {
+    private void setupMap(GoogleMap googleMap)
+    {
         googleMap.setOnMarkerDragListener(this);
         googleMap.getUiSettings().setZoomControlsEnabled(true); // Enable zoom controls
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
             googleMap.setMyLocationEnabled(true);
 
             // This block is for setting up the source map
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
-                    if (sourceMarker == null) {
+                    if (sourceMarker == null)
+                    {
                         sourceLatLng = latLng;
                         sourceMarker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-                    } else {
+                    }
+                    else
+                    {
                         sourceLatLng = latLng;
                         sourceMarker.setPosition(sourceLatLng);
 
                         addressGeoCoder = getAddressFromCoordinates(sourceLatLng.latitude,sourceLatLng.longitude);
                     }
+
                     Toast.makeText(getApplicationContext(), "Location: "+sourceLatLng.toString()+","+addressGeoCoder, Toast.LENGTH_SHORT).show();
 
                 }
@@ -301,18 +308,23 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
 
     int locationID;
 
-    private String getAddressTitleFromCoordinates(double latitude, double longitude) {
+    private String getAddressTitleFromCoordinates(double latitude, double longitude)
+    {
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         String address = "Rand";
 
-        try {
+        try
+        {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (!addresses.isEmpty()) {
+            if (!addresses.isEmpty())
+            {
                 Address address1 = addresses.get(0);
                 String locationName = address1.getAddressLine(0);
                 address=locationName;
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
@@ -321,10 +333,6 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
     private void createSingleLocation(double latitude, double longitude) throws IOException {
         String title = getAddressTitleFromCoordinates(latitude, longitude);
         String description = getAddressFromCoordinates(latitude, longitude);
-
-        // RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        // String url = BASE_URL + "/locations/";
-
 
         Location location = new Location();
         location.setDescription(description);
@@ -335,24 +343,9 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
         LocationDA locationDA =   new LocationDA();
         locationID = locationDA.saveLocation(location);
 
-
-        //fromLocationId = locationID;
-        //intent.putExtra("fromLocationId",""+fromLocationId+"");
-        //intent
-        //intent.putExtra("sourceLocationId",String.valueOf(locationID));
-        //Log.d("11fromLocationId",String.valueOf(fromLocationId));
-        //Toast.makeText(FilterActivity.this, "Source Location Created Successfully", Toast.LENGTH_SHORT).show();
-        // Create destination location after the source has been created
-        //createSingleLocation(dst_latitude, dst_longitude, false, locationID, transporterID, 0, 0);
-
-
-        // Toast.makeText(FilterActivity.this, "Destination Location Created Successfully", Toast.LENGTH_SHORT).show();
-        // Code to handle successful creation of both source and destination locations
-        //createService(transporterID, sourceLocationId, locationID);
-
-
     }
-    private String getAddressFromCoordinates(double latitude, double longitude) {
+    private String getAddressFromCoordinates(double latitude, double longitude)
+    {
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         String address = "";
 
