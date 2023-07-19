@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email, password;
     private Button loginBtn;
     RequestQueue requestQueue;
+    //boolean isUserLoggedIn;
 
     String loginBaseURL = "http://176.119.254.198:8000/wasselha/login/";
 
