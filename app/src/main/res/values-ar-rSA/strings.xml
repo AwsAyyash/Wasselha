@@ -230,6 +230,8 @@
     <string name="already_exist">رقم الهاتف أو الإيميل موجود بالفعل!</string>
     <string name="done_signup">تم إنشاء حساب جديد</string>
     <string name="reference_number">رقم المرجع:</string>
+    <string name="create_new_account">جارِ إنشاء حساب جديد…</string>
+    <string name="select_location">اختر موقعك ثم حاول مرة أخرى!</string>
 
 </resources>
 

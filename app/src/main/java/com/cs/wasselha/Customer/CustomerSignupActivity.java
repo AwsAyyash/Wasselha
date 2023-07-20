@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -56,6 +57,7 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
     TextView errorMessage;
 
     ScrollView scrollView;
+    private ProgressDialog progressDialog;
 
     private GoogleMap source_mMap;
     private Marker sourceMarker;
@@ -124,9 +126,19 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
             @Override
             public void onClick(View v)
             {
-                try {
-                    createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude);
-                } catch (IOException e) {
+                try
+                {
+                    if (sourceLatLng != null)
+                    {
+                            createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude);
+                        }
+                        else
+                        {
+                            Toast.makeText(CustomerSignupActivity.this, getString(R.string.select_location)+"", Toast.LENGTH_SHORT).show();
+                        }
+
+                } catch (IOException e)
+                {
                     e.printStackTrace();
                 }
 
@@ -201,6 +213,18 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
 
                             if (id > 0 )
                             {
+                                progressDialog = new ProgressDialog(CustomerSignupActivity.this);
+                                progressDialog.setMessage(getString(R.string.create_new_account));
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        progressDialog.dismiss();
+                                    }
+                                }, 2000);
+
                                 openFinishAddCustomerDialog();
                                 email.setText("");
                                 firstName.setText("");
@@ -242,26 +266,8 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
     }
 
 
-    private void openLoadingDialog()
-    {
-        final LoadingDialog loadingDialog = new LoadingDialog(CustomerSignupActivity.this);
-        loadingDialog.startLoadingDialog();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run()
-            {
-                loadingDialog.dismissDialog();
-            }
-        }, 4000);
-
-    }
-
     private void openFinishAddCustomerDialog()
     {
-        openLoadingDialog();
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -270,10 +276,9 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                 FinishAddCustomerDialog finishAddCustomer = new FinishAddCustomerDialog();
                 finishAddCustomer.show(getSupportFragmentManager(), "AddCustomer");
             }
-        }, 5000);
+        }, 1000);
 
     }
-
 
     String addressGeoCoder;
     private void setupMap(GoogleMap googleMap)
