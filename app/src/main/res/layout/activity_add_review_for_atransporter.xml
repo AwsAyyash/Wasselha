@@ -92,10 +92,18 @@
                                 android:textStyle="bold" />
 
                             <RadioButton
-                                android:id="@+id/collectionPointReviewInCustomerReservationDetailsRadio"
+                                android:id="@+id/sourceCollectionPointReviewInCustomerReservationDetailsRadio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/collection_point_provider"
+                                android:text="@string/source_collection_point"
+                                android:textColor="@color/light_selver"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                            <RadioButton
+                                android:id="@+id/DestinationCollectionPointReviewInCustomerReservationDetailsRadio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/destination_collection_point"
                                 android:textColor="@color/light_selver"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />

@@ -184,7 +184,7 @@
     <string name="settings_title">الإعدادات</string>
     <string name="update_my_information">تحديث معلوماتي الشخصية</string>
     <string name="change_the_language">تغيير اللغة</string>
-    <string name="select_your_language">اختار اللغة</string>
+    <string name="select_your_language">اختر اللغة</string>
     <string name="enter_the_name_person">أدخل اسم الشخص</string>
     <string name="enter_the_name_of_the_person_receiving_the_package">أدخل اسم الشخص الذي سيستلم الطلب</string>
     <string name="send_message">أرسل رسالة</string>
@@ -233,6 +233,8 @@
     <string name="create_new_account">جارِ إنشاء حساب جديد…</string>
     <string name="select_location">اختر موقعك ثم حاول مرة أخرى!</string>
     <string name="send_message_to_transporter">إذا كانت هنالك أي مشكلة، يمكنك ارسال رسالة للسائق</string>
+    <string name="source_collection_point">نقطة التجميع المصدر</string>
+    <string name="destination_collection_point">نقطة التجميع الهدف</string>
 
 </resources>
 
