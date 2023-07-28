@@ -347,8 +347,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                         }
                                         Notification notifTrans = new Notification(service.getTransporter(),"transporter",
                                                 ("Request a service: id= "+ service.getId() ),
-                                                ("Customer = "+customerName +" wants to requests this delivery service From= ," + srcCity.getText().toString() + ", To= " +
-                                                        destCity.getText().toString() + ", His Phone No. = " + phoneNumber + ", deliver it to person called"+personHandoverNameStr ),
+                                                ("Customer = "+customerName +" wants to requests this delivery service From= " + srcCity.getText().toString() + ", To= " +
+                                                        destCity.getText().toString() + ", His Phone No. = " + phoneNumber + ", deliver it to person called "+personHandoverNameStr ),
                                                 serviceDateNow);
 
                                         Notification notifCPPSrc;
@@ -369,8 +369,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                                             }
                                             notifCPPSrc = new Notification(collectionPointSrcc.getCollection_point_provider(),"collectionpointprovider",
                                                     ("Request a Collection Point: id= "+ fromCPLocationId ),
-                                                    ("Customer = "+customerName +" wants to requests this collection point as a src located at= ," +collectionPointSrcc.getName() + ", His Phone No. = " + phoneNumber
-                                                            + ", transporter ="+transporter.getFirst_name()+" will collect it"),
+                                                    ("Customer = "+customerName +" wants to requests this collection point as a src located at= " +collectionPointSrcc.getName() + ", His Phone No. = " + phoneNumber
+                                                            + ", transporter = "+transporter.getFirst_name()+" will collect it"),
                                                     serviceDateNow);
 
                                             try {

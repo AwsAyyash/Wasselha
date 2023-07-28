@@ -100,6 +100,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
                 Intent intentMsg = new Intent(DeliveryStatusActivity.this, SendMessageToTransporterActivity.class);
 
                 intentMsg.putExtra("delSerDetId",delSerDetId+"");
+                intentMsg.putExtra("customerId",customerId+"");
 
                 startActivity(intentMsg);
             }
