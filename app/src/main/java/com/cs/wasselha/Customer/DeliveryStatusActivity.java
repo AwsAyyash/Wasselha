@@ -81,7 +81,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent intentReview = new Intent(DeliveryStatusActivity.this, AddReviewForATransporterActivity.class);
-                intentReview.putExtra("delSerDetId",delSerDetId+"");
+                intentReview.putExtra("user_id",delivaryDetailsReservationsForCustomerData+"");
                 intentReview.putExtra("writer_id",customerId+"");
 
 
@@ -97,8 +97,11 @@ public class DeliveryStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intentReview = new Intent(DeliveryStatusActivity.this, SendMessageToTransporterActivity.class);
-                startActivity(intentReview);
+                Intent intentMsg = new Intent(DeliveryStatusActivity.this, SendMessageToTransporterActivity.class);
+
+                intentMsg.putExtra("delSerDetId",delSerDetId+"");
+
+                startActivity(intentMsg);
             }
         });
     }

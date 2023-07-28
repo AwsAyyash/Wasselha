@@ -56,9 +56,10 @@ public class HomeCollectionPointProviderFragment extends Fragment {
                 ArrayList<CollectionPoint> collectionPoints=cA.getCollectionPsByCPPid(collectionPointProviderID);
                 for (int i=0;i<collectionPoints.size();i++) {
                     collectionPointsData.add(new CollectionPoints(collectionPoints.get(i).getId(),R.drawable.collection_point_img, collectionPoints.get(i).getName(), btn));
-                    CollectionPointsAdapter collectionPointsAdapter = new CollectionPointsAdapter(requireContext(), R.layout.home_page_collection_point_provider_list_view, collectionPointsData);
-                    listView.setAdapter(collectionPointsAdapter);
+
                 }
+                CollectionPointsAdapter collectionPointsAdapter = new CollectionPointsAdapter(requireContext(), R.layout.home_page_collection_point_provider_list_view, collectionPointsData);
+                listView.setAdapter(collectionPointsAdapter);
             } catch (IOException e) {
                 e.printStackTrace();
             }
