@@ -131,11 +131,11 @@ public class CustomerSignupActivity extends AppCompatActivity implements GoogleM
                     if (sourceLatLng != null)
                     {
                             createSingleLocation(sourceLatLng.latitude,sourceLatLng.longitude);
-                        }
-                        else
-                        {
+                    }
+                    else
+                    {
                             Toast.makeText(CustomerSignupActivity.this, getString(R.string.select_location)+"", Toast.LENGTH_SHORT).show();
-                        }
+                    }
 
                 } catch (IOException e)
                 {

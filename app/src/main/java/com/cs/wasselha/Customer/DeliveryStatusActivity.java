@@ -29,7 +29,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
     private static final String LOGIN_TYPE_KEY = "loginType";
     private static final String PREFERENCES_NAME = "MyPreferences";
 
-    private Button addReviewBtn;
+    private Button addReviewBtn, sendMessageBtn;
 
     private int customerId;
     private String userType;
@@ -44,6 +44,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
         //Calls
         setupRefernces();
         addReviewBtnSetup();
+        sendMessageBtnSetup();
 
 
         Intent intent = getIntent();
@@ -70,6 +71,7 @@ public class DeliveryStatusActivity extends AppCompatActivity {
     {
         detailsListView = findViewById(R.id.deliveryStatusCustomerListView);
         addReviewBtn = findViewById(R.id.addReviewBtnInCustomerDeliveryStatusPage);
+        sendMessageBtn = findViewById(R.id.sendMessageToTransporterInDeliveryStatusPageBtn);
     }
 
     private void addReviewBtnSetup()
@@ -84,6 +86,18 @@ public class DeliveryStatusActivity extends AppCompatActivity {
 
 
 
+                startActivity(intentReview);
+            }
+        });
+    }
+
+    private void sendMessageBtnSetup()
+    {
+        sendMessageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intentReview = new Intent(DeliveryStatusActivity.this, SendMessageToTransporterActivity.class);
                 startActivity(intentReview);
             }
         });

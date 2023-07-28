@@ -26,7 +26,7 @@
 
     <string name="app_name">Wasselha</string>
     <string name="main_title">Wasselha</string>
-    <string name="welcome">أهلاً بك</string>
+    <string name="welcome">أهلًا بك في Wasselha</string>
     <string name="need">كل ما تحتاجه في مكان واحد</string>
     <string name="login">تسجيل الدخول</string>
     <string name="signup">إنشاء حساب</string>
@@ -232,6 +232,7 @@
     <string name="reference_number">رقم المرجع:</string>
     <string name="create_new_account">جارِ إنشاء حساب جديد…</string>
     <string name="select_location">اختر موقعك ثم حاول مرة أخرى!</string>
+    <string name="send_message_to_transporter">إذا كانت هنالك أي مشكلة، يمكنك ارسال رسالة للسائق</string>
 
 </resources>
 
