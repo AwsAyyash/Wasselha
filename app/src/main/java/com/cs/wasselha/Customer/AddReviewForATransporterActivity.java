@@ -139,9 +139,18 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                         ClaimsDA claimsDA = new ClaimsDA();
                         if (sourceCollectionPointReviewInCustomerReservationDetailsRadio.isSelected()) {
 
-                            if (srcCPP != 0)
+                            if (srcCPP != 0){
                                 claimSrc = new Claim(0, delSerDetId, writer_id, srcCPP,
                                         "customer", "collectionpointprovider", msg, Integer.parseInt(review), serviceDateNow);
+
+                                try {
+                                    claimsDA.saveClaim(claimSrc);
+                                    Toast.makeText(AddReviewForATransporterActivity.this, "Review added, Thanks!", Toast.LENGTH_LONG).show();
+
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
                             else{
 
                                 Toast.makeText(AddReviewForATransporterActivity.this, "No source collection point!", Toast.LENGTH_LONG).show();
@@ -151,9 +160,18 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
 
 
                         } else if (DestinationCollectionPointReviewInCustomerReservationDetailsRadio.isSelected()) {
-                            if (destCPP != 0)
+                            if (destCPP != 0){
+
                                 claimDest = new Claim(0, delSerDetId, writer_id, destCPP,
                                         "customer", "collectionpointprovider", msg, Integer.parseInt(review), serviceDateNow);
+                                try {
+                                    claimsDA.saveClaim(claimDest);
+                                    Toast.makeText(AddReviewForATransporterActivity.this, "Review added, Thanks!", Toast.LENGTH_LONG).show();
+
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
 
                             else{
 
@@ -166,10 +184,19 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                             claimTrans = new Claim(0, delSerDetId, writer_id, transId,
                                     "customer", "transporter", msg, Integer.parseInt(review), serviceDateNow);
 
+                            try {
+                                claimsDA.saveClaim(claimTrans);
+                                Toast.makeText(AddReviewForATransporterActivity.this, "Review added to the transporter, Thanks!", Toast.LENGTH_LONG).show();
+
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
 
                         }
+                        finish();
 
-                        try {
+                      /*  try {
 
                             if (claimTrans != null){
                                 claimsDA.saveClaim(claimTrans);
@@ -192,12 +219,12 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                             else
                                 Toast.makeText(AddReviewForATransporterActivity.this, "No dest collection point!", Toast.LENGTH_LONG).show();
 
-                            finish();
+
                         } catch (IOException e) {
                             Toast.makeText(AddReviewForATransporterActivity.this, "Please, try again!", Toast.LENGTH_LONG).show();
 
                             throw new RuntimeException(e);
-                        }
+                        }*/
 
                     }
                 });
