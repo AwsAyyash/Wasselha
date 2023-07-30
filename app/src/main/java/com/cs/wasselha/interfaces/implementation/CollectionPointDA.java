@@ -101,7 +101,9 @@ public class CollectionPointDA {
 
             //Type customerListType = new TypeToken<ArrayList<Customer>>() {}.getType();
             //customerListGlobal = new ArrayList<>();
-            collectionPP = gson.fromJson(response.peekBody(2048).string(), CollectionPoint.class);
+            Log.d("104CP",response.peekBody(5048).string());
+
+            collectionPP = gson.fromJson(response.peekBody(5048).string(), CollectionPoint.class);
             // todo: here i should fill the data into the activity
             //Log.d("response.body().string()", response.body().string());
 
