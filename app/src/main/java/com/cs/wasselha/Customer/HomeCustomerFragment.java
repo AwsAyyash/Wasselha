@@ -266,7 +266,7 @@ public class HomeCustomerFragment extends Fragment {
             Location destLocation = locationDA.getLocation(servicesModelDAList.get(i).getDestination_place());
 
             if ((int) ( calcDistanceFromLongLat(srcLocation.getLatitude(),srcLocation.getLongitude(),latSrcFilter,longSrcFilter)+
-                    calcDistanceFromLongLat(destLocation.getLatitude(),destLocation.getLongitude(),latDestFilter,longDestFilter)  ) >10 )
+                    calcDistanceFromLongLat(destLocation.getLatitude(),destLocation.getLongitude(),latDestFilter,longDestFilter)  ) >30 )
                 continue;
             servicesModelList.add(new ServicesModel(
 
