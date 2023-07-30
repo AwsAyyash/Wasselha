@@ -41,16 +41,17 @@ public class DeliveryStatusActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
-        //Calls
-        setupRefernces();
-        addReviewBtnSetup();
-        sendMessageBtnSetup();
-
-
         Intent intent = getIntent();
         if (intent != null)
             delSerDetId = Integer.parseInt(intent.getStringExtra("delSerDetId"));
+        //Calls
+        setupRefernces();
 
+        sendMessageBtnSetup();
+
+
+
+        addReviewBtnSetup();
         getFromSharedPref();
 
         try
@@ -83,6 +84,8 @@ public class DeliveryStatusActivity extends AppCompatActivity {
                 Intent intentReview = new Intent(DeliveryStatusActivity.this, AddReviewForATransporterActivity.class);
                 intentReview.putExtra("user_id",delivaryDetailsReservationsForCustomerData+"");
                 intentReview.putExtra("writer_id",customerId+"");
+                intentReview.putExtra("delSerDetId",delSerDetId+"");
+
 
 
 
