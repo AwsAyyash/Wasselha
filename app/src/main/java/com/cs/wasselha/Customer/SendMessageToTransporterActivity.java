@@ -111,7 +111,7 @@ public class SendMessageToTransporterActivity extends AppCompatActivity {
                     new NotificationsDA().saveNotification(notifTrans);
                    // Toast.makeText(getApplicationContext(),
                     Toast.makeText(SendMessageToTransporterActivity.this, "The Msg was sent! Thanks!", Toast.LENGTH_LONG).show();
-
+                    finish();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

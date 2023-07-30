@@ -137,7 +137,7 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                         Claim claimSrc = null;
                         Claim claimDest = null;
                         ClaimsDA claimsDA = new ClaimsDA();
-                        if (sourceCollectionPointReviewInCustomerReservationDetailsRadio.isSelected()) {
+                        if (sourceCollectionPointReviewInCustomerReservationDetailsRadio.isChecked()) {
 
                             if (srcCPP != 0){
                                 claimSrc = new Claim(0, delSerDetId, writer_id, srcCPP,
@@ -159,7 +159,7 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
                             }
 
 
-                        } else if (DestinationCollectionPointReviewInCustomerReservationDetailsRadio.isSelected()) {
+                        } else if (DestinationCollectionPointReviewInCustomerReservationDetailsRadio.isChecked()) {
                             if (destCPP != 0){
 
                                 claimDest = new Claim(0, delSerDetId, writer_id, destCPP,
@@ -186,7 +186,7 @@ public class AddReviewForATransporterActivity extends AppCompatActivity {
 
                             try {
                                 claimsDA.saveClaim(claimTrans);
-                                Toast.makeText(AddReviewForATransporterActivity.this, "Review added to the transporter, Thanks!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddReviewForATransporterActivity.this, "Review added, Thanks!", Toast.LENGTH_LONG).show();
 
                             } catch (IOException e) {
                                 throw new RuntimeException(e);

@@ -13,13 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.cs.wasselha.R;
 import com.cs.wasselha.Models.ServicesModel;
 import com.cs.wasselha.Adapters.ServicesModelRecyclerViewAdapter;
@@ -40,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
 public class HomeCustomerFragment extends Fragment {
 
@@ -351,11 +347,18 @@ public class HomeCustomerFragment extends Fragment {
 
 
 
-                double latSrc = s1.getSrcLocation().getLatitude();
-                double longSrc =  s1.getSrcLocation().getLongitude();
+                double latSrc1 = s1.getSrcLocation().getLatitude();
+                double longSrc1 =  s1.getSrcLocation().getLongitude();
 
-                double latDest = s2.getSrcLocation().getLatitude();
-                double longDest =  s2.getSrcLocation().getLongitude();
+                double latSrc2 = s2.getSrcLocation().getLatitude();
+                double longSrc2 =  s2.getSrcLocation().getLongitude();
+
+                double latDest1 = s1.getDestLocation().getLatitude();
+                double longDest1 =  s1.getDestLocation().getLongitude();
+
+                double latDest2 = s2.getDestLocation().getLatitude();
+                double longDest2 =  s2.getDestLocation().getLongitude();
+
 
                 double longSrcFilterIn;
                 double longDestFilterIn;
@@ -387,8 +390,8 @@ public class HomeCustomerFragment extends Fragment {
                 }
 
 
-             return  (int) ( calcDistanceFromLongLat(latSrc,longSrc,latSrcFilterIn,longSrcFilterIn)+
-                        calcDistanceFromLongLat(latDest,longDest,latDestFilterIn,longDestFilterIn)  )
+             return  (int) ( (calcDistanceFromLongLat(latSrc1, longSrc1,latSrcFilterIn,longSrcFilterIn) + (calcDistanceFromLongLat(latDest1, longDest1,latDestFilterIn,longDestFilterIn)))-
+                     (calcDistanceFromLongLat(latSrc2, longSrc2,latSrcFilterIn,longSrcFilterIn) +(calcDistanceFromLongLat(latDest2, longDest2,latDestFilterIn,longDestFilterIn))) )
                 ;
 
 
