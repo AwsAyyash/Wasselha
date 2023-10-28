@@ -159,10 +159,10 @@ public class HomeCustomerFragment extends Fragment {
 
     private void trySort() {
 
-        if (prefSpin.equalsIgnoreCase("Location") ||prefSpin.equalsIgnoreCase("الموقع")){
+        if (prefSpin.equalsIgnoreCase("Location") || prefSpin.equalsIgnoreCase("الموقع")){
 
             Collections.sort(servicesModelList, comparatorLocation);
-        }else if(prefSpin.equalsIgnoreCase("Price") ||prefSpin.equalsIgnoreCase("السعر")){
+        }else if(prefSpin.equalsIgnoreCase("Price") || prefSpin.equalsIgnoreCase("السعر")){
 
 
             servicesModelList.sort(new Comparator<ServicesModel>() {
